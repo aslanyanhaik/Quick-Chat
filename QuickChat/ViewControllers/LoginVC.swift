@@ -1,25 +1,28 @@
 //
-//  ViewController.swift
+//  LoginVC.swift
 //  QuickChat
 //
-//  Created by Haik Aslanyan on 8/9/16.
+//  Created by Haik Aslanyan on 9/12/16.
 //  Copyright © 2016 Mexonis. All rights reserved.
 //
 
 import UIKit
 
-class ViewController: UIViewController {
+class LoginVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        self.view.backgroundColor = UIColor.redColor()
+
     }
 
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.LightContent
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
+   
 }
-
