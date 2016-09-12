@@ -14,7 +14,6 @@ class ChatListTB: UITableViewController {
     
     //MARK: Methods
     func customization()  {
-       
     }
     
   

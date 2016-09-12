@@ -10,19 +10,26 @@ import UIKit
 
 class LoginVC: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.view.backgroundColor = UIColor.redColor()
-
-    }
-
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return UIStatusBarStyle.LightContent
+    //MARK: Properties
+    @IBOutlet weak var whiteView: UIView!
+    @IBOutlet weak var loginButton: UIButton!
+    
+    //MARK: Methods
+    func customization()  {
+        self.view.backgroundColor = Colors.yellow
+        self.whiteView.layer.cornerRadius = 8
+        self.whiteView.layer.masksToBounds = true
+        self.loginButton.layer.cornerRadius = 5
+        self.loginButton.layer.masksToBounds = true
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func dismissKeyboard(sender: AnyObject) {
+        self.resignFirstResponder()
     }
-   
+    
+    //MARK: Viewcontroller lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.customization()
+    }
 }
