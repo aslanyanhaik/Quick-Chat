@@ -13,6 +13,11 @@ class LoginVC: UIViewController {
     //MARK: Properties
     @IBOutlet weak var whiteView: UIView!
     @IBOutlet weak var loginButton: UIButton!
+    let nameTF: UITextField = {
+        let name = UITextField.init(frame: CGRect.init(x: 0, y: 0, width: 120, height: 30))
+        name.backgroundColor = UIColor.red
+        return name
+    }()
     
     //MARK: Methods
     func customization()  {
@@ -24,9 +29,17 @@ class LoginVC: UIViewController {
     }
     
     @IBAction func dismissKeyboard(sender: AnyObject) {
-        self.resignFirstResponder()
+        self.view.endEditing(true)
     }
     
+    @IBAction func switcher(sender: UISegmentedControl) {
+        
+        switch sender.selectedSegmentIndex {
+        case 0: self.whiteView.addSubview(self.nameTF)
+        case 1: print("Register")
+        default: break
+        }
+    }
     //MARK: Viewcontroller lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
