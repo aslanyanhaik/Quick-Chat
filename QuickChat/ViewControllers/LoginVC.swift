@@ -28,18 +28,7 @@ class LoginVC: UIViewController {
         self.loginButton.layer.masksToBounds = true
     }
     
-    @IBAction func dismissKeyboard(sender: AnyObject) {
-        self.view.endEditing(true)
-    }
-    
-    @IBAction func switcher(sender: UISegmentedControl) {
-        
-        switch sender.selectedSegmentIndex {
-        case 0: self.whiteView.addSubview(self.nameTF)
-        case 1: print("Register")
-        default: break
-        }
-    }
+   
     //MARK: Viewcontroller lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
