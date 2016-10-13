@@ -7,14 +7,13 @@
 //
 
 import UIKit
+import Firebase
 
 class LoginVC: UIViewController {
 
     //MARK: Properties
-    
     @IBOutlet weak var whiteView: UIView!
     @IBOutlet weak var loginButton: UIButton!
-    
     let nameTF: UITextField = {
         let name = UITextField.init(frame: CGRect.init(x: 0, y: 0, width: 120, height: 30))
         name.backgroundColor = UIColor.red
@@ -30,6 +29,18 @@ class LoginVC: UIViewController {
         self.loginButton.layer.masksToBounds = true
     }
     
+    @IBAction func login(_ sender: UIButton) {
+        
+        FIRAuth.auth()?.createUser(withEmail: "hello@mail.com", password: "hayastan", completion: { (user: FIRUser?, error) in
+            
+            let ref = FIRDatabase.database().reference(fromURL: "https://quick-chat-60662.firebaseio.com/")
+            let values = ["name" : "William", "email" : "hello@mail.com"]
+            ref.updateChildValues(values)
+        })
+        
+        
+    }
+    
    
     //MARK: Viewcontroller lifecycle
     override func viewDidLoad() {
@@ -37,3 +48,7 @@ class LoginVC: UIViewController {
         self.customization()
     }
 }
+
+
+
+
