@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -19,7 +20,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QrO-C4-V5e" id="MmC-vq-dj4">
-                                    <frame key="frameInset" width="375" height="43"/>
+                                    <frame key="frameInset" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -67,9 +68,41 @@
                                 <color key="tintColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </segmentedControl>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Otg-RC-oXc">
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Name" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JjV-8h-tcD">
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Email" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zyD-kA-VBN">
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Password" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ycf-lc-CSq">
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="Ycf-lc-CSq" firstAttribute="height" secondItem="Otg-RC-oXc" secondAttribute="height" multiplier="0.33" id="837-Vc-inz"/>
+                                    <constraint firstItem="Ycf-lc-CSq" firstAttribute="top" secondItem="zyD-kA-VBN" secondAttribute="bottom" id="Gp3-nU-i2n"/>
+                                    <constraint firstItem="JjV-8h-tcD" firstAttribute="centerX" secondItem="Otg-RC-oXc" secondAttribute="centerX" id="HKd-sg-mMp"/>
+                                    <constraint firstItem="JjV-8h-tcD" firstAttribute="height" secondItem="Otg-RC-oXc" secondAttribute="height" multiplier="0.33" id="KaA-em-MxP"/>
                                     <constraint firstAttribute="height" constant="150" id="Szn-k8-Dru"/>
+                                    <constraint firstItem="zyD-kA-VBN" firstAttribute="centerX" secondItem="Otg-RC-oXc" secondAttribute="centerX" id="UHD-2I-R5H"/>
+                                    <constraint firstItem="zyD-kA-VBN" firstAttribute="top" secondItem="JjV-8h-tcD" secondAttribute="bottom" id="Ynl-q0-3tk"/>
+                                    <constraint firstItem="JjV-8h-tcD" firstAttribute="top" secondItem="Otg-RC-oXc" secondAttribute="top" id="agX-up-tzV"/>
+                                    <constraint firstItem="JjV-8h-tcD" firstAttribute="width" secondItem="Otg-RC-oXc" secondAttribute="width" id="du0-9k-2MB"/>
+                                    <constraint firstItem="Ycf-lc-CSq" firstAttribute="width" secondItem="Otg-RC-oXc" secondAttribute="width" id="kTf-pP-DDr"/>
+                                    <constraint firstItem="zyD-kA-VBN" firstAttribute="height" secondItem="Otg-RC-oXc" secondAttribute="height" multiplier="0.33" id="mpV-xv-whA"/>
+                                    <constraint firstItem="Ycf-lc-CSq" firstAttribute="centerX" secondItem="Otg-RC-oXc" secondAttribute="centerX" id="rmL-Bg-H1J"/>
+                                    <constraint firstItem="zyD-kA-VBN" firstAttribute="width" secondItem="Otg-RC-oXc" secondAttribute="width" id="s6v-cd-RsO"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BPt-2m-cIR">
@@ -101,7 +134,11 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="emailField" destination="zyD-kA-VBN" id="l7d-Jf-Lug"/>
                         <outlet property="loginButton" destination="BPt-2m-cIR" id="hRq-p7-WgW"/>
+                        <outlet property="nameField" destination="JjV-8h-tcD" id="bDT-cC-eqJ"/>
+                        <outlet property="passwordField" destination="Ycf-lc-CSq" id="kkH-wW-deK"/>
+                        <outlet property="stateSegment" destination="nTw-Dv-Pqt" id="myA-I7-FlH"/>
                         <outlet property="whiteView" destination="Otg-RC-oXc" id="o3Q-8L-spg"/>
                     </connections>
                 </viewController>

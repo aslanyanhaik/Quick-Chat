@@ -14,11 +14,11 @@ class LoginVC: UIViewController {
     //MARK: Properties
     @IBOutlet weak var whiteView: UIView!
     @IBOutlet weak var loginButton: UIButton!
-    let nameTF: UITextField = {
-        let name = UITextField.init(frame: CGRect.init(x: 0, y: 0, width: 120, height: 30))
-        name.backgroundColor = UIColor.red
-        return name
-    }()
+    @IBOutlet weak var nameField: UITextField!
+    @IBOutlet weak var emailField: UITextField!
+    @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet weak var stateSegment: UISegmentedControl!
+    
     
     //MARK: Methods
     func customization()  {
@@ -30,18 +30,25 @@ class LoginVC: UIViewController {
     }
     
     @IBAction func login(_ sender: UIButton) {
-        
-        FIRAuth.auth()?.createUser(withEmail: "hello@mail.com", password: "hayastan", completion: { (user: FIRUser?, error) in
-            
-            let ref = FIRDatabase.database().reference(fromURL: "https://quick-chat-60662.firebaseio.com/")
-            let values = ["name" : "William", "email" : "hello@mail.com"]
-            ref.updateChildValues(values)
-        })
-        
+        if self.stateSegment.selectedSegmentIndex == 0 {
+            self.loginUser()
+        } else {
+            self.registerUser()
+        }
+    }
+    
+    func loginUser() {
         
     }
     
-   
+    func registerUser()  {
+        FIRAuth.auth()?.createUser(withEmail: self.emailField.text!, password: self.passwordField.text!, completion: { (user: FIRUser?, error) in
+            let ref = FIRDatabase.database().reference(fromURL: "https://quick-chat-60662.firebaseio.com/").child("users").child((user?.uid)!)
+            let values = ["name" : self.nameField.text!, "email" : self.emailField.text!]
+            ref.updateChildValues(values)
+        })
+    }
+    
     //MARK: Viewcontroller lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
