@@ -38,7 +38,7 @@ class LoginVC: UIViewController {
     }
     
     func loginUser() {
-        
+        FIRAuth.auth()?.signIn(withEmail: self.emailField.text!, password: self.passwordField.text!, completion: nil)
     }
     
     func registerUser()  {
