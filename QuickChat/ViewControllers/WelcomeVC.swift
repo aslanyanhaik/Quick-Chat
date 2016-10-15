@@ -102,6 +102,7 @@ class WelcomeVC: UIViewController, UITextFieldDelegate {
     }
     
     func animateHorizontal() {
+        self.viewDidLayoutSubviews()
         switch self.isContainerVisible {
         case true:
             UIView.animate(withDuration: 0.3, animations: {
@@ -118,6 +119,19 @@ class WelcomeVC: UIViewController, UITextFieldDelegate {
         }
     }
     
+    override func viewDidLayoutSubviews() {
+        switch self.isContainerVisible {
+        case true:
+            self.containerView.frame.origin.y = 0
+            self.loginContainer.frame.origin.y = 200
+            self.registerContainer.frame.origin.y = 200    
+        case false:
+            self.containerView.frame.origin.y = -150
+            self.loginContainer.frame.origin.y = 50
+            self.registerContainer.frame.origin.y = 50
+        }
+    }
+    
     //MARK: Delegates
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if self.isContainerVisible {
@@ -126,11 +140,11 @@ class WelcomeVC: UIViewController, UITextFieldDelegate {
         }
         return true
     }
-    
+   
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        self.isContainerVisible = false
         self.animateHorizontal()
+        self.isContainerVisible = true
         return true
     }
     
