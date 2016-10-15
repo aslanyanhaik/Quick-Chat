@@ -10,6 +10,6 @@ import Foundation
 import UIKit
 
 struct Colors {
-    static let yellow = UIColor.rbg(r: 255, g: 208, b: 18)
-    static let gray = UIColor.rbg(r: 70, g: 70, b: 70)
+    static let blue = UIColor.rbg(r: 129, g: 144, b: 255)
+    static let purple = UIColor.rbg(r: 161, g: 114, b: 255)
 }
