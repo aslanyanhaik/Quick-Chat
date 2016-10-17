@@ -50,11 +50,27 @@ class WelcomeVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
         self.profilePicView.layer.cornerRadius = 50
         self.profilePicView.clipsToBounds = true
         self.profilePicView.layer.borderWidth = 2
-        self.profilePicView.layer.borderColor = Colors.blue.cgColor
+        self.profilePicView.layer.borderColor = GlobalVariables.blue.cgColor
     }
     
     @IBAction func submit(_ sender: AnyObject) {
-        
+        switch self.currentState {
+        case .login:
+            FIRAuth.auth()?.signIn(withEmail: self.loginEmailTextField.text!, password: self.loginPasswordTextField.text!, completion: { (user, error) in
+                print(error)
+            })
+        case .register:
+            FIRAuth.auth()?.createUser(withEmail: self.registerEmailTextField.text!, password: self.registerPassWordTextField.text!, completion: { (user: FIRUser?, error) in
+                if let id  = user?.uid {
+                    let ref = FIRDatabase.database().reference(fromURL: "https://quick-chat-60662.firebaseio.com/").child("users").child(id)
+                    let values = ["name" : self.registerNameTextField.text!, "email" : self.registerEmailTextField.text!]
+                    ref.updateChildValues(values, withCompletionBlock: { (err, reference) in
+                        print(err)
+                    })
+
+                }
+            })
+        }
     }
     
     @IBAction func selectPic(_ sender: AnyObject) {
@@ -70,7 +86,7 @@ class WelcomeVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
     @IBAction func login(_ sender: AnyObject) {
         self.currentState = .login
         self.registerButton.setTitleColor(UIColor.lightGray, for: .normal)
-        self.loginButton.setTitleColor(Colors.purple, for: .normal)
+        self.loginButton.setTitleColor(GlobalVariables.purple, for: .normal)
         self.submitButton.setTitle("Login", for: .normal)
         self.animate()
     }
@@ -78,7 +94,7 @@ class WelcomeVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
     @IBAction func register(_ sender: AnyObject) {
         self.currentState = .register
         self.loginButton.setTitleColor(UIColor.lightGray, for: .normal)
-        self.registerButton.setTitleColor(Colors.purple, for: .normal)
+        self.registerButton.setTitleColor(GlobalVariables.purple, for: .normal)
         self.submitButton.setTitle("Register", for: .normal)
         self.animate()
     }

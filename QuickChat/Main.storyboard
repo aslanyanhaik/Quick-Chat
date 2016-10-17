@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -310,6 +311,39 @@
             </objects>
             <point key="canvasLocation" x="61.600000000000001" y="428.63568215892059"/>
         </scene>
+        <!--ProfileVC-->
+        <scene sceneID="5qK-ht-XFK">
+            <objects>
+                <viewController id="y2N-Nq-KJO" customClass="ProfileVC" customModule="QuickChat" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6w3-xf-I94"/>
+                        <viewControllerLayoutGuide type="bottom" id="YGw-MJ-UNm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="EJB-4e-EMa">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Re7-Yp-Kbj">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Re7-Yp-Kbj" firstAttribute="top" secondItem="6w3-xf-I94" secondAttribute="bottom" constant="135" id="HmX-0h-kZE"/>
+                            <constraint firstItem="Re7-Yp-Kbj" firstAttribute="leading" secondItem="EJB-4e-EMa" secondAttribute="leadingMargin" id="Qz9-Iu-TL9"/>
+                            <constraint firstItem="Re7-Yp-Kbj" firstAttribute="trailing" secondItem="EJB-4e-EMa" secondAttribute="trailingMargin" id="wy3-fR-gO0"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="nameLabel" destination="Re7-Yp-Kbj" id="qKS-bn-Nuo"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cWB-nU-CRf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="156" y="1331.784107946027"/>
+        </scene>
         <!--ConversationsTB-->
         <scene sceneID="gg8-6S-tJu">
             <objects>
@@ -334,8 +368,16 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="1L4-bd-oWn">
+                        <barButtonItem key="leftBarButtonItem" title="Item" id="nuC-lX-2aU">
+                            <connections>
+                                <segue destination="y2N-Nq-KJO" kind="presentation" id="jEn-Kb-tpg"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="compose" id="eyN-um-sQ0">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="signOut:" destination="LSs-oo-Dbz" id="CV2-f2-dvo"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>

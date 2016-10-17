@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class ConversationsTB: UITableViewController {
     
@@ -17,6 +18,15 @@ class ConversationsTB: UITableViewController {
         }
     }
 
+    @IBAction func signOut(_ sender: AnyObject) {
+        
+        do {
+            try FIRAuth.auth()?.signOut()
+        } catch _ {
+            print("something went wrong")
+        }
+        
+    }
     
     func customization()  {
         
