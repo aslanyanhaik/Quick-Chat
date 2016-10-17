@@ -8,8 +8,9 @@
 
 import UIKit
 import Firebase
+import Photos
 
-class WelcomeVC: UIViewController, UITextFieldDelegate {
+class WelcomeVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     //MARK: Properties
     @IBOutlet weak var cloudsView: UIImageView!
@@ -23,12 +24,18 @@ class WelcomeVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var registerContainer: UIView!
     @IBOutlet weak var loginContainer: UIView!
-    @IBOutlet weak var profilePicButton: UIButton!
     @IBOutlet weak var registerNameTextField: UITextField!
     @IBOutlet weak var registerEmailTextField: UITextField!
     @IBOutlet weak var registerPassWordTextField: UITextField!
+    @IBOutlet weak var profilePicView: UIImageView!
+    let imagePicker = UIImagePickerController()
     var isContainerVisible = true
     var currentState: State = .register
+    var profilePic: UIImage! {
+        didSet {
+            self.profilePicView.image = profilePic
+        }
+    }
     override var prefersStatusBarHidden: Bool {
         get {
             return true
@@ -37,12 +44,14 @@ class WelcomeVC: UIViewController, UITextFieldDelegate {
     
     //MARK: Methods
     func customization()  {
+        self.imagePicker.delegate = self
         self.submitButton.layer.cornerRadius = 20
         self.submitButton.clipsToBounds = true
-        self.profilePicButton.layer.cornerRadius = 35
-        self.profilePicButton.clipsToBounds = true
+        self.profilePicView.layer.cornerRadius = 50
+        self.profilePicView.clipsToBounds = true
+        self.profilePicView.layer.borderWidth = 2
+        self.profilePicView.layer.borderColor = Colors.blue.cgColor
     }
-    
     
     @IBAction func submit(_ sender: AnyObject) {
         
@@ -50,6 +59,12 @@ class WelcomeVC: UIViewController, UITextFieldDelegate {
     
     @IBAction func selectPic(_ sender: AnyObject) {
         
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {
+            self.imagePicker.sourceType = UIImagePickerControllerSourceType.savedPhotosAlbum;
+            self.imagePicker.allowsEditing = false
+            self.present(self.imagePicker, animated: true, completion: nil)
+        }
+    
     }
     
     @IBAction func login(_ sender: AnyObject) {
@@ -109,12 +124,14 @@ class WelcomeVC: UIViewController, UITextFieldDelegate {
                 self.containerView.frame.origin.y = -150
                 self.loginContainer.frame.origin.y = 50
                 self.registerContainer.frame.origin.y = 50
+                self.submitButton.frame.origin.y -= 150
             })
         case false:
             UIView.animate(withDuration: 0.3, animations: {
                 self.containerView.frame.origin.y = 0
                 self.loginContainer.frame.origin.y = 200
                 self.registerContainer.frame.origin.y = 200
+                self.submitButton.frame.origin.y += 150
             })
         }
     }
@@ -124,11 +141,14 @@ class WelcomeVC: UIViewController, UITextFieldDelegate {
         case true:
             self.containerView.frame.origin.y = 0
             self.loginContainer.frame.origin.y = 200
-            self.registerContainer.frame.origin.y = 200    
+            self.registerContainer.frame.origin.y = 200
+            self.submitButton.frame.origin.y = 567
+
         case false:
             self.containerView.frame.origin.y = -150
             self.loginContainer.frame.origin.y = 50
             self.registerContainer.frame.origin.y = 50
+            self.submitButton.frame.origin.y = 417
         }
     }
     
@@ -148,19 +168,11 @@ class WelcomeVC: UIViewController, UITextFieldDelegate {
         return true
     }
     
-    
-    
-    
-    func loginUser() {
-        FIRAuth.auth()?.signIn(withEmail: "sdsdgs", password: "sdgsdg", completion: nil)
-    }
-    
-    func registerUser()  {
-        FIRAuth.auth()?.createUser(withEmail: "sdsdg", password: "sdgsdg", completion: { (user: FIRUser?, error) in
-            let ref = FIRDatabase.database().reference(fromURL: "https://quick-chat-60662.firebaseio.com/").child("users").child((user?.uid)!)
-            let values = ["name" : "sdgsd", "email" : "dgsdg"]
-            ref.updateChildValues(values)
-        })
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            self.profilePicView.image = pickedImage
+        }
+        dismiss(animated: true, completion: nil)
     }
     
     //MARK: Viewcontroller lifecycle

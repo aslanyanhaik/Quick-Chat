@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		224834AC1DB502D50019153C /* ConversationsTB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224834AB1DB502D50019153C /* ConversationsTB.swift */; };
 		224AFA9D1D867DE7004E7CCD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 224AFA9C1D867DE7004E7CCD /* Main.storyboard */; };
 		224AFAA31D8686ED004E7CCD /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224AFAA21D8686ED004E7CCD /* extensions.swift */; };
 		224AFAA91D86890A004E7CCD /* WelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224AFAA81D86890A004E7CCD /* WelcomeVC.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		224834AB1DB502D50019153C /* ConversationsTB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConversationsTB.swift; path = QuickChat/ViewControllers/ConversationsTB.swift; sourceTree = "<group>"; };
 		224AFA9C1D867DE7004E7CCD /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		224AFAA21D8686ED004E7CCD /* extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = extensions.swift; path = extensions/extensions.swift; sourceTree = "<group>"; };
 		224AFAA81D86890A004E7CCD /* WelcomeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WelcomeVC.swift; path = QuickChat/ViewControllers/WelcomeVC.swift; sourceTree = "<group>"; };
@@ -47,6 +49,7 @@
 		224AFA9E1D868371004E7CCD /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				224834AB1DB502D50019153C /* ConversationsTB.swift */,
 				224AFAA81D86890A004E7CCD /* WelcomeVC.swift */,
 			);
 			name = ViewControllers;
@@ -244,6 +247,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				224834AC1DB502D50019153C /* ConversationsTB.swift in Sources */,
 				22A92BB11D59EBD6005D76F7 /* AppDelegate.swift in Sources */,
 				224AFAA91D86890A004E7CCD /* WelcomeVC.swift in Sources */,
 				224AFAA31D8686ED004E7CCD /* extensions.swift in Sources */,
@@ -269,8 +273,10 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -316,8 +322,10 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";

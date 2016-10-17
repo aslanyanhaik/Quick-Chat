@@ -45,7 +45,7 @@
                                                     <constraint firstAttribute="width" constant="70" id="C56-4N-9tX"/>
                                                     <constraint firstAttribute="height" constant="30" id="naC-NB-3h7"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="23"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="20"/>
                                                 <state key="normal" title="Login">
                                                     <color key="titleColor" red="0.50588235294117645" green="0.56862745098039214" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
@@ -68,7 +68,7 @@
                                                     <constraint firstAttribute="width" constant="90" id="h3k-c7-rjE"/>
                                                     <constraint firstAttribute="height" constant="30" id="iW4-0M-1lN"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="23"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="20"/>
                                                 <state key="normal" title="Register">
                                                     <color key="titleColor" white="0.81640625" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
@@ -118,7 +118,7 @@
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                         <connections>
                                             <outlet property="delegate" destination="rVC-Ig-Azx" id="kBz-ZF-L81"/>
                                         </connections>
@@ -164,11 +164,16 @@
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CCp-O7-HLQ" userLabel="register container">
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CvH-VR-Ni5">
-                                        <color key="backgroundColor" white="0.81640625" alpha="1" colorSpace="calibratedWhite"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile pic" translatesAutoresizingMaskIntoConstraints="NO" id="iUH-C2-KrJ">
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="70" id="luL-uX-x6y"/>
-                                            <constraint firstAttribute="height" constant="70" id="vQC-Qk-oAy"/>
+                                            <constraint firstAttribute="height" constant="100" id="0I6-Kr-Rif"/>
+                                            <constraint firstAttribute="width" constant="100" id="tAd-3W-TbI"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CvH-VR-Ni5">
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="luL-uX-x6y"/>
+                                            <constraint firstAttribute="height" constant="100" id="vQC-Qk-oAy"/>
                                         </constraints>
                                         <connections>
                                             <action selector="selectPic:" destination="rVC-Ig-Azx" eventType="touchUpInside" id="4dl-ql-4K4"/>
@@ -180,7 +185,7 @@
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="yes"/>
                                         <connections>
                                             <outlet property="delegate" destination="rVC-Ig-Azx" id="fsT-UB-GXR"/>
                                         </connections>
@@ -191,7 +196,7 @@
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                         <connections>
                                             <outlet property="delegate" destination="rVC-Ig-Azx" id="dIm-pf-tHS"/>
                                         </connections>
@@ -228,9 +233,11 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="Tpg-fn-8gL" firstAttribute="width" secondItem="CCp-O7-HLQ" secondAttribute="width" multiplier="0.8" id="12m-hJ-wqw"/>
+                                    <constraint firstItem="iUH-C2-KrJ" firstAttribute="top" secondItem="CCp-O7-HLQ" secondAttribute="top" constant="15" id="1Ja-jF-FrA"/>
                                     <constraint firstItem="lib-vh-eBS" firstAttribute="centerX" secondItem="CCp-O7-HLQ" secondAttribute="centerX" id="1ef-Y1-eyi"/>
                                     <constraint firstItem="lib-vh-eBS" firstAttribute="width" secondItem="VxX-5M-kXb" secondAttribute="width" id="1er-bs-ei1"/>
                                     <constraint firstItem="7b6-Jo-sLy" firstAttribute="top" secondItem="Tpg-fn-8gL" secondAttribute="bottom" id="1rF-yu-fBU"/>
+                                    <constraint firstItem="iUH-C2-KrJ" firstAttribute="centerX" secondItem="CCp-O7-HLQ" secondAttribute="centerX" id="64W-s0-7Qb"/>
                                     <constraint firstItem="VxX-5M-kXb" firstAttribute="width" secondItem="CCp-O7-HLQ" secondAttribute="width" multiplier="0.8" id="GDg-LL-G5e"/>
                                     <constraint firstItem="tlg-M4-cGD" firstAttribute="width" secondItem="CCp-O7-HLQ" secondAttribute="width" multiplier="0.8" id="Gle-wO-5yg"/>
                                     <constraint firstItem="CvH-VR-Ni5" firstAttribute="centerX" secondItem="CCp-O7-HLQ" secondAttribute="centerX" id="IVR-PX-DFn"/>
@@ -238,12 +245,12 @@
                                     <constraint firstItem="lib-vh-eBS" firstAttribute="top" secondItem="VxX-5M-kXb" secondAttribute="bottom" id="OnK-ly-ovn"/>
                                     <constraint firstItem="oiP-ha-NmU" firstAttribute="width" secondItem="tlg-M4-cGD" secondAttribute="width" id="U7G-Cz-533"/>
                                     <constraint firstItem="oiP-ha-NmU" firstAttribute="centerX" secondItem="CCp-O7-HLQ" secondAttribute="centerX" id="VQa-UY-d7e"/>
-                                    <constraint firstItem="tlg-M4-cGD" firstAttribute="top" secondItem="VxX-5M-kXb" secondAttribute="bottom" constant="25" id="X8a-Hb-W63"/>
+                                    <constraint firstItem="tlg-M4-cGD" firstAttribute="top" secondItem="VxX-5M-kXb" secondAttribute="bottom" constant="35" id="X8a-Hb-W63"/>
                                     <constraint firstItem="VxX-5M-kXb" firstAttribute="centerX" secondItem="CCp-O7-HLQ" secondAttribute="centerX" id="Y7g-1o-bbA"/>
                                     <constraint firstItem="tlg-M4-cGD" firstAttribute="centerX" secondItem="CCp-O7-HLQ" secondAttribute="centerX" id="abm-MT-HrZ"/>
                                     <constraint firstItem="7b6-Jo-sLy" firstAttribute="centerX" secondItem="CCp-O7-HLQ" secondAttribute="centerX" id="eHS-D4-ENU"/>
-                                    <constraint firstItem="Tpg-fn-8gL" firstAttribute="top" secondItem="CvH-VR-Ni5" secondAttribute="bottom" constant="25" id="hgf-Em-hmc"/>
-                                    <constraint firstItem="VxX-5M-kXb" firstAttribute="top" secondItem="Tpg-fn-8gL" secondAttribute="bottom" constant="25" id="iEy-DS-2Bb"/>
+                                    <constraint firstItem="Tpg-fn-8gL" firstAttribute="top" secondItem="CvH-VR-Ni5" secondAttribute="bottom" constant="15" id="hgf-Em-hmc"/>
+                                    <constraint firstItem="VxX-5M-kXb" firstAttribute="top" secondItem="Tpg-fn-8gL" secondAttribute="bottom" constant="35" id="iEy-DS-2Bb"/>
                                     <constraint firstItem="oiP-ha-NmU" firstAttribute="top" secondItem="tlg-M4-cGD" secondAttribute="bottom" id="jAl-M5-cFO"/>
                                     <constraint firstItem="7b6-Jo-sLy" firstAttribute="width" secondItem="Tpg-fn-8gL" secondAttribute="width" id="mRk-we-TFH"/>
                                     <constraint firstItem="Tpg-fn-8gL" firstAttribute="centerX" secondItem="CCp-O7-HLQ" secondAttribute="centerX" id="rbd-rx-4RA"/>
@@ -260,6 +267,7 @@
                                 </state>
                                 <connections>
                                     <action selector="submit:" destination="rVC-Ig-Azx" eventType="touchUpInside" id="n6s-EA-yH0"/>
+                                    <segue destination="ApB-eK-ERO" kind="show" id="nBa-Tr-N14"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -267,15 +275,15 @@
                         <constraints>
                             <constraint firstItem="g1M-I5-tzY" firstAttribute="top" secondItem="Ubw-N5-9kO" secondAttribute="bottom" id="0tu-Wt-JN4"/>
                             <constraint firstItem="CCp-O7-HLQ" firstAttribute="top" secondItem="Ubw-N5-9kO" secondAttribute="bottom" id="FUk-tr-h18"/>
-                            <constraint firstItem="Ong-Qv-GEy" firstAttribute="top" secondItem="aSu-34-603" secondAttribute="bottom" constant="60" id="FzX-8V-LHb"/>
-                            <constraint firstItem="aSu-34-603" firstAttribute="top" secondItem="CCp-O7-HLQ" secondAttribute="bottom" constant="50" id="NpA-L0-d4C"/>
+                            <constraint firstItem="Ong-Qv-GEy" firstAttribute="top" secondItem="aSu-34-603" secondAttribute="bottom" constant="80" id="FzX-8V-LHb"/>
+                            <constraint firstItem="aSu-34-603" firstAttribute="top" secondItem="CCp-O7-HLQ" secondAttribute="bottom" constant="30" id="NpA-L0-d4C"/>
                             <constraint firstItem="Ubw-N5-9kO" firstAttribute="width" secondItem="oxM-sB-nYg" secondAttribute="width" id="OBh-1S-HEu"/>
                             <constraint firstItem="CCp-O7-HLQ" firstAttribute="width" secondItem="oxM-sB-nYg" secondAttribute="width" id="TGk-jg-YwI"/>
                             <constraint firstItem="Ubw-N5-9kO" firstAttribute="centerX" secondItem="oxM-sB-nYg" secondAttribute="centerX" id="Yi8-pO-5ei"/>
                             <constraint firstItem="aSu-34-603" firstAttribute="centerX" secondItem="oxM-sB-nYg" secondAttribute="centerX" id="Yiw-ZS-PWv"/>
                             <constraint firstItem="CCp-O7-HLQ" firstAttribute="centerX" secondItem="oxM-sB-nYg" secondAttribute="centerX" id="gri-Wm-S3C"/>
                             <constraint firstItem="Ubw-N5-9kO" firstAttribute="top" secondItem="oxM-sB-nYg" secondAttribute="top" id="hRd-Ey-fBm"/>
-                            <constraint firstItem="aSu-34-603" firstAttribute="top" secondItem="g1M-I5-tzY" secondAttribute="bottom" constant="50" id="hrG-xS-BaJ"/>
+                            <constraint firstItem="aSu-34-603" firstAttribute="top" secondItem="g1M-I5-tzY" secondAttribute="bottom" constant="30" id="hrG-xS-BaJ"/>
                             <constraint firstItem="g1M-I5-tzY" firstAttribute="centerX" secondItem="oxM-sB-nYg" secondAttribute="centerX" id="rBL-Ta-m1a"/>
                             <constraint firstItem="g1M-I5-tzY" firstAttribute="width" secondItem="oxM-sB-nYg" secondAttribute="width" id="yQe-qr-0cE"/>
                         </constraints>
@@ -289,7 +297,7 @@
                         <outlet property="loginPasswordTextField" destination="t5N-yS-6QS" id="xCQ-X0-Ycf"/>
                         <outlet property="logoView" destination="Kaf-oQ-x34" id="bO0-4Q-quW"/>
                         <outlet property="pointerView" destination="N64-ZL-lYm" id="3W9-GN-fPa"/>
-                        <outlet property="profilePicButton" destination="CvH-VR-Ni5" id="6Q9-h5-PSD"/>
+                        <outlet property="profilePicView" destination="iUH-C2-KrJ" id="llz-5b-MLK"/>
                         <outlet property="registerButton" destination="mnn-XH-8zT" id="e53-Z5-PUw"/>
                         <outlet property="registerContainer" destination="CCp-O7-HLQ" id="kmH-a0-DO4"/>
                         <outlet property="registerEmailTextField" destination="VxX-5M-kXb" id="uaw-TM-v9C"/>
@@ -302,11 +310,63 @@
             </objects>
             <point key="canvasLocation" x="61.600000000000001" y="428.63568215892059"/>
         </scene>
+        <!--ConversationsTB-->
+        <scene sceneID="gg8-6S-tJu">
+            <objects>
+                <tableViewController id="LSs-oo-Dbz" customClass="ConversationsTB" customModule="QuickChat" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="nsJ-vt-LiG">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Q6I-yl-5Jg">
+                                <rect key="frame" x="0.0" y="92" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Q6I-yl-5Jg" id="uY4-CC-Xa7">
+                                    <frame key="frameInset" width="375" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="LSs-oo-Dbz" id="omp-fC-f2J"/>
+                            <outlet property="delegate" destination="LSs-oo-Dbz" id="ROj-Vi-Zeq"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="1L4-bd-oWn">
+                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="eyN-um-sQ0">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a26-Mc-fRO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2040.8" y="428.63568215892059"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="PCR-s5-Lha">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ApB-eK-ERO" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="48U-mr-U1F">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="LSs-oo-Dbz" kind="relationship" relationship="rootViewController" id="UNm-Ru-HXS"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OKS-MU-cKn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1101.5999999999999" y="428.63568215892059"/>
+        </scene>
     </scenes>
     <resources>
         <image name="button" width="60" height="20"/>
         <image name="clouds" width="750" height="150"/>
         <image name="logo" width="50" height="39"/>
         <image name="pointer" width="14" height="9"/>
+        <image name="profile pic" width="100" height="100"/>
     </resources>
 </document>
