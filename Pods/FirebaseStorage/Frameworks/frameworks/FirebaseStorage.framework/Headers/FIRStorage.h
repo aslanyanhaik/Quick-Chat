@@ -79,7 +79,8 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Creates a FIRStorageReference given a gs:// or https:// URL pointing to a Firebase Storage
  * location. For example, you can pass in an https:// download URL retrieved from
- * [FIRStorageReference getDownloadURL] or the gs:// URI from [FIRStorageReference description].
+ * [FIRStorageReference downloadURLWithCompletion] or the gs:// URI from
+ * [FIRStorageReference description].
  * @param string A gs:// or https:// URL to initialize the reference with.
  * @return An instance of FIRStorageReference at the given child path.
  * @throws Throws an exception if passed in URL is not associated with the FIRApp used to initialize

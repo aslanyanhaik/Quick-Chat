@@ -1,0 +1,15 @@
+framework module FirebaseCore {
+
+  export *
+
+  umbrella header "FirebaseCore.h"
+
+  header "FIRAnalyticsConfiguration.h"
+  header "FIRApp.h"
+  header "FIRConfiguration.h"
+  header "FIROptions.h"
+
+  link framework "SystemConfiguration"
+
+  link "c++"
+}

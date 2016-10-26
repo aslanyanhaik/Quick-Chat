@@ -283,8 +283,8 @@ static NSString *const kFIRParameterTravelClass = @"travel_class";
 /// a general purpose parameter that is useful for accumulating a key metric that pertains to an
 /// event. Examples include revenue, distance, time and points. Value should be specified as signed
 /// 64-bit integer or double as NSNumber. Notes: Currency-related values should be supplied using
-/// double as NSNumber and must be accompanied by a {@link kFIRParameterCurrency} parameter. The
-/// valid range of accumulated values is [-9,223,372,036,854.77, 9,223,372,036,854.77].
+/// double as NSNumber and must be accompanied by a @c kFIRParameterCurrency parameter. The valid
+/// range of accumulated values is [-9,223,372,036,854.77, 9,223,372,036,854.77].
 /// <pre>
 ///     NSDictionary *params = @{
 ///       kFIRParameterValue : @(3.99),

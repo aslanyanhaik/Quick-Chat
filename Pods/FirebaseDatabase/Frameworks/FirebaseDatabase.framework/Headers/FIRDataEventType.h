@@ -33,11 +33,11 @@
  * This enum is the set of events that you can observe at a Firebase Database location.
  */
 typedef NS_ENUM(NSInteger, FIRDataEventType) {
-    FIRDataEventTypeChildAdded,    // 0, fired when a new child node is added to a location
-    FIRDataEventTypeChildRemoved,  // 1, fired when a child node is removed from a location
-    FIRDataEventTypeChildChanged,  // 2, fired when a child node at a location changes
-    FIRDataEventTypeChildMoved,    // 3, fired when a child node moves relative to the other child nodes at a location
-    FIRDataEventTypeValue          // 4, fired when any data changes at a location and, recursively, any children
+    FIRDataEventTypeChildAdded,    /// A new child node is added to a location.
+    FIRDataEventTypeChildRemoved,  /// A child node is removed from a location.
+    FIRDataEventTypeChildChanged,  /// A child node at a location changes.
+    FIRDataEventTypeChildMoved,    /// A child node moves relative to the other child nodes at a location.
+    FIRDataEventTypeValue          /// Any data changes at a location or, recursively, at any child node.
 };
 
 #endif

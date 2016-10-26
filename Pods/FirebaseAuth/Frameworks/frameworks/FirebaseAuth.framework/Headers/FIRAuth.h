@@ -122,6 +122,7 @@ typedef void (^FIRSendPasswordResetCallback)(NSError *_Nullable error);
         - @c FIRAuthErrorCodeUserDisabled Indicates the user's account is disabled.
         - @c FIRAuthErrorCodeWrongPassword Indicates the user attempted sign in with an incorrect
             password.
+        - @c FIRAuthErrorCodeInvalidEmail - Indicates the email address is malformed.
         - See @c FIRAuthErrors for a list of error codes that are common to all API methods.
  */
 - (void)signInWithEmail:(NSString *)email
@@ -150,6 +151,7 @@ typedef void (^FIRSendPasswordResetCallback)(NSError *_Nullable error);
         - @c FIRAuthErrorCodeUserDisabled Indicates the user's account is disabled.
         - @c FIRAuthErrorCodeWrongPassword Indicates the user attempted sign in with a incorrect
             password, if credential is of the type EmailPasswordAuthCredential.
+        - @c FIRAuthErrorCodeInvalidEmail - Indicates the email address is malformed.
         - See @c FIRAuthErrors for a list of error codes that are common to all API methods.
  */
 - (void)signInWithCredential:(FIRAuthCredential *)credential

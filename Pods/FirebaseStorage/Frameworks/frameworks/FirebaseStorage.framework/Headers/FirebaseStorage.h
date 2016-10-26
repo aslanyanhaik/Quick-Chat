@@ -17,5 +17,5 @@
 #import "FIRStorageTaskSnapshot.h"
 #import "FIRStorageUploadTask.h"
 
-//! Project version string for FirebaseStorage.
+/** Project version string for FirebaseStorage. */
 FOUNDATION_EXPORT const unsigned char *const FirebaseStorageVersionString;

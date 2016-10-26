@@ -8,8 +8,8 @@
  * To save time integrating Firebase Analytics in an application, Firebase Analytics does not
  * require delegation implementation from the AppDelegate. Instead this is automatically done by
  * Firebase Analytics. Should you choose instead to delegate manually, you can turn off the App
- * Delegate Proxy by adding FirebaseAppDelegateProxyEnabled into your Info.plist and setting it
- * to NO, and adding the methods in this category to corresponding delegation handlers.
+ * Delegate Proxy by adding FirebaseAppDelegateProxyEnabled into your app's Info.plist and setting
+ * it to NO, and adding the methods in this category to corresponding delegation handlers.
  *
  * To handle Universal Links, you must return YES in
  * [UIApplicationDelegate application:didFinishLaunchingWithOptions:].

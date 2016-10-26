@@ -44,9 +44,9 @@ NS_ASSUME_NONNULL_BEGIN
  * and can be used for reading or writing data to that Firebase Database location.
  *
  * This class is the starting point for all Firebase Database operations. After you've
- * initialized it with initWithUrl: you can use it
- * to read data (ie. observeEventType:withBlock:), write data (ie. setValue:), and to create new
- * FIRDatabaseReferences (ie. child:).
+ * obtained your first FIRDatabaseReference via [FIRDatabase reference], you can use it
+ * to read data (ie. observeEventType:withBlock:), write data (ie. setValue:), and to
+ * create new FIRDatabaseReferences (ie. child:).
  */
 @interface FIRDatabaseReference : FIRDatabaseQuery
 

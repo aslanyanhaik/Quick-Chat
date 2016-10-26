@@ -159,6 +159,7 @@ typedef void (^FIRSendEmailVerificationCallback)(NSError *_Nullable error);
             incorrect password, if credential is of the type EmailPasswordAuthCredential.
         - @c FIRAuthErrorCodeUserMismatch Indicates that an attempt was made to reauthenticate with
             a user which is not the current user.
+        - @c FIRAuthErrorCodeInvalidEmail - Indicates the email address is malformed.
         - See @c FIRAuthErrors for a list of error codes that are common to all API methods.
  */
 - (void)reauthenticateWithCredential:(FIRAuthCredential *)credential

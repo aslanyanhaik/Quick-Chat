@@ -17,4 +17,6 @@ framework module FirebaseAuth {
   link framework "Security"
 
   use FirebaseAnalytics
+  use GoogleToolboxForMac
+  use GTMSessionFetcher
 }

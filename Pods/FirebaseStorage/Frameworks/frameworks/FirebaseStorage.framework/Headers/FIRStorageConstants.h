@@ -50,9 +50,8 @@ typedef void (^FIRStorageVoidMetadataError)(FIRStorageMetadata *_Nullable metada
                                             NSError *_Nullable error);
 
 /**
- * Block typedef typically used when getting or updating metadata with the possibility of an error.
- * @param metadata The metadata returned by the operation, if metadata exists.
- * @param error The error describing failure, if one occurred.
+ * Block typedef typically used to asynchronously return a storage task snapshot.
+ * @param snapshot The returned task snapshot.
  */
 typedef void (^FIRStorageVoidSnapshot)(FIRStorageTaskSnapshot *snapshot);
 
@@ -107,16 +106,53 @@ FOUNDATION_EXPORT NSString *const FIRStorageErrorDomain;
  * Enum representing the errors raised by Firebase Storage.
  */
 typedef NS_ENUM(NSInteger, FIRStorageErrorCode) {
+  /** An unknown error occurred. */
   FIRStorageErrorCodeUnknown = -13000,
+
+  /** No object exists at the desired reference. */
   FIRStorageErrorCodeObjectNotFound = -13010,
+
+  /** No bucket is configured for Firebase Storage. */
   FIRStorageErrorCodeBucketNotFound = -13011,
+
+  /** No project is configured for Firebase Storage. */
   FIRStorageErrorCodeProjectNotFound = -13012,
+
+  /**
+   * Quota on your Firebase Storage bucket has been exceeded.
+   * If you're on the free tier, upgrade to a paid plan.
+   * If you're on a paid plan, reach out to Firebase support.
+   */
   FIRStorageErrorCodeQuotaExceeded = -13013,
+
+  /** User is unauthenticated. Authenticate and try again. */
   FIRStorageErrorCodeUnauthenticated = -13020,
+
+  /**
+   * User is not authorized to perform the desired action.
+   * Check your rules to ensure they are correct.
+   */
   FIRStorageErrorCodeUnauthorized = -13021,
+
+  /**
+   * The maximum time limit on an operation (upload, download, delete, etc.) has been exceeded.
+   * Try uploading again.
+   */
   FIRStorageErrorCodeRetryLimitExceeded = -13030,
+
+  /**
+   * File on the client does not match the checksum of the file recieved by the server.
+   * Try uploading again.
+   */
   FIRStorageErrorCodeNonMatchingChecksum = -13031,
+
+  /** User canceled the operation. */
   FIRStorageErrorCodeDownloadSizeExceeded = -13032,
+
+  /**
+   * Size of the downloaded file exceeds the amount of memory allocated for the download.
+   * Increase memory cap and try downloading again.
+   */
   FIRStorageErrorCodeCancelled = -13040
 };
 
