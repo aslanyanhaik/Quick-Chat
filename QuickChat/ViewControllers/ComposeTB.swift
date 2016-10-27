@@ -50,10 +50,31 @@ class ComposeTB: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = self.items[indexPath.row].name
-        cell.detailTextLabel?.text = self.items[indexPath.row].email
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! UsersCell
+        cell.nameLabel.text = self.items[indexPath.row].name
+        cell.emailLabel.text = self.items[indexPath.row].email
+        let profilepicURL = URL.init(string: self.items[indexPath.row].profilePicLink)
+        let data = try! Data.init(contentsOf: profilepicURL!)
+        let image = UIImage.init(data: data)
+        cell.profilePicView.image = image
         return cell
     }
 
 }
+
+
+
+
+class UsersCell: UITableViewCell {
+    
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var profilePicView: UIImageView!
+    
+   
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+}
+
