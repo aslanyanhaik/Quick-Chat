@@ -17,6 +17,7 @@
 		22A92BB11D59EBD6005D76F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A92BB01D59EBD6005D76F7 /* AppDelegate.swift */; };
 		22A92BB81D59EBD6005D76F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22A92BB71D59EBD6005D76F7 /* Assets.xcassets */; };
 		22AE96381D89727D00B4ED38 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 22AE96371D89727C00B4ED38 /* GoogleService-Info.plist */; };
+		22DC201F1DC0D703002C715E /* ComposeTB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DC201E1DC0D703002C715E /* ComposeTB.swift */; };
 		62058F6006BD9ACBE0439C4B /* Pods_QuickChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8041C4B4A9DA4F0F53D2BDE /* Pods_QuickChat.framework */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +34,7 @@
 		22A92BB71D59EBD6005D76F7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		22A92BBC1D59EBD6005D76F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22AE96371D89727C00B4ED38 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		22DC201E1DC0D703002C715E /* ComposeTB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ComposeTB.swift; path = QuickChat/ViewControllers/ComposeTB.swift; sourceTree = "<group>"; };
 		614F8B4888358059B3DC166B /* Pods-QuickChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QuickChat/Pods-QuickChat.debug.xcconfig"; sourceTree = "<group>"; };
 		B8041C4B4A9DA4F0F53D2BDE /* Pods_QuickChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuickChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8FBFCFF82B6EB57B02FA375 /* Pods-QuickChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-QuickChat/Pods-QuickChat.release.xcconfig"; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 		224AFA9E1D868371004E7CCD /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				22DC201E1DC0D703002C715E /* ComposeTB.swift */,
 				224834AD1DB532510019153C /* ProfileVC.swift */,
 				224834AB1DB502D50019153C /* ConversationsTB.swift */,
 				224AFAA81D86890A004E7CCD /* WelcomeVC.swift */,
@@ -268,6 +271,7 @@
 				224AFAA91D86890A004E7CCD /* WelcomeVC.swift in Sources */,
 				224AFAA31D8686ED004E7CCD /* extensions.swift in Sources */,
 				224AFAAC1D869039004E7CCD /* GlobalVariables.swift in Sources */,
+				22DC201F1DC0D703002C715E /* ComposeTB.swift in Sources */,
 				224834B11DB539A50019153C /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

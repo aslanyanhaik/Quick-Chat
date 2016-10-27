@@ -19,16 +19,7 @@ class ConversationsTB: UITableViewController {
         }
     }
 
-    @IBAction func signOut(_ sender: AnyObject) {
         
-        do {
-            try FIRAuth.auth()?.signOut()
-        } catch _ {
-            print("something went wrong")
-        }
-        
-    }
-    
     func customization()  {
         
         UINavigationBar.appearance().setBackgroundImage(UIImage(named: "button")!.resizableImage(withCapInsets: UIEdgeInsetsMake(0, 0, 0, 0), resizingMode: .stretch), for: .default)
@@ -36,7 +27,7 @@ class ConversationsTB: UITableViewController {
 
 
     }
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

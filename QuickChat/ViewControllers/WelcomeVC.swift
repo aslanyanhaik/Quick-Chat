@@ -62,14 +62,21 @@ class WelcomeVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
         case .register:
             FIRAuth.auth()?.createUser(withEmail: self.registerEmailTextField.text!, password: self.registerPassWordTextField.text!, completion: { (user: FIRUser?, error) in
                 if let id  = user?.uid {
-                    let ref = FIRDatabase.database().reference(fromURL: "https://quick-chat-60662.firebaseio.com/").child("users").child(id)
-                    let values = ["name" : self.registerNameTextField.text!, "email" : self.registerEmailTextField.text!]
-                    ref.updateChildValues(values, withCompletionBlock: { (err, reference) in
-                        print(err)
-                    })
+                    let stodateRef = FIRStorage.storage().reference().child("usersProfilePics").child(id)
+                    let data = UIImagePNGRepresentation(self.profilePicView.image!)!
+                    stodateRef.put(data, metadata: nil, completion: { (metadata, error) in
+                        let path  = metadata?.downloadURL()?.absoluteString
+                        let ref = FIRDatabase.database().reference(fromURL: "https://quick-chat-60662.firebaseio.com/").child("users").child(id)
+                        let values = ["name" : self.registerNameTextField.text!, "email" : self.registerEmailTextField.text!, "profilePicLink" : path!]
+                        ref.updateChildValues(values, withCompletionBlock: { (err, reference) in
+                            print(err)
+                        })
 
+                    })
                 }
             })
+            
+            
         }
     }
     
@@ -195,6 +202,7 @@ class WelcomeVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
     override func viewDidLoad() {
         super.viewDidLoad()
         self.customization()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {

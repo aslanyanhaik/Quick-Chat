@@ -13,6 +13,10 @@ class ProfileVC: UIViewController {
     
     
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var profilePicView: UIImageView!
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,8 +24,24 @@ class ProfileVC: UIViewController {
             FIRDatabase.database().reference().child("users").child(id).observe(.value, with: { (snapshot) in
                 let value = snapshot.value as! [String : String]
                 self.nameLabel.text = value["email"]
+                self.emailLabel.text = value["name"]
+                let profilePicURL = URL.init(string: value["profilePicLink"]!)
+                let imageData = try! Data.init(contentsOf: profilePicURL!)
+                let profilePic = UIImage.init(data: imageData)
+                self.profilePicView.image = profilePic
             })
         }
+            }
+    @IBAction func logOut(_ sender: AnyObject) {
+
+        if let _ = FIRAuth.auth()?.currentUser?.uid {
+            do {
+                try FIRAuth.auth()?.signOut()
+            } catch _ {
+                print("something went wrong")
+            }
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
