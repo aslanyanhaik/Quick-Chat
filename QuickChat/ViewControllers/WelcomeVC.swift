@@ -63,8 +63,8 @@ class WelcomeVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
             FIRAuth.auth()?.createUser(withEmail: self.registerEmailTextField.text!, password: self.registerPassWordTextField.text!, completion: { (user: FIRUser?, error) in
                 if let id  = user?.uid {
                     let stodateRef = FIRStorage.storage().reference().child("usersProfilePics").child(id)
-                    let data = UIImagePNGRepresentation(self.profilePicView.image!)!
-                    stodateRef.put(data, metadata: nil, completion: { (metadata, error) in
+                    let data = UIImageJPEGRepresentation(self.profilePicView.image!, 0.9)
+                    stodateRef.put(data!, metadata: nil, completion: { (metadata, error) in
                         let path  = metadata?.downloadURL()?.absoluteString
                         let ref = FIRDatabase.database().reference(fromURL: "https://quick-chat-60662.firebaseio.com/").child("users").child(id)
                         let values = ["name" : self.registerNameTextField.text!, "email" : self.registerEmailTextField.text!, "profilePicLink" : path!]
