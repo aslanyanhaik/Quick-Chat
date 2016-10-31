@@ -57,27 +57,33 @@ class WelcomeVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
         switch self.currentState {
         case .login:
             FIRAuth.auth()?.signIn(withEmail: self.loginEmailTextField.text!, password: self.loginPasswordTextField.text!, completion: { (user, error) in
-                print(user?.providerID)
-                print(user)
+                if error == nil {
+                    let userInfo = ["email" : self.loginEmailTextField.text!, "password" : self.loginPasswordTextField.text!]
+                    UserDefaults.standard.set(userInfo, forKey: "userInformation")
+                    let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+                    let rootController = storyboard.instantiateViewController(withIdentifier: "Conversations") as! ConversationsTB
+                    let navigationController  = UINavigationController.init(rootViewController: rootController)
+                    self.show(navigationController, sender: nil)
+                }
             })
         case .register:
             FIRAuth.auth()?.createUser(withEmail: self.registerEmailTextField.text!, password: self.registerPassWordTextField.text!, completion: { (user: FIRUser?, error) in
-                if let id  = user?.uid {
-                    let stodateRef = FIRStorage.storage().reference().child("usersProfilePics").child(id)
+                if error == nil {
+                    let stodateRef = FIRStorage.storage().reference().child("usersProfilePics").child((user?.uid)!)
                     let data = UIImagePNGRepresentation(self.profilePicView.image!)
                     stodateRef.put(data!, metadata: nil, completion: { (metadata, error) in
                         let path  = metadata?.downloadURL()?.absoluteString
-                        let ref = FIRDatabase.database().reference(fromURL: "https://quick-chat-60662.firebaseio.com/").child("users").child(id)
                         let values = ["name" : self.registerNameTextField.text!, "email" : self.registerEmailTextField.text!, "profilePicLink" : path!]
-                        ref.updateChildValues(values, withCompletionBlock: { (err, reference) in
-                            print(err)
-                        })
-
+                        GlobalVariables.users.child((user?.uid)!).updateChildValues(values)
+                        let userInfo = ["email" : self.registerPassWordTextField.text!, "password" : self.registerPassWordTextField.text!]
+                        UserDefaults.standard.set(userInfo, forKey: "userInformation")
+                        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+                        let rootController = storyboard.instantiateViewController(withIdentifier: "Conversations") as! ConversationsTB
+                        let navigationController  = UINavigationController.init(rootViewController: rootController)
+                        self.show(navigationController, sender: nil)
                     })
                 }
             })
-            
-            
         }
     }
     
@@ -203,7 +209,6 @@ class WelcomeVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
     override func viewDidLoad() {
         super.viewDidLoad()
         self.customization()
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {

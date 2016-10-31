@@ -17,6 +17,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         FIRApp.configure()
+        self.window = UIWindow.init(frame: UIScreen.main.bounds)
+        if let userInformation = UserDefaults.standard.dictionary(forKey: "userInformation") {
+            let email = userInformation["email"] as! String
+            let password = userInformation["password"] as! String
+            FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user, error) in
+                if error == nil {
+                    self.pushTo(viewController: .conversations)
+                } else {
+                    self.pushTo(viewController: .welcome)
+                }
+            })
+        } else {
+            self.pushTo(viewController: .welcome)
+        }
         return true
     }
     
@@ -42,6 +56,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
-    
+    func pushTo(viewController: ViewControllerType)  {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        switch viewController {
+        case .conversations:
+            let rootController = storyboard.instantiateViewController(withIdentifier: "Conversations") as! ConversationsTB
+            self.window?.rootViewController = UINavigationController.init(rootViewController: rootController)
+            self.window?.makeKeyAndVisible()
+        case .welcome:
+            let rootController = storyboard.instantiateViewController(withIdentifier: "Welcome")
+            self.window?.rootViewController = rootController
+            self.window?.makeKeyAndVisible()
+        }
+    }
 }
+
+
+enum ViewControllerType {
+    case welcome
+    case conversations
+}
+
+
 

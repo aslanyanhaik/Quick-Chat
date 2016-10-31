@@ -30,8 +30,8 @@ class ComposeTB: UITableViewController {
             let name = output["name"]
             let email = output["email"]
             let profilePicLink = output["profilePicLink"]
-            let user = User.init(name: name!, email: email!, profilePicLink: profilePicLink!)
-            self.items.append(user)
+            //let user = User.init(name: name!, email: email!, profilePicLink: profilePicLink!)
+           // self.items.append(user)
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }

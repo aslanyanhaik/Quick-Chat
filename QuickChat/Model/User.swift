@@ -12,11 +12,13 @@ import UIKit
 class User {
     let name: String
     let email: String
-    let profilePicLink: String
+    let profilePicLink: URL
+    let profilePic: UIImage
     
-    init(name: String, email: String, profilePicLink: String) {
+    init(name: String, email: String, profilePicLink: URL, profilePic: UIImage) {
         self.name = name
         self.email = email
         self.profilePicLink = profilePicLink
+        self.profilePic = profilePic
     }
 }

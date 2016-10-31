@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rVC-Ig-Azx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -11,7 +11,7 @@
         <!--WelcomeVC-->
         <scene sceneID="Gs1-m1-RGK">
             <objects>
-                <viewController id="rVC-Ig-Azx" customClass="WelcomeVC" customModule="QuickChat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Welcome" useStoryboardIdentifierAsRestorationIdentifier="YES" id="rVC-Ig-Azx" customClass="WelcomeVC" customModule="QuickChat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fbL-YA-EsA"/>
                         <viewControllerLayoutGuide type="bottom" id="Ong-Qv-GEy"/>
@@ -268,7 +268,6 @@
                                 </state>
                                 <connections>
                                     <action selector="submit:" destination="rVC-Ig-Azx" eventType="touchUpInside" id="n6s-EA-yH0"/>
-                                    <segue destination="ApB-eK-ERO" kind="show" id="nBa-Tr-N14"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -381,7 +380,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="70"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="snW-pf-jTP" id="wTZ-JO-YbF">
-                                    <frame key="frameInset" width="375" height="70"/>
+                                    <frame key="frameInset" width="375" height="69"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4K0-aP-qrN">
@@ -439,7 +438,7 @@
         <!--ConversationsTB-->
         <scene sceneID="gg8-6S-tJu">
             <objects>
-                <tableViewController id="LSs-oo-Dbz" customClass="ConversationsTB" customModule="QuickChat" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="Conversations" useStoryboardIdentifierAsRestorationIdentifier="YES" id="LSs-oo-Dbz" customClass="ConversationsTB" customModule="QuickChat" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="nsJ-vt-LiG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -37,6 +37,7 @@ class ProfileVC: UIViewController {
         if let _ = FIRAuth.auth()?.currentUser?.uid {
             do {
                 try FIRAuth.auth()?.signOut()
+                UserDefaults.standard.removeObject(forKey: "userInformation")
             } catch _ {
                 print("something went wrong")
             }
