@@ -30,7 +30,7 @@ class WelcomeVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
     @IBOutlet weak var profilePicView: UIImageView!
     let imagePicker = UIImagePickerController()
     var isContainerVisible = true
-    var currentState: State = .register
+    var currentState: State = .login
     var profilePic: UIImage! {
         didSet {
             self.profilePicView.image = profilePic
@@ -57,13 +57,14 @@ class WelcomeVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
         switch self.currentState {
         case .login:
             FIRAuth.auth()?.signIn(withEmail: self.loginEmailTextField.text!, password: self.loginPasswordTextField.text!, completion: { (user, error) in
-                print(error)
+                print(user?.providerID)
+                print(user)
             })
         case .register:
             FIRAuth.auth()?.createUser(withEmail: self.registerEmailTextField.text!, password: self.registerPassWordTextField.text!, completion: { (user: FIRUser?, error) in
                 if let id  = user?.uid {
                     let stodateRef = FIRStorage.storage().reference().child("usersProfilePics").child(id)
-                    let data = UIImageJPEGRepresentation(self.profilePicView.image!, 0.9)
+                    let data = UIImagePNGRepresentation(self.profilePicView.image!)
                     stodateRef.put(data!, metadata: nil, completion: { (metadata, error) in
                         let path  = metadata?.downloadURL()?.absoluteString
                         let ref = FIRDatabase.database().reference(fromURL: "https://quick-chat-60662.firebaseio.com/").child("users").child(id)
