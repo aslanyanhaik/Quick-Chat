@@ -9,17 +9,23 @@
 import UIKit
 import Firebase
 
-class ConversationsTB: UITableViewController {
+class ConversationsTB: UITableViewController, ComposeVCDelegate {
     
     
     //MARK: Properties
-    let items = ["hello", "world"]
+    var items = [String]()
     override var preferredStatusBarStyle: UIStatusBarStyle {
         get {
             return .lightContent
         }
     }
 
+    @IBAction func compose(_ sender: Any) {
+        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "Compose") as! ComposeTB
+        vc.delegate = self
+        self.present(vc, animated: true, completion: nil)
+    }
         
     func customization()  {
         
@@ -29,22 +35,38 @@ class ConversationsTB: UITableViewController {
 
     }
     
+    func id(id: String) {
+        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "Chat") as! ChatVC
+        vc.id = id
+        print(id)
+        self.show(vc, sender: nil)
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.customization()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        
+        if let id = FIRAuth.auth()?.currentUser?.uid {
+            GlobalVariables.users.child(id).child("conversations").observe(.value, with: { (snapshot) in
+                if let value = snapshot.value as? [String : String] {
+                    let userId = value["toID"]
+                    GlobalVariables.users.child(userId!).observe(.value, with: { (userSnapshot) in
+                        let userValue = userSnapshot.value as! [String : String]
+                        let name = userValue["name"]!
+                        self.items.append(name)
+                        DispatchQueue.main.async {
+                            self.tableView.reloadData()
+                        }
+                    })
+                }
+            })
+        }
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+ 
 
     // MARK: - Table view data source
 

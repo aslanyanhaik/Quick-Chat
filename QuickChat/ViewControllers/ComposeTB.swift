@@ -9,14 +9,21 @@
 import UIKit
 import Firebase
 
+protocol ComposeVCDelegate {
+    func id(id: String)
+}
+
 class ComposeTB: UITableViewController {
     
     var items = [User]()
+    var delegate: ComposeVCDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.fetchUsers()
         self.navigationItem.title = "aaa"
+        
+        
     }
 
     @IBAction func cancelView(_ sender: AnyObject) {
@@ -25,20 +32,20 @@ class ComposeTB: UITableViewController {
     
     func fetchUsers()  {
         
-         FIRDatabase.database().reference().child("users").observe(.childAdded, with: { (snapshot) in
+         GlobalVariables.users.observe(.childAdded, with: { (snapshot) in
             let output = snapshot.value as! [String: String]
-            let name = output["name"]
-            let email = output["email"]
-            let profilePicLink = output["profilePicLink"]
-            //let user = User.init(name: name!, email: email!, profilePicLink: profilePicLink!)
-           // self.items.append(user)
+            let name = output["name"]!
+            let email = output["email"]!
+            let profilePicLink = output["profilePicLink"]!
+                let link = URL.init(string: profilePicLink)
+                let data = try! Data.init(contentsOf: link!)
+                let profilePic = UIImage.init(data: data)!
+            let user = User.init(name: name, email: email, id: snapshot.key, profilePicLink: link!, profilePic: profilePic)
+                self.items.append(user)
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
-
-         
          })
-    
         }
 
     // MARK: - TableView Delegates
@@ -56,14 +63,18 @@ class ComposeTB: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! UsersCell
         cell.nameLabel.text = self.items[indexPath.row].name
         cell.emailLabel.text = self.items[indexPath.row].email
-       // let profilepicURL = URL.init(string: self.items[indexPath.row].profilePicLink)
-       // let data = try! Data.init(contentsOf: profilepicURL!)
-       // let image = UIImage.init(data: data)
-       // cell.profilePicView.image = image
+        cell.imageView?.image = self.items[indexPath.row].profilePic
         return cell
     }
 
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let id = items[indexPath.row].id
+        self.delegate?.id(id: id)
+        self.dismiss(animated: true, completion: nil)
+    }
 }
+
 
 
 
