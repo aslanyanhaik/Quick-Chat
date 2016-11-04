@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		223611991DC8F8A700CDBEF4 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223611981DC8F8A700CDBEF4 /* LoginVC.swift */; };
+		2236119B1DC8F8DF00CDBEF4 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2236119A1DC8F8DF00CDBEF4 /* RegisterVC.swift */; };
 		224834AC1DB502D50019153C /* ConversationsTB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224834AB1DB502D50019153C /* ConversationsTB.swift */; };
 		224834AE1DB532510019153C /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224834AD1DB532510019153C /* ProfileVC.swift */; };
 		224834B11DB539A50019153C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224834B01DB539A50019153C /* User.swift */; };
@@ -24,6 +26,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		223611981DC8F8A700CDBEF4 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginVC.swift; path = QuickChat/ViewControllers/LoginVC.swift; sourceTree = "<group>"; };
+		2236119A1DC8F8DF00CDBEF4 /* RegisterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterVC.swift; path = QuickChat/ViewControllers/RegisterVC.swift; sourceTree = "<group>"; };
 		224834AB1DB502D50019153C /* ConversationsTB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConversationsTB.swift; path = QuickChat/ViewControllers/ConversationsTB.swift; sourceTree = "<group>"; };
 		224834AD1DB532510019153C /* ProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileVC.swift; path = QuickChat/ViewControllers/ProfileVC.swift; sourceTree = "<group>"; };
 		224834B01DB539A50019153C /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = QuickChat/Model/User.swift; sourceTree = "<group>"; };
@@ -69,11 +73,13 @@
 		224AFA9E1D868371004E7CCD /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				224AFAA81D86890A004E7CCD /* WelcomeVC.swift */,
+				223611981DC8F8A700CDBEF4 /* LoginVC.swift */,
+				2236119A1DC8F8DF00CDBEF4 /* RegisterVC.swift */,
 				2284BC441DC3582F00E36E8A /* ChatVC.swift */,
 				22DC201E1DC0D703002C715E /* ComposeTB.swift */,
 				224834AD1DB532510019153C /* ProfileVC.swift */,
 				224834AB1DB502D50019153C /* ConversationsTB.swift */,
-				224AFAA81D86890A004E7CCD /* WelcomeVC.swift */,
 			);
 			name = ViewControllers;
 			path = ..;
@@ -271,6 +277,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				223611991DC8F8A700CDBEF4 /* LoginVC.swift in Sources */,
 				2284BC451DC3582F00E36E8A /* ChatVC.swift in Sources */,
 				224834AE1DB532510019153C /* ProfileVC.swift in Sources */,
 				224834AC1DB502D50019153C /* ConversationsTB.swift in Sources */,
@@ -279,6 +286,7 @@
 				224AFAA31D8686ED004E7CCD /* extensions.swift in Sources */,
 				224AFAAC1D869039004E7CCD /* GlobalVariables.swift in Sources */,
 				22873DAA1DC790550021690E /* Message.swift in Sources */,
+				2236119B1DC8F8DF00CDBEF4 /* RegisterVC.swift in Sources */,
 				22DC201F1DC0D703002C715E /* ComposeTB.swift in Sources */,
 				224834B11DB539A50019153C /* User.swift in Sources */,
 			);
