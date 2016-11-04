@@ -20,6 +20,7 @@ class ProfileVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = UIColor.orange
         if let id  = FIRAuth.auth()?.currentUser?.uid {
             FIRDatabase.database().reference().child("users").child(id).observe(.value, with: { (snapshot) in
                 let value = snapshot.value as! [String : String]
@@ -38,6 +39,9 @@ class ProfileVC: UIViewController {
             do {
                 try FIRAuth.auth()?.signOut()
                 UserDefaults.standard.removeObject(forKey: "userInformation")
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "Welcome") as! WelcomeVC
+                self.present(vc, animated: true, completion: { 
+                })
             } catch _ {
                 print("something went wrong")
             }

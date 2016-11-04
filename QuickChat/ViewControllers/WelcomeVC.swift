@@ -79,9 +79,8 @@ class WelcomeVC: UIViewController, SuccessfulAuthentication {
     
     //MARK: Delegates
     func didAuthenticate() {
-        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-        let rootController = storyboard.instantiateViewController(withIdentifier: "Conversations") as! ConversationsTB
-        let navigationController  = UINavigationController.init(rootViewController: rootController)
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Conversations") as! ConversationsVC
+        let navigationController  = UINavigationController.init(rootViewController: vc)
         self.show(navigationController, sender: nil)
     }
 

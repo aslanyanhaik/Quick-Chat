@@ -13,6 +13,14 @@ extension UIColor{
     class func rbg(r: CGFloat, g: CGFloat, b: CGFloat) -> UIColor {
         let color = UIColor.init(red: r/255, green: g/255, blue: b/255, alpha: 1)
         return color
-        
     }
 }
+
+extension UIImage {
+    class func downloadImagewith(link: String) -> UIImage {
+        let downloadLink = URL.init(string: link)
+        let data = try! Data.init(contentsOf: downloadLink!)
+        let image = UIImage.init(data: data)
+        return image!
+    }
+ }

@@ -7,15 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2217853D1DCD1DAC00A69F88 /* ConversationsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2217853C1DCD1DAC00A69F88 /* ConversationsVC.swift */; };
 		223611991DC8F8A700CDBEF4 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223611981DC8F8A700CDBEF4 /* LoginVC.swift */; };
 		2236119B1DC8F8DF00CDBEF4 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2236119A1DC8F8DF00CDBEF4 /* RegisterVC.swift */; };
-		224834AC1DB502D50019153C /* ConversationsTB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224834AB1DB502D50019153C /* ConversationsTB.swift */; };
 		224834AE1DB532510019153C /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224834AD1DB532510019153C /* ProfileVC.swift */; };
 		224834B11DB539A50019153C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224834B01DB539A50019153C /* User.swift */; };
 		224AFA9D1D867DE7004E7CCD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 224AFA9C1D867DE7004E7CCD /* Main.storyboard */; };
 		224AFAA31D8686ED004E7CCD /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224AFAA21D8686ED004E7CCD /* extensions.swift */; };
 		224AFAA91D86890A004E7CCD /* WelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224AFAA81D86890A004E7CCD /* WelcomeVC.swift */; };
 		224AFAAC1D869039004E7CCD /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224AFAAB1D869039004E7CCD /* GlobalVariables.swift */; };
+		2274709E1DCCF9BF00645401 /* LandingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2274709D1DCCF9BF00645401 /* LandingVC.swift */; };
 		2284BC451DC3582F00E36E8A /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2284BC441DC3582F00E36E8A /* ChatVC.swift */; };
 		22873DAA1DC790550021690E /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22873DA91DC790550021690E /* Message.swift */; };
 		22A92BB11D59EBD6005D76F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A92BB01D59EBD6005D76F7 /* AppDelegate.swift */; };
@@ -26,15 +27,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2217853C1DCD1DAC00A69F88 /* ConversationsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConversationsVC.swift; path = QuickChat/ViewControllers/ConversationsVC.swift; sourceTree = "<group>"; };
 		223611981DC8F8A700CDBEF4 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginVC.swift; path = QuickChat/ViewControllers/LoginVC.swift; sourceTree = "<group>"; };
 		2236119A1DC8F8DF00CDBEF4 /* RegisterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterVC.swift; path = QuickChat/ViewControllers/RegisterVC.swift; sourceTree = "<group>"; };
-		224834AB1DB502D50019153C /* ConversationsTB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConversationsTB.swift; path = QuickChat/ViewControllers/ConversationsTB.swift; sourceTree = "<group>"; };
 		224834AD1DB532510019153C /* ProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileVC.swift; path = QuickChat/ViewControllers/ProfileVC.swift; sourceTree = "<group>"; };
 		224834B01DB539A50019153C /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = QuickChat/Model/User.swift; sourceTree = "<group>"; };
 		224AFA9C1D867DE7004E7CCD /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		224AFAA21D8686ED004E7CCD /* extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = extensions.swift; path = extensions/extensions.swift; sourceTree = "<group>"; };
 		224AFAA81D86890A004E7CCD /* WelcomeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WelcomeVC.swift; path = QuickChat/ViewControllers/WelcomeVC.swift; sourceTree = "<group>"; };
 		224AFAAB1D869039004E7CCD /* GlobalVariables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GlobalVariables.swift; path = "Helper files/GlobalVariables.swift"; sourceTree = "<group>"; };
+		2274709D1DCCF9BF00645401 /* LandingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LandingVC.swift; path = QuickChat/ViewControllers/LandingVC.swift; sourceTree = "<group>"; };
 		2284BC441DC3582F00E36E8A /* ChatVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatVC.swift; path = QuickChat/ViewControllers/ChatVC.swift; sourceTree = "<group>"; };
 		22873DA91DC790550021690E /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Message.swift; path = QuickChat/Model/Message.swift; sourceTree = "<group>"; };
 		22A92BAD1D59EBD6005D76F7 /* QuickChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -73,13 +75,14 @@
 		224AFA9E1D868371004E7CCD /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				2274709D1DCCF9BF00645401 /* LandingVC.swift */,
 				224AFAA81D86890A004E7CCD /* WelcomeVC.swift */,
 				223611981DC8F8A700CDBEF4 /* LoginVC.swift */,
 				2236119A1DC8F8DF00CDBEF4 /* RegisterVC.swift */,
+				2217853C1DCD1DAC00A69F88 /* ConversationsVC.swift */,
 				2284BC441DC3582F00E36E8A /* ChatVC.swift */,
 				22DC201E1DC0D703002C715E /* ComposeTB.swift */,
 				224834AD1DB532510019153C /* ProfileVC.swift */,
-				224834AB1DB502D50019153C /* ConversationsTB.swift */,
 			);
 			name = ViewControllers;
 			path = ..;
@@ -279,8 +282,9 @@
 			files = (
 				223611991DC8F8A700CDBEF4 /* LoginVC.swift in Sources */,
 				2284BC451DC3582F00E36E8A /* ChatVC.swift in Sources */,
+				2274709E1DCCF9BF00645401 /* LandingVC.swift in Sources */,
 				224834AE1DB532510019153C /* ProfileVC.swift in Sources */,
-				224834AC1DB502D50019153C /* ConversationsTB.swift in Sources */,
+				2217853D1DCD1DAC00A69F88 /* ConversationsVC.swift in Sources */,
 				22A92BB11D59EBD6005D76F7 /* AppDelegate.swift in Sources */,
 				224AFAA91D86890A004E7CCD /* WelcomeVC.swift in Sources */,
 				224AFAA31D8686ED004E7CCD /* extensions.swift in Sources */,
