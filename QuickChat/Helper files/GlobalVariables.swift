@@ -15,4 +15,5 @@ struct GlobalVariables {
     static let purple = UIColor.rbg(r: 161, g: 114, b: 255)
     static let users = FIRDatabase.database().reference().child("users")
     static let conversations = FIRDatabase.database().reference().child("conversations")
+    static let storageUsers = FIRStorage.storage().reference().child("usersProfilePics")
 }

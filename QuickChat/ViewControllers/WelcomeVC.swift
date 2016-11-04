@@ -45,8 +45,8 @@ class WelcomeVC: UIViewController, SuccessfulAuthentication {
    
     func cloundsAnimation() {
         let distance = -(self.cloudsView.bounds.width - UIScreen.main.bounds.width)
-        self.cloudsViewLeading.constant = distance
         UIView.animate(withDuration: 15, delay: 0, options: [.repeat, .curveLinear], animations: {
+            self.cloudsViewLeading.constant = distance
             self.view.layoutIfNeeded()
         })
     }
@@ -79,7 +79,10 @@ class WelcomeVC: UIViewController, SuccessfulAuthentication {
     
     //MARK: Delegates
     func didAuthenticate() {
-        print(123)
+        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+        let rootController = storyboard.instantiateViewController(withIdentifier: "Conversations") as! ConversationsTB
+        let navigationController  = UINavigationController.init(rootViewController: rootController)
+        self.show(navigationController, sender: nil)
     }
 
     //MARK: Viewcontroller lifecycle

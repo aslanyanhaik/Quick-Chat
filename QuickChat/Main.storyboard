@@ -149,6 +149,12 @@
                                     <constraint firstAttribute="height" constant="1" id="EDI-68-7JI"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wrong input paramets, please try again" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ri7-N3-fas">
+                                <rect key="frame" x="36" y="209" width="303" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="1" green="0.30980392159999998" blue="0.30980392159999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -162,11 +168,14 @@
                             <constraint firstAttribute="trailingMargin" secondItem="SkT-Yj-9LX" secondAttribute="trailing" constant="20" id="S2R-IC-87d"/>
                             <constraint firstItem="Lji-ps-GuA" firstAttribute="centerY" secondItem="APw-xb-Hyu" secondAttribute="centerY" id="XY0-dl-7fE"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Lji-ps-GuA" secondAttribute="trailing" constant="20" id="a1a-80-xHh"/>
+                            <constraint firstItem="ri7-N3-fas" firstAttribute="top" secondItem="SkT-Yj-9LX" secondAttribute="bottom" constant="20" id="aGp-Ei-Jv5"/>
                             <constraint firstItem="spD-eL-2Jy" firstAttribute="leading" secondItem="Cnn-IB-IBV" secondAttribute="trailing" constant="22" id="bwy-QR-KnJ"/>
                             <constraint firstItem="SkT-Yj-9LX" firstAttribute="leading" secondItem="avh-qJ-b4y" secondAttribute="leadingMargin" constant="20" id="fjT-kP-EeL"/>
                             <constraint firstItem="Efl-2s-kHW" firstAttribute="centerX" secondItem="avh-qJ-b4y" secondAttribute="centerX" id="gH2-c8-btG"/>
                             <constraint firstAttribute="trailingMargin" secondItem="spD-eL-2Jy" secondAttribute="trailing" constant="20" id="jLT-FA-7QN"/>
                             <constraint firstItem="Cnn-IB-IBV" firstAttribute="top" secondItem="APw-xb-Hyu" secondAttribute="bottom" constant="70" id="kvz-xP-g5d"/>
+                            <constraint firstItem="ri7-N3-fas" firstAttribute="leading" secondItem="avh-qJ-b4y" secondAttribute="leadingMargin" constant="20" id="l5f-tH-BHq"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ri7-N3-fas" secondAttribute="trailing" constant="20" id="liH-JA-Tft"/>
                             <constraint firstItem="x27-hS-cdm" firstAttribute="leading" secondItem="avh-qJ-b4y" secondAttribute="leadingMargin" constant="20" id="q7S-85-hd6"/>
                             <constraint firstItem="Efl-2s-kHW" firstAttribute="top" secondItem="SkT-Yj-9LX" secondAttribute="bottom" constant="70" id="uSX-bU-1Z5"/>
                             <constraint firstItem="Lji-ps-GuA" firstAttribute="leading" secondItem="APw-xb-Hyu" secondAttribute="trailing" constant="22" id="v8l-q6-iiy"/>
@@ -174,6 +183,7 @@
                     </view>
                     <connections>
                         <outlet property="emailTextField" destination="Lji-ps-GuA" id="Kjt-aK-tgf"/>
+                        <outlet property="errorLabel" destination="ri7-N3-fas" id="6yF-1f-K0S"/>
                         <outlet property="passwordTextField" destination="spD-eL-2Jy" id="Wez-oI-ca4"/>
                         <outlet property="submitButton" destination="Efl-2s-kHW" id="reN-pd-mB8"/>
                     </connections>
@@ -303,6 +313,12 @@
                                     <action selector="registerUser:" destination="0x1-fE-mox" eventType="touchUpInside" id="gZt-2H-aLp"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wrong input paramets, please try again" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="MMz-pX-jfh">
+                                <rect key="frame" x="36" y="333" width="303" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="1" green="0.30980392159999998" blue="0.30980392159999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -315,6 +331,8 @@
                             <constraint firstItem="47j-I0-fSe" firstAttribute="top" secondItem="dam-iU-iUk" secondAttribute="bottom" constant="48" id="Dcp-cj-7MK"/>
                             <constraint firstItem="JBZ-y3-LTf" firstAttribute="centerY" secondItem="47j-I0-fSe" secondAttribute="centerY" id="Fbe-2e-Hhz"/>
                             <constraint firstItem="S24-Wi-M6D" firstAttribute="centerY" secondItem="dam-iU-iUk" secondAttribute="centerY" id="Fka-YE-nfJ"/>
+                            <constraint firstItem="MMz-pX-jfh" firstAttribute="top" secondItem="nSn-iH-47d" secondAttribute="bottom" constant="14" id="GGI-6m-7Gn"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="MMz-pX-jfh" secondAttribute="trailing" constant="20" id="HV2-6w-pS2"/>
                             <constraint firstItem="wAV-oB-QL8" firstAttribute="top" secondItem="JBZ-y3-LTf" secondAttribute="bottom" constant="10" id="JAa-lb-D2Z"/>
                             <constraint firstAttribute="trailingMargin" secondItem="wAV-oB-QL8" secondAttribute="trailing" constant="20" id="OgM-tS-W0M"/>
                             <constraint firstItem="nSn-iH-47d" firstAttribute="top" secondItem="mwz-q7-4hj" secondAttribute="bottom" constant="10" id="PHz-A2-XF5"/>
@@ -329,6 +347,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="mwz-q7-4hj" secondAttribute="trailing" constant="20" id="e8V-My-toU"/>
                             <constraint firstItem="nSn-iH-47d" firstAttribute="leading" secondItem="wTQ-IJ-wHh" secondAttribute="leadingMargin" constant="20" id="eCT-Dx-hml"/>
                             <constraint firstItem="gnx-r9-hs8" firstAttribute="leading" secondItem="wTQ-IJ-wHh" secondAttribute="leadingMargin" constant="20" id="fH5-89-vUp"/>
+                            <constraint firstItem="MMz-pX-jfh" firstAttribute="leading" secondItem="wTQ-IJ-wHh" secondAttribute="leadingMargin" constant="20" id="fQm-us-msn"/>
                             <constraint firstItem="dam-iU-iUk" firstAttribute="top" secondItem="tfK-EP-g3M" secondAttribute="bottom" constant="30" id="kD1-RS-KhD"/>
                             <constraint firstItem="tfK-EP-g3M" firstAttribute="top" secondItem="wd4-Sc-RtO" secondAttribute="bottom" constant="20" id="kX8-6G-3g5"/>
                             <constraint firstItem="47j-I0-fSe" firstAttribute="leading" secondItem="wTQ-IJ-wHh" secondAttribute="leadingMargin" constant="20" id="l02-lU-Pvc"/>
@@ -340,6 +359,7 @@
                     </view>
                     <connections>
                         <outlet property="emailTextField" destination="JBZ-y3-LTf" id="V82-HS-LGG"/>
+                        <outlet property="errorLabel" destination="MMz-pX-jfh" id="rZ9-My-aDW"/>
                         <outlet property="nameTextField" destination="S24-Wi-M6D" id="I7d-4C-MJY"/>
                         <outlet property="passwordTextField" destination="mwz-q7-4hj" id="kyC-cB-970"/>
                         <outlet property="profilePic" destination="tfK-EP-g3M" id="WxW-Ui-nau"/>
