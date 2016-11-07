@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class ConversationsVC: UIViewController,UITableViewDelegate, UITableViewDataSource, ComposeVCDelegate {
+class ConversationsVC: UIViewController,UITableViewDelegate, UITableViewDataSource, ComposeVCDelegate, ProfileVCDelegate {
     
     //MARK: Properties
     @IBOutlet weak var tableView: UITableView!
@@ -21,16 +21,22 @@ class ConversationsVC: UIViewController,UITableViewDelegate, UITableViewDataSour
     }()
     lazy var profileView: UIView = {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "Profile") as! ProfileVC
-        //vc.delegate = self
-        self.addChildViewController(vc)
-        vc.view.frame = CGRect.init(x: 20, y: 20, width: 100, height: 200)
-        vc.didMove(toParentViewController: self)
+        vc.delegate = self
+        self.navigationController!.addChildViewController(vc)
+        vc.view.frame = CGRect.init(x: (UIScreen.main.bounds.width * 0.1), y: UIScreen.main.bounds.height, width: (UIScreen.main.bounds.width * 0.8), height: (UIScreen.main.bounds.height * 0.65))
+        vc.view.layer.cornerRadius = 5
+        vc.didMove(toParentViewController: self.navigationController!)
         return vc.view
+    }()
+    lazy var darkView: UIView = {
+        let view = UIView.init(frame: UIScreen.main.bounds)
+        view.backgroundColor = UIColor.black
+        view.alpha = 0
+        return view
     }()
     
     //MARK: Methods
     func customization()  {
-        self.view.addSubview(self.profileView)
         UINavigationBar.appearance().setBackgroundImage(UIImage(named: "button")!.resizableImage(withCapInsets: UIEdgeInsetsMake(0, 0, 0, 0), resizingMode: .stretch), for: .default)
         let icon = UIImage.init(named: "compose")?.withRenderingMode(.alwaysOriginal)
         let rightButton = UIBarButtonItem.init(image: icon!, style: .plain, target: self, action: #selector(ConversationsVC.compose))
@@ -54,15 +60,13 @@ class ConversationsVC: UIViewController,UITableViewDelegate, UITableViewDataSour
     }
     
     func viewUserProfile() {
-        UIView.animate(withDuration: 0.3, animations: {
+        if let nav = self.navigationController {
+            nav.view.addSubview(self.darkView)
+            nav.view.addSubview(self.profileView)
+        }
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
+            self.darkView.alpha = 0.5
             self.profileView.frame.origin.y = 100
-        })
-        
-    }
-    
-    func hideUserProfile()  {
-        UIView.animate(withDuration: 0.3, animations: {
-            self.profileView.frame.origin.y = 500
         })
     }
     
@@ -94,6 +98,16 @@ class ConversationsVC: UIViewController,UITableViewDelegate, UITableViewDataSour
         vc.id = id
         print(id)
         self.show(vc, sender: nil)
+    }
+    
+    func dismissVC() {
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+            self.darkView.alpha = 0
+            self.profileView.frame.origin.y = UIScreen.main.bounds.height
+        }, completion:  { (true) in
+            self.darkView.removeFromSuperview()
+            self.profileView.removeFromSuperview()
+        })
     }
     
     //MARK: ViewController lifeCycle
