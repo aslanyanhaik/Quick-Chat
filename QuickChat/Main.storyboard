@@ -277,7 +277,7 @@
                                     <outlet property="delegate" destination="0x1-fE-mox" id="KY0-dU-Hg0"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="S24-Wi-M6D">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="S24-Wi-M6D">
                                 <rect key="frame" x="82" y="140" width="257" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="nx9-76-dgh"/>
@@ -412,17 +412,63 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="42" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Plb-lE-iQb">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Plb-lE-iQb">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="separatorColor" red="1" green="0.30980392159999998" blue="0.30980392159999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="42" id="xjX-CL-WpE">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="42"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="xjX-CL-WpE" customClass="ConversationsTBCell" customModule="QuickChat" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xjX-CL-WpE" id="4hB-2f-4v2">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="42"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile pic" translatesAutoresizingMaskIntoConstraints="NO" id="wvs-3O-oXq">
+                                                    <rect key="frame" x="10" y="15" width="50" height="50"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="50" id="3J7-bl-iGG"/>
+                                                        <constraint firstAttribute="height" constant="50" id="y8v-kI-rOM"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Name, last name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gPT-DC-2NP">
+                                                    <rect key="frame" x="80" y="15" width="230.5" height="23.5"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZCM-9r-Ja9">
+                                                    <rect key="frame" x="330.5" y="15" width="34.5" height="18"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="13"/>
+                                                    <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello there, how are you doing, hope everything is fine" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="had-mQ-hEJ">
+                                                    <rect key="frame" x="80" y="45.5" width="285" height="19.5"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
+                                                    <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="had-mQ-hEJ" secondAttribute="trailing" constant="2" id="6RS-k2-uuF"/>
+                                                <constraint firstItem="wvs-3O-oXq" firstAttribute="centerY" secondItem="4hB-2f-4v2" secondAttribute="centerY" id="BDj-yq-fJI"/>
+                                                <constraint firstItem="had-mQ-hEJ" firstAttribute="leading" secondItem="wvs-3O-oXq" secondAttribute="trailing" constant="20" id="CgE-u9-W3d"/>
+                                                <constraint firstItem="gPT-DC-2NP" firstAttribute="leading" secondItem="wvs-3O-oXq" secondAttribute="trailing" constant="20" id="Cil-fE-1cc"/>
+                                                <constraint firstItem="gPT-DC-2NP" firstAttribute="top" secondItem="wvs-3O-oXq" secondAttribute="top" id="UXa-9z-qDV"/>
+                                                <constraint firstItem="wvs-3O-oXq" firstAttribute="leading" secondItem="4hB-2f-4v2" secondAttribute="leading" constant="10" id="VuR-5m-Znp"/>
+                                                <constraint firstAttribute="trailing" secondItem="ZCM-9r-Ja9" secondAttribute="trailing" constant="10" id="Y7r-SD-qSa"/>
+                                                <constraint firstItem="had-mQ-hEJ" firstAttribute="bottom" secondItem="wvs-3O-oXq" secondAttribute="bottom" id="fT6-s3-img"/>
+                                                <constraint firstItem="ZCM-9r-Ja9" firstAttribute="top" secondItem="wvs-3O-oXq" secondAttribute="top" id="fsr-FL-vGi"/>
+                                                <constraint firstItem="ZCM-9r-Ja9" firstAttribute="leading" secondItem="gPT-DC-2NP" secondAttribute="trailing" constant="20" id="sVl-5h-5W1"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="messageLabel" destination="had-mQ-hEJ" id="TMS-nh-Z6Q"/>
+                                            <outlet property="nameLabel" destination="gPT-DC-2NP" id="VFn-7e-gcn"/>
+                                            <outlet property="profilePic" destination="wvs-3O-oXq" id="lRS-Tk-UMd"/>
+                                            <outlet property="timeLabel" destination="ZCM-9r-Ja9" id="9si-sP-l1o"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>

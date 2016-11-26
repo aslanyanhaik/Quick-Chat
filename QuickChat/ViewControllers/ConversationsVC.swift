@@ -13,7 +13,7 @@ class ConversationsVC: UIViewController,UITableViewDelegate, UITableViewDataSour
     
     //MARK: Properties
     @IBOutlet weak var tableView: UITableView!
-    var items = ["Hello", "Welcome"]
+    var items = [Conversation]()
     lazy var leftButton: UIBarButtonItem = {
         let image = UIImage.init(named: "default profile")?.withRenderingMode(.alwaysOriginal)
         let button  = UIBarButtonItem.init(image: image, style: .plain, target: self, action: #selector(ConversationsVC.viewUserProfile))
@@ -37,11 +37,13 @@ class ConversationsVC: UIViewController,UITableViewDelegate, UITableViewDataSour
     
     //MARK: Methods
     func customization()  {
+        self.randomData()
         UINavigationBar.appearance().setBackgroundImage(UIImage(named: "button")!.resizableImage(withCapInsets: UIEdgeInsetsMake(0, 0, 0, 0), resizingMode: .stretch), for: .default)
         let icon = UIImage.init(named: "compose")?.withRenderingMode(.alwaysOriginal)
         let rightButton = UIBarButtonItem.init(image: icon!, style: .plain, target: self, action: #selector(ConversationsVC.compose))
         self.navigationItem.rightBarButtonItem = rightButton
         self.navigationItem.leftBarButtonItem = self.leftButton
+        self.tableView.tableFooterView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 0, height: 0))
         if let id  = FIRAuth.auth()?.currentUser?.uid {
             GlobalVariables.users.child(id).observe(.value, with: { (snapshot) in
                 let value = snapshot.value as! [String : String]
@@ -61,6 +63,16 @@ class ConversationsVC: UIViewController,UITableViewDelegate, UITableViewDataSour
                 }
             })
         }
+    }
+    
+    func randomData() {
+        let item = Conversation.init(profilePic: UIImage.init(named: "1")!, name: "Steve Jobs", lastMessage: "Hello there, how are you doing", time: Date.init(timeIntervalSinceNow: 10), isRead: true)
+        let item2 = Conversation.init(profilePic: UIImage.init(named: "2")!, name: "William Brown", lastMessage: "Wonderful day, how is it there?", time: Date.init(timeIntervalSinceNow: 15), isRead: false)
+        let item3 = Conversation.init(profilePic: UIImage.init(named: "3")!, name: "Conan", lastMessage: "random text", time: Date.init(timeIntervalSinceNow: 15), isRead: true)
+        self.items.append(item)
+        self.items.append(item2)
+        self.items.append(item3)
+        self.tableView.reloadData()
     }
     
     func viewUserProfile() {
@@ -93,8 +105,21 @@ class ConversationsVC: UIViewController,UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = self.items[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ConversationsTBCell
+        cell.profilePic.image = self.items[indexPath.row].profilePic
+        cell.nameLabel.text = self.items[indexPath.row].name
+        cell.messageLabel.text = self.items[indexPath.row].lastMessage
+        let dataformatter = DateFormatter.init()
+        dataformatter.timeStyle = .short
+        let date = dataformatter.string(from: self.items[indexPath.row].time)
+        cell.timeLabel.text = date
+        print(date)
+        if self.items[indexPath.row].isRead == false {
+            cell.nameLabel.font = UIFont(name:"AvenirNext-DemiBold", size: 17.0)
+            cell.messageLabel.font = UIFont(name:"AvenirNext-DemiBold", size: 14.0)
+            cell.timeLabel.font = UIFont(name:"AvenirNext-DemiBold", size: 13.0)
+            cell.profilePic.layer.borderColor = GlobalVariables.blue.cgColor
+        }
         return cell
     }
     
