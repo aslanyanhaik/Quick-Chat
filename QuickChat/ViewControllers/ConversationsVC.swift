@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class ConversationsVC: UIViewController,UITableViewDelegate, UITableViewDataSource, ComposeVCDelegate, ProfileVCDelegate {
+class ConversationsVC: UIViewController,UITableViewDelegate, UITableViewDataSource, DismissVCDelegate {
     
     //MARK: Properties
     @IBOutlet weak var tableView: UITableView!
@@ -25,6 +25,14 @@ class ConversationsVC: UIViewController,UITableViewDelegate, UITableViewDataSour
         self.navigationController!.addChildViewController(vc)
         vc.view.frame = CGRect.init(x: (UIScreen.main.bounds.width * 0.1), y: UIScreen.main.bounds.height, width: (UIScreen.main.bounds.width * 0.8), height: (UIScreen.main.bounds.height * 0.65))
         vc.view.layer.cornerRadius = 5
+        vc.didMove(toParentViewController: self.navigationController!)
+        return vc.view
+    }()
+    lazy var contactsView: UIView = {
+       let vc = self.storyboard?.instantiateViewController(withIdentifier: "Contacts") as! ContactsVC
+        vc.delegate = self
+        self.navigationController!.addChildViewController(vc)
+        vc.view.frame = CGRect.init(x: 0, y: UIScreen.main.bounds.height, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         vc.didMove(toParentViewController: self.navigationController!)
         return vc.view
     }()
@@ -81,7 +89,7 @@ class ConversationsVC: UIViewController,UITableViewDelegate, UITableViewDataSour
             nav.view.addSubview(self.darkView)
             nav.view.addSubview(self.profileView)
             UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
-                self.darkView.alpha = 0.5
+                self.darkView.alpha = 0.8
                 self.profileView.frame.origin.y = 100
                 nav.view.transform = transform
             })
@@ -89,10 +97,16 @@ class ConversationsVC: UIViewController,UITableViewDelegate, UITableViewDataSour
     }
     
     func compose() {
-        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "Compose") as! ComposeTB
-        vc.delegate = self
-        self.present(vc, animated: true, completion: nil)
+        let transform = CGAffineTransform.init(scaleX: 0.98, y: 0.98)
+        if let nav = self.navigationController {
+            nav.view.addSubview(self.darkView)
+            nav.view.addSubview(self.contactsView)
+            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
+                self.darkView.alpha = 0.8
+                self.contactsView.frame.origin.y = 0
+                nav.view.transform = transform
+            })
+        }
     }
     
     //MARK: Delegates
@@ -113,32 +127,31 @@ class ConversationsVC: UIViewController,UITableViewDelegate, UITableViewDataSour
         dataformatter.timeStyle = .short
         let date = dataformatter.string(from: self.items[indexPath.row].time)
         cell.timeLabel.text = date
-        print(date)
         if self.items[indexPath.row].isRead == false {
             cell.nameLabel.font = UIFont(name:"AvenirNext-DemiBold", size: 17.0)
             cell.messageLabel.font = UIFont(name:"AvenirNext-DemiBold", size: 14.0)
             cell.timeLabel.font = UIFont(name:"AvenirNext-DemiBold", size: 13.0)
             cell.profilePic.layer.borderColor = GlobalVariables.blue.cgColor
+            cell.messageLabel.textColor = GlobalVariables.purple
         }
         return cell
     }
     
-    func id(id: String) {
-        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "Chat") as! ChatVC
-        vc.id = id
-        print(id)
-        self.show(vc, sender: nil)
-    }
-    
-    func dismissVC() {
+    func dismissVC(withSelectedUser: String?) {
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
             self.darkView.alpha = 0
             self.profileView.frame.origin.y = UIScreen.main.bounds.height
+            self.contactsView.frame.origin.y = UIScreen.main.bounds.height
             self.navigationController?.view.transform = CGAffineTransform.identity
         }, completion:  { (true) in
             self.darkView.removeFromSuperview()
+            self.contactsView.removeFromSuperview()
             self.profileView.removeFromSuperview()
+            if let user = withSelectedUser {
+                print(user)
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "Chat")
+                self.present(vc!, animated: true, completion: nil)
+            }
         })
     }
     

@@ -9,10 +9,6 @@
 import UIKit
 import Firebase
 
-protocol ProfileVCDelegate {
-    func dismissVC()
-}
-
 class ProfileVC: UIViewController {
     
     //MARK: Properties
@@ -20,7 +16,7 @@ class ProfileVC: UIViewController {
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var profilePicView: UIImageView!
     @IBOutlet weak var logOutButton: UIButton!
-    var delegate: ProfileVCDelegate?
+    var delegate: DismissVCDelegate?
     
     //MARK: Methods
     func customization() {
@@ -59,7 +55,7 @@ class ProfileVC: UIViewController {
     }
     
     @IBAction func dismiss(_ sender: Any) {
-        self.delegate?.dismissVC()
+        self.delegate?.dismissVC(withSelectedUser: nil)
     }
     
     //MARK: ViewController LifeCycle

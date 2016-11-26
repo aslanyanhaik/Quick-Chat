@@ -22,9 +22,10 @@
 		22A92BB11D59EBD6005D76F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A92BB01D59EBD6005D76F7 /* AppDelegate.swift */; };
 		22A92BB81D59EBD6005D76F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22A92BB71D59EBD6005D76F7 /* Assets.xcassets */; };
 		22AE96381D89727D00B4ED38 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 22AE96371D89727C00B4ED38 /* GoogleService-Info.plist */; };
+		22B3DB611DE9F6BC0007DEA1 /* ContactsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B3DB601DE9F6BC0007DEA1 /* ContactsVC.swift */; };
+		22B3DB651DE9F9810007DEA1 /* ContactsCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B3DB641DE9F9810007DEA1 /* ContactsCVCell.swift */; };
 		22B974BE1DE9AED700E09490 /* ConversationsTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B974BD1DE9AED700E09490 /* ConversationsTBCell.swift */; };
 		22B974C01DE9B5DF00E09490 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B974BF1DE9B5DF00E09490 /* Conversation.swift */; };
-		22DC201F1DC0D703002C715E /* ComposeTB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DC201E1DC0D703002C715E /* ComposeTB.swift */; };
 		62058F6006BD9ACBE0439C4B /* Pods_QuickChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8041C4B4A9DA4F0F53D2BDE /* Pods_QuickChat.framework */; };
 /* End PBXBuildFile section */
 
@@ -46,9 +47,10 @@
 		22A92BB71D59EBD6005D76F7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		22A92BBC1D59EBD6005D76F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22AE96371D89727C00B4ED38 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		22B3DB601DE9F6BC0007DEA1 /* ContactsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContactsVC.swift; path = QuickChat/ViewControllers/ContactsVC.swift; sourceTree = "<group>"; };
+		22B3DB641DE9F9810007DEA1 /* ContactsCVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContactsCVCell.swift; path = QuickChat/ViewControllers/ContactsCVCell.swift; sourceTree = "<group>"; };
 		22B974BD1DE9AED700E09490 /* ConversationsTBCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConversationsTBCell.swift; path = QuickChat/ViewControllers/ConversationsTBCell.swift; sourceTree = "<group>"; };
 		22B974BF1DE9B5DF00E09490 /* Conversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Conversation.swift; path = QuickChat/Model/Conversation.swift; sourceTree = "<group>"; };
-		22DC201E1DC0D703002C715E /* ComposeTB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ComposeTB.swift; path = QuickChat/ViewControllers/ComposeTB.swift; sourceTree = "<group>"; };
 		614F8B4888358059B3DC166B /* Pods-QuickChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QuickChat/Pods-QuickChat.debug.xcconfig"; sourceTree = "<group>"; };
 		B8041C4B4A9DA4F0F53D2BDE /* Pods_QuickChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuickChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8FBFCFF82B6EB57B02FA375 /* Pods-QuickChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-QuickChat/Pods-QuickChat.release.xcconfig"; sourceTree = "<group>"; };
@@ -86,8 +88,9 @@
 				2236119A1DC8F8DF00CDBEF4 /* RegisterVC.swift */,
 				2217853C1DCD1DAC00A69F88 /* ConversationsVC.swift */,
 				22B974BD1DE9AED700E09490 /* ConversationsTBCell.swift */,
+				22B3DB601DE9F6BC0007DEA1 /* ContactsVC.swift */,
+				22B3DB641DE9F9810007DEA1 /* ContactsCVCell.swift */,
 				2284BC441DC3582F00E36E8A /* ChatVC.swift */,
-				22DC201E1DC0D703002C715E /* ComposeTB.swift */,
 				224834AD1DB532510019153C /* ProfileVC.swift */,
 			);
 			name = ViewControllers;
@@ -293,14 +296,15 @@
 				224834AE1DB532510019153C /* ProfileVC.swift in Sources */,
 				22B974BE1DE9AED700E09490 /* ConversationsTBCell.swift in Sources */,
 				2217853D1DCD1DAC00A69F88 /* ConversationsVC.swift in Sources */,
+				22B3DB651DE9F9810007DEA1 /* ContactsCVCell.swift in Sources */,
 				22A92BB11D59EBD6005D76F7 /* AppDelegate.swift in Sources */,
 				224AFAA91D86890A004E7CCD /* WelcomeVC.swift in Sources */,
 				224AFAA31D8686ED004E7CCD /* extensions.swift in Sources */,
 				224AFAAC1D869039004E7CCD /* GlobalVariables.swift in Sources */,
 				22873DAA1DC790550021690E /* Message.swift in Sources */,
 				2236119B1DC8F8DF00CDBEF4 /* RegisterVC.swift in Sources */,
-				22DC201F1DC0D703002C715E /* ComposeTB.swift in Sources */,
 				224834B11DB539A50019153C /* User.swift in Sources */,
+				22B3DB611DE9F6BC0007DEA1 /* ContactsVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
