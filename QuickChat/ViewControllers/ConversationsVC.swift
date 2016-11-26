@@ -28,7 +28,7 @@ class ConversationsVC: UIViewController,UITableViewDelegate, UITableViewDataSour
         vc.didMove(toParentViewController: self.navigationController!)
         return vc.view
     }()
-    lazy var darkView: UIView = {
+    let darkView: UIView = {
         let view = UIView.init(frame: UIScreen.main.bounds)
         view.backgroundColor = UIColor.black
         view.alpha = 0
@@ -47,10 +47,14 @@ class ConversationsVC: UIViewController,UITableViewDelegate, UITableViewDataSour
                 let value = snapshot.value as! [String : String]
                 let image = UIImage.downloadImagewith(link: value["profilePicLink"]!)
                 DispatchQueue.main.async {
-                    let contentSize = CGSize.init(width: 28, height: 28)
+                    let contentSize = CGSize.init(width: 30, height: 30)
                     UIGraphicsBeginImageContextWithOptions(contentSize, false, 0.0)
-                    let _  = UIBezierPath.init(roundedRect: CGRect.init(x: 0, y: 0, width: 28, height: 28), cornerRadius: 14).addClip()
-                    image.draw(in: CGRect(origin: CGPoint(x: 0,y :0), size: contentSize))
+                    let _  = UIBezierPath.init(roundedRect: CGRect.init(origin: CGPoint.init(x: 0, y: 0), size: contentSize), cornerRadius: 14).addClip()
+                    image.draw(in: CGRect(origin: CGPoint(x: 0, y :0), size: contentSize))
+                    let path = UIBezierPath.init(roundedRect: CGRect.init(origin: CGPoint.init(x: 0, y: 0), size: contentSize), cornerRadius: 14)
+                    path.lineWidth = 3
+                    UIColor.white.setStroke()
+                    path.stroke()
                     let finalImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!.withRenderingMode(.alwaysOriginal)
                     UIGraphicsEndImageContext()
                     self.leftButton.image = finalImage
@@ -60,14 +64,16 @@ class ConversationsVC: UIViewController,UITableViewDelegate, UITableViewDataSour
     }
     
     func viewUserProfile() {
+        let transform = CGAffineTransform.init(scaleX: 0.98, y: 0.98)
         if let nav = self.navigationController {
             nav.view.addSubview(self.darkView)
             nav.view.addSubview(self.profileView)
+            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
+                self.darkView.alpha = 0.5
+                self.profileView.frame.origin.y = 100
+                nav.view.transform = transform
+            })
         }
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
-            self.darkView.alpha = 0.5
-            self.profileView.frame.origin.y = 100
-        })
     }
     
     func compose() {
@@ -104,6 +110,7 @@ class ConversationsVC: UIViewController,UITableViewDelegate, UITableViewDataSour
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
             self.darkView.alpha = 0
             self.profileView.frame.origin.y = UIScreen.main.bounds.height
+            self.navigationController?.view.transform = CGAffineTransform.identity
         }, completion:  { (true) in
             self.darkView.removeFromSuperview()
             self.profileView.removeFromSuperview()

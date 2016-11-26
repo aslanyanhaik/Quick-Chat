@@ -12,11 +12,11 @@ import UIKit
 class Message {
     
     let type: MessageType
-    let content: AnyObject
+    let content: AnyObject?
     let timestamp: Int
     var read: Bool
     
-    init(type: MessageType, content: AnyObject, timestamp: Int, read: Bool) {
+    init(type: MessageType, content: AnyObject?, timestamp: Int, read: Bool) {
         self.type = type
         self.content = content
         self.timestamp = timestamp
@@ -29,4 +29,5 @@ enum MessageType {
     case photo
     case text
     case video
+    case location
 }
