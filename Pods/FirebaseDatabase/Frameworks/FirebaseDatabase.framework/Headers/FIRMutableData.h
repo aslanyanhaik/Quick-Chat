@@ -37,18 +37,19 @@ NS_ASSUME_NONNULL_BEGIN
  * you wish to save at that location, and then returning using [FIRTransactionResult successWithValue:].
  *
  * To modify the data, set its value property to any of the native types support by Firebase Database:
- * * NSNumber (includes BOOL)
- * * NSDictionary
- * * NSArray
- * * NSString
- * * nil / NSNull to remove the data
+ *
+ * + NSNumber (includes BOOL)
+ * + NSDictionary
+ * + NSArray
+ * + NSString
+ * + nil / NSNull to remove the data
  *
  * Note that changes made to a child FIRMutableData instance will be visible to the parent.
  */
 @interface FIRMutableData : NSObject
 
 
-/** @name Inspecting and navigating the data */
+#pragma mark - Inspecting and navigating the data
 
 
 /**
@@ -78,17 +79,17 @@ NS_ASSUME_NONNULL_BEGIN
 - (FIRMutableData *)childDataByAppendingPath:(NSString *)path;
 
 
-/** @name Properties */
+#pragma mark - Properties
 
 
 /**
  * To modify the data contained by this instance of FIRMutableData, set this to any of the native types supported by Firebase Database:
  *
- * * NSNumber (includes BOOL)
- * * NSDictionary
- * * NSArray
- * * NSString
- * * nil / NSNull to remove the data
+ * + NSNumber (includes BOOL)
+ * + NSDictionary
+ * + NSArray
+ * + NSString
+ * + nil / NSNull to remove the data
  *
  * Note that setting this value will override the priority at this location.
  *
@@ -100,9 +101,9 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Set this property to update the priority of the data at this location. Can be set to the following types:
  *
- * * NSNumber
- * * NSString
- * * nil / NSNull to remove the priority
+ * + NSNumber
+ * + NSString
+ * + nil / NSNull to remove the priority
  *
  * @return The priority of the data at this location
  */

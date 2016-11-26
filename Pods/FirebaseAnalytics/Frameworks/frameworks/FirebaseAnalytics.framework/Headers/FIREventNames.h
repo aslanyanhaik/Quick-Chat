@@ -6,7 +6,7 @@
 /// 500 different types of Events per app and you can associate up to 25 unique parameters with each
 /// Event type. Some common events are suggested below, but you may also choose to specify custom
 /// Event types that are associated with your specific app. Each event type is identified by a
-/// unique name. Event names can be up to 32 characters long, may only contain alphanumeric
+/// unique name. Event names can be up to 40 characters long, may only contain alphanumeric
 /// characters and underscores ("_"), and must start with an alphabetic character. The "firebase_"
 /// prefix is reserved and should not be used.
 

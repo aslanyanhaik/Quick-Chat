@@ -41,7 +41,7 @@ typedef NSUInteger FIRDatabaseHandle;
 
 /**
  * A FIRDatabaseQuery instance represents a query over the data at a particular location.
- * 
+ *
  * You create one by calling one of the query methods (queryOrderedByChild:, queryStartingAtValue:, etc.)
  * on a FIRDatabaseReference. The query methods can be chained to further specify the data you are interested in
  * observing
@@ -49,7 +49,7 @@ typedef NSUInteger FIRDatabaseHandle;
 @interface FIRDatabaseQuery : NSObject
 
 
-/** @name Attach observers to read data */
+#pragma mark - Attach observers to read data
 
 /**
  * observeEventType:withBlock: is used to listen for data changes at a particular location.
@@ -57,6 +57,7 @@ typedef NSUInteger FIRDatabaseHandle;
  * for the initial data and again whenever the data changes.
  *
  * Use removeObserverWithHandle: to stop receiving updates.
+ *
  * @param eventType The type of event to listen for.
  * @param block The block that should be called with initial data and updates.  It is passed the data as a FIRDataSnapshot.
  * @return A handle used to unregister this block later using removeObserverWithHandle:
@@ -159,7 +160,8 @@ typedef NSUInteger FIRDatabaseHandle;
  */
 - (void)observeSingleEventOfType:(FIRDataEventType)eventType andPreviousSiblingKeyWithBlock:(void (^)(FIRDataSnapshot *snapshot, NSString *__nullable prevKey))block withCancelBlock:(nullable void (^)(NSError* error))cancelBlock;
 
-/** @name Detaching observers */
+
+#pragma mark - Detaching observers
 
 /**
  * Detach a block previously attached with observeEventType:withBlock:.
@@ -184,8 +186,7 @@ typedef NSUInteger FIRDatabaseHandle;
  - (void) keepSynced:(BOOL)keepSynced;
 
 
-/** @name Querying and limiting */
-
+#pragma mark - Querying and limiting
 
 /**
 * queryLimitedToFirst: is used to generate a reference to a limited view of the data at this location.
@@ -207,10 +208,10 @@ typedef NSUInteger FIRDatabaseHandle;
 - (FIRDatabaseQuery *)queryLimitedToLast:(NSUInteger)limit;
 
 /**
-* queryOrderBy: is used to generate a reference to a view of the data that's been sorted by the values of
-* a particular child key. This method is intended to be used in combination with queryStartingAtValue:,
-* queryEndingAtValue:, or queryEqualToValue:.
-*
+ * queryOrderBy: is used to generate a reference to a view of the data that's been sorted by the values of
+ * a particular child key. This method is intended to be used in combination with queryStartingAtValue:,
+ * queryEndingAtValue:, or queryEqualToValue:.
+ *
  * @param key The child key to use in ordering data visible to the returned FIRDatabaseQuery
  * @return A FIRDatabaseQuery instance, ordered by the values of the specified child key.
 */
@@ -308,8 +309,7 @@ typedef NSUInteger FIRDatabaseHandle;
 - (FIRDatabaseQuery *)queryEqualToValue:(nullable id)value childKey:(nullable NSString *)childKey;
 
 
-/** @name Properties */
-
+#pragma mark - Properties
 
 /**
 * Gets a FIRDatabaseReference for the location of this query.

@@ -51,7 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface FIRDatabaseReference : FIRDatabaseQuery
 
 
-/** @name Getting references to children locations */
+#pragma mark - Getting references to children locations
 
 /**
  * Gets a FIRDatabaseReference for the location at the specified relative path.
@@ -81,7 +81,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (FIRDatabaseReference *) childByAutoId;
 
 
-/** @name Writing data */
+#pragma mark - Writing data
 
 /** Write data to this Firebase Database location.
 
@@ -213,7 +213,7 @@ is meant to be preserved, you should use setValue:andPriority: instead.
 - (void) updateChildValues:(NSDictionary *)values withCompletionBlock:(void (^)(NSError *__nullable error, FIRDatabaseReference * ref))block;
 
 
-/** @name Attaching observers to read data */
+#pragma mark - Attaching observers to read data
 
 /**
  * observeEventType:withBlock: is used to listen for data changes at a particular location.
@@ -323,7 +323,7 @@ is meant to be preserved, you should use setValue:andPriority: instead.
  */
 - (void)observeSingleEventOfType:(FIRDataEventType)eventType andPreviousSiblingKeyWithBlock:(void (^)(FIRDataSnapshot *snapshot, NSString *__nullable prevKey))block withCancelBlock:(nullable void (^)(NSError* error))cancelBlock;
 
-/** @name Detaching observers */
+#pragma mark - Detaching observers
 
 /**
  * Detach a block previously attached with observeEventType:withBlock:.
@@ -348,7 +348,7 @@ is meant to be preserved, you should use setValue:andPriority: instead.
  */
 - (void) removeAllObservers;
 
-/** @name Querying and limiting */
+#pragma mark - Querying and limiting
 
 
 /**
@@ -462,7 +462,7 @@ is meant to be preserved, you should use setValue:andPriority: instead.
  */
 - (FIRDatabaseQuery *)queryEqualToValue:(nullable id)value childKey:(nullable NSString *)childKey;
 
-/** @name Managing presence */
+#pragma mark - Managing presence
 
 /**
  * Ensure the data at this location is set to the specified value when
@@ -580,7 +580,7 @@ is meant to be preserved, you should use setValue:andPriority: instead.
 - (void) cancelDisconnectOperationsWithCompletionBlock:(nullable void (^)(NSError *__nullable error, FIRDatabaseReference * ref))block;
 
 
-/** @name Manual Connection Management */
+#pragma mark - Manual Connection Management
 
 /**
  * Manually disconnect the Firebase Database client from the server and disable automatic reconnection.
@@ -622,7 +622,7 @@ is meant to be preserved, you should use setValue:andPriority: instead.
 + (void) goOnline;
 
 
-/** @name Transactions */
+#pragma mark - Transactions
 
 /**
  * Performs an optimistic-concurrency transactional update to the data at this location. Your block will be called with a FIRMutableData
@@ -675,7 +675,7 @@ is meant to be preserved, you should use setValue:andPriority: instead.
 - (void)runTransactionBlock:(FIRTransactionResult * (^) (FIRMutableData* currentData))block andCompletionBlock:(nullable void (^) (NSError *__nullable error, BOOL committed, FIRDataSnapshot *__nullable snapshot))completionBlock withLocalEvents:(BOOL)localEvents;
 
 
-/** @name Retrieving String Representation */
+#pragma mark - Retrieving String Representation
 
 /**
  * Gets the absolute URL of this Firebase Database location.
@@ -684,7 +684,7 @@ is meant to be preserved, you should use setValue:andPriority: instead.
  */
 - (NSString *) description;
 
-/** @name Properties */
+#pragma mark - Properties
 
 /**
  * Gets a FIRDatabaseReference for the parent location.

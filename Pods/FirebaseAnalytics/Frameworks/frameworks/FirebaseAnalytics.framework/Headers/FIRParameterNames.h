@@ -5,9 +5,9 @@
 /// Params supply information that contextualize Events. You can associate up to 25 unique Params
 /// with each Event type. Some Params are suggested below for certain common Events, but you are
 /// not limited to these. You may supply extra Params for suggested Events or custom Params for
-/// Custom events. Param names can be up to 24 characters long, may only contain alphanumeric
+/// Custom events. Param names can be up to 40 characters long, may only contain alphanumeric
 /// characters and underscores ("_"), and must start with an alphabetic character. Param values can
-/// be up to 36 characters long. The "firebase_" prefix is reserved and should not be used.
+/// be up to 100 characters long. The "firebase_" prefix is reserved and should not be used.
 
 /// Game achievement ID (NSString).
 /// <pre>

@@ -44,7 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface FIRDataSnapshot : NSObject
 
 
-/** @name Navigating and inspecting a snapshot */
+#pragma mark - Navigating and inspecting a snapshot
 
 /**
  * Gets a FIRDataSnapshot for the location at the specified relative path.
@@ -83,7 +83,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL) exists;
 
 
-/** @name Data export */
+#pragma mark - Data export
 
 /**
  * Returns the raw value at this location, coupled with any metadata, such as priority.
@@ -94,16 +94,16 @@ NS_ASSUME_NONNULL_BEGIN
 - (id __nullable) valueInExportFormat;
 
 
-/** @name Properties */
+#pragma mark - Properties
 
 /**
  * Returns the contents of this data snapshot as native types.
  *
  * Data types returned:
- * * NSDictionary
- * * NSArray
- * * NSNumber (also includes booleans)
- * * NSString
+ * + NSDictionary
+ * + NSArray
+ * + NSNumber (also includes booleans)
+ * + NSString
  *
  * @return The data as a native object.
  */
@@ -119,9 +119,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /**
- * Gets a FIRDatabaseReference for the location that this data came from
+ * Gets a FIRDatabaseReference for the location that this data came from.
  *
- * @return A FIRDatabaseReference instance for the location of this data
+ * @return A FIRDatabaseReference instance for the location of this data.
  */
 @property (nonatomic, readonly, strong) FIRDatabaseReference * ref;
 
@@ -142,7 +142,7 @@ NS_ASSUME_NONNULL_BEGIN
  *     ...
  * }
  *
- * @return An NSEnumerator of the children
+ * @return An NSEnumerator of the children.
  */
 @property (strong, readonly, nonatomic) NSEnumerator* children;
 

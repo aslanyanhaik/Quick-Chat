@@ -30,17 +30,17 @@
 ///     <li>user_engagement</li>
 /// </ul>
 ///
-/// @param name The name of the event. Should contain 1 to 32 alphanumeric characters or
+/// @param name The name of the event. Should contain 1 to 40 alphanumeric characters or
 ///     underscores. The name must start with an alphabetic character. Some event names are
 ///     reserved. See FIREventNames.h for the list of reserved event names. The "firebase_" prefix
 ///     is reserved and should not be used. Note that event names are case-sensitive and that
 ///     logging two events whose names differ only in case will result in two distinct events.
 /// @param parameters The dictionary of event parameters. Passing nil indicates that the event has
-///     no parameters. Parameter names can be up to 24 characters long and must start with an
+///     no parameters. Parameter names can be up to 40 characters long and must start with an
 ///     alphabetic character and contain only alphanumeric characters and underscores. Only NSString
 ///     and NSNumber (signed 64-bit integer and 64-bit floating-point number) parameter types are
-///     supported. NSString parameter values can be up to 36 characters long. The "firebase_" prefix
-///     is reserved and should not be used for parameter names.
+///     supported. NSString parameter values can be up to 100 characters long. The "firebase_"
+///     prefix is reserved and should not be used for parameter names.
 + (void)logEventWithName:(nonnull NSString *)name
               parameters:(nullable NSDictionary<NSString *, NSObject *> *)parameters;
 
@@ -84,9 +84,9 @@
 /// The screen name and screen class remain in effect until the current UIViewController changes or
 /// a new call to setScreenName:screenClass: is made.
 ///
-/// @param screenName The name of the current screen. Should contain 1 to 36 characters. Set to nil
+/// @param screenName The name of the current screen. Should contain 1 to 100 characters. Set to nil
 ///     to clear the current screen name.
-/// @param screenClassOverride The name of the screen class. Should contain 1 to 36 characters. By
+/// @param screenClassOverride The name of the screen class. Should contain 1 to 100 characters. By
 ///     default this is the class name of the current UIViewController. Set to nil to revert to the
 ///     default class name.
 + (void)setScreenName:(nullable NSString *)screenName
