@@ -44,7 +44,6 @@ class NavVC: UINavigationController {
         //Notification setup
         NotificationCenter.default.addObserver(self, selector: #selector(self.dismissVC(notification:)), name: NSNotification.Name(rawValue: "dismissVC"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.showVC(notification:)), name: NSNotification.Name(rawValue: "showVC"), object: nil)
-
     }
     //dismiss contacts/profile ViewControllers
     func dismissVC(notification: NSNotification) {

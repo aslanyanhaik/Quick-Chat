@@ -18,7 +18,7 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func customization() {
         self.navigationItem.title = self.userName
         self.navigationItem.setHidesBackButton(true, animated: false)
-        let icon = UIImage.init(named: "compose")?.withRenderingMode(.alwaysOriginal)
+        let icon = UIImage.init(named: "back")?.withRenderingMode(.alwaysOriginal)
         let rightButton = UIBarButtonItem.init(image: icon!, style: .plain, target: self, action: #selector(ChatVC.dismissSelf))
         self.navigationItem.leftBarButtonItem = rightButton
     }
