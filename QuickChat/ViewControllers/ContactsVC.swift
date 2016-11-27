@@ -13,6 +13,7 @@ class ContactsVC: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     //MARK: Properties
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var closeButton: UIButton!
+    var isTableEmpty: Bool!
     var items = [User]()
     
     //MARK: Methods
@@ -51,25 +52,39 @@ class ContactsVC: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if self.items.count == 0 {
+            self.isTableEmpty = true
+            return 1
+        } else {
+            self.isTableEmpty = false
         return self.items.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! ContactsCVCell
-        cell.profilePic.image = self.items[indexPath.row].profilePic
-        cell.nameLabel.text = self.items[indexPath.row].name
-        cell.profilePic.layer.cornerRadius = (UIScreen.main.bounds.width * 0.12)
-        cell.profilePic.clipsToBounds = true
-        cell.profilePic.layer.borderWidth = 2
-        cell.profilePic.layer.borderColor = GlobalVariables.purple.cgColor
-        return cell
+        switch self.isTableEmpty {
+        case true:
+            let cell  = collectionView.dequeueReusableCell(withReuseIdentifier: "Empty Cell", for: indexPath)
+            return cell
+        default:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! ContactsCVCell
+            cell.profilePic.image = self.items[indexPath.row].profilePic
+            cell.nameLabel.text = self.items[indexPath.row].name
+            cell.profilePic.layer.cornerRadius = (UIScreen.main.bounds.width * 0.12)
+            cell.profilePic.clipsToBounds = true
+            cell.profilePic.layer.borderWidth = 2
+            cell.profilePic.layer.borderColor = GlobalVariables.purple.cgColor
+            return cell
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let info = ["isContactsVC" : true]
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "dismissVC"), object: nil, userInfo: info)
-        let userInfo = ["username": String(indexPath.row)]
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showUserMessages"), object: nil, userInfo: userInfo)
+        if self.items.count > 0 {
+            let info = ["isContactsVC" : true]
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "dismissVC"), object: nil, userInfo: info)
+            let userInfo = ["username": String(indexPath.row)]
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showUserMessages"), object: nil, userInfo: userInfo)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -81,9 +96,13 @@ class ContactsVC: UIViewController, UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (0.3 * UIScreen.main.bounds.width)
-        let height = width + 30
-        return CGSize.init(width: width, height: height)
+        if self.items.count == 0 {
+            return self.collectionView.bounds.size
+        } else {
+            let width = (0.3 * UIScreen.main.bounds.width)
+            let height = width + 30
+            return CGSize.init(width: width, height: height)
+        }
     }
     
     //MARK: ViewController lifecycle

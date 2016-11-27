@@ -469,6 +469,25 @@
                                             <outlet property="timeLabel" destination="ZCM-9r-Ja9" id="9si-sP-l1o"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Empty Cell" id="QgS-rc-0dp">
+                                        <rect key="frame" x="0.0" y="108" width="375" height="80"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QgS-rc-0dp" id="JnP-IB-JdY">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty" translatesAutoresizingMaskIntoConstraints="NO" id="yGb-ft-A2K">
+                                                    <rect key="frame" x="3" y="0.0" width="369" height="80"/>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="yGb-ft-A2K" firstAttribute="leading" secondItem="JnP-IB-JdY" secondAttribute="leading" constant="3" id="5hj-05-QxW"/>
+                                                <constraint firstAttribute="trailing" secondItem="yGb-ft-A2K" secondAttribute="trailing" constant="3" id="Ent-Wd-hcn"/>
+                                                <constraint firstAttribute="bottom" secondItem="yGb-ft-A2K" secondAttribute="bottom" id="V2j-ir-9Ge"/>
+                                                <constraint firstItem="yGb-ft-A2K" firstAttribute="top" secondItem="JnP-IB-JdY" secondAttribute="top" id="wC6-8p-DEC"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="UoK-02-tpp" id="Y2I-pp-6U5"/>
@@ -636,6 +655,28 @@
                                             <outlet property="profilePic" destination="6TB-7m-Dep" id="EbE-Ty-kCc"/>
                                         </connections>
                                     </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Empty Cell" id="TzO-aU-on6" customClass="ContactsCVCell" customModule="QuickChat" customModuleProvider="target">
+                                        <rect key="frame" x="44" y="281" width="287" height="271"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="271"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Seems like you're alone in this world" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RK9-RZ-99V">
+                                                    <rect key="frame" x="19" y="125.5" width="248.5" height="20.5"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
+                                                    <color key="textColor" white="0.87315848214285718" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </view>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="RK9-RZ-99V" firstAttribute="centerX" secondItem="TzO-aU-on6" secondAttribute="centerX" id="8ed-QB-SNY"/>
+                                            <constraint firstItem="RK9-RZ-99V" firstAttribute="centerX" secondItem="TzO-aU-on6" secondAttribute="centerX" id="Riu-P2-Eej"/>
+                                            <constraint firstItem="RK9-RZ-99V" firstAttribute="centerY" secondItem="TzO-aU-on6" secondAttribute="centerY" id="pe6-0Y-z9X"/>
+                                        </constraints>
+                                    </collectionViewCell>
                                 </cells>
                                 <connections>
                                     <outlet property="dataSource" destination="rot-Ac-nac" id="Bba-cr-D9e"/>
@@ -759,6 +800,7 @@
         <image name="close" width="25" height="25"/>
         <image name="clouds" width="750" height="110"/>
         <image name="email" width="24" height="24"/>
+        <image name="empty" width="375" height="602"/>
         <image name="launch" width="375" height="667"/>
         <image name="name" width="24" height="24"/>
         <image name="password" width="24" height="24"/>

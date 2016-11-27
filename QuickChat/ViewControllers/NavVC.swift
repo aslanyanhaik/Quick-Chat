@@ -71,7 +71,7 @@ class NavVC: UINavigationController {
     
     //show contacts/profile ViewControllers
     func showVC(notification: NSNotification)  {
-        let transform = CGAffineTransform.init(scaleX: 0.98, y: 0.98)
+        let transform = CGAffineTransform.init(scaleX: 0.97, y: 0.97)
         self.darkView.frame.origin.y = 0
         if let type = notification.userInfo?["isContactsVC"] as? Bool {
             switch type {
