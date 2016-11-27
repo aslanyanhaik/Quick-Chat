@@ -15,8 +15,8 @@ class LandingVC: UIViewController {
     func pushTo(viewController: ViewControllerType)  {
         switch viewController {
         case .conversations:
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "Conversations") as! ConversationsVC
-            self.present(UINavigationController.init(rootViewController: vc), animated: false, completion: nil)
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "Navigation") as! NavVC
+            self.present(vc, animated: false, completion: nil)
         case .welcome:
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "Welcome") as! WelcomeVC
             self.present(vc, animated: false, completion: nil)

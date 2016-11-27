@@ -9,66 +9,46 @@
 import UIKit
 import Firebase
 
-class ConversationsVC: UIViewController,UITableViewDelegate, UITableViewDataSource, DismissVCDelegate {
+class ConversationsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     //MARK: Properties
     @IBOutlet weak var tableView: UITableView!
     var items = [Conversation]()
     lazy var leftButton: UIBarButtonItem = {
         let image = UIImage.init(named: "default profile")?.withRenderingMode(.alwaysOriginal)
-        let button  = UIBarButtonItem.init(image: image, style: .plain, target: self, action: #selector(ConversationsVC.viewUserProfile))
+        let button  = UIBarButtonItem.init(image: image, style: .plain, target: self, action: #selector(ConversationsVC.showProfile))
         return button
     }()
-    lazy var profileView: UIView = {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Profile") as! ProfileVC
-        vc.delegate = self
-        self.navigationController!.addChildViewController(vc)
-        vc.view.frame = CGRect.init(x: (UIScreen.main.bounds.width * 0.1), y: UIScreen.main.bounds.height, width: (UIScreen.main.bounds.width * 0.8), height: (UIScreen.main.bounds.height * 0.65))
-        vc.view.layer.cornerRadius = 5
-        vc.didMove(toParentViewController: self.navigationController!)
-        return vc.view
-    }()
-    lazy var contactsView: UIView = {
-       let vc = self.storyboard?.instantiateViewController(withIdentifier: "Contacts") as! ContactsVC
-        vc.delegate = self
-        self.navigationController!.addChildViewController(vc)
-        vc.view.frame = CGRect.init(x: 0, y: UIScreen.main.bounds.height, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-        vc.didMove(toParentViewController: self.navigationController!)
-        return vc.view
-    }()
-    let darkView: UIView = {
-        let view = UIView.init(frame: UIScreen.main.bounds)
-        view.backgroundColor = UIColor.black
-        view.alpha = 0
-        return view
-    }()
-    
+        
     //MARK: Methods
     func customization()  {
+        // notification setup
+        NotificationCenter.default.addObserver(self, selector: #selector(self.pushToUserMesssages(notification:)), name: NSNotification.Name(rawValue: "showUserMessages"), object: nil)
         self.randomData()
-        UINavigationBar.appearance().setBackgroundImage(UIImage(named: "button")!.resizableImage(withCapInsets: UIEdgeInsetsMake(0, 0, 0, 0), resizingMode: .stretch), for: .default)
+        //Navigation bar customization
+         UINavigationBar.appearance().setBackgroundImage(UIImage(named: "button")!.resizableImage(withCapInsets: UIEdgeInsetsMake(0, 0, 0, 0), resizingMode: .stretch), for: .default)
+        //right bar button
         let icon = UIImage.init(named: "compose")?.withRenderingMode(.alwaysOriginal)
-        let rightButton = UIBarButtonItem.init(image: icon!, style: .plain, target: self, action: #selector(ConversationsVC.compose))
+        let rightButton = UIBarButtonItem.init(image: icon!, style: .plain, target: self, action: #selector(ConversationsVC.showContacts))
         self.navigationItem.rightBarButtonItem = rightButton
+        //left bar button image fetching
         self.navigationItem.leftBarButtonItem = self.leftButton
         self.tableView.tableFooterView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 0, height: 0))
         if let id  = FIRAuth.auth()?.currentUser?.uid {
             GlobalVariables.users.child(id).observe(.value, with: { (snapshot) in
                 let value = snapshot.value as! [String : String]
                 let image = UIImage.downloadImagewith(link: value["profilePicLink"]!)
-                DispatchQueue.main.async {
                     let contentSize = CGSize.init(width: 30, height: 30)
                     UIGraphicsBeginImageContextWithOptions(contentSize, false, 0.0)
                     let _  = UIBezierPath.init(roundedRect: CGRect.init(origin: CGPoint.init(x: 0, y: 0), size: contentSize), cornerRadius: 14).addClip()
                     image.draw(in: CGRect(origin: CGPoint(x: 0, y :0), size: contentSize))
                     let path = UIBezierPath.init(roundedRect: CGRect.init(origin: CGPoint.init(x: 0, y: 0), size: contentSize), cornerRadius: 14)
-                    path.lineWidth = 3
+                    path.lineWidth = 2
                     UIColor.white.setStroke()
                     path.stroke()
                     let finalImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!.withRenderingMode(.alwaysOriginal)
                     UIGraphicsEndImageContext()
                     self.leftButton.image = finalImage
-                }
             })
         }
     }
@@ -83,32 +63,24 @@ class ConversationsVC: UIViewController,UITableViewDelegate, UITableViewDataSour
         self.tableView.reloadData()
     }
     
-    func viewUserProfile() {
-        let transform = CGAffineTransform.init(scaleX: 0.98, y: 0.98)
-        if let nav = self.navigationController {
-            nav.view.addSubview(self.darkView)
-            nav.view.addSubview(self.profileView)
-            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
-                self.darkView.alpha = 0.8
-                self.profileView.frame.origin.y = 100
-                nav.view.transform = transform
-            })
-        }
+    func showProfile() {
+        let info = ["isContactsVC" : false]
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showVC"), object: nil, userInfo: info)
     }
     
-    func compose() {
-        let transform = CGAffineTransform.init(scaleX: 0.98, y: 0.98)
-        if let nav = self.navigationController {
-            nav.view.addSubview(self.darkView)
-            nav.view.addSubview(self.contactsView)
-            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
-                self.darkView.alpha = 0.8
-                self.contactsView.frame.origin.y = 0
-                nav.view.transform = transform
-            })
-        }
+    func showContacts() {
+        let info = ["isContactsVC" : true]
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showVC"), object: nil, userInfo: info)
     }
     
+    func pushToUserMesssages(notification: NSNotification) {
+        if let name = notification.userInfo?["username"] as? String {
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "Chat") as! ChatVC
+            vc.userName = name
+            self.show(vc, sender: self)
+        }
+    }
+
     //MARK: Delegates
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -137,24 +109,12 @@ class ConversationsVC: UIViewController,UITableViewDelegate, UITableViewDataSour
         return cell
     }
     
-    func dismissVC(withSelectedUser: String?) {
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
-            self.darkView.alpha = 0
-            self.profileView.frame.origin.y = UIScreen.main.bounds.height
-            self.contactsView.frame.origin.y = UIScreen.main.bounds.height
-            self.navigationController?.view.transform = CGAffineTransform.identity
-        }, completion:  { (true) in
-            self.darkView.removeFromSuperview()
-            self.contactsView.removeFromSuperview()
-            self.profileView.removeFromSuperview()
-            if let user = withSelectedUser {
-                print(user)
-                let vc = self.storyboard?.instantiateViewController(withIdentifier: "Chat")
-                self.present(vc!, animated: true, completion: nil)
-            }
-        })
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Chat") as! ChatVC
+        vc.userName = "from conversation"
+        self.show(vc, sender: self)
     }
-    
+       
     //MARK: ViewController lifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -162,3 +122,6 @@ class ConversationsVC: UIViewController,UITableViewDelegate, UITableViewDataSour
     }
 
 }
+
+
+

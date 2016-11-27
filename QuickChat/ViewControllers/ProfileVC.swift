@@ -16,12 +16,14 @@ class ProfileVC: UIViewController {
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var profilePicView: UIImageView!
     @IBOutlet weak var logOutButton: UIButton!
-    var delegate: DismissVCDelegate?
     
     //MARK: Methods
     func customization() {
-        self.profilePicView.layer.cornerRadius = 75
+        let radius = self.profilePicView.bounds.width / 2
+        self.profilePicView.layer.cornerRadius = radius
         self.profilePicView.clipsToBounds = true
+        self.profilePicView.layer.borderColor = GlobalVariables.purple.cgColor
+        self.profilePicView.layer.borderWidth = 3
         self.logOutButton.layer.cornerRadius = 20
         self.logOutButton.clipsToBounds = true
     }
@@ -55,13 +57,12 @@ class ProfileVC: UIViewController {
     }
     
     @IBAction func dismiss(_ sender: Any) {
-        self.delegate?.dismissVC(withSelectedUser: nil)
-    }
+        let info = ["isContactsVC" : false]
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "dismissVC"), object: nil, userInfo: info)    }
     
     //MARK: ViewController LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.customization()
-        self.fetchUserInfo()
     }
 }

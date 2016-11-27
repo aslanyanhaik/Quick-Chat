@@ -19,6 +19,7 @@
 		2274709E1DCCF9BF00645401 /* LandingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2274709D1DCCF9BF00645401 /* LandingVC.swift */; };
 		2284BC451DC3582F00E36E8A /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2284BC441DC3582F00E36E8A /* ChatVC.swift */; };
 		22873DAA1DC790550021690E /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22873DA91DC790550021690E /* Message.swift */; };
+		22A5FC5F1DEB185B00624E2B /* NavVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A5FC5E1DEB185B00624E2B /* NavVC.swift */; };
 		22A92BB11D59EBD6005D76F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A92BB01D59EBD6005D76F7 /* AppDelegate.swift */; };
 		22A92BB81D59EBD6005D76F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22A92BB71D59EBD6005D76F7 /* Assets.xcassets */; };
 		22AE96381D89727D00B4ED38 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 22AE96371D89727C00B4ED38 /* GoogleService-Info.plist */; };
@@ -42,6 +43,7 @@
 		2274709D1DCCF9BF00645401 /* LandingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LandingVC.swift; path = QuickChat/ViewControllers/LandingVC.swift; sourceTree = "<group>"; };
 		2284BC441DC3582F00E36E8A /* ChatVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatVC.swift; path = QuickChat/ViewControllers/ChatVC.swift; sourceTree = "<group>"; };
 		22873DA91DC790550021690E /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Message.swift; path = QuickChat/Model/Message.swift; sourceTree = "<group>"; };
+		22A5FC5E1DEB185B00624E2B /* NavVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NavVC.swift; path = QuickChat/ViewControllers/NavVC.swift; sourceTree = "<group>"; };
 		22A92BAD1D59EBD6005D76F7 /* QuickChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22A92BB01D59EBD6005D76F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22A92BB71D59EBD6005D76F7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 				224AFAA81D86890A004E7CCD /* WelcomeVC.swift */,
 				223611981DC8F8A700CDBEF4 /* LoginVC.swift */,
 				2236119A1DC8F8DF00CDBEF4 /* RegisterVC.swift */,
+				22A5FC5E1DEB185B00624E2B /* NavVC.swift */,
 				2217853C1DCD1DAC00A69F88 /* ConversationsVC.swift */,
 				22B974BD1DE9AED700E09490 /* ConversationsTBCell.swift */,
 				22B3DB601DE9F6BC0007DEA1 /* ContactsVC.swift */,
@@ -292,6 +295,7 @@
 				223611991DC8F8A700CDBEF4 /* LoginVC.swift in Sources */,
 				2284BC451DC3582F00E36E8A /* ChatVC.swift in Sources */,
 				2274709E1DCCF9BF00645401 /* LandingVC.swift in Sources */,
+				22A5FC5F1DEB185B00624E2B /* NavVC.swift in Sources */,
 				22B974C01DE9B5DF00E09490 /* Conversation.swift in Sources */,
 				224834AE1DB532510019153C /* ProfileVC.swift in Sources */,
 				22B974BE1DE9AED700E09490 /* ConversationsTBCell.swift in Sources */,

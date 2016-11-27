@@ -9,34 +9,44 @@
 import UIKit
 
 class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+    
+    //MARK: Properties
     @IBOutlet weak var tableView: UITableView!
-    var id = ""
+    var userName = "Name"
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
-
-        // Do any additional setup after loading the view.
+    //MARK: Methods
+    func customization() {
+        self.navigationItem.title = self.userName
+        self.navigationItem.setHidesBackButton(true, animated: false)
+        let icon = UIImage.init(named: "compose")?.withRenderingMode(.alwaysOriginal)
+        let rightButton = UIBarButtonItem.init(image: icon!, style: .plain, target: self, action: #selector(ChatVC.dismissSelf))
+        self.navigationItem.leftBarButtonItem = rightButton
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        self.navigationItem.title = id
+    func dismissSelf() {
+        if let navController = self.navigationController {
+            navController.popViewController(animated: true)
+        }
     }
-
     
+    //MARK: Delegates
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return 10
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        cell.textLabel?.text = "Random messages"
         return cell
+    }
+    
+    //MARK: ViewController lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.customization()
     }
 }
