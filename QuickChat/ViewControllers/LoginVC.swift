@@ -12,7 +12,6 @@ import Firebase
 class LoginVC: UIViewController, UITextFieldDelegate {
 
     //MARK: Properties
-    
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var submitButton: UIButton!

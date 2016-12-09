@@ -22,7 +22,6 @@ class RegisterVC: UIViewController, UITextFieldDelegate, UINavigationControllerD
     let imagePicker = UIImagePickerController()
     var delegate: SuccessfulAuthentication?
     
-    
     //MARK: Methods
     func customization()  {
         self.imagePicker.delegate = self
@@ -60,7 +59,8 @@ class RegisterVC: UIViewController, UITextFieldDelegate, UINavigationControllerD
                 self.imagePicker.sourceType = .camera;
                 self.imagePicker.allowsEditing = true
                 self.present(self.imagePicker, animated: true, completion: nil)
-            }        case .library:
+            }
+        case .library:
             let status = PHPhotoLibrary.authorizationStatus()
             if (status == .authorized || status == .notDetermined) {
                 self.imagePicker.sourceType = .savedPhotosAlbum;

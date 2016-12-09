@@ -58,9 +58,9 @@ class ConversationsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         let item = Conversation.init(profilePic: UIImage.init(named: "1")!, name: "Steve Jobs", lastMessage: "Hello there, how are you doing", time: Date.init(timeIntervalSinceNow: 10), isRead: true)
         let item2 = Conversation.init(profilePic: UIImage.init(named: "2")!, name: "William Brown", lastMessage: "Wonderful day, how is it there?", time: Date.init(timeIntervalSinceNow: 15), isRead: false)
         let item3 = Conversation.init(profilePic: UIImage.init(named: "3")!, name: "Conan", lastMessage: "random text", time: Date.init(timeIntervalSinceNow: 15), isRead: true)
-       //self.items.append(item)
-       //self.items.append(item2)
-       //self.items.append(item3)
+       self.items.append(item)
+       self.items.append(item2)
+       self.items.append(item3)
     }
     
     func showProfile() {
@@ -135,7 +135,6 @@ class ConversationsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             vc.userName = "from conversation"
             self.show(vc, sender: self)
         }
-        
     }
        
     //MARK: ViewController lifeCycle

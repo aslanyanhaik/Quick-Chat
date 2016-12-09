@@ -20,7 +20,6 @@ class NavVC: UINavigationController {
         view.alpha = 0
         return view
     }()
-
     
     //MARK: Methods
     func customization()  {
@@ -45,6 +44,7 @@ class NavVC: UINavigationController {
         NotificationCenter.default.addObserver(self, selector: #selector(self.dismissVC(notification:)), name: NSNotification.Name(rawValue: "dismissVC"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.showVC(notification:)), name: NSNotification.Name(rawValue: "showVC"), object: nil)
     }
+    
     //dismiss contacts/profile ViewControllers
     func dismissVC(notification: NSNotification) {
         if let type = notification.userInfo?["isContactsVC"] as? Bool {
