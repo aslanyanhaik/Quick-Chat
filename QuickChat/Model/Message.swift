@@ -14,13 +14,13 @@ class Message {
     let type: MessageType
     let content: AnyObject?
     let timestamp: Int
-    var read: Bool
+    var owner: MessageOwner
     
-    init(type: MessageType, content: AnyObject?, timestamp: Int, read: Bool) {
+    init(type: MessageType, content: AnyObject?, timestamp: Int, owner: MessageOwner) {
         self.type = type
         self.content = content
         self.timestamp = timestamp
-        self.read = read
+        self.owner = owner
     }
 }
 
@@ -28,6 +28,11 @@ class Message {
 enum MessageType {
     case photo
     case text
-    case video
-    case location
+    //case video
+    //case location
+}
+
+enum MessageOwner {
+    case sender
+    case receiver
 }

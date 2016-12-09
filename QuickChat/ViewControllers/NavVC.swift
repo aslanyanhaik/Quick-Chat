@@ -13,6 +13,8 @@ class NavVC: UINavigationController {
     //MARK: Properties
     var profileVC: ProfileVC!
     var contactsVC: ContactsVC!
+    var isProfileVCDataFetched = false
+    var isContactsVCDataFetched = false
     let darkView: UIView = {
         let view = UIView.init(frame: UIScreen.main.bounds)
         view.frame.origin.y = UIScreen.main.bounds.height
@@ -71,19 +73,25 @@ class NavVC: UINavigationController {
     
     //show contacts/profile ViewControllers
     func showVC(notification: NSNotification)  {
-        let transform = CGAffineTransform.init(scaleX: 0.97, y: 0.97)
+        let transform = CGAffineTransform.init(scaleX: 0.94, y: 0.94)
         self.darkView.frame.origin.y = 0
         if let type = notification.userInfo?["isContactsVC"] as? Bool {
             switch type {
             case true:
-                self.contactsVC.fetchUsers()
+                if self.isContactsVCDataFetched == false {
+                    self.contactsVC.fetchUsers()
+                }
+                self.isContactsVCDataFetched = true
                 UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
                     self.darkView.alpha = 0.8
                     self.contactsVC.view.frame.origin.y = 0
                     self.view.transform = transform
                 })
             case false:
-                self.profileVC.fetchUserInfo()
+                if self.isProfileVCDataFetched == false {
+                    self.profileVC.fetchUserInfo()
+                }
+                self.isProfileVCDataFetched = true
                 UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
                     self.darkView.alpha = 0.8
                     self.profileVC.view.frame.origin.y = 100

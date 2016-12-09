@@ -11,20 +11,19 @@ import UIKit
 class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     //MARK: Properties
-    var items = [String]()
     @IBOutlet weak var tableView: UITableView!
-    var userName = "Name"
+    var userName = ""
+    var items = [Message]()
     
     //MARK: Methods
     func customization() {
-        tableView.estimatedRowHeight = 68.0
-        tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 50
+        self.tableView.rowHeight = UITableViewAutomaticDimension
         self.navigationItem.title = self.userName
         self.navigationItem.setHidesBackButton(true, animated: false)
         let icon = UIImage.init(named: "back")?.withRenderingMode(.alwaysOriginal)
         let rightButton = UIBarButtonItem.init(image: icon!, style: .plain, target: self, action: #selector(ChatVC.dismissSelf))
         self.navigationItem.leftBarButtonItem = rightButton
-        self.tableView.reloadData()
     }
     
     func dismissSelf() {
@@ -34,35 +33,41 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     //MARK: Delegates
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.items.count
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.transform = CGAffineTransform.init(scaleX: 0.5, y: 0.5)
+        UIView.animate(withDuration: 0.3, animations: {
+            cell.transform = CGAffineTransform.identity
+        })
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row < 5{
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Sender", for: indexPath) as! SenderCell
-            cell.message.text = "adfgafg"
-            if indexPath.row == 3 {
-                cell.message.text = ""
-                cell.messageBackground.image = UIImage.init(named: "3")
+        switch self.items[indexPath.row].owner {
+        case .receiver:
+           let cell = tableView.dequeueReusableCell(withIdentifier: "Receiver", for: indexPath) as! ReceiverCell
+           switch self.items[indexPath.row].type {
+           case .text:
+            cell.message.text = self.items[indexPath.row].content as! String
+           case .photo:
+            let photo  = self.items[indexPath.row].content as! UIImage
+            cell.messageBackground.image = photo
             }
             return cell
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Receiver", for: indexPath) as! ReceiverCell
-            cell.message.text = "adfgafg"
-            if indexPath.row == 8 {
-                cell.message.text = ""
-                cell.messageBackground.image = UIImage.init(named: "1")
-                cell.messageBackground.frame.size.height = 200
+        case .sender:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Sender", for: indexPath) as! SenderCell
+            switch self.items[indexPath.row].type {
+            case .text:
+                cell.message.text = self.items[indexPath.row].content as! String
+            case .photo:
+                let photo  = self.items[indexPath.row].content as! UIImage
+                cell.messageBackground.image = photo
             }
             return cell
         }
     }
-    
     
     //MARK: ViewController lifecycle
     override func viewDidLoad() {
@@ -80,6 +85,7 @@ class SenderCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
+        self.message.textContainerInset = UIEdgeInsetsMake(5, 5, 5, 5)
         self.messageBackground.layer.cornerRadius = 15
         self.messageBackground.clipsToBounds = true
         self.profilePic.layer.cornerRadius = 18
@@ -95,6 +101,7 @@ class ReceiverCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
+        self.message.textContainerInset = UIEdgeInsetsMake(5, 5, 5, 5)
         self.messageBackground.layer.cornerRadius = 15
         self.messageBackground.clipsToBounds = true
     }
