@@ -11,7 +11,7 @@ import UIKit
 class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     
     //MARK: Properties
-    @IBOutlet var inputBar: UIVisualEffectView!
+    @IBOutlet var inputBar: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var inputTextField: UITextField!
     override var inputAccessoryView: UIView? {
@@ -43,14 +43,24 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
     }
     
     @IBAction func selectPic(_ sender: Any) {
-        
+
     }
-    
     
     func dismissSelf() {
         if let navController = self.navigationController {
             navController.popViewController(animated: true)
         }
+    }
+    
+    func keyboardAppear(notification: Notification)  {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            let offset = keyboardSize.height + 50
+            self.tableView.contentInset = UIEdgeInsetsMake(0, 0, offset, 0)
+        }
+    }
+    
+    func keyboardDisappear(notification: Notification)  {
+        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 50, 0)
     }
     
     //MARK: Delegates
@@ -101,7 +111,25 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
         return true
     }
     
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 300, 0)
+        self.tableView.scrollToRow(at: IndexPath.init(row: (self.items.count - 1), section: 0), at: .bottom, animated: true)
+        return true
+    }
+    
     //MARK: ViewController lifecycle
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.inputBar.backgroundColor = UIColor.clear
+        NotificationCenter.default.addObserver(self, selector: #selector(ChatVC.keyboardAppear(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ChatVC.keyboardDisappear(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         for _ in 0...10 {
@@ -114,46 +142,5 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
         }
         self.tableView.reloadData()
         self.customization()
-    }
-   }
-
-class SenderCell: UITableViewCell {
-    
-    @IBOutlet weak var profilePic: UIImageView!
-    @IBOutlet weak var message: UITextView!
-    @IBOutlet weak var messageBackground: UIImageView!
-    
-    func clearCellData()  {
-        self.message.text = nil
-        self.messageBackground.image = nil
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        self.selectionStyle = .none
-        self.message.textContainerInset = UIEdgeInsetsMake(5, 5, 5, 5)
-        self.messageBackground.layer.cornerRadius = 15
-        self.messageBackground.clipsToBounds = true
-        self.profilePic.layer.cornerRadius = 18
-        self.profilePic.clipsToBounds = true
-    }
-}
-
-class ReceiverCell: UITableViewCell {
-    
-    @IBOutlet weak var message: UITextView!
-    @IBOutlet weak var messageBackground: UIImageView!
-    
-    func clearCellData()  {
-        self.message.text = nil
-        self.messageBackground.image = nil
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        self.selectionStyle = .none
-        self.message.textContainerInset = UIEdgeInsetsMake(5, 5, 5, 5)
-        self.messageBackground.layer.cornerRadius = 15
-        self.messageBackground.clipsToBounds = true
     }
 }

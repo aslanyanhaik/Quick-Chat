@@ -16,6 +16,7 @@
 		224AFAA31D8686ED004E7CCD /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224AFAA21D8686ED004E7CCD /* extensions.swift */; };
 		224AFAA91D86890A004E7CCD /* WelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224AFAA81D86890A004E7CCD /* WelcomeVC.swift */; };
 		224AFAAC1D869039004E7CCD /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224AFAAB1D869039004E7CCD /* GlobalVariables.swift */; };
+		226197481DFC02270049C76D /* ChatTBCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226197471DFC02270049C76D /* ChatTBCells.swift */; };
 		2274709E1DCCF9BF00645401 /* LandingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2274709D1DCCF9BF00645401 /* LandingVC.swift */; };
 		2284BC451DC3582F00E36E8A /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2284BC441DC3582F00E36E8A /* ChatVC.swift */; };
 		22873DAA1DC790550021690E /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22873DA91DC790550021690E /* Message.swift */; };
@@ -40,6 +41,7 @@
 		224AFAA21D8686ED004E7CCD /* extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = extensions.swift; path = extensions/extensions.swift; sourceTree = "<group>"; };
 		224AFAA81D86890A004E7CCD /* WelcomeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WelcomeVC.swift; path = QuickChat/ViewControllers/WelcomeVC.swift; sourceTree = "<group>"; };
 		224AFAAB1D869039004E7CCD /* GlobalVariables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GlobalVariables.swift; path = "Helper files/GlobalVariables.swift"; sourceTree = "<group>"; };
+		226197471DFC02270049C76D /* ChatTBCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatTBCells.swift; path = QuickChat/ViewControllers/ChatTBCells.swift; sourceTree = "<group>"; };
 		2274709D1DCCF9BF00645401 /* LandingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LandingVC.swift; path = QuickChat/ViewControllers/LandingVC.swift; sourceTree = "<group>"; };
 		2284BC441DC3582F00E36E8A /* ChatVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatVC.swift; path = QuickChat/ViewControllers/ChatVC.swift; sourceTree = "<group>"; };
 		22873DA91DC790550021690E /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Message.swift; path = QuickChat/Model/Message.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 				22B3DB601DE9F6BC0007DEA1 /* ContactsVC.swift */,
 				22B3DB641DE9F9810007DEA1 /* ContactsCVCell.swift */,
 				2284BC441DC3582F00E36E8A /* ChatVC.swift */,
+				226197471DFC02270049C76D /* ChatTBCells.swift */,
 				224834AD1DB532510019153C /* ProfileVC.swift */,
 			);
 			name = ViewControllers;
@@ -293,6 +296,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				223611991DC8F8A700CDBEF4 /* LoginVC.swift in Sources */,
+				226197481DFC02270049C76D /* ChatTBCells.swift in Sources */,
 				2284BC451DC3582F00E36E8A /* ChatVC.swift in Sources */,
 				2274709E1DCCF9BF00645401 /* LandingVC.swift in Sources */,
 				22A5FC5F1DEB185B00624E2B /* NavVC.swift in Sources */,
