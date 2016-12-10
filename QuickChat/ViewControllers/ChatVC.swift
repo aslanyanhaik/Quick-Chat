@@ -28,7 +28,7 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
     
     //MARK: Methods
     func customization() {
-        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 50, 0)
+        self.tableView.contentInset.bottom = 50
         self.tableView.estimatedRowHeight = 50
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.navigationItem.title = self.userName
@@ -52,15 +52,18 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
         }
     }
     
+    //MARK: Notification handlers
     func keyboardAppear(notification: Notification)  {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            let offset = keyboardSize.height + 50
-            self.tableView.contentInset = UIEdgeInsetsMake(0, 0, offset, 0)
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.height {
+           let contentInsets = UIEdgeInsetsMake(0, 0, keyboardSize, 0)
+            self.tableView.contentInset = contentInsets
+            self.tableView.scrollIndicatorInsets = contentInsets
         }
     }
     
     func keyboardDisappear(notification: Notification)  {
-        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 50, 0)
+        self.tableView.contentInset = UIEdgeInsets.zero
+        self.tableView.scrollIndicatorInsets = UIEdgeInsets.zero
     }
     
     //MARK: Delegates
@@ -111,10 +114,10 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
         return true
     }
     
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 300, 0)
-        self.tableView.scrollToRow(at: IndexPath.init(row: (self.items.count - 1), section: 0), at: .bottom, animated: true)
-        return true
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if self.items.count > 0 {
+            self.tableView.scrollToRow(at: IndexPath.init(row: self.items.count - 1, section: 0), at: .bottom, animated: true)
+        }
     }
     
     //MARK: ViewController lifecycle
