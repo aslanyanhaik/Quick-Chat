@@ -12,11 +12,11 @@ import UIKit
 class Message {
     
     let type: MessageType
-    let content: AnyObject
+    let content: Any
     let timestamp: Int
     var owner: MessageOwner
     
-    init(type: MessageType, content: AnyObject, timestamp: Int, owner: MessageOwner) {
+    init(type: MessageType, content: Any, timestamp: Int, owner: MessageOwner) {
         self.type = type
         self.content = content
         self.timestamp = timestamp
