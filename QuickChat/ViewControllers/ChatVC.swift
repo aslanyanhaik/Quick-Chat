@@ -27,22 +27,19 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
     var userName = ""
     var items = [Message]()
     let imagePicker = UIImagePickerController()
-    let defaultEdgeInset = UIEdgeInsetsMake(0, 0, 50, 0)
 
     //MARK: Methods
     func customization() {
         self.imagePicker.delegate = self
-        self.tableView.contentInset = self.defaultEdgeInset
-        self.tableView.scrollIndicatorInsets = self.defaultEdgeInset
         self.tableView.estimatedRowHeight = 50
         self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.contentInset.bottom = 50
+        self.tableView.scrollIndicatorInsets.bottom = 50
         self.navigationItem.title = self.userName
         self.navigationItem.setHidesBackButton(true, animated: false)
         let icon = UIImage.init(named: "back")?.withRenderingMode(.alwaysOriginal)
         let rightButton = UIBarButtonItem.init(image: icon!, style: .plain, target: self, action: #selector(ChatVC.dismissSelf))
         self.navigationItem.leftBarButtonItem = rightButton
-        NotificationCenter.default.addObserver(self, selector: #selector(ChatVC.keyboardAppear(notification:)), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(ChatVC.keyboardDisappear(notification:)), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
     }
     
     func fetchData()  {
@@ -55,7 +52,6 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
             self.items.append(item)
         }
         self.tableView.reloadData()
-        self.tableView.scrollToRow(at: IndexPath.init(row: self.items.count - 1, section: 0), at: .bottom, animated: true)
     }
     
     func openPhotoPickerWith(source: PhotoSource) {
@@ -115,22 +111,6 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
         }
     }
     
-    //MARK: Notification handlers
-    func keyboardAppear(notification: Notification)  {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.height {
-           let contentInsets = UIEdgeInsetsMake(0, 0, keyboardSize, 0)
-            self.tableView.contentInset = contentInsets
-            self.tableView.contentOffset = CGPoint.init(x: 0, y: -keyboardSize)
-            self.tableView.scrollIndicatorInsets = contentInsets
-        }
-    }
-    
-    func keyboardDisappear(notification: Notification)  {
-        self.tableView.contentInset = defaultEdgeInset
-        self.tableView.scrollIndicatorInsets = defaultEdgeInset
-        self.tableView.contentOffset = CGPoint.init(x: 0, y: -50)
-    }
-    
     //MARK: Delegates
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.items.count
@@ -183,15 +163,14 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
         if let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
             let item = Message.init(type: .photo, content: pickedImage, timestamp: 20, owner: .receiver)
             self.items.append(item)
+            self.tableView.insertRows(at: [IndexPath.init(row: self.items.count - 1, section: 0)], with: .automatic)
         } else {
             let pickedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
                 let item = Message.init(type: .photo, content: pickedImage, timestamp: 20, owner: .receiver)
                 self.items.append(item)
+            self.tableView.insertRows(at: [IndexPath.init(row: self.items.count - 1, section: 0)], with: .automatic)
         }
         picker.dismiss(animated: true, completion: {
-            self.tableView.contentInset = self.defaultEdgeInset
-            self.tableView.scrollIndicatorInsets = self.defaultEdgeInset
-            self.tableView.insertRows(at: [IndexPath.init(row: self.items.count - 1, section: 0)], with: .automatic)
             self.tableView.scrollToRow(at: IndexPath.init(row: self.items.count - 1, section: 0), at: .bottom, animated: true)
         })
     }
@@ -200,11 +179,6 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.inputBar.backgroundColor = UIColor.clear
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        NotificationCenter.default.removeObserver(self)
     }
     
     override func viewDidLoad() {
