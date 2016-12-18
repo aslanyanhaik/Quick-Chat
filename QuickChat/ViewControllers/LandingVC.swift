@@ -45,8 +45,3 @@ class LandingVC: UIViewController {
         super.viewDidLoad()
     }
 }
-
-enum ViewControllerType {
-    case welcome
-    case conversations
-}

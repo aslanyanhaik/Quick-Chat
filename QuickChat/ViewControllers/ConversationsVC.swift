@@ -64,12 +64,13 @@ class ConversationsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     func showProfile() {
-        let info = ["isContactsView" : false]
+        let info = ["viewType" : ShowExtraView.profile]
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showExtraView"), object: nil, userInfo: info)
+        self.inputView?.isHidden = true
     }
     
     func showContacts() {
-        let info = ["isContactsView" : true]
+        let info = ["viewType" : ShowExtraView.contacts]
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showExtraView"), object: nil, userInfo: info)
     }
     

@@ -17,3 +17,19 @@ struct GlobalVariables {
     static let conversations = FIRDatabase.database().reference().child("conversations")
     static let storageUsers = FIRStorage.storage().reference().child("usersProfilePics")
 }
+
+enum ViewControllerType {
+    case welcome
+    case conversations
+}
+
+enum PhotoSource {
+    case library
+    case camera
+}
+
+enum ShowExtraView {
+    case contacts
+    case profile
+    case preview
+}

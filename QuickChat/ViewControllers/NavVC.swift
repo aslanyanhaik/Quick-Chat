@@ -9,11 +9,14 @@
 import UIKit
 import Firebase
 
-class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate {
 
     //MARK: Properties
     @IBOutlet var contactsView: UIView!
     @IBOutlet var profileView: UIView!
+    @IBOutlet var previewView: UIView!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var previewImageView: UIImageView!
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var profilePicView: RoundedImageView!
@@ -21,18 +24,15 @@ class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewD
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var logOutButton: UIButton!
     var topAnchorContraint: NSLayoutConstraint!
-    let darkView: UIView = {
-        let view = UIView.init()
-        view.backgroundColor = UIColor.black
-        view.alpha = 0
-        return view
-    }()
+    let darkView = UIView.init()
     var items = [User]()
     
     //MARK: Methods
     func customization() {
         //DarkView customization
         self.view.addSubview(self.darkView)
+        self.darkView.backgroundColor = UIColor.black
+        self.darkView.alpha = 0
         self.darkView.translatesAutoresizingMaskIntoConstraints = false
         self.darkView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         self.darkView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
@@ -50,8 +50,8 @@ class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewD
         extraViewsContainer.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 1).isActive = true
         extraViewsContainer.backgroundColor = UIColor.clear
     //ContactsView customization
-        self.contactsView.translatesAutoresizingMaskIntoConstraints = false
         extraViewsContainer.addSubview(self.contactsView)
+        self.contactsView.translatesAutoresizingMaskIntoConstraints = false
         self.contactsView.topAnchor.constraint(equalTo: extraViewsContainer.topAnchor).isActive = true
         self.contactsView.leadingAnchor.constraint(equalTo: extraViewsContainer.leadingAnchor).isActive = true
         self.contactsView.trailingAnchor.constraint(equalTo: extraViewsContainer.trailingAnchor).isActive = true
@@ -62,9 +62,9 @@ class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewD
         self.closeButton.clipsToBounds = true
         self.contactsView.backgroundColor = UIColor.clear
     //ProfileView Customization
-        self.profileView.translatesAutoresizingMaskIntoConstraints = false
         extraViewsContainer.addSubview(self.profileView)
-        profileView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.width * 0.9)).isActive = true
+        self.profileView.translatesAutoresizingMaskIntoConstraints = false
+        self.profileView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.width * 0.9)).isActive = true
         let profileViewAspectRatio = NSLayoutConstraint.init(item: self.profileView, attribute: .width, relatedBy: .equal, toItem: self.profileView, attribute: .height, multiplier: 0.8125, constant: 0)
         profileViewAspectRatio.isActive = true
         self.profileView.centerXAnchor.constraint(equalTo: extraViewsContainer.centerXAnchor).isActive = true
@@ -77,11 +77,22 @@ class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewD
         self.logOutButton.layer.cornerRadius = 20
         self.logOutButton.clipsToBounds = true
         self.view.layoutIfNeeded()
+    //PreviewView Customization
+        extraViewsContainer.addSubview(self.previewView)
+        self.previewView.isHidden = true
+        self.previewView.translatesAutoresizingMaskIntoConstraints = false
+        self.previewView.leadingAnchor.constraint(equalTo: extraViewsContainer.leadingAnchor).isActive = true
+        self.previewView.topAnchor.constraint(equalTo: extraViewsContainer.topAnchor).isActive = true
+        self.previewView.trailingAnchor.constraint(equalTo: extraViewsContainer.trailingAnchor).isActive = true
+        self.previewView.bottomAnchor.constraint(equalTo: extraViewsContainer.bottomAnchor).isActive = true
+        self.scrollView.minimumZoomScale = 1.0
+        self.scrollView.maximumZoomScale = 5.0
     //NotificationCenter for showing extra views
         NotificationCenter.default.addObserver(self, selector: #selector(self.showExtraViews(notification:)), name: NSNotification.Name(rawValue: "showExtraView"), object: nil)
     }
     
     func dismissExtraViews() {
+        UIApplication.shared.isStatusBarHidden = false
         self.topAnchorContraint.constant = 1000
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
             self.view.layoutIfNeeded()
@@ -91,28 +102,35 @@ class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewD
             self.darkView.isHidden = true
             self.profileView.isHidden = true
             self.contactsView.isHidden = true
+            self.previewView.isHidden = true
+            let vc = self.viewControllers.last
+            vc?.inputAccessoryView?.isHidden = false
         })
     }
     
     func showExtraViews(notification: NSNotification)  {
         let transform = CGAffineTransform.init(scaleX: 0.94, y: 0.94)
-        if let type = notification.userInfo?["isContactsView"] as? Bool {
-            self.topAnchorContraint.constant = 0
-            self.darkView.isHidden = false
+        self.topAnchorContraint.constant = 0
+        self.darkView.isHidden = false
+        if let type = notification.userInfo?["viewType"] as? ShowExtraView {
             UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
                 self.view.layoutIfNeeded()
                 self.darkView.alpha = 0.8
                 self.view.transform = transform
             })
             switch type {
-            case true:
+            case .contacts:
                 self.contactsView.isHidden = false
                 if self.items.count == 0 {
                     self.fetchUsers()
                 }
-            case false:
+            case .profile:
                 self.profileView.isHidden = false
                 self.fetchUserInfo()
+            case .preview:
+                self.previewView.isHidden = false
+                UIApplication.shared.isStatusBarHidden = true
+                self.previewImageView.image = notification.userInfo?["pic"] as? UIImage
             }
         }
     }
@@ -219,6 +237,10 @@ class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewD
                 return CGSize.init(width: width, height: height)
             }
         }
+    }
+    
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return self.previewImageView
     }
 
     //MARK: ViewController lifeCycle

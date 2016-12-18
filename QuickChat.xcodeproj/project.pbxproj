@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		220698841E066E4900F2284B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220698831E066E4900F2284B /* Extensions.swift */; };
 		2217853D1DCD1DAC00A69F88 /* ConversationsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2217853C1DCD1DAC00A69F88 /* ConversationsVC.swift */; };
 		223611991DC8F8A700CDBEF4 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223611981DC8F8A700CDBEF4 /* LoginVC.swift */; };
 		2236119B1DC8F8DF00CDBEF4 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2236119A1DC8F8DF00CDBEF4 /* RegisterVC.swift */; };
@@ -14,7 +15,6 @@
 		224AFA9D1D867DE7004E7CCD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 224AFA9C1D867DE7004E7CCD /* Main.storyboard */; };
 		224AFAA91D86890A004E7CCD /* WelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224AFAA81D86890A004E7CCD /* WelcomeVC.swift */; };
 		224AFAAC1D869039004E7CCD /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224AFAAB1D869039004E7CCD /* GlobalVariables.swift */; };
-		226197481DFC02270049C76D /* ChatTBCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226197471DFC02270049C76D /* ChatTBCells.swift */; };
 		2274709E1DCCF9BF00645401 /* LandingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2274709D1DCCF9BF00645401 /* LandingVC.swift */; };
 		2284BC451DC3582F00E36E8A /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2284BC441DC3582F00E36E8A /* ChatVC.swift */; };
 		22873DAA1DC790550021690E /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22873DA91DC790550021690E /* Message.swift */; };
@@ -23,12 +23,11 @@
 		22A92BB81D59EBD6005D76F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22A92BB71D59EBD6005D76F7 /* Assets.xcassets */; };
 		22AE96381D89727D00B4ED38 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 22AE96371D89727C00B4ED38 /* GoogleService-Info.plist */; };
 		22B974C01DE9B5DF00E09490 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B974BF1DE9B5DF00E09490 /* Conversation.swift */; };
-		22DBC7B41E05DFCC00481694 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DBC7B31E05DFCC00481694 /* Extensions.swift */; };
-		22E693521DFD4B3F00543B87 /* PreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E693511DFD4B3F00543B87 /* PreviewVC.swift */; };
 		62058F6006BD9ACBE0439C4B /* Pods_QuickChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8041C4B4A9DA4F0F53D2BDE /* Pods_QuickChat.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		220698831E066E4900F2284B /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = "Helper files/Extensions.swift"; sourceTree = "<group>"; };
 		2217853C1DCD1DAC00A69F88 /* ConversationsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConversationsVC.swift; path = QuickChat/ViewControllers/ConversationsVC.swift; sourceTree = "<group>"; };
 		223611981DC8F8A700CDBEF4 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginVC.swift; path = QuickChat/ViewControllers/LoginVC.swift; sourceTree = "<group>"; };
 		2236119A1DC8F8DF00CDBEF4 /* RegisterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterVC.swift; path = QuickChat/ViewControllers/RegisterVC.swift; sourceTree = "<group>"; };
@@ -36,7 +35,6 @@
 		224AFA9C1D867DE7004E7CCD /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		224AFAA81D86890A004E7CCD /* WelcomeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WelcomeVC.swift; path = QuickChat/ViewControllers/WelcomeVC.swift; sourceTree = "<group>"; };
 		224AFAAB1D869039004E7CCD /* GlobalVariables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GlobalVariables.swift; path = "Helper files/GlobalVariables.swift"; sourceTree = "<group>"; };
-		226197471DFC02270049C76D /* ChatTBCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatTBCells.swift; path = QuickChat/ViewControllers/ChatTBCells.swift; sourceTree = "<group>"; };
 		2274709D1DCCF9BF00645401 /* LandingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LandingVC.swift; path = QuickChat/ViewControllers/LandingVC.swift; sourceTree = "<group>"; };
 		2284BC441DC3582F00E36E8A /* ChatVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatVC.swift; path = QuickChat/ViewControllers/ChatVC.swift; sourceTree = "<group>"; };
 		22873DA91DC790550021690E /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Message.swift; path = QuickChat/Model/Message.swift; sourceTree = "<group>"; };
@@ -47,8 +45,6 @@
 		22A92BBC1D59EBD6005D76F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22AE96371D89727C00B4ED38 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		22B974BF1DE9B5DF00E09490 /* Conversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Conversation.swift; path = QuickChat/Model/Conversation.swift; sourceTree = "<group>"; };
-		22DBC7B31E05DFCC00481694 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = extensions/Extensions.swift; sourceTree = "<group>"; };
-		22E693511DFD4B3F00543B87 /* PreviewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PreviewVC.swift; path = QuickChat/ViewControllers/PreviewVC.swift; sourceTree = "<group>"; };
 		614F8B4888358059B3DC166B /* Pods-QuickChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QuickChat/Pods-QuickChat.debug.xcconfig"; sourceTree = "<group>"; };
 		B8041C4B4A9DA4F0F53D2BDE /* Pods_QuickChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuickChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8FBFCFF82B6EB57B02FA375 /* Pods-QuickChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-QuickChat/Pods-QuickChat.release.xcconfig"; sourceTree = "<group>"; };
@@ -87,24 +83,15 @@
 				22A5FC5E1DEB185B00624E2B /* NavVC.swift */,
 				2217853C1DCD1DAC00A69F88 /* ConversationsVC.swift */,
 				2284BC441DC3582F00E36E8A /* ChatVC.swift */,
-				226197471DFC02270049C76D /* ChatTBCells.swift */,
-				22E693511DFD4B3F00543B87 /* PreviewVC.swift */,
 			);
 			name = ViewControllers;
 			path = ..;
 			sourceTree = "<group>";
 		};
-		224AFAA11D8686C0004E7CCD /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				22DBC7B31E05DFCC00481694 /* Extensions.swift */,
-			);
-			name = Extensions;
-			sourceTree = "<group>";
-		};
 		224AFAAA1D86900B004E7CCD /* Helper files */ = {
 			isa = PBXGroup;
 			children = (
+				220698831E066E4900F2284B /* Extensions.swift */,
 				224AFAAB1D869039004E7CCD /* GlobalVariables.swift */,
 			);
 			name = "Helper files";
@@ -136,7 +123,6 @@
 				224AFA9E1D868371004E7CCD /* ViewControllers */,
 				224834AF1DB539690019153C /* Model */,
 				224AFAAA1D86900B004E7CCD /* Helper files */,
-				224AFAA11D8686C0004E7CCD /* Extensions */,
 				22A92BB71D59EBD6005D76F7 /* Assets.xcassets */,
 				22A92BBC1D59EBD6005D76F7 /* Info.plist */,
 				22AE96371D89727C00B4ED38 /* GoogleService-Info.plist */,
@@ -287,8 +273,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				223611991DC8F8A700CDBEF4 /* LoginVC.swift in Sources */,
-				226197481DFC02270049C76D /* ChatTBCells.swift in Sources */,
-				22E693521DFD4B3F00543B87 /* PreviewVC.swift in Sources */,
 				2284BC451DC3582F00E36E8A /* ChatVC.swift in Sources */,
 				2274709E1DCCF9BF00645401 /* LandingVC.swift in Sources */,
 				22A5FC5F1DEB185B00624E2B /* NavVC.swift in Sources */,
@@ -296,9 +280,9 @@
 				2217853D1DCD1DAC00A69F88 /* ConversationsVC.swift in Sources */,
 				22A92BB11D59EBD6005D76F7 /* AppDelegate.swift in Sources */,
 				224AFAA91D86890A004E7CCD /* WelcomeVC.swift in Sources */,
+				220698841E066E4900F2284B /* Extensions.swift in Sources */,
 				224AFAAC1D869039004E7CCD /* GlobalVariables.swift in Sources */,
 				22873DAA1DC790550021690E /* Message.swift in Sources */,
-				22DBC7B41E05DFCC00481694 /* Extensions.swift in Sources */,
 				2236119B1DC8F8DF00CDBEF4 /* RegisterVC.swift in Sources */,
 				224834B11DB539A50019153C /* User.swift in Sources */,
 			);

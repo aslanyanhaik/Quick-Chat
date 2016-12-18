@@ -116,7 +116,4 @@ class RegisterVC: UIViewController, UITextFieldDelegate, UINavigationControllerD
     }
 }
 
-enum PhotoSource {
-    case library
-    case camera
-}
+
