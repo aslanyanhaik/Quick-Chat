@@ -64,13 +64,13 @@ class ConversationsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     func showProfile() {
-        let info = ["isContactsVC" : false]
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showVC"), object: nil, userInfo: info)
+        let info = ["isContactsView" : false]
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showExtraView"), object: nil, userInfo: info)
     }
     
     func showContacts() {
-        let info = ["isContactsVC" : true]
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showVC"), object: nil, userInfo: info)
+        let info = ["isContactsView" : true]
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showExtraView"), object: nil, userInfo: info)
     }
     
     func pushToUserMesssages(notification: NSNotification) {
@@ -143,6 +143,21 @@ class ConversationsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         self.customization()
         self.fetchData()
     }
+}
+
+class ConversationsTBCell: UITableViewCell {
+    
+    @IBOutlet weak var profilePic: RoundedImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var messageLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.profilePic.layer.borderWidth = 2
+        self.profilePic.layer.borderColor = GlobalVariables.purple.cgColor
+    }
+    
 }
 
 

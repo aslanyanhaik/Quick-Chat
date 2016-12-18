@@ -7,96 +7,216 @@
 //
 
 import UIKit
+import Firebase
 
-class NavVC: UINavigationController {
+class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     //MARK: Properties
-    var profileVC: ProfileVC!
-    var contactsVC: ContactsVC!
-    var isProfileVCDataFetched = false
-    var isContactsVCDataFetched = false
+    @IBOutlet var contactsView: UIView!
+    @IBOutlet var profileView: UIView!
+    @IBOutlet weak var closeButton: UIButton!
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var profilePicView: RoundedImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var logOutButton: UIButton!
+    var topAnchorContraint: NSLayoutConstraint!
     let darkView: UIView = {
-        let view = UIView.init(frame: UIScreen.main.bounds)
-        view.frame.origin.y = UIScreen.main.bounds.height
+        let view = UIView.init()
         view.backgroundColor = UIColor.black
         view.alpha = 0
         return view
     }()
+    var items = [User]()
     
     //MARK: Methods
-    func customization()  {
+    func customization() {
+        //DarkView customization
         self.view.addSubview(self.darkView)
-        //profile view init
-        self.profileVC = self.storyboard?.instantiateViewController(withIdentifier: "Profile") as! ProfileVC
-        self.addChildViewController(self.profileVC)
-        self.profileVC.view.frame = CGRect.init(x: (UIScreen.main.bounds.width * 0.1), y: (UIScreen.main.bounds.height + 100), width: (UIScreen.main.bounds.width * 0.8), height: (UIScreen.main.bounds.height * 0.65))
-        self.profileVC.view.layer.cornerRadius = 5
-        self.view.addSubview(self.profileVC.view)
-        profileVC.didMove(toParentViewController: self)
-        //contacts view init
-        self.contactsVC = self.storyboard?.instantiateViewController(withIdentifier: "Contacts") as! ContactsVC
-        self.addChildViewController(self.contactsVC)
-        self.contactsVC.view.frame = CGRect.init(x: 0, y: (UIScreen.main.bounds.height + 100), width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-        self.view.addSubview(self.contactsVC.view)
-        contactsVC.didMove(toParentViewController: self)
-        //conversations VC
-        let conversationsVC = self.storyboard?.instantiateViewController(withIdentifier: "Conversations")
-        self.show(conversationsVC!, sender: self)
-        //Notification setup
-        NotificationCenter.default.addObserver(self, selector: #selector(self.dismissVC(notification:)), name: NSNotification.Name(rawValue: "dismissVC"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.showVC(notification:)), name: NSNotification.Name(rawValue: "showVC"), object: nil)
+        self.darkView.translatesAutoresizingMaskIntoConstraints = false
+        self.darkView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        self.darkView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        self.darkView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        self.darkView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        self.darkView.isHidden = true
+    //ContainerView customization
+        let extraViewsContainer = UIView.init()
+        extraViewsContainer.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(extraViewsContainer)
+        self.topAnchorContraint = NSLayoutConstraint.init(item: extraViewsContainer, attribute: .top, relatedBy: .equal, toItem: self.view, attribute: .top, multiplier: 1, constant: 1000)
+        self.topAnchorContraint.isActive = true
+        extraViewsContainer.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        extraViewsContainer.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        extraViewsContainer.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 1).isActive = true
+        extraViewsContainer.backgroundColor = UIColor.clear
+    //ContactsView customization
+        self.contactsView.translatesAutoresizingMaskIntoConstraints = false
+        extraViewsContainer.addSubview(self.contactsView)
+        self.contactsView.topAnchor.constraint(equalTo: extraViewsContainer.topAnchor).isActive = true
+        self.contactsView.leadingAnchor.constraint(equalTo: extraViewsContainer.leadingAnchor).isActive = true
+        self.contactsView.trailingAnchor.constraint(equalTo: extraViewsContainer.trailingAnchor).isActive = true
+        self.contactsView.bottomAnchor.constraint(equalTo: extraViewsContainer.bottomAnchor).isActive = true
+        self.contactsView.isHidden = true
+        self.collectionView?.contentInset = UIEdgeInsetsMake(10, 0, 0, 0)
+        self.closeButton.layer.cornerRadius = 20
+        self.closeButton.clipsToBounds = true
+        self.contactsView.backgroundColor = UIColor.clear
+    //ProfileView Customization
+        self.profileView.translatesAutoresizingMaskIntoConstraints = false
+        extraViewsContainer.addSubview(self.profileView)
+        profileView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.width * 0.9)).isActive = true
+        let profileViewAspectRatio = NSLayoutConstraint.init(item: self.profileView, attribute: .width, relatedBy: .equal, toItem: self.profileView, attribute: .height, multiplier: 0.8125, constant: 0)
+        profileViewAspectRatio.isActive = true
+        self.profileView.centerXAnchor.constraint(equalTo: extraViewsContainer.centerXAnchor).isActive = true
+        self.profileView.centerYAnchor.constraint(equalTo: extraViewsContainer.centerYAnchor).isActive = true
+        self.profileView.layer.cornerRadius = 5
+        self.profileView.clipsToBounds = true
+        self.profileView.isHidden = true
+        self.profilePicView.layer.borderColor = GlobalVariables.purple.cgColor
+        self.profilePicView.layer.borderWidth = 3
+        self.logOutButton.layer.cornerRadius = 20
+        self.logOutButton.clipsToBounds = true
+        self.view.layoutIfNeeded()
+    //NotificationCenter for showing extra views
+        NotificationCenter.default.addObserver(self, selector: #selector(self.showExtraViews(notification:)), name: NSNotification.Name(rawValue: "showExtraView"), object: nil)
     }
     
-    //dismiss contacts/profile ViewControllers
-    func dismissVC(notification: NSNotification) {
-        if let type = notification.userInfo?["isContactsVC"] as? Bool {
+    func dismissExtraViews() {
+        self.topAnchorContraint.constant = 1000
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+            self.view.layoutIfNeeded()
+            self.darkView.alpha = 0
+            self.view.transform = CGAffineTransform.identity
+        }, completion:  { (true) in
+            self.darkView.isHidden = true
+            self.profileView.isHidden = true
+            self.contactsView.isHidden = true
+        })
+    }
+    
+    func showExtraViews(notification: NSNotification)  {
+        let transform = CGAffineTransform.init(scaleX: 0.94, y: 0.94)
+        if let type = notification.userInfo?["isContactsView"] as? Bool {
+            self.topAnchorContraint.constant = 0
+            self.darkView.isHidden = false
+            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
+                self.view.layoutIfNeeded()
+                self.darkView.alpha = 0.8
+                self.view.transform = transform
+            })
             switch type {
             case true:
-                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
-                    self.darkView.alpha = 0
-                    self.contactsVC.view.frame.origin.y = (UIScreen.main.bounds.height + 100)
-                    self.view.transform = CGAffineTransform.identity
-                }, completion:  { (true) in
-                    self.darkView.frame.origin.y = UIScreen.main.bounds.height
-                })
+                self.contactsView.isHidden = false
+                if self.items.count == 0 {
+                    self.fetchUsers()
+                }
             case false:
-                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
-                    self.darkView.alpha = 0
-                    self.profileVC.view.frame.origin.y = (UIScreen.main.bounds.height + 100)
-                    self.view.transform = CGAffineTransform.identity
-                }, completion:  { (true) in
-                    self.darkView.frame.origin.y = UIScreen.main.bounds.height
-                })
+                self.profileView.isHidden = false
+                self.fetchUserInfo()
             }
         }
     }
     
-    //show contacts/profile ViewControllers
-    func showVC(notification: NSNotification)  {
-        let transform = CGAffineTransform.init(scaleX: 0.94, y: 0.94)
-        self.darkView.frame.origin.y = 0
-        if let type = notification.userInfo?["isContactsVC"] as? Bool {
-            switch type {
-            case true:
-                if self.isContactsVCDataFetched == false {
-                    self.contactsVC.fetchUsers()
-                }
-                self.isContactsVCDataFetched = true
-                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
-                    self.darkView.alpha = 0.8
-                    self.contactsVC.view.frame.origin.y = 0
-                    self.view.transform = transform
+    func fetchUsers()  {
+        GlobalVariables.users.observe(.childAdded, with: { (snapshot) in
+            let output = snapshot.value as! [String: String]
+            let name = output["name"]!
+            let email = output["email"]!
+            let profilePicLink = output["profilePicLink"]!
+            let link = URL.init(string: profilePicLink)
+            let data = try! Data.init(contentsOf: link!)
+            let profilePic = UIImage.init(data: data)!
+            let user = User.init(name: name, email: email, id: snapshot.key, profilePicLink: link!, profilePic: profilePic)
+            self.items.append(user)
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        })
+    }
+    
+    func fetchUserInfo() {
+        if let id  = FIRAuth.auth()?.currentUser?.uid {
+            FIRDatabase.database().reference().child("users").child(id).observe(.value, with: { (snapshot) in
+                let value = snapshot.value as! [String : String]
+                self.nameLabel.text = value["email"]
+                self.emailLabel.text = value["name"]
+                let profilePicURL = URL.init(string: value["profilePicLink"]!)
+                let imageData = try! Data.init(contentsOf: profilePicURL!)
+                let profilePic = UIImage.init(data: imageData)
+                self.profilePicView.image = profilePic
+            })
+        }
+    }
+    
+    @IBAction func closeView(_ sender: Any) {
+        self.dismissExtraViews()
+    }
+  
+    @IBAction func logOutUser(_ sender: Any) {
+        if let _ = FIRAuth.auth()?.currentUser?.uid {
+            do {
+                try FIRAuth.auth()?.signOut()
+                UserDefaults.standard.removeObject(forKey: "userInformation")
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "Welcome") as! WelcomeVC
+                self.present(vc, animated: true, completion: {
                 })
-            case false:
-                if self.isProfileVCDataFetched == false {
-                    self.profileVC.fetchUserInfo()
-                }
-                self.isProfileVCDataFetched = true
-                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
-                    self.darkView.alpha = 0.8
-                    self.profileVC.view.frame.origin.y = 100
-                    self.view.transform = transform
-                })
+            } catch _ {
+                print("something went wrong")
+            }
+        }
+    }
+    
+    //MARK: Delegates
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if self.items.count == 0 {
+            return 1
+        } else {
+            return self.items.count
+        }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if self.items.count == 0 {
+            let cell  = collectionView.dequeueReusableCell(withReuseIdentifier: "Empty Cell", for: indexPath)
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! ContactsCVCell
+            cell.profilePic.image = self.items[indexPath.row].profilePic
+            cell.nameLabel.text = self.items[indexPath.row].name
+            cell.profilePic.layer.borderWidth = 2
+            cell.profilePic.layer.borderColor = GlobalVariables.purple.cgColor
+            return cell
+        }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if self.items.count > 0 {
+            self.dismissExtraViews()
+            let userInfo = ["username": String(indexPath.row)]
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showUserMessages"), object: nil, userInfo: userInfo)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if self.items.count == 0 {
+            return self.collectionView.bounds.size
+        } else {
+            if UIScreen.main.bounds.width > UIScreen.main.bounds.height {
+                let width = (0.3 * UIScreen.main.bounds.height)
+                let height = width + 30
+                return CGSize.init(width: width, height: height)
+            } else {
+                let width = (0.3 * UIScreen.main.bounds.width)
+                let height = width + 30
+                return CGSize.init(width: width, height: height)
             }
         }
     }
@@ -105,5 +225,19 @@ class NavVC: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.customization()        
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        self.view.transform = CGAffineTransform.identity
+    }
+}
+
+class ContactsCVCell: UICollectionViewCell {
+    
+    @IBOutlet weak var profilePic: RoundedImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
     }
 }

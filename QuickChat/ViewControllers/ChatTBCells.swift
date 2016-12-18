@@ -11,12 +11,13 @@ import UIKit
 
 class SenderCell: UITableViewCell {
     
-    @IBOutlet weak var profilePic: UIImageView!
+    @IBOutlet weak var profilePic: RoundedImageView!
     @IBOutlet weak var message: UITextView!
     @IBOutlet weak var messageBackground: UIImageView!
     
     func clearCellData()  {
         self.message.text = nil
+        self.message.isHidden = false
         self.messageBackground.image = nil
     }
     
@@ -26,8 +27,6 @@ class SenderCell: UITableViewCell {
         self.message.textContainerInset = UIEdgeInsetsMake(5, 5, 5, 5)
         self.messageBackground.layer.cornerRadius = 15
         self.messageBackground.clipsToBounds = true
-        self.profilePic.layer.cornerRadius = 18
-        self.profilePic.clipsToBounds = true
     }
 }
 
@@ -38,6 +37,7 @@ class ReceiverCell: UITableViewCell {
     
     func clearCellData()  {
         self.message.text = nil
+        self.message.isHidden = false
         self.messageBackground.image = nil
     }
     
