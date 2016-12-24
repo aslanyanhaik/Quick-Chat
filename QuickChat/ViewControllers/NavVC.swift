@@ -17,12 +17,10 @@ class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewD
     @IBOutlet var previewView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var previewImageView: UIImageView!
-    @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var profilePicView: RoundedImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
-    @IBOutlet weak var logOutButton: UIButton!
     var topAnchorContraint: NSLayoutConstraint!
     let darkView = UIView.init()
     var items = [User]()
@@ -58,8 +56,6 @@ class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewD
         self.contactsView.bottomAnchor.constraint(equalTo: extraViewsContainer.bottomAnchor).isActive = true
         self.contactsView.isHidden = true
         self.collectionView?.contentInset = UIEdgeInsetsMake(10, 0, 0, 0)
-        self.closeButton.layer.cornerRadius = 20
-        self.closeButton.clipsToBounds = true
         self.contactsView.backgroundColor = UIColor.clear
     //ProfileView Customization
         extraViewsContainer.addSubview(self.profileView)
@@ -74,8 +70,6 @@ class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewD
         self.profileView.isHidden = true
         self.profilePicView.layer.borderColor = GlobalVariables.purple.cgColor
         self.profilePicView.layer.borderWidth = 3
-        self.logOutButton.layer.cornerRadius = 20
-        self.logOutButton.clipsToBounds = true
         self.view.layoutIfNeeded()
     //PreviewView Customization
         extraViewsContainer.addSubview(self.previewView)

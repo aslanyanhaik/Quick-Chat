@@ -11,8 +11,8 @@ typedef void (^FIRAppVoidBoolCallback)(BOOL success);
 /**
  * The entry point of Firebase SDKs.
  *
- * Initialize and configure FIRApp using [FIRApp configure];
- * Or other customized ways as shown below.
+ * Initialize and configure FIRApp using +[FIRApp configure]
+ * or other customized ways as shown below.
  *
  * The logging system has two modes: default mode and debug mode. In default mode, only logs with
  * log level Notice, Warning and Error will be sent to device. In debug mode, all logs will be sent
@@ -63,20 +63,20 @@ typedef void (^FIRAppVoidBoolCallback)(BOOL success);
 + (nullable FIRApp *)appNamed:(NSString *)name;
 
 /**
- * Returns the set of all extant FIRApp instances, or nil if there is no FIRApp instance. This
+ * Returns the set of all extant FIRApp instances, or nil if there are no FIRApp instances. This
  * method is thread safe.
  */
 + (nullable NSDictionary *)allApps;
 
 /**
  * Cleans up the current FIRApp, freeing associated data and returning its name to the pool for
- * future use. This method is thread safe in class level.
+ * future use. This method is thread safe.
  */
 - (void)deleteApp:(FIRAppVoidBoolCallback)completion;
 
 /**
- * FIRFirebaseApp instances should not be initialized directly. Call |FIRApp configure|, or
- * |FIRApp configureWithOptions:|, or |FIRApp configureWithNames:options| directly.
+ * FIRApp instances should not be initialized directly. Call +[FIRApp configure],
+ * +[FIRApp configureWithOptions:], or +[FIRApp configureWithNames:options:] directly.
  */
 - (instancetype)init NS_UNAVAILABLE;
 

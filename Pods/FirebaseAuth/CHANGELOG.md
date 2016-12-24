@@ -1,3 +1,11 @@
+# 2016-12-13 -- v3.1.0
+- Adds FIRAuth methods that enable the app to follow up with user actions
+  delivered by email, such as verifying email address or reset password.
+- No longer applies the keychain workaround introduced in v3.0.5 on iOS 10.2
+  simulator or above since the issue has been fixed.
+- Fixes nullability compilation warnings when used in Swift.
+- Better reports missing password error.
+
 # 2016-10-24 -- v3.0.6
 - Switches to depend on open sourced GoogleToolboxForMac and GTMSessionFetcher.
 - Improves logging of keychain error when initializing.

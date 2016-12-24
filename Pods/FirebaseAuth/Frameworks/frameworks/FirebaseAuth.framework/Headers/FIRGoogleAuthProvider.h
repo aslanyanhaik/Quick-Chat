@@ -23,9 +23,10 @@ extern NSString *const FIRGoogleAuthProviderID;
 
 /** @fn credentialWithIDToken:accessToken:
     @brief Creates an @c FIRAuthCredential for a Google sign in.
+
     @param IDToken The ID Token from Google.
     @param accessToken The Access Token from Google.
-    @return A @c FIRAuthCredential containing the Google credentials.
+    @return A FIRAuthCredential containing the Google credentials.
  */
 + (FIRAuthCredential *)credentialWithIDToken:(NSString *)IDToken
                                  accessToken:(NSString *)accessToken;
@@ -33,7 +34,7 @@ extern NSString *const FIRGoogleAuthProviderID;
 /** @fn init
     @brief This class should not be initialized.
  */
-- (nullable instancetype)init NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 

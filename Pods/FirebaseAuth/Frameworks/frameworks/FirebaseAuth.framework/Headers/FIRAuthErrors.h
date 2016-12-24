@@ -9,32 +9,21 @@
 
 /** @class FIRAuthErrors
     @remarks Error Codes common to all API Methods:
-        - FIRAuthErrorCodeNetworkError - Indicates a network error occurred during the operation.
-        - FIRAuthErrorCodeUserNotFound - Indicates the user account was not found. This could happen
-            if the user account has been deleted.
-        - FIRAuthErrorCodeUserTokenExpired - Indicates the current user’s token has expired, for
-            example, the user may have changed account password on another device. You must prompt
-            the user to sign in again on this device.
-        - FIRAuthErrorCodeTooManyRequests - Indicates that the request has been blocked after an
-            abnormal number of requests have been made from the caller device to the Firebase Auth
-            servers. Retry again after some time.
-        - FIRAuthErrorCodeInvalidAPIKey - Indicates the application has been configured with an
-            invalid API key.
-        - FIRAuthErrorCodeAppNotAuthorized - Indicates the App is not authorized to use Firebase
-            Authentication with the provided API Key. Go to the Google API Console and check under
-            the credentials tab that the API key you are using has your application’s bundle ID
-            whitelisted.
-        - FIRAuthErrorCodeKeychainError - Indicates an error occurred while accessing the keychain.
-            The NSLocalizedFailureReasonErrorKey and NSUnderlyingErrorKey fields in the
-            NSError.userInfo dictionary will contain more information about the error encountered.
-        - FIRAuthErrorCodeInternalError - Indicates an internal error occurred. Please report the
-            error back to us with the entire NSError object.
-    @remarks Common error codes for FIRUser operations:
-        - FIRAuthErrorCodeInvalidUserToken - Indicates that the signed-in user's refresh token,
-            that holds session information, is invalid. You must prompt the user to sign in again
-            on this device.
-        - FIRAuthErrorCodeUserDisabled - Indicates the user's account is disabled and can no longer
-            be used until enabled again from within the Users panel in the Firebase console.
+    <ul>
+        <li>@c FIRAuthErrorCodeNetworkError</li>
+        <li>@c FIRAuthErrorCodeUserNotFound</li>
+        <li>@c FIRAuthErrorCodeUserTokenExpired</li>
+        <li>@c FIRAuthErrorCodeTooManyRequests</li>
+        <li>@c FIRAuthErrorCodeInvalidAPIKey</li>
+        <li>@c FIRAuthErrorCodeAppNotAuthorized</li>
+        <li>@c FIRAuthErrorCodeKeychainError</li>
+        <li>@c FIRAuthErrorCodeInternalError</li>
+    </ul>
+    @remarks Common error codes for @c FIRUser operations:
+    <ul>
+        <li>@c FIRAuthErrorCodeInvalidUserToken</li>
+        <li>@c FIRAuthErrorCodeUserDisabled</li>
+    </ul>
  */
 @interface FIRAuthErrors
 
@@ -153,6 +142,14 @@ typedef NS_ENUM(NSInteger, FIRAuthErrorCode) {
         provided API Key.
      */
     FIRAuthErrorCodeAppNotAuthorized = 17028,
+
+    /** Indicates the OOB code is expired.
+     */
+    FIRAuthErrorCodeExpiredActionCode = 17029,
+
+    /** Indicates the OOB code is invalid.
+     */
+    FIRAuthErrorCodeInvalidActionCode = 17030,
 
     /** Indicates an error occurred while attempting to access the keychain.
      */

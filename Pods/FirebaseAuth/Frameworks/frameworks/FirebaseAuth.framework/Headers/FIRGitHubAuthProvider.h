@@ -23,15 +23,16 @@ extern NSString *const FIRGitHubAuthProviderID;
 
 /** @fn credentialWithToken:
     @brief Creates an @c FIRAuthCredential for a GitHub sign in.
+
     @param token The GitHub OAuth access token.
-    @return A @c FIRAuthCredential containing the GitHub credential.
+    @return A FIRAuthCredential containing the GitHub credential.
  */
 + (FIRAuthCredential *)credentialWithToken:(NSString *)token;
 
 /** @fn init
     @brief This class is not meant to be initialized.
  */
-- (nullable instancetype)init NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
