@@ -20,9 +20,11 @@ class ConversationsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         let button  = UIBarButtonItem.init(image: image, style: .plain, target: self, action: #selector(ConversationsVC.showProfile))
         return button
     }()
+    var name = ""
         
     //MARK: Methods
     func customization()  {
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
         //NavigationBar customization
         let navigationTitleFont = UIFont(name: "AvenirNext-Regular", size: 18)!
         self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: navigationTitleFont, NSForegroundColorAttributeName: UIColor.white]
@@ -76,9 +78,15 @@ class ConversationsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     func pushToUserMesssages(notification: NSNotification) {
         if let name = notification.userInfo?["username"] as? String {
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "Chat") as! ChatVC
-            vc.userName = name
-            self.show(vc, sender: self)
+            self.name = name
+            self.performSegue(withIdentifier: "segue", sender: self)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "segue" {
+            let vc = segue.destination as! ChatVC
+            vc.userName = self.name
         }
     }
 
@@ -132,9 +140,8 @@ class ConversationsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if self.items.count > 0 {
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "Chat") as! ChatVC
-            vc.userName = "from conversation"
-            self.show(vc, sender: self)
+            self.name = "from conversation"
+            self.performSegue(withIdentifier: "segue", sender: self)
         }
     }
        

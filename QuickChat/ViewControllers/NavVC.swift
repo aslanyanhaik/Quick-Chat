@@ -110,7 +110,9 @@ class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewD
             UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
                 self.view.layoutIfNeeded()
                 self.darkView.alpha = 0.8
-                self.view.transform = transform
+                if (type == .contacts || type == .profile) {
+                    self.view.transform = transform
+                }
             })
             switch type {
             case .contacts:
@@ -127,6 +129,16 @@ class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewD
                 self.previewImageView.image = notification.userInfo?["pic"] as? UIImage
             }
         }
+    }
+    
+    func zoomRectForScale(scale: CGFloat, center: CGPoint) -> CGRect {
+        var zoomRect = CGRect.zero
+        zoomRect.size.height = self.previewImageView.frame.size.height / scale
+        zoomRect.size.width  = self.previewImageView.frame.size.width  / scale
+        let newCenter = self.previewImageView.convert(center, from: self.scrollView)
+        zoomRect.origin.x = newCenter.x - (zoomRect.size.width / 2.0)
+        zoomRect.origin.y = newCenter.y - (zoomRect.size.height / 2.0)
+        return zoomRect
     }
     
     func fetchUsers()  {
@@ -160,6 +172,14 @@ class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewD
         }
     }
     
+    @IBAction func doubleTapGesture(_ sender: UITapGestureRecognizer) {
+        if self.scrollView.zoomScale == 1 {
+            self.scrollView.zoom(to: zoomRectForScale(scale: self.scrollView.maximumZoomScale, center: sender.location(in: sender.view)), animated: true)
+        } else {
+            self.scrollView.setZoomScale(1, animated: true)
+        }
+    }
+    
     @IBAction func closeView(_ sender: Any) {
         self.dismissExtraViews()
     }
@@ -169,9 +189,7 @@ class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewD
             do {
                 try FIRAuth.auth()?.signOut()
                 UserDefaults.standard.removeObject(forKey: "userInformation")
-                let vc = self.storyboard?.instantiateViewController(withIdentifier: "Welcome") as! WelcomeVC
-                self.present(vc, animated: true, completion: {
-                })
+                self.dismiss(animated: true, completion: nil)
             } catch _ {
                 print("something went wrong")
             }
@@ -245,7 +263,7 @@ class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewD
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         self.view.transform = CGAffineTransform.identity
-    }
+    }    
 }
 
 class ContactsCVCell: UICollectionViewCell {

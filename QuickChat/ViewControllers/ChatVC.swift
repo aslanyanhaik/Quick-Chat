@@ -8,6 +8,7 @@
 
 import UIKit
 import Photos
+import AudioToolbox
 
 class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate,  UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
@@ -39,8 +40,8 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
         self.navigationItem.title = self.userName
         self.navigationItem.setHidesBackButton(true, animated: false)
         let icon = UIImage.init(named: "back")?.withRenderingMode(.alwaysOriginal)
-        let rightButton = UIBarButtonItem.init(image: icon!, style: .plain, target: self, action: #selector(ChatVC.dismissSelf))
-        self.navigationItem.leftBarButtonItem = rightButton
+        let backButton = UIBarButtonItem.init(image: icon!, style: .plain, target: self, action: #selector(self.dismissSelf))
+        self.navigationItem.leftBarButtonItem = backButton
     }
     
     func fetchData()  {
@@ -56,28 +57,19 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
         self.tableView.scrollToRow(at: IndexPath.init(row: self.items.count - 1, section: 0), at: .bottom, animated: true)
     }
     
-    func openPhotoPickerWith(source: PhotoSource) {
-        switch source {
-        case .camera:
-            let status = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
-            if (status == .authorized || status == .notDetermined) {
-                self.imagePicker.sourceType = .camera;
-                self.imagePicker.allowsEditing = true
-                self.present(self.imagePicker, animated: true, completion: nil)
-            }
-        case .library:
-            let status = PHPhotoLibrary.authorizationStatus()
-            if (status == .authorized || status == .notDetermined) {
-                self.imagePicker.sourceType = .savedPhotosAlbum;
-                self.present(self.imagePicker, animated: true, completion: nil)
-            }
-        }
-    }
-    
     func dismissSelf() {
         if let navController = self.navigationController {
             navController.popViewController(animated: true)
         }
+    }
+    
+    func playSound()  {
+        var soundURL: NSURL?
+        var soundID:SystemSoundID = 0
+        let filePath = Bundle.main.path(forResource: "sentMessage", ofType: "wav")
+        soundURL = NSURL(fileURLWithPath: filePath!)
+        AudioServicesCreateSystemSoundID(soundURL!, &soundID)
+        AudioServicesPlaySystemSound(soundID)
     }
     
     @IBAction func sendMessage(_ sender: Any) {
@@ -89,27 +81,19 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
                 self.tableView.insertRows(at: [IndexPath.init(row: self.items.count - 1, section: 0)], with: .none)
                 let bottomOffset = CGPoint(x: 0, y: self.tableView.contentSize.height - self.tableView.bounds.size.height + self.tableView.contentInset.bottom)
                 self.tableView.setContentOffset(bottomOffset, animated: true)
+                self.playSound()
                 // self.tableView.scrollToRow(at: IndexPath.init(row: self.items.count - 1, section: 0), at: .bottom, animated: true)
             }
         }
     }
     
     @IBAction func selectPic(_ sender: Any) {
-        self.inputTextField.resignFirstResponder()
-        let sheet = UIAlertController(title: nil, message: "Select the source", preferredStyle: .actionSheet)
-        let cameraAction = UIAlertAction(title: "Camera", style: .default, handler: {
-            (alert: UIAlertAction!) -> Void in
-            self.openPhotoPickerWith(source: .camera)
-        })
-        let photoAction = UIAlertAction(title: "Gallery", style: .default, handler: {
-            (alert: UIAlertAction!) -> Void in
-            self.openPhotoPickerWith(source: .library)
-        })
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        sheet.addAction(cameraAction)
-        sheet.addAction(photoAction)
-        sheet.addAction(cancelAction)
-        self.present(sheet, animated: true, completion: nil)
+        //self.inputTextField.resignFirstResponder()
+        let status = PHPhotoLibrary.authorizationStatus()
+        if (status == .authorized || status == .notDetermined) {
+            self.imagePicker.sourceType = .savedPhotosAlbum;
+            self.present(self.imagePicker, animated: true, completion: nil)
+        }
     }
     
     //MARK: NotificationCenter handlers
@@ -163,7 +147,13 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
         }
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.inputTextField.resignFirstResponder()
         if self.items[indexPath.row].type == .photo {
             let info = ["viewType" : ShowExtraView.preview, "pic": self.items[indexPath.row].content]
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showExtraView"), object: nil, userInfo: info)
@@ -181,6 +171,7 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
                 let item = Message.init(type: .photo, content: pickedImage, timestamp: 20, owner: .receiver)
                 self.items.append(item)
             self.tableView.insertRows(at: [IndexPath.init(row: self.items.count - 1, section: 0)], with: .automatic)
+           self.playSound()
         }
         picker.dismiss(animated: true, completion: {
             self.tableView.scrollToRow(at: IndexPath.init(row: self.items.count - 1, section: 0), at: .bottom, animated: true)

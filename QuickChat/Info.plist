@@ -23,9 +23,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>send photos</string>
+	<string>Image will be used for setting profile picture or sending to friend</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>send photos</string>
+	<string>Image will be used for setting profile picture or sending to friend</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
