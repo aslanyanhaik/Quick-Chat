@@ -2,7 +2,7 @@
 //  ChatVC.swift
 //  QuickChat
 //
-//  Created by Haik Aslanyan on 10/28/16.
+//  Created by Haik Aslanyan on 12/18/16.
 //  Copyright © 2016 Mexonis. All rights reserved.
 //
 

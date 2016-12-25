@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  QuickChat
 //
-//  Created by Haik Aslanyan on 8/9/16.
+//  Created by Haik Aslanyan on 12/18/16.
 //  Copyright © 2016 Mexonis. All rights reserved.
 //
 

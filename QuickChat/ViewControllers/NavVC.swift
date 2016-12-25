@@ -2,7 +2,7 @@
 //  NavVC.swift
 //  QuickChat
 //
-//  Created by Haik Aslanyan on 11/27/16.
+//  Created by Haik Aslanyan on 12/18/16.
 //  Copyright © 2016 Mexonis. All rights reserved.
 //
 
