@@ -80,7 +80,7 @@ class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewD
         self.previewView.trailingAnchor.constraint(equalTo: extraViewsContainer.trailingAnchor).isActive = true
         self.previewView.bottomAnchor.constraint(equalTo: extraViewsContainer.bottomAnchor).isActive = true
         self.scrollView.minimumZoomScale = 1.0
-        self.scrollView.maximumZoomScale = 5.0
+        self.scrollView.maximumZoomScale = 3.0
     //NotificationCenter for showing extra views
         NotificationCenter.default.addObserver(self, selector: #selector(self.showExtraViews(notification:)), name: NSNotification.Name(rawValue: "showExtraView"), object: nil)
     }
