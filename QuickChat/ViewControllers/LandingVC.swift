@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Firebase
+
 
 class LandingVC: UIViewController {
 
@@ -23,17 +23,20 @@ class LandingVC: UIViewController {
         }
     }
     
-    //MARK: Check is user is signed in or not
+    //MARK: Check if user is signed in or not
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if let userInformation = UserDefaults.standard.dictionary(forKey: "userInformation") {
             let email = userInformation["email"] as! String
             let password = userInformation["password"] as! String
-            FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user, error) in
-                if error == nil {
-                    self.pushTo(viewController: .conversations)
-                } else {
-                    self.pushTo(viewController: .welcome)
+            User.loginUser(withEmail: email, password: password, completion: { [weak weakSelf = self] (status) in
+                DispatchQueue.main.async {
+                    if status == true {
+                        weakSelf?.pushTo(viewController: .conversations)
+                    } else {
+                        weakSelf?.pushTo(viewController: .welcome)
+                    }
+                    weakSelf = nil
                 }
             })
         } else {

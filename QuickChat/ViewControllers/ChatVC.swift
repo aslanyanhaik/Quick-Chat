@@ -9,6 +9,7 @@
 import UIKit
 import Photos
 import AudioToolbox
+import Firebase
 
 class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate,  UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
@@ -25,44 +26,46 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
     override var canBecomeFirstResponder: Bool{
         return true
     }
-    var userName = ""
     var items = [Message]()
     let imagePicker = UIImagePickerController()
     let barHeight: CGFloat = 50
+    var currentUser: User?
 
     //MARK: Methods
     func customization() {
         self.imagePicker.delegate = self
-        self.tableView.estimatedRowHeight = 50
+        self.tableView.estimatedRowHeight = self.barHeight
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.contentInset.bottom = self.barHeight
         self.tableView.scrollIndicatorInsets.bottom = self.barHeight
-        self.navigationItem.title = self.userName
+        self.navigationItem.title = self.currentUser?.name
         self.navigationItem.setHidesBackButton(true, animated: false)
         let icon = UIImage.init(named: "back")?.withRenderingMode(.alwaysOriginal)
         let backButton = UIBarButtonItem.init(image: icon!, style: .plain, target: self, action: #selector(self.dismissSelf))
         self.navigationItem.leftBarButtonItem = backButton
     }
     
-    func fetchData()  {
-        for _ in 0...10 {
-            let item = Message.init(type: .text, content: "Hello there", timestamp: 20, owner: .sender)
-            self.items.append(item)
-        }
-        for _ in 0...10 {
-            let item = Message.init(type: .text, content: "Hello there", timestamp: 20, owner: .receiver)
-            self.items.append(item)
-        }
-        self.tableView.reloadData()
-        self.tableView.scrollToRow(at: IndexPath.init(row: self.items.count - 1, section: 0), at: .bottom, animated: true)
+    //Downloads messages
+    func fetchData() {
+        Message.downloadAllMessages(forUserID: self.currentUser!.id, completion: {(message) in
+            self.items.append(message)
+            DispatchQueue.main.async {
+                if self.items.count > 0 {
+                    self.tableView.reloadData()
+                    self.tableView.scrollToRow(at: IndexPath.init(row: self.items.count - 1, section: 0), at: .none, animated: true)
+                }
+            }
+        })
     }
     
+    //Hides current viewcontroller
     func dismissSelf() {
         if let navController = self.navigationController {
             navController.popViewController(animated: true)
         }
     }
     
+    //Plays sound
     func playSound()  {
         var soundURL: NSURL?
         var soundID:SystemSoundID = 0
@@ -75,14 +78,14 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
     @IBAction func sendMessage(_ sender: Any) {
         if let text = self.inputTextField.text {
             if text.characters.count > 0 {
-                let message = Message.init(type: .text, content: self.inputTextField.text!, timestamp: 20, owner: .sender)
-                self.inputTextField.text = nil
-                self.items.append(message)
-                self.tableView.insertRows(at: [IndexPath.init(row: self.items.count - 1, section: 0)], with: .none)
-                let bottomOffset = CGPoint(x: 0, y: self.tableView.contentSize.height - self.tableView.bounds.size.height + self.tableView.contentInset.bottom)
-                self.tableView.setContentOffset(bottomOffset, animated: true)
-                self.playSound()
-                // self.tableView.scrollToRow(at: IndexPath.init(row: self.items.count - 1, section: 0), at: .bottom, animated: true)
+                let message = Message.init(type: .text, content: text, owner: .sender)
+                Message.send(message: message, toID: self.currentUser!.id, completion: {[weak weakSelf = self] (status) in
+                    weakSelf?.inputTextField.text = ""
+                    if status == true {
+                        weakSelf?.playSound()
+                    }
+                    weakSelf = nil
+                })
             }
         }
     }
@@ -102,7 +105,9 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
             let height = frame.cgRectValue.height
             self.tableView.contentInset.bottom = height
             self.tableView.scrollIndicatorInsets.bottom = height
-            self.tableView.scrollToRow(at: IndexPath.init(row: self.items.count - 1, section: 0), at: .bottom, animated: true)
+            if self.items.count > 0 {
+                self.tableView.scrollToRow(at: IndexPath.init(row: self.items.count - 1, section: 0), at: .bottom, animated: true)
+            }
         }
     }
 
@@ -112,24 +117,27 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.transform = CGAffineTransform.init(scaleX: 0.5, y: 0.5)
-        UIView.animate(withDuration: 0.3, animations: {
-            cell.transform = CGAffineTransform.identity
-        })
+        if tableView.isDragging {
+            cell.transform = CGAffineTransform.init(scaleX: 0.5, y: 0.5)
+            UIView.animate(withDuration: 0.3, animations: {
+                cell.transform = CGAffineTransform.identity
+            })
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch self.items[indexPath.row].owner {
         case .receiver:
-           let cell = tableView.dequeueReusableCell(withIdentifier: "Receiver", for: indexPath) as! ReceiverCell
-           cell.clearCellData()
-           switch self.items[indexPath.row].type {
-           case .text:
-            cell.message.text = self.items[indexPath.row].content as! String
-           case .photo:
-            let photo  = self.items[indexPath.row].content as! UIImage
-            cell.messageBackground.image = photo
-            cell.message.isHidden = true
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Receiver", for: indexPath) as! ReceiverCell
+            cell.clearCellData()
+            switch self.items[indexPath.row].type {
+            case .text:
+                cell.message.text = self.items[indexPath.row].content as! String
+            case .photo:
+                let photo  = self.items[indexPath.row].content as! UIImage
+                cell.messageBackground.image = photo
+                cell.message.isHidden = true
+            default: break
             }
             return cell
         case .sender:
@@ -142,14 +150,10 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
                 let photo  = self.items[indexPath.row].content as! UIImage
                 cell.messageBackground.image = photo
                 cell.message.isHidden = true
+            default: break
             }
             return cell
         }
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -161,36 +165,28 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
         }
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
-            let item = Message.init(type: .photo, content: pickedImage, timestamp: 20, owner: .receiver)
-            self.items.append(item)
-            self.tableView.insertRows(at: [IndexPath.init(row: self.items.count - 1, section: 0)], with: .automatic)
+            //let item = Message.init(type: .photo, content: pickedImage, timestamp: 20, owner: .receiver)
+            
         } else {
             let pickedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-                let item = Message.init(type: .photo, content: pickedImage, timestamp: 20, owner: .receiver)
-                self.items.append(item)
-            self.tableView.insertRows(at: [IndexPath.init(row: self.items.count - 1, section: 0)], with: .automatic)
-           self.playSound()
+            //
         }
-        picker.dismiss(animated: true, completion: {
-            self.tableView.scrollToRow(at: IndexPath.init(row: self.items.count - 1, section: 0), at: .bottom, animated: true)
-        })
+        picker.dismiss(animated: true, completion: nil)
     }
 
     //MARK: ViewController lifecycle
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        if self.items.count > 0 {
-            self.tableView.scrollToRow(at: IndexPath.init(row: self.items.count - 1, section: 0), at: .bottom, animated: false)
-        }
-        NotificationCenter.default.addObserver(self, selector: #selector(ChatVC.showKeyboard(notification:)), name: Notification.Name.UIKeyboardWillShow, object: nil)
-        
-    }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.inputBar.backgroundColor = UIColor.clear
         self.view.layoutIfNeeded()
+        NotificationCenter.default.addObserver(self, selector: #selector(ChatVC.showKeyboard(notification:)), name: Notification.Name.UIKeyboardWillShow, object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {

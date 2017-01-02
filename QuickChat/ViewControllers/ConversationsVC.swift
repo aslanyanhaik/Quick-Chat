@@ -13,15 +13,14 @@ class ConversationsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     //MARK: Properties
     @IBOutlet weak var tableView: UITableView!
-    var items = [Conversation]()
-    var isTableEmpty: Bool!
     lazy var leftButton: UIBarButtonItem = {
         let image = UIImage.init(named: "default profile")?.withRenderingMode(.alwaysOriginal)
         let button  = UIBarButtonItem.init(image: image, style: .plain, target: self, action: #selector(ConversationsVC.showProfile))
         return button
     }()
-    var name = ""
-        
+    var items = [Conversation]()
+    var selectedUser: User?
+    
     //MARK: Methods
     func customization()  {
         self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
@@ -37,48 +36,49 @@ class ConversationsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         //left bar button image fetching
         self.navigationItem.leftBarButtonItem = self.leftButton
         self.tableView.tableFooterView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 0, height: 0))
-        if let id  = FIRAuth.auth()?.currentUser?.uid {
-            GlobalVariables.users.child(id).observe(.value, with: { (snapshot) in
-                let value = snapshot.value as! [String : String]
-                let image = UIImage.downloadImagewith(link: value["profilePicLink"]!)
-                    let contentSize = CGSize.init(width: 30, height: 30)
-                    UIGraphicsBeginImageContextWithOptions(contentSize, false, 0.0)
-                    let _  = UIBezierPath.init(roundedRect: CGRect.init(origin: CGPoint.init(x: 0, y: 0), size: contentSize), cornerRadius: 14).addClip()
-                    image.draw(in: CGRect(origin: CGPoint(x: 0, y :0), size: contentSize))
-                    let path = UIBezierPath.init(roundedRect: CGRect.init(origin: CGPoint.init(x: 0, y: 0), size: contentSize), cornerRadius: 14)
-                    path.lineWidth = 2
-                    UIColor.white.setStroke()
-                    path.stroke()
-                    let finalImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!.withRenderingMode(.alwaysOriginal)
-                    UIGraphicsEndImageContext()
-                    self.leftButton.image = finalImage
+        if let id = FIRAuth.auth()?.currentUser?.uid {
+            User.info(forUserID: id, completion: { [weak weakSelf = self] (user) in
+                let image = user.profilePic
+                let contentSize = CGSize.init(width: 30, height: 30)
+                UIGraphicsBeginImageContextWithOptions(contentSize, false, 0.0)
+                let _  = UIBezierPath.init(roundedRect: CGRect.init(origin: CGPoint.zero, size: contentSize), cornerRadius: 14).addClip()
+                image.draw(in: CGRect(origin: CGPoint.zero, size: contentSize))
+                let path = UIBezierPath.init(roundedRect: CGRect.init(origin: CGPoint.zero, size: contentSize), cornerRadius: 14)
+                path.lineWidth = 2
+                UIColor.white.setStroke()
+                path.stroke()
+                let finalImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!.withRenderingMode(.alwaysOriginal)
+                UIGraphicsEndImageContext()
+                DispatchQueue.main.async {
+                    weakSelf?.leftButton.image = finalImage
+                    weakSelf = nil
+                }
             })
         }
     }
     
+    //Downloads conversations
     func fetchData() {
-        let item = Conversation.init(profilePic: UIImage.init(named: "1")!, name: "Steve Jobs", lastMessage: "Hello there, how are you doing", time: Date.init(timeIntervalSinceNow: 10), isRead: true)
-        let item2 = Conversation.init(profilePic: UIImage.init(named: "2")!, name: "William Brown", lastMessage: "Wonderful day, how is it there?", time: Date.init(timeIntervalSinceNow: 15), isRead: false)
-        let item3 = Conversation.init(profilePic: UIImage.init(named: "3")!, name: "Conan", lastMessage: "random text", time: Date.init(timeIntervalSinceNow: 15), isRead: true)
-       self.items.append(item)
-       self.items.append(item2)
-       self.items.append(item3)
+        
     }
     
+    //Shows profile extra view
     func showProfile() {
         let info = ["viewType" : ShowExtraView.profile]
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showExtraView"), object: nil, userInfo: info)
         self.inputView?.isHidden = true
     }
     
+    //Shows contacts extra view
     func showContacts() {
         let info = ["viewType" : ShowExtraView.contacts]
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showExtraView"), object: nil, userInfo: info)
     }
     
+    //Shows Chat viewcontroller with given user
     func pushToUserMesssages(notification: NSNotification) {
-        if let name = notification.userInfo?["username"] as? String {
-            self.name = name
+        if let user = notification.userInfo?["user"] as? User {
+            self.selectedUser = user
             self.performSegue(withIdentifier: "segue", sender: self)
         }
     }
@@ -86,7 +86,7 @@ class ConversationsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segue" {
             let vc = segue.destination as! ChatVC
-            vc.userName = self.name
+            vc.currentUser = self.selectedUser
         }
     }
 
@@ -97,10 +97,8 @@ class ConversationsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.items.count == 0 {
-            self.isTableEmpty = true
             return 1
         } else {
-            self.isTableEmpty = false
             return self.items.count
         }
     }
@@ -114,8 +112,11 @@ class ConversationsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch self.isTableEmpty {
-        case false:
+        switch self.items.count {
+        case 0:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Empty Cell")!
+            return cell
+        default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ConversationsTBCell
             cell.profilePic.image = self.items[indexPath.row].profilePic
             cell.nameLabel.text = self.items[indexPath.row].name
@@ -132,15 +133,12 @@ class ConversationsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 cell.messageLabel.textColor = GlobalVariables.purple
             }
             return cell
-        default:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Empty Cell")!
-            return cell
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if self.items.count > 0 {
-            self.name = "from conversation"
+            self.selectedUser = self.items[indexPath.row].currentConversationUser()
             self.performSegue(withIdentifier: "segue", sender: self)
         }
     }

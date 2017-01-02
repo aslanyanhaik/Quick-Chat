@@ -83,8 +83,12 @@ class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewD
         self.scrollView.maximumZoomScale = 3.0
     //NotificationCenter for showing extra views
         NotificationCenter.default.addObserver(self, selector: #selector(self.showExtraViews(notification:)), name: NSNotification.Name(rawValue: "showExtraView"), object: nil)
+        self.fetchUsers()
+        self.fetchUserInfo()
+
     }
     
+    //Hide Extra views
     func dismissExtraViews() {
         UIApplication.shared.isStatusBarHidden = false
         self.topAnchorContraint.constant = 1000
@@ -102,6 +106,7 @@ class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewD
         })
     }
     
+    //Show extra view
     func showExtraViews(notification: NSNotification)  {
         let transform = CGAffineTransform.init(scaleX: 0.94, y: 0.94)
         self.topAnchorContraint.constant = 0
@@ -118,19 +123,19 @@ class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewD
             case .contacts:
                 self.contactsView.isHidden = false
                 if self.items.count == 0 {
-                    self.fetchUsers()
                 }
             case .profile:
                 self.profileView.isHidden = false
-                self.fetchUserInfo()
             case .preview:
                 self.previewView.isHidden = false
                 UIApplication.shared.isStatusBarHidden = true
                 self.previewImageView.image = notification.userInfo?["pic"] as? UIImage
+                self.scrollView.contentSize = self.previewImageView.frame.size
             }
         }
     }
     
+    //Preview view scrollview's zoom calculation
     func zoomRectForScale(scale: CGFloat, center: CGPoint) -> CGRect {
         var zoomRect = CGRect.zero
         zoomRect.size.height = self.previewImageView.frame.size.height / scale
@@ -141,37 +146,33 @@ class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewD
         return zoomRect
     }
     
+    //Downloads users list for Contacts View
     func fetchUsers()  {
-        GlobalVariables.users.observe(.childAdded, with: { (snapshot) in
-            let output = snapshot.value as! [String: String]
-            let name = output["name"]!
-            let email = output["email"]!
-            let profilePicLink = output["profilePicLink"]!
-            let link = URL.init(string: profilePicLink)
-            let data = try! Data.init(contentsOf: link!)
-            let profilePic = UIImage.init(data: data)!
-            let user = User.init(name: name, email: email, id: snapshot.key, profilePicLink: link!, profilePic: profilePic)
-            self.items.append(user)
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
-        })
-    }
-    
-    func fetchUserInfo() {
-        if let id  = FIRAuth.auth()?.currentUser?.uid {
-            FIRDatabase.database().reference().child("users").child(id).observe(.value, with: { (snapshot) in
-                let value = snapshot.value as! [String : String]
-                self.nameLabel.text = value["email"]
-                self.emailLabel.text = value["name"]
-                let profilePicURL = URL.init(string: value["profilePicLink"]!)
-                let imageData = try! Data.init(contentsOf: profilePicURL!)
-                let profilePic = UIImage.init(data: imageData)
-                self.profilePicView.image = profilePic
+        if let id = FIRAuth.auth()?.currentUser?.uid {
+            User.downloadAllUsers(exceptID: id, completion: {(user) in
+                DispatchQueue.main.async {
+                    self.items.append(user)
+                    self.collectionView.reloadData()
+                }
             })
         }
     }
     
+    //Downloads current user credentials
+    func fetchUserInfo() {
+        if let id = FIRAuth.auth()?.currentUser?.uid {
+            User.info(forUserID: id, completion: {[weak weakSelf = self] (user) in
+                DispatchQueue.main.async {
+                    weakSelf?.nameLabel.text = user.name
+                    weakSelf?.emailLabel.text = user.email
+                    weakSelf?.profilePicView.image = user.profilePic
+                    weakSelf = nil
+                }
+            })
+        }
+    }
+    
+    //Extra gesture to allow user double tap for zooming of preview view scrollview
     @IBAction func doubleTapGesture(_ sender: UITapGestureRecognizer) {
         if self.scrollView.zoomScale == 1 {
             self.scrollView.zoom(to: zoomRectForScale(scale: self.scrollView.maximumZoomScale, center: sender.location(in: sender.view)), animated: true)
@@ -185,13 +186,9 @@ class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewD
     }
   
     @IBAction func logOutUser(_ sender: Any) {
-        if let _ = FIRAuth.auth()?.currentUser?.uid {
-            do {
-                try FIRAuth.auth()?.signOut()
-                UserDefaults.standard.removeObject(forKey: "userInformation")
+        User.logOutUser { (status) in
+            if status == true {
                 self.dismiss(animated: true, completion: nil)
-            } catch _ {
-                print("something went wrong")
             }
         }
     }
@@ -222,7 +219,7 @@ class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if self.items.count > 0 {
             self.dismissExtraViews()
-            let userInfo = ["username": String(indexPath.row)]
+            let userInfo = ["user": self.items[indexPath.row]]
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showUserMessages"), object: nil, userInfo: userInfo)
         }
     }
@@ -251,6 +248,7 @@ class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewD
         }
     }
     
+    //Preview view scrollview zooming
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return self.previewImageView
     }

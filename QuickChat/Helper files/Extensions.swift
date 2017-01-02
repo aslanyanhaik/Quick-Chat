@@ -17,11 +17,16 @@ extension UIColor{
 }
 
 extension UIImage {
-    class func downloadImagewith(link: String) -> UIImage {
+    class func downloadImagewith(link: String) -> UIImage? {
         let downloadLink = URL.init(string: link)
-        let data = try! Data.init(contentsOf: downloadLink!)
-        let image = UIImage.init(data: data)
-        return image!
+        var image: UIImage?
+        do {
+            let data = try Data.init(contentsOf: downloadLink!)
+            image = UIImage.init(data: data)
+        } catch _ {
+            print("error dowloading image")
+        }
+        return image
     }
 }
 

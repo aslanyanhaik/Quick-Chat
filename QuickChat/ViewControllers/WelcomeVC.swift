@@ -8,7 +8,6 @@
 
 import UIKit
 import Photos
-import Firebase
 
 class WelcomeVC: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
@@ -112,38 +111,32 @@ class WelcomeVC: UIViewController, UITextFieldDelegate, UINavigationControllerDe
     }
     
     @IBAction func register(_ sender: Any) {
-        FIRAuth.auth()?.createUser(withEmail: self.registerEmailField.text!, password: self.registerPasswordField.text!, completion: { (user: FIRUser?, error) in
-            if error == nil {
-                let storageRef = GlobalVariables.storageUsers.child(user!.uid)
-                let data  = UIImageJPEGRepresentation(self.profilePicView.image!, 0.5)
-                storageRef.put(data!, metadata: nil, completion: { (metadata, storageError) in
-                    let path  = metadata?.downloadURL()?.absoluteString
-                    let values = ["name" : self.registerEmailField.text!, "email" : self.registerPasswordField.text!, "profilePicLink" : path!]
-                    GlobalVariables.users.child((user?.uid)!).updateChildValues(values)
-                    let userInfo = ["email" : self.registerEmailField.text!, "password" : self.registerPasswordField.text!]
-                    UserDefaults.standard.set(userInfo, forKey: "userInformation")
-                    self.pushTomainView()
-                })
-            } else {
-                for item in self.waringLabels {
-                    item.isHidden = false
+        User.registerUser(withName: self.registerNameField.text!, email: self.registerEmailField.text!, password: self.registerPasswordField.text!, profilePic: self.profilePicView.image!) { [weak weakSelf = self] (status) in
+            DispatchQueue.main.async {
+                if status == true {
+                    weakSelf?.pushTomainView()
+                } else {
+                    for item in (weakSelf?.waringLabels)! {
+                        item.isHidden = false
+                    }
                 }
             }
-        })
+        }
     }
     
     @IBAction func login(_ sender: Any) {
-        FIRAuth.auth()?.signIn(withEmail: self.loginEmailField.text!, password: self.loginPasswordField.text!, completion: { (user, error) in
-            if error == nil {
-                let userInfo = ["email" : self.loginEmailField.text!, "password" : self.loginPasswordField.text!]
-                UserDefaults.standard.set(userInfo, forKey: "userInformation")
-                self.pushTomainView()
-            } else {
-                for item in self.waringLabels {
-                    item.isHidden = false
+        User.loginUser(withEmail: self.loginEmailField.text!, password: self.loginPasswordField.text!) { [weak weakSelf = self](status) in
+            DispatchQueue.main.async {
+                if status == true {
+                    weakSelf?.pushTomainView()
+                } else {
+                    for item in (weakSelf?.waringLabels)! {
+                        item.isHidden = false
+                    }
                 }
+                weakSelf = nil
             }
-        })
+        }
     }
     
     @IBAction func selectPic(_ sender: Any) {
