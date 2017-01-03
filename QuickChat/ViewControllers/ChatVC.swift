@@ -8,7 +8,6 @@
 
 import UIKit
 import Photos
-import AudioToolbox
 import Firebase
 
 class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate,  UINavigationControllerDelegate, UIImagePickerControllerDelegate {
@@ -47,16 +46,17 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
     
     //Downloads messages
     func fetchData() {
-        Message.downloadAllMessages(forUserID: self.currentUser!.id, completion: {(message) in
-            self.items.append(message)
-            self.items.sort{ $0.timestamp < $1.timestamp }
+        Message.downloadAllMessages(forUserID: self.currentUser!.id, completion: {[weak weakSelf = self] (message) in
+            weakSelf?.items.append(message)
+            weakSelf?.items.sort{ $0.timestamp < $1.timestamp }
             DispatchQueue.main.async {
-                if self.items.count > 0 {
-                    self.tableView.reloadData()
-                    self.tableView.scrollToRow(at: IndexPath.init(row: self.items.count - 1, section: 0), at: .bottom, animated: false)
+                if let state = weakSelf?.items.isEmpty, state == false {
+                    weakSelf?.tableView.reloadData()
+                    weakSelf?.tableView.scrollToRow(at: IndexPath.init(row: self.items.count - 1, section: 0), at: .bottom, animated: false)
                 }
             }
         })
+        Message.markMessagesRead(forUserID: self.currentUser!.id)
     }
     
     //Hides current viewcontroller
@@ -66,27 +66,13 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
         }
     }
     
-    //Plays sound
-    func playSound()  {
-        var soundURL: NSURL?
-        var soundID:SystemSoundID = 0
-        let filePath = Bundle.main.path(forResource: "sentMessage", ofType: "wav")
-        soundURL = NSURL(fileURLWithPath: filePath!)
-        AudioServicesCreateSystemSoundID(soundURL!, &soundID)
-        AudioServicesPlaySystemSound(soundID)
-    }
-    
     @IBAction func sendMessage(_ sender: Any) {
         if let text = self.inputTextField.text {
             if text.characters.count > 0 {
-                let message = Message.init(type: .text, content: text, owner: .sender, timestamp: Int(Date().timeIntervalSince1970))
-                Message.send(message: message, toID: self.currentUser!.id, completion: {[weak weakSelf = self] (status) in
-                    weakSelf?.inputTextField.text = ""
-                    if status == true {
-                        weakSelf?.playSound()
-                    }
-                    weakSelf = nil
+                let message = Message.init(type: .text, content: text, owner: .sender, timestamp: Int(Date().timeIntervalSince1970), isRead: false)
+                Message.send(message: message, toID: self.currentUser!.id, completion: {(_) in
                 })
+                self.inputTextField.text = ""
             }
         }
     }
@@ -194,6 +180,7 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self)
+        Message.markMessagesRead(forUserID: self.currentUser!.id)
     }
     
     override func viewDidLoad() {

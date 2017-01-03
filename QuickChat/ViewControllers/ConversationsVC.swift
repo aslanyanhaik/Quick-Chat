@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import AudioToolbox
 
 class ConversationsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -37,7 +38,7 @@ class ConversationsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         self.navigationItem.rightBarButtonItem = rightButton
         //left bar button image fetching
         self.navigationItem.leftBarButtonItem = self.leftButton
-        self.tableView.tableFooterView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 0, height: 0))
+        self.tableView.tableFooterView = UIView.init(frame: CGRect.zero)
         if let id = FIRAuth.auth()?.currentUser?.uid {
             User.info(forUserID: id, completion: { [weak weakSelf = self] (user) in
                 let image = user.profilePic
@@ -61,7 +62,19 @@ class ConversationsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     //Downloads conversations
     func fetchData() {
-        
+        Conversation.showConversations { (conversations) in
+            self.items = conversations
+            self.items.sort{ $0.lastMessage.timestamp > $1.lastMessage.timestamp }
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+                for conversation in self.items {
+                    if conversation.lastMessage.isRead == false {
+                        self.playSound()
+                        break
+                    }
+                }
+            }
+        }
     }
     
     //Shows profile extra view
@@ -83,6 +96,7 @@ class ConversationsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             status == true ? (weakSelf?.alertBottomConstraint.constant = -40) : (weakSelf?.alertBottomConstraint.constant = 0)
             UIView.animate(withDuration: 0.3) {
                 weakSelf?.view.layoutIfNeeded()
+                weakSelf = nil
             }
         }
     }
@@ -94,6 +108,16 @@ class ConversationsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             self.performSegue(withIdentifier: "segue", sender: self)
         }
     }
+    
+    func playSound()  {
+        var soundURL: NSURL?
+        var soundID:SystemSoundID = 0
+        let filePath = Bundle.main.path(forResource: "newMessage", ofType: "wav")
+        soundURL = NSURL(fileURLWithPath: filePath!)
+        AudioServicesCreateSystemSoundID(soundURL!, &soundID)
+        AudioServicesPlaySystemSound(soundID)
+    }
+
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segue" {
@@ -130,14 +154,24 @@ class ConversationsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ConversationsTBCell
-            cell.profilePic.image = self.items[indexPath.row].profilePic
-            cell.nameLabel.text = self.items[indexPath.row].name
-            cell.messageLabel.text = self.items[indexPath.row].lastMessage
+            cell.clearCellData()
+            cell.profilePic.image = self.items[indexPath.row].user.profilePic
+            cell.nameLabel.text = self.items[indexPath.row].user.name
+            switch self.items[indexPath.row].lastMessage.type {
+            case .text:
+                let message = self.items[indexPath.row].lastMessage.content as! String
+                cell.messageLabel.text = message
+            case .location:
+                cell.messageLabel.text = "Location"
+            default:
+                cell.messageLabel.text = "Media"
+            }
+            let messageDate = Date.init(timeIntervalSince1970: TimeInterval(self.items[indexPath.row].lastMessage.timestamp))
             let dataformatter = DateFormatter.init()
             dataformatter.timeStyle = .short
-            let date = dataformatter.string(from: self.items[indexPath.row].time)
+            let date = dataformatter.string(from: messageDate)
             cell.timeLabel.text = date
-            if self.items[indexPath.row].isRead == false {
+            if self.items[indexPath.row].lastMessage.owner == .sender && self.items[indexPath.row].lastMessage.isRead == false {
                 cell.nameLabel.font = UIFont(name:"AvenirNext-DemiBold", size: 17.0)
                 cell.messageLabel.font = UIFont(name:"AvenirNext-DemiBold", size: 14.0)
                 cell.timeLabel.font = UIFont(name:"AvenirNext-DemiBold", size: 13.0)
@@ -150,7 +184,7 @@ class ConversationsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if self.items.count > 0 {
-            self.selectedUser = self.items[indexPath.row].currentConversationUser()
+            self.selectedUser = self.items[indexPath.row].user
             self.performSegue(withIdentifier: "segue", sender: self)
         }
     }
@@ -166,6 +200,13 @@ class ConversationsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         super.viewDidAppear(animated)
         self.showEmailAlert()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let selectionIndexPath = self.tableView.indexPathForSelectedRow {
+            self.tableView.deselectRow(at: selectionIndexPath, animated: animated)
+        }
+    }
 }
 
 class ConversationsTBCell: UITableViewCell {
@@ -174,6 +215,14 @@ class ConversationsTBCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
+    
+    func clearCellData()  {
+        self.nameLabel.font = UIFont(name:"AvenirNext-Regular", size: 17.0)
+        self.messageLabel.font = UIFont(name:"AvenirNext-Regular", size: 14.0)
+        self.timeLabel.font = UIFont(name:"AvenirNext-Regular", size: 13.0)
+        self.profilePic.layer.borderColor = GlobalVariables.purple.cgColor
+        self.messageLabel.textColor = UIColor.rbg(r: 111, g: 113, b: 121)
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

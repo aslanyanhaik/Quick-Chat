@@ -14,9 +14,10 @@ class Message {
     
     //MARK: Properties
     var owner: MessageOwner
-    let type: MessageType
-    let content: Any
-    let timestamp: Int
+    var type: MessageType
+    var content: Any
+    var timestamp: Int
+    var isRead: Bool
     private var toID: String?
     private var fromID: String?
     
@@ -34,13 +35,13 @@ class Message {
                             switch type {
                             case "text":
                                 let content = receivedMessage["content"] as! String
-                                let fromID = receivedMessage["toID"] as! String
+                                let fromID = receivedMessage["fromID"] as! String
                                 let timestamp = receivedMessage["timestamp"] as! Int
                                 if fromID == currentUserID {
-                                    let message = Message.init(type: .text, content: content, owner: .sender, timestamp: timestamp)
+                                    let message = Message.init(type: .text, content: content, owner: .receiver, timestamp: timestamp, isRead: true)
                                     completion(message)
                                 } else {
-                                    let message = Message.init(type: .text, content: content, owner: .receiver, timestamp: timestamp)
+                                    let message = Message.init(type: .text, content: content, owner: .sender, timestamp: timestamp, isRead: true)
                                     completion(message)
                                 }
                             default: break
@@ -51,19 +52,77 @@ class Message {
             })
         }
     }
+    
+    class func markMessagesRead(forUserID: String)  {
+        if let currentUserID = FIRAuth.auth()?.currentUser?.uid {
+            FIRDatabase.database().reference().child("users").child(currentUserID).child("conversations").child(forUserID).observeSingleEvent(of: .value, with: { (snapshot) in
+                if snapshot.exists() {
+                    let data = snapshot.value as! [String: String]
+                    let location = data["location"]!
+                    FIRDatabase.database().reference().child("conversations").child(location).observeSingleEvent(of: .value, with: { (snap) in
+                        if snap.exists() {
+                            for item in snap.children {
+                                let receivedMessage = (item as! FIRDataSnapshot).value as! [String: Any]
+                                let fromID = receivedMessage["fromID"] as! String
+                                if fromID != currentUserID {
+                                    FIRDatabase.database().reference().child("conversations").child(location).child((item as! FIRDataSnapshot).key).child("isRead").setValue(true)
+                                }
+                            }
+                        }
+                    })
+                }
+            })
+        }
+    }
+   
+    func downloadLastMessage(forLocation: String, completion: @escaping (Void) -> Swift.Void) {
+        if let currentUserID = FIRAuth.auth()?.currentUser?.uid {
+            FIRDatabase.database().reference().child("conversations").child(forLocation).observe(.value, with: { (snapshot) in
+                if snapshot.exists() {
+                    for snap in snapshot.children {
+                        let receivedMessage = (snap as! FIRDataSnapshot).value as! [String: Any]
+                        self.content = receivedMessage["content"]!
+                        self.timestamp = receivedMessage["timestamp"] as! Int
+                        let messageType = receivedMessage["type"] as! String
+                        let fromID = receivedMessage["fromID"] as! String
+                        self.isRead = receivedMessage["isRead"] as! Bool
+                        var type = MessageType.text
+                        switch messageType {
+                        case "text":
+                            type = .text
+                        case "photo":
+                            type = .photo
+                        case "location":
+                            type = .location
+                        case "video":
+                            type = .video
+                        default: break
+                        }
+                        self.type = type
+                        if currentUserID == fromID {
+                            self.owner = .receiver
+                        } else {
+                            self.owner = .sender
+                        }
+                        completion()
+                    }
+                }
+            })
+        }
+    }
 
     class func send(message: Message, toID: String, completion: @escaping (Bool) -> Swift.Void)  {
         if let currentUserID = FIRAuth.auth()?.currentUser?.uid {
             var values = [String: Any]()
             switch message.type {
             case .text:
-                values = ["type": "text", "content": message.content, "fromID": currentUserID, "toID": toID, "timestamp": message.timestamp]
+                values = ["type": "text", "content": message.content, "fromID": currentUserID, "toID": toID, "timestamp": message.timestamp, "isRead": false]
             case .photo:
-                print("missing implementation")
+                values = ["type": "photo", "content": message.content, "fromID": currentUserID, "toID": toID, "timestamp": message.timestamp, "isRead": false]
             case .location:
-                values = ["type": "location", "content": message.content, "fromID": currentUserID, "toID": toID, "timestamp": message.timestamp]
+                values = ["type": "location", "content": message.content, "fromID": currentUserID, "toID": toID, "timestamp": message.timestamp, "isRead": false]
             case .video:
-                print("missing implementation")
+                values = ["type": "video", "content": message.content, "fromID": currentUserID, "toID": toID, "timestamp": message.timestamp, "isRead": false]
             }
            FIRDatabase.database().reference().child("users").child(currentUserID).child("conversations").child(toID).observeSingleEvent(of: .value, with: { (snapshot) in
                 if snapshot.exists() {
@@ -89,11 +148,12 @@ class Message {
     }
     
     //MARK: Inits
-    init(type: MessageType, content: Any, owner: MessageOwner, timestamp: Int) {
+    init(type: MessageType, content: Any, owner: MessageOwner, timestamp: Int, isRead: Bool) {
         self.type = type
         self.content = content
         self.owner = owner
         self.timestamp = timestamp
+        self.isRead = isRead
     }
 }
 

@@ -22,7 +22,6 @@
 		22A92BB81D59EBD6005D76F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22A92BB71D59EBD6005D76F7 /* Assets.xcassets */; };
 		22AE96381D89727D00B4ED38 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 22AE96371D89727C00B4ED38 /* GoogleService-Info.plist */; };
 		22B284AE1E0BBAF700778900 /* newMessage.wav in Resources */ = {isa = PBXBuildFile; fileRef = 22B284AC1E0BBAF700778900 /* newMessage.wav */; };
-		22B284AF1E0BBAF700778900 /* sentMessage.wav in Resources */ = {isa = PBXBuildFile; fileRef = 22B284AD1E0BBAF700778900 /* sentMessage.wav */; };
 		22B974C01DE9B5DF00E09490 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B974BF1DE9B5DF00E09490 /* Conversation.swift */; };
 		62058F6006BD9ACBE0439C4B /* Pods_QuickChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8041C4B4A9DA4F0F53D2BDE /* Pods_QuickChat.framework */; };
 /* End PBXBuildFile section */
@@ -45,7 +44,6 @@
 		22A92BBC1D59EBD6005D76F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22AE96371D89727C00B4ED38 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		22B284AC1E0BBAF700778900 /* newMessage.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = newMessage.wav; sourceTree = "<group>"; };
-		22B284AD1E0BBAF700778900 /* sentMessage.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sentMessage.wav; sourceTree = "<group>"; };
 		22B974BF1DE9B5DF00E09490 /* Conversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Conversation.swift; path = QuickChat/Model/Conversation.swift; sourceTree = "<group>"; };
 		614F8B4888358059B3DC166B /* Pods-QuickChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QuickChat/Pods-QuickChat.debug.xcconfig"; sourceTree = "<group>"; };
 		B8041C4B4A9DA4F0F53D2BDE /* Pods_QuickChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuickChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -128,7 +126,6 @@
 				22A92BBC1D59EBD6005D76F7 /* Info.plist */,
 				22AE96371D89727C00B4ED38 /* GoogleService-Info.plist */,
 				22B284AC1E0BBAF700778900 /* newMessage.wav */,
-				22B284AD1E0BBAF700778900 /* sentMessage.wav */,
 			);
 			path = QuickChat;
 			sourceTree = "<group>";
@@ -190,6 +187,9 @@
 						DevelopmentTeamName = "Haik Aslanyan (Personal Team)";
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 0;
+							};
 							com.apple.Maps.iOS = {
 								enabled = 1;
 							};
@@ -220,7 +220,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22B284AF1E0BBAF700778900 /* sentMessage.wav in Resources */,
 				22A92BB81D59EBD6005D76F7 /* Assets.xcassets in Resources */,
 				22B284AE1E0BBAF700778900 /* newMessage.wav in Resources */,
 				224AFA9D1D867DE7004E7CCD /* Main.storyboard in Resources */,
