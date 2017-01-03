@@ -16,9 +16,11 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
     @IBOutlet var inputBar: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var inputTextField: UITextField!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     override var inputAccessoryView: UIView? {
         get {
             self.inputBar.frame.size.height = self.barHeight
+            self.inputBar.clipsToBounds = true
             return self.inputBar
         }
     }
@@ -66,22 +68,53 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
         }
     }
     
-    @IBAction func sendMessage(_ sender: Any) {
-        if let text = self.inputTextField.text {
-            if text.characters.count > 0 {
-                let message = Message.init(type: .text, content: text, owner: .sender, timestamp: Int(Date().timeIntervalSince1970), isRead: false)
-                Message.send(message: message, toID: self.currentUser!.id, completion: {(_) in
-                })
-                self.inputTextField.text = ""
-            }
+    func composeMessage(type: MessageType, content: Any)  {
+        let message = Message.init(type: type, content: content, owner: .sender, timestamp: Int(Date().timeIntervalSince1970), isRead: false)
+        Message.send(message: message, toID: self.currentUser!.id, completion: {(_) in
+        })
+    }
+    
+    @IBAction func showMessage(_ sender: Any) {
+        self.bottomConstraint.constant = 0
+        UIView.animate(withDuration: 0.3) { 
+            self.inputBar.layoutIfNeeded()
         }
     }
     
-    @IBAction func selectPic(_ sender: Any) {
+    @IBAction func selectGallery(_ sender: Any) {
         let status = PHPhotoLibrary.authorizationStatus()
         if (status == .authorized || status == .notDetermined) {
             self.imagePicker.sourceType = .savedPhotosAlbum;
             self.present(self.imagePicker, animated: true, completion: nil)
+        }
+    }
+    
+    @IBAction func selectCamera(_ sender: Any) {
+        let status = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
+        if (status == .authorized || status == .notDetermined) {
+            self.imagePicker.sourceType = .camera
+            self.imagePicker.allowsEditing = true
+            self.present(self.imagePicker, animated: true, completion: nil)
+        }
+    }
+    
+    @IBAction func selectLocation(_ sender: Any) {
+        
+    }
+    
+    @IBAction func showOptions(_ sender: Any) {
+        self.bottomConstraint.constant = -50
+        UIView.animate(withDuration: 0.3) {
+            self.inputBar.layoutIfNeeded()
+        }
+    }
+    
+    @IBAction func sendMessage(_ sender: Any) {
+        if let text = self.inputTextField.text {
+            if text.characters.count > 0 {
+                self.composeMessage(type: .text, content: self.inputTextField.text!)
+                self.inputTextField.text = ""
+            }
         }
     }
     
@@ -159,11 +192,10 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
-            //let item = Message.init(type: .photo, content: pickedImage, timestamp: 20, owner: .receiver)
-            
+            self.composeMessage(type: .photo, content: pickedImage)
         } else {
             let pickedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-            //
+            self.composeMessage(type: .photo, content: pickedImage)
         }
         picker.dismiss(animated: true, completion: nil)
     }
