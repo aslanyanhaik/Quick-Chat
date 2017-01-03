@@ -156,16 +156,3 @@ class Message {
         self.isRead = isRead
     }
 }
-
-
-enum MessageType {
-    case photo
-    case text
-    case video
-    case location
-}
-
-enum MessageOwner {
-    case sender
-    case receiver
-}
