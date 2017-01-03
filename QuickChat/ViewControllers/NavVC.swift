@@ -90,7 +90,6 @@ class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewD
     
     //Hide Extra views
     func dismissExtraViews() {
-        UIApplication.shared.isStatusBarHidden = false
         self.topAnchorContraint.constant = 1000
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
             self.view.layoutIfNeeded()
@@ -128,7 +127,6 @@ class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewD
                 self.profileView.isHidden = false
             case .preview:
                 self.previewView.isHidden = false
-                UIApplication.shared.isStatusBarHidden = true
                 self.previewImageView.image = notification.userInfo?["pic"] as? UIImage
                 self.scrollView.contentSize = self.previewImageView.frame.size
             }

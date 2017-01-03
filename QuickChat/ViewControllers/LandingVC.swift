@@ -10,6 +10,13 @@ import UIKit
 
 
 class LandingVC: UIViewController {
+    
+    //MARK: Properties
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        get {
+            return UIInterfaceOrientationMask.portrait
+        }
+    }
 
     //MARK: Push to relevant ViewController
     func pushTo(viewController: ViewControllerType)  {

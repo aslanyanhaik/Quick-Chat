@@ -21,7 +21,7 @@ class Conversation {
     private var iD: String?
     
     //MARK: Methods
-    class func showConversations(forUserID: String, completion: @escaping ([Conversation]) -> Swift.Void) {
+    class func showConversations(forUserID: String, completion: @escaping (Conversation) -> Swift.Void) {
         FIRDatabase.database().reference().child("users").child(forUserID).child("conversations").observe(.value, with: { (snapshot) in
             if snapshot.exists() {
                 let fromID = snapshot.key
@@ -34,7 +34,7 @@ class Conversation {
                     let name = receivedData["name"]!
                     let conversation = Conversation.init(profilePic: profilPic!, name: name, lastMessage: "some Message", time: Date(), isRead: true)
                     conversation.iD = fromID
-                    completion([conversation])
+                    completion(conversation)
                 })
             }
         })

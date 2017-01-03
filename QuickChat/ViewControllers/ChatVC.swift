@@ -49,10 +49,11 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
     func fetchData() {
         Message.downloadAllMessages(forUserID: self.currentUser!.id, completion: {(message) in
             self.items.append(message)
+            self.items.sort{ $0.timestamp < $1.timestamp }
             DispatchQueue.main.async {
                 if self.items.count > 0 {
                     self.tableView.reloadData()
-                    self.tableView.scrollToRow(at: IndexPath.init(row: self.items.count - 1, section: 0), at: .none, animated: true)
+                    self.tableView.scrollToRow(at: IndexPath.init(row: self.items.count - 1, section: 0), at: .bottom, animated: false)
                 }
             }
         })
@@ -78,7 +79,7 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
     @IBAction func sendMessage(_ sender: Any) {
         if let text = self.inputTextField.text {
             if text.characters.count > 0 {
-                let message = Message.init(type: .text, content: text, owner: .sender)
+                let message = Message.init(type: .text, content: text, owner: .sender, timestamp: Int(Date().timeIntervalSince1970))
                 Message.send(message: message, toID: self.currentUser!.id, completion: {[weak weakSelf = self] (status) in
                     weakSelf?.inputTextField.text = ""
                     if status == true {
@@ -143,6 +144,7 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
         case .sender:
             let cell = tableView.dequeueReusableCell(withIdentifier: "Sender", for: indexPath) as! SenderCell
             cell.clearCellData()
+            cell.profilePic.image = self.currentUser?.profilePic
             switch self.items[indexPath.row].type {
             case .text:
                 cell.message.text = self.items[indexPath.row].content as! String

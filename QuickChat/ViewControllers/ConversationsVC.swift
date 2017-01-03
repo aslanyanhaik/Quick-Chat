@@ -13,6 +13,7 @@ class ConversationsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     //MARK: Properties
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var alertBottomConstraint: NSLayoutConstraint!
     lazy var leftButton: UIBarButtonItem = {
         let image = UIImage.init(named: "default profile")?.withRenderingMode(.alwaysOriginal)
         let button  = UIBarButtonItem.init(image: image, style: .plain, target: self, action: #selector(ConversationsVC.showProfile))
@@ -29,6 +30,7 @@ class ConversationsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: navigationTitleFont, NSForegroundColorAttributeName: UIColor.white]
         // notification setup
         NotificationCenter.default.addObserver(self, selector: #selector(self.pushToUserMesssages(notification:)), name: NSNotification.Name(rawValue: "showUserMessages"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.showEmailAlert), name: Notification.Name.UIApplicationDidBecomeActive, object: nil)
         //right bar button
         let icon = UIImage.init(named: "compose")?.withRenderingMode(.alwaysOriginal)
         let rightButton = UIBarButtonItem.init(image: icon!, style: .plain, target: self, action: #selector(ConversationsVC.showContacts))
@@ -75,6 +77,16 @@ class ConversationsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showExtraView"), object: nil, userInfo: info)
     }
     
+    //Show EmailVerification on the bottom
+    func showEmailAlert() {
+        User.checkUserVerification {[weak weakSelf = self] (status) in
+            status == true ? (weakSelf?.alertBottomConstraint.constant = -40) : (weakSelf?.alertBottomConstraint.constant = 0)
+            UIView.animate(withDuration: 0.3) {
+                weakSelf?.view.layoutIfNeeded()
+            }
+        }
+    }
+    
     //Shows Chat viewcontroller with given user
     func pushToUserMesssages(notification: NSNotification) {
         if let user = notification.userInfo?["user"] as? User {
@@ -105,7 +117,7 @@ class ConversationsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if self.items.count == 0 {
-            return self.tableView.bounds.height
+            return self.view.bounds.height - self.navigationController!.navigationBar.bounds.height
         } else {
             return 80
         }
@@ -148,6 +160,11 @@ class ConversationsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         super.viewDidLoad()
         self.customization()
         self.fetchData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.showEmailAlert()
     }
 }
 

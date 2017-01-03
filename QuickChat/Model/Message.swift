@@ -16,7 +16,7 @@ class Message {
     var owner: MessageOwner
     let type: MessageType
     let content: Any
-    private var timeStamp: Int?
+    let timestamp: Int
     private var toID: String?
     private var fromID: String?
     
@@ -35,11 +35,12 @@ class Message {
                             case "text":
                                 let content = receivedMessage["content"] as! String
                                 let fromID = receivedMessage["toID"] as! String
+                                let timestamp = receivedMessage["timestamp"] as! Int
                                 if fromID == currentUserID {
-                                    let message = Message.init(type: .text, content: content, owner: .sender)
+                                    let message = Message.init(type: .text, content: content, owner: .sender, timestamp: timestamp)
                                     completion(message)
                                 } else {
-                                    let message = Message.init(type: .text, content: content, owner: .receiver)
+                                    let message = Message.init(type: .text, content: content, owner: .receiver, timestamp: timestamp)
                                     completion(message)
                                 }
                             default: break
@@ -56,11 +57,11 @@ class Message {
             var values = [String: Any]()
             switch message.type {
             case .text:
-                values = ["type": "text", "content": message.content, "fromID": currentUserID, "toID": toID, "timestamp": Int(Date().timeIntervalSince1970)]
+                values = ["type": "text", "content": message.content, "fromID": currentUserID, "toID": toID, "timestamp": message.timestamp]
             case .photo:
                 print("missing implementation")
             case .location:
-                print("missing implementation")
+                values = ["type": "location", "content": message.content, "fromID": currentUserID, "toID": toID, "timestamp": message.timestamp]
             case .video:
                 print("missing implementation")
             }
@@ -88,10 +89,11 @@ class Message {
     }
     
     //MARK: Inits
-    init(type: MessageType, content: Any, owner: MessageOwner) {
+    init(type: MessageType, content: Any, owner: MessageOwner, timestamp: Int) {
         self.type = type
         self.content = content
         self.owner = owner
+        self.timestamp = timestamp
     }
 }
 

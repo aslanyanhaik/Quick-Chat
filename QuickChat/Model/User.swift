@@ -22,6 +22,7 @@ class User: NSObject {
     class func registerUser(withName: String, email: String, password: String, profilePic: UIImage, completion: @escaping (Bool) -> Swift.Void) {
         FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user, error) in
             if error == nil {
+                user?.sendEmailVerification(completion: nil)
                 let storageRef = FIRStorage.storage().reference().child("usersProfilePics").child(user!.uid)
                 let imageData = UIImageJPEGRepresentation(profilePic, 0.1)
                 storageRef.put(imageData!, metadata: nil, completion: { (metadata, err) in
@@ -91,6 +92,14 @@ class User: NSObject {
             }
         })
     }
+    
+    class func checkUserVerification(completion: @escaping (Bool) -> Swift.Void) {
+        FIRAuth.auth()?.currentUser?.reload(completion: { (_) in
+            let status = (FIRAuth.auth()?.currentUser?.isEmailVerified)!
+            completion(status)
+        })
+    }
+
     
     //MARK: Inits
     init(name: String, email: String, id: String, profilePic: UIImage) {
