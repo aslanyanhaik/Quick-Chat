@@ -94,8 +94,6 @@ class Message {
                             type = .photo
                         case "location":
                             type = .location
-                        case "video":
-                            type = .video
                         default: break
                         }
                         self.type = type
@@ -121,8 +119,6 @@ class Message {
                 values = ["type": "photo", "content": message.content, "fromID": currentUserID, "toID": toID, "timestamp": message.timestamp, "isRead": false]
             case .location:
                 values = ["type": "location", "content": message.content, "fromID": currentUserID, "toID": toID, "timestamp": message.timestamp, "isRead": false]
-            case .video:
-                values = ["type": "video", "content": message.content, "fromID": currentUserID, "toID": toID, "timestamp": message.timestamp, "isRead": false]
             }
            FIRDatabase.database().reference().child("users").child(currentUserID).child("conversations").child(toID).observeSingleEvent(of: .value, with: { (snapshot) in
                 if snapshot.exists() {

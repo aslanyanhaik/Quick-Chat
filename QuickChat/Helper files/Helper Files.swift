@@ -75,7 +75,6 @@ enum ShowExtraView {
 enum MessageType {
     case photo
     case text
-    case video
     case location
 }
 

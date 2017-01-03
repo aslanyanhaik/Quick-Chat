@@ -78,7 +78,6 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
     }
     
     @IBAction func selectPic(_ sender: Any) {
-        //self.inputTextField.resignFirstResponder()
         let status = PHPhotoLibrary.authorizationStatus()
         if (status == .authorized || status == .notDetermined) {
             self.imagePicker.sourceType = .savedPhotosAlbum;

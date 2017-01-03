@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		220698841E066E4900F2284B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220698831E066E4900F2284B /* Extensions.swift */; };
+		220698841E066E4900F2284B /* Helper Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220698831E066E4900F2284B /* Helper Files.swift */; };
 		2217853D1DCD1DAC00A69F88 /* ConversationsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2217853C1DCD1DAC00A69F88 /* ConversationsVC.swift */; };
 		224834B11DB539A50019153C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224834B01DB539A50019153C /* User.swift */; };
 		224AFA9D1D867DE7004E7CCD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 224AFA9C1D867DE7004E7CCD /* Main.storyboard */; };
@@ -26,7 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		220698831E066E4900F2284B /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = "Helper files/Extensions.swift"; sourceTree = "<group>"; };
+		220698831E066E4900F2284B /* Helper Files.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Helper Files.swift"; path = "Helper files/Helper Files.swift"; sourceTree = "<group>"; };
 		2217853C1DCD1DAC00A69F88 /* ConversationsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConversationsVC.swift; path = QuickChat/ViewControllers/ConversationsVC.swift; sourceTree = "<group>"; };
 		224834B01DB539A50019153C /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = QuickChat/Model/User.swift; sourceTree = "<group>"; };
 		224AFA9C1D867DE7004E7CCD /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -85,12 +85,12 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
-		224AFAAA1D86900B004E7CCD /* Helper files */ = {
+		224AFAAA1D86900B004E7CCD /* Helper Files */ = {
 			isa = PBXGroup;
 			children = (
-				220698831E066E4900F2284B /* Extensions.swift */,
+				220698831E066E4900F2284B /* Helper Files.swift */,
 			);
-			name = "Helper files";
+			name = "Helper Files";
 			sourceTree = "<group>";
 		};
 		22A92BA41D59EBD5005D76F7 = {
@@ -118,7 +118,7 @@
 				224AFA9C1D867DE7004E7CCD /* Main.storyboard */,
 				224AFA9E1D868371004E7CCD /* ViewControllers */,
 				224834AF1DB539690019153C /* Model */,
-				224AFAAA1D86900B004E7CCD /* Helper files */,
+				224AFAAA1D86900B004E7CCD /* Helper Files */,
 				22A92BB71D59EBD6005D76F7 /* Assets.xcassets */,
 				22A92BBC1D59EBD6005D76F7 /* Info.plist */,
 				22AE96371D89727C00B4ED38 /* GoogleService-Info.plist */,
@@ -286,7 +286,7 @@
 				2217853D1DCD1DAC00A69F88 /* ConversationsVC.swift in Sources */,
 				22A92BB11D59EBD6005D76F7 /* AppDelegate.swift in Sources */,
 				224AFAA91D86890A004E7CCD /* WelcomeVC.swift in Sources */,
-				220698841E066E4900F2284B /* Extensions.swift in Sources */,
+				220698841E066E4900F2284B /* Helper Files.swift in Sources */,
 				22873DAA1DC790550021690E /* Message.swift in Sources */,
 				224834B11DB539A50019153C /* User.swift in Sources */,
 			);
