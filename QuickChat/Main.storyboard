@@ -713,10 +713,10 @@
                             <blurEffect style="light"/>
                         </visualEffectView>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="5QH-wl-jIq">
-                            <rect key="frame" x="37.5" y="69" width="301" height="50"/>
+                            <rect key="frame" x="38" y="69" width="301" height="50"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qBU-f2-8Pd">
-                                    <rect key="frame" x="0.0" y="12.5" width="32" height="25"/>
+                                    <rect key="frame" x="1" y="13" width="32" height="25"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="32" id="TVn-tN-gQt"/>
                                         <constraint firstAttribute="height" constant="25" id="jlM-k3-Pan"/>
@@ -727,7 +727,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z7R-1B-pUQ">
-                                    <rect key="frame" x="89.5" y="12.5" width="32" height="25"/>
+                                    <rect key="frame" x="90" y="13" width="32" height="25"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="25" id="8Ol-jB-PAe"/>
                                         <constraint firstAttribute="width" constant="32" id="hI0-DJ-UeW"/>
@@ -738,7 +738,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bPy-aa-pXN">
-                                    <rect key="frame" x="179.5" y="12.5" width="32" height="25"/>
+                                    <rect key="frame" x="180" y="13" width="32" height="25"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="32" id="sbK-bR-TmC"/>
                                         <constraint firstAttribute="height" constant="25" id="yVq-0V-Mqj"/>
@@ -749,7 +749,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wkz-Xg-Poz">
-                                    <rect key="frame" x="269" y="12.5" width="32" height="25"/>
+                                    <rect key="frame" x="270" y="13" width="32" height="25"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="32" id="D4D-g2-P3B"/>
                                         <constraint firstAttribute="height" constant="25" id="xpY-Vx-Gwa"/>
@@ -854,6 +854,8 @@
                         <outlet property="collectionView" destination="F31-kN-ucx" id="0Kf-TA-lPm"/>
                         <outlet property="contactsView" destination="h17-gA-Mas" id="QGw-Ac-aPT"/>
                         <outlet property="emailLabel" destination="TfX-sg-Sfv" id="vN0-W8-G2p"/>
+                        <outlet property="mapPreviewView" destination="v1v-tx-tiQ" id="9LT-qq-0gi"/>
+                        <outlet property="mapVIew" destination="YmA-BC-M1i" id="G7e-17-eAH"/>
                         <outlet property="nameLabel" destination="YYP-Ai-qet" id="j8E-52-uwH"/>
                         <outlet property="previewImageView" destination="Lie-ZE-ra1" id="Y0s-vj-ELc"/>
                         <outlet property="previewView" destination="aWP-xl-u9a" id="dVy-5I-MY4"/>
@@ -1088,13 +1090,42 @@
                         <constraint firstAttribute="bottom" secondItem="oRc-AA-MCG" secondAttribute="bottom" id="uRW-BM-eBb"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" id="v1v-tx-tiQ">
+                    <rect key="frame" x="0.0" y="0.0" width="423" height="269"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsCompass="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YmA-BC-M1i">
+                            <rect key="frame" x="0.0" y="0.0" width="423" height="269"/>
+                        </mapView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RD5-wZ-EvL">
+                            <rect key="frame" x="382" y="16" width="25" height="25"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="25" id="LKF-3T-2aD"/>
+                                <constraint firstAttribute="height" constant="25" id="YaR-Bn-Qle"/>
+                            </constraints>
+                            <state key="normal" backgroundImage="close"/>
+                            <connections>
+                                <action selector="closeView:" destination="ZJi-hT-Uhs" eventType="touchUpInside" id="CWN-Yf-f2F"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="YmA-BC-M1i" secondAttribute="bottom" id="Ie3-6n-2f4"/>
+                        <constraint firstItem="YmA-BC-M1i" firstAttribute="leading" secondItem="v1v-tx-tiQ" secondAttribute="leading" id="WpY-xG-eBt"/>
+                        <constraint firstItem="RD5-wZ-EvL" firstAttribute="top" secondItem="v1v-tx-tiQ" secondAttribute="top" constant="16" id="ZBf-xh-rmn"/>
+                        <constraint firstItem="YmA-BC-M1i" firstAttribute="top" secondItem="v1v-tx-tiQ" secondAttribute="top" id="bE0-xV-cSC"/>
+                        <constraint firstAttribute="trailing" secondItem="RD5-wZ-EvL" secondAttribute="trailing" constant="16" id="mAe-6q-V8U"/>
+                        <constraint firstAttribute="trailing" secondItem="YmA-BC-M1i" secondAttribute="trailing" id="x2r-IB-sEx"/>
+                    </constraints>
+                </view>
                 <tapGestureRecognizer numberOfTapsRequired="2" id="ZmC-Vj-4lp">
                     <connections>
                         <action selector="doubleTapGesture:" destination="ZJi-hT-Uhs" id="tbH-dR-LAs"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="810" y="429"/>
+            <point key="canvasLocation" x="823" y="429"/>
         </scene>
     </scenes>
     <resources>

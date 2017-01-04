@@ -9,8 +9,9 @@
 import UIKit
 import Photos
 import Firebase
+import CoreLocation
 
-class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate,  UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate,  UINavigationControllerDelegate, UIImagePickerControllerDelegate, CLLocationManagerDelegate {
     
     //MARK: Properties
     @IBOutlet var inputBar: UIView!
@@ -27,10 +28,13 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
     override var canBecomeFirstResponder: Bool{
         return true
     }
+    let locationManager = CLLocationManager()
     var items = [Message]()
     let imagePicker = UIImagePickerController()
     let barHeight: CGFloat = 50
     var currentUser: User?
+    var canSendLocation = true
+    
 
     //MARK: Methods
     func customization() {
@@ -44,6 +48,7 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
         let icon = UIImage.init(named: "back")?.withRenderingMode(.alwaysOriginal)
         let backButton = UIBarButtonItem.init(image: icon!, style: .plain, target: self, action: #selector(self.dismissSelf))
         self.navigationItem.leftBarButtonItem = backButton
+        self.locationManager.delegate = self
     }
     
     //Downloads messages
@@ -74,39 +79,69 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
         })
     }
     
-    @IBAction func showMessage(_ sender: Any) {
-        self.bottomConstraint.constant = 0
-        UIView.animate(withDuration: 0.3) { 
-            self.inputBar.layoutIfNeeded()
+    func checkLocationPermission() -> Bool {
+        var state = false
+        switch CLLocationManager.authorizationStatus() {
+        case .authorizedWhenInUse:
+            state = true
+        case .authorizedAlways:
+            state = true
+        default: break
+        }
+        return state
+    }
+    
+    func animateExtraButtons(toHide: Bool)  {
+        switch toHide {
+        case true:
+            self.bottomConstraint.constant = 0
+            UIView.animate(withDuration: 0.3) {
+                self.inputBar.layoutIfNeeded()
+            }
+        default:
+            self.bottomConstraint.constant = -50
+            UIView.animate(withDuration: 0.3) {
+                self.inputBar.layoutIfNeeded()
+            }
         }
     }
     
+    @IBAction func showMessage(_ sender: Any) {
+       self.animateExtraButtons(toHide: true)
+    }
+    
     @IBAction func selectGallery(_ sender: Any) {
+        self.animateExtraButtons(toHide: true)
         let status = PHPhotoLibrary.authorizationStatus()
         if (status == .authorized || status == .notDetermined) {
             self.imagePicker.sourceType = .savedPhotosAlbum;
             self.present(self.imagePicker, animated: true, completion: nil)
         }
+        
     }
     
     @IBAction func selectCamera(_ sender: Any) {
+        self.animateExtraButtons(toHide: true)
         let status = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
         if (status == .authorized || status == .notDetermined) {
             self.imagePicker.sourceType = .camera
-            self.imagePicker.allowsEditing = true
+            self.imagePicker.allowsEditing = false
             self.present(self.imagePicker, animated: true, completion: nil)
         }
     }
     
     @IBAction func selectLocation(_ sender: Any) {
-        
+        self.canSendLocation = true
+        self.animateExtraButtons(toHide: true)
+        if self.checkLocationPermission() {
+            self.locationManager.startUpdatingLocation()
+        } else {
+            self.locationManager.requestWhenInUseAuthorization()
+        }
     }
     
     @IBAction func showOptions(_ sender: Any) {
-        self.bottomConstraint.constant = -50
-        UIView.animate(withDuration: 0.3) {
-            self.inputBar.layoutIfNeeded()
-        }
+        self.animateExtraButtons(toHide: false)
     }
     
     @IBAction func sendMessage(_ sender: Any) {
@@ -153,10 +188,26 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
             case .text:
                 cell.message.text = self.items[indexPath.row].content as! String
             case .photo:
-                let photo  = self.items[indexPath.row].content as! UIImage
-                cell.messageBackground.image = photo
+                if let image = self.items[indexPath.row].image {
+                    cell.messageBackground.image = image
+                    cell.message.isHidden = true
+                } else {
+                    cell.messageBackground.image = UIImage.init(named: "loading")
+                    self.items[indexPath.row].downloadImage(indexpathRow: indexPath.row, completion: { (state, index) in
+                        if state == true {
+                            DispatchQueue.main.async {
+                                for visibleIndex in self.tableView.indexPathsForVisibleRows! {
+                                    if visibleIndex.row == index {
+                                        self.tableView.reloadData()
+                                    }
+                                }
+                            }
+                        }
+                    })
+                }
+            case .location:
+                cell.messageBackground.image = UIImage.init(named: "location")
                 cell.message.isHidden = true
-            default: break
             }
             return cell
         case .sender:
@@ -167,10 +218,26 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
             case .text:
                 cell.message.text = self.items[indexPath.row].content as! String
             case .photo:
-                let photo  = self.items[indexPath.row].content as! UIImage
-                cell.messageBackground.image = photo
+                if let image = self.items[indexPath.row].image {
+                    cell.messageBackground.image = image
+                    cell.message.isHidden = true
+                } else {
+                    cell.messageBackground.image = UIImage.init(named: "loading")
+                    self.items[indexPath.row].downloadImage(indexpathRow: indexPath.row, completion: { (state, index) in
+                        if state == true {
+                            DispatchQueue.main.async {
+                                for visibleIndex in self.tableView.indexPathsForVisibleRows! {
+                                    if visibleIndex.row == index {
+                                        self.tableView.reloadData()
+                                    }
+                                }
+                            }
+                        }
+                    })
+                }
+            case .location:
+                cell.messageBackground.image = UIImage.init(named: "location")
                 cell.message.isHidden = true
-            default: break
             }
             return cell
         }
@@ -178,10 +245,18 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.inputTextField.resignFirstResponder()
-        if self.items[indexPath.row].type == .photo {
-            let info = ["viewType" : ShowExtraView.preview, "pic": self.items[indexPath.row].content]
+        switch self.items[indexPath.row].type {
+        case .photo:
+            let info = ["viewType" : ShowExtraView.preview, "pic": self.items[indexPath.row].image] as [String : Any?]
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showExtraView"), object: nil, userInfo: info)
             self.inputAccessoryView?.isHidden = true
+        case .location:
+            let coordinates = (self.items[indexPath.row].content as! String).components(separatedBy: ":")
+            let location = CLLocation.init(latitude: CLLocationDegrees(coordinates[0]), longitude: CLLocationDegrees(coordinates[1]))
+            let info = ["viewType" : ShowExtraView.map, "location": location]
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showExtraView"), object: nil, userInfo: info)
+            self.inputAccessoryView?.isHidden = true
+        default: break
         }
     }
     
@@ -198,6 +273,19 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
             self.composeMessage(type: .photo, content: pickedImage)
         }
         picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        self.locationManager.stopUpdatingLocation()
+        if let lastLocation = locations.last {
+            if self.canSendLocation {
+                let coordinate = String(lastLocation.coordinate.latitude) + ":" + String(lastLocation.coordinate.longitude)
+                let message = Message.init(type: .location, content: coordinate, owner: .sender, timestamp: Int(Date().timeIntervalSince1970), isRead: false)
+                Message.send(message: message, toID: self.currentUser!.id, completion: {(_) in
+                })
+                self.canSendLocation = false
+            }
+        }
     }
 
     //MARK: ViewController lifecycle
@@ -221,44 +309,5 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
     }
 }
 
-class SenderCell: UITableViewCell {
-    
-    @IBOutlet weak var profilePic: RoundedImageView!
-    @IBOutlet weak var message: UITextView!
-    @IBOutlet weak var messageBackground: UIImageView!
-    
-    func clearCellData()  {
-        self.message.text = nil
-        self.message.isHidden = false
-        self.messageBackground.image = nil
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        self.selectionStyle = .none
-        self.message.textContainerInset = UIEdgeInsetsMake(5, 5, 5, 5)
-        self.messageBackground.layer.cornerRadius = 15
-        self.messageBackground.clipsToBounds = true
-    }
-}
 
-class ReceiverCell: UITableViewCell {
-    
-    @IBOutlet weak var message: UITextView!
-    @IBOutlet weak var messageBackground: UIImageView!
-    
-    func clearCellData()  {
-        self.message.text = nil
-        self.message.isHidden = false
-        self.messageBackground.image = nil
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        self.selectionStyle = .none
-        self.message.textContainerInset = UIEdgeInsetsMake(5, 5, 5, 5)
-        self.messageBackground.layer.cornerRadius = 15
-        self.messageBackground.clipsToBounds = true
-    }
-}
 

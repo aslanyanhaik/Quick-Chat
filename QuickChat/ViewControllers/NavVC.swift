@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import MapKit
 
 class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate {
 
@@ -15,6 +16,8 @@ class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewD
     @IBOutlet var contactsView: UIView!
     @IBOutlet var profileView: UIView!
     @IBOutlet var previewView: UIView!
+    @IBOutlet var mapPreviewView: UIView!
+    @IBOutlet weak var mapVIew: MKMapView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var previewImageView: UIImageView!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -262,12 +265,4 @@ class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewD
     }    
 }
 
-class ContactsCVCell: UICollectionViewCell {
-    
-    @IBOutlet weak var profilePic: RoundedImageView!
-    @IBOutlet weak var nameLabel: UILabel!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-}
+

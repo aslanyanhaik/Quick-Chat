@@ -72,9 +72,14 @@ class User: NSObject {
             let data = snapshot.value as! [String: String]
             let name = data["name"]!
             let email = data["email"]!
-            let profilePic = UIImage.downloadImagewith(link: data["profilePicLink"]! )
-            let user = User.init(name: name, email: email, id: forUserID, profilePic: profilePic!)
-            completion(user)
+            let link = URL.init(string: data["profilePicLink"]!)
+            URLSession.shared.dataTask(with: link!, completionHandler: { (data, response, error) in
+                if error == nil {
+                    let profilePic = UIImage.init(data: data!)
+                    let user = User.init(name: name, email: email, id: forUserID, profilePic: profilePic!)
+                    completion(user)
+                }
+            }).resume()
         })
     }
     
@@ -86,9 +91,14 @@ class User: NSObject {
             if id != exceptID {
                 let name = credentials["name"]!
                 let email = credentials["email"]!
-                let profilePic = UIImage.downloadImagewith(link: credentials["profilePicLink"]!)
-                let user = User.init(name: name, email: email, id: id, profilePic: profilePic!)
-                completion(user)
+                let link = URL.init(string: credentials["profilePicLink"]!)
+                URLSession.shared.dataTask(with: link!, completionHandler: { (data, response, error) in
+                    if error == nil {
+                        let profilePic = UIImage.init(data: data!)
+                        let user = User.init(name: name, email: email, id: id, profilePic: profilePic!)
+                        completion(user)
+                    }
+                }).resume()
             }
         })
     }

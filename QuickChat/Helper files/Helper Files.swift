@@ -23,20 +23,6 @@ extension UIColor{
     }
 }
 
-extension UIImage {
-    class func downloadImagewith(link: String) -> UIImage? {
-        let downloadLink = URL.init(string: link)
-        var image: UIImage?
-        do {
-            let data = try Data.init(contentsOf: downloadLink!)
-            image = UIImage.init(data: data)
-        } catch _ {
-            print("error dowloading image")
-        }
-        return image
-    }
-}
-
 class RoundedImageView: UIImageView {
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -70,6 +56,7 @@ enum ShowExtraView {
     case contacts
     case profile
     case preview
+    case map
 }
 
 enum MessageType {
