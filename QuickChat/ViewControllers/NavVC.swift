@@ -84,7 +84,15 @@ class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewD
         self.previewView.bottomAnchor.constraint(equalTo: extraViewsContainer.bottomAnchor).isActive = true
         self.scrollView.minimumZoomScale = 1.0
         self.scrollView.maximumZoomScale = 3.0
-    //NotificationCenter for showing extra views
+    //MapPreView Customization
+        extraViewsContainer.addSubview(self.mapPreviewView)
+        self.mapPreviewView.isHidden = true
+        self.mapPreviewView.translatesAutoresizingMaskIntoConstraints = false
+        self.mapPreviewView.leadingAnchor.constraint(equalTo: extraViewsContainer.leadingAnchor).isActive = true
+        self.mapPreviewView.topAnchor.constraint(equalTo: extraViewsContainer.topAnchor).isActive = true
+        self.mapPreviewView.trailingAnchor.constraint(equalTo: extraViewsContainer.trailingAnchor).isActive = true
+        self.mapPreviewView.bottomAnchor.constraint(equalTo: extraViewsContainer.bottomAnchor).isActive = true
+        //NotificationCenter for showing extra views
         NotificationCenter.default.addObserver(self, selector: #selector(self.showExtraViews(notification:)), name: NSNotification.Name(rawValue: "showExtraView"), object: nil)
         self.fetchUsers()
         self.fetchUserInfo()
@@ -103,6 +111,8 @@ class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewD
             self.profileView.isHidden = true
             self.contactsView.isHidden = true
             self.previewView.isHidden = true
+            self.mapPreviewView.isHidden = true
+            self.mapVIew.removeAnnotations(self.mapVIew.annotations)
             let vc = self.viewControllers.last
             vc?.inputAccessoryView?.isHidden = false
         })
@@ -132,6 +142,13 @@ class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewD
                 self.previewView.isHidden = false
                 self.previewImageView.image = notification.userInfo?["pic"] as? UIImage
                 self.scrollView.contentSize = self.previewImageView.frame.size
+            case .map:
+                self.mapPreviewView.isHidden = false
+                let coordinate = notification.userInfo?["location"] as? CLLocationCoordinate2D
+                let annotation = MKPointAnnotation.init()
+                annotation.coordinate = coordinate!
+                self.mapVIew.addAnnotation(annotation)
+                self.mapVIew.showAnnotations(self.mapVIew.annotations, animated: false)
             }
         }
     }

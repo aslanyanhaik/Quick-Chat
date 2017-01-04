@@ -196,11 +196,7 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
                     self.items[indexPath.row].downloadImage(indexpathRow: indexPath.row, completion: { (state, index) in
                         if state == true {
                             DispatchQueue.main.async {
-                                for visibleIndex in self.tableView.indexPathsForVisibleRows! {
-                                    if visibleIndex.row == index {
-                                        self.tableView.reloadData()
-                                    }
-                                }
+                                self.tableView.reloadData()
                             }
                         }
                     })
@@ -226,11 +222,7 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
                     self.items[indexPath.row].downloadImage(indexpathRow: indexPath.row, completion: { (state, index) in
                         if state == true {
                             DispatchQueue.main.async {
-                                for visibleIndex in self.tableView.indexPathsForVisibleRows! {
-                                    if visibleIndex.row == index {
-                                        self.tableView.reloadData()
-                                    }
-                                }
+                                self.tableView.reloadData()
                             }
                         }
                     })
@@ -247,13 +239,15 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
         self.inputTextField.resignFirstResponder()
         switch self.items[indexPath.row].type {
         case .photo:
-            let info = ["viewType" : ShowExtraView.preview, "pic": self.items[indexPath.row].image] as [String : Any?]
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showExtraView"), object: nil, userInfo: info)
-            self.inputAccessoryView?.isHidden = true
+            if let photo = self.items[indexPath.row].image {
+                let info = ["viewType" : ShowExtraView.preview, "pic": photo] as [String : Any]
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showExtraView"), object: nil, userInfo: info)
+                self.inputAccessoryView?.isHidden = true
+            }
         case .location:
             let coordinates = (self.items[indexPath.row].content as! String).components(separatedBy: ":")
-            let location = CLLocation.init(latitude: CLLocationDegrees(coordinates[0]), longitude: CLLocationDegrees(coordinates[1]))
-            let info = ["viewType" : ShowExtraView.map, "location": location]
+            let location = CLLocationCoordinate2D.init(latitude: CLLocationDegrees(coordinates[0])!, longitude: CLLocationDegrees(coordinates[1])!)
+            let info = ["viewType" : ShowExtraView.map, "location": location] as [String : Any]
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showExtraView"), object: nil, userInfo: info)
             self.inputAccessoryView?.isHidden = true
         default: break

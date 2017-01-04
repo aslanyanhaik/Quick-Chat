@@ -1069,7 +1069,7 @@
                             </connections>
                         </scrollView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TUv-Vq-FfK">
-                            <rect key="frame" x="341" y="16" width="25" height="25"/>
+                            <rect key="frame" x="332" y="25" width="25" height="25"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="25" id="CzI-Xq-XFd"/>
                                 <constraint firstAttribute="width" constant="25" id="Gmu-CS-b1w"/>
@@ -1082,8 +1082,8 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="TUv-Vq-FfK" firstAttribute="top" secondItem="aWP-xl-u9a" secondAttribute="top" constant="16" id="6wC-Ki-e5f"/>
-                        <constraint firstAttribute="trailing" secondItem="TUv-Vq-FfK" secondAttribute="trailing" constant="16" id="Jcg-J6-MpL"/>
+                        <constraint firstItem="TUv-Vq-FfK" firstAttribute="top" secondItem="aWP-xl-u9a" secondAttribute="top" constant="25" id="6wC-Ki-e5f"/>
+                        <constraint firstAttribute="trailing" secondItem="TUv-Vq-FfK" secondAttribute="trailing" constant="25" id="Jcg-J6-MpL"/>
                         <constraint firstItem="oRc-AA-MCG" firstAttribute="top" secondItem="aWP-xl-u9a" secondAttribute="top" id="LVG-L0-YeV"/>
                         <constraint firstAttribute="trailing" secondItem="oRc-AA-MCG" secondAttribute="trailing" id="bKr-0e-Kll"/>
                         <constraint firstItem="oRc-AA-MCG" firstAttribute="leading" secondItem="aWP-xl-u9a" secondAttribute="leading" id="cJU-hl-t3l"/>
@@ -1098,7 +1098,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="423" height="269"/>
                         </mapView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RD5-wZ-EvL">
-                            <rect key="frame" x="382" y="16" width="25" height="25"/>
+                            <rect key="frame" x="373" y="25" width="25" height="25"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="25" id="LKF-3T-2aD"/>
                                 <constraint firstAttribute="height" constant="25" id="YaR-Bn-Qle"/>
@@ -1113,9 +1113,9 @@
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="YmA-BC-M1i" secondAttribute="bottom" id="Ie3-6n-2f4"/>
                         <constraint firstItem="YmA-BC-M1i" firstAttribute="leading" secondItem="v1v-tx-tiQ" secondAttribute="leading" id="WpY-xG-eBt"/>
-                        <constraint firstItem="RD5-wZ-EvL" firstAttribute="top" secondItem="v1v-tx-tiQ" secondAttribute="top" constant="16" id="ZBf-xh-rmn"/>
+                        <constraint firstItem="RD5-wZ-EvL" firstAttribute="top" secondItem="v1v-tx-tiQ" secondAttribute="top" constant="25" id="ZBf-xh-rmn"/>
                         <constraint firstItem="YmA-BC-M1i" firstAttribute="top" secondItem="v1v-tx-tiQ" secondAttribute="top" id="bE0-xV-cSC"/>
-                        <constraint firstAttribute="trailing" secondItem="RD5-wZ-EvL" secondAttribute="trailing" constant="16" id="mAe-6q-V8U"/>
+                        <constraint firstAttribute="trailing" secondItem="RD5-wZ-EvL" secondAttribute="trailing" constant="25" id="mAe-6q-V8U"/>
                         <constraint firstAttribute="trailing" secondItem="YmA-BC-M1i" secondAttribute="trailing" id="x2r-IB-sEx"/>
                     </constraints>
                 </view>
