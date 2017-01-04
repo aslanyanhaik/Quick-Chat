@@ -31,6 +31,6 @@ Quick Chat for iOS is compatible with iOS 9.1+.
 
 ## License
 
-Copyright 2017 Haik Aslanyan.Twitter, Inc. and contributors.
+Copyright 2017 Haik Aslanyan.
 
 Licensed under MIT License: https://opensource.org/licenses/MIT
