@@ -13,4 +13,10 @@
    <FileRef
       location = "group:README.md">
    </FileRef>
+   <FileRef
+      location = "group:screenshot2.png">
+   </FileRef>
+   <FileRef
+      location = "group:screenshot1.png">
+   </FileRef>
 </Workspace>
