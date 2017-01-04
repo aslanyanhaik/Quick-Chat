@@ -15,6 +15,7 @@ To get started and run the app, you need to follow these simple steps:
 3. Go to [Firebase](https://firebase.google.com) and create new project.
 4. Select "Add Firebase to your iOS app" option, type bundle Identifier & click continue.
 5. Download "GoogleService-Info.plist" file and add to project. Make sure file name is "GoogleService-Info.plist".
+6. Go to [Firebase Console](https://console.firebase.google.com), select your project, choose "Authentication" from left menu, select "SIGN-IN METHOD" and enable "Email/Password" option.
 6. You're all set! Run Quick Chat on your iPhone or the iOS Simulator.
 
 ![Screenshots of Quick Chat for iOS](screenshot2.png "Screenshots of Quick Chat for iOS")
