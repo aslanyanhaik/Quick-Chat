@@ -19,7 +19,6 @@
 		22A5FC5F1DEB185B00624E2B /* NavVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A5FC5E1DEB185B00624E2B /* NavVC.swift */; };
 		22A92BB11D59EBD6005D76F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A92BB01D59EBD6005D76F7 /* AppDelegate.swift */; };
 		22A92BB81D59EBD6005D76F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22A92BB71D59EBD6005D76F7 /* Assets.xcassets */; };
-		22AE96381D89727D00B4ED38 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 22AE96371D89727C00B4ED38 /* GoogleService-Info.plist */; };
 		22B974C01DE9B5DF00E09490 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B974BF1DE9B5DF00E09490 /* Conversation.swift */; };
 		22EA578F1E1D28DD0008FFB2 /* newMessage.wav in Resources */ = {isa = PBXBuildFile; fileRef = 22EA578E1E1D28DD0008FFB2 /* newMessage.wav */; };
 		22EA57911E1D32520008FFB2 /* VCCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EA57901E1D32520008FFB2 /* VCCells.swift */; };
@@ -41,7 +40,6 @@
 		22A92BB01D59EBD6005D76F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22A92BB71D59EBD6005D76F7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		22A92BBC1D59EBD6005D76F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		22AE96371D89727C00B4ED38 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		22B974BF1DE9B5DF00E09490 /* Conversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Conversation.swift; path = QuickChat/Model/Conversation.swift; sourceTree = "<group>"; };
 		22EA578E1E1D28DD0008FFB2 /* newMessage.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = newMessage.wav; sourceTree = "<group>"; };
 		22EA57901E1D32520008FFB2 /* VCCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VCCells.swift; path = QuickChat/ViewControllers/VCCells.swift; sourceTree = "<group>"; };
@@ -124,7 +122,6 @@
 				224AFAAA1D86900B004E7CCD /* Helper Files */,
 				22A92BB71D59EBD6005D76F7 /* Assets.xcassets */,
 				22A92BBC1D59EBD6005D76F7 /* Info.plist */,
-				22AE96371D89727C00B4ED38 /* GoogleService-Info.plist */,
 				22EA578E1E1D28DD0008FFB2 /* newMessage.wav */,
 			);
 			path = QuickChat;
@@ -183,7 +180,6 @@
 				TargetAttributes = {
 					22A92BAC1D59EBD5005D76F7 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = XWX6323S35;
 						DevelopmentTeamName = "Haik Aslanyan (Personal Team)";
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -223,7 +219,6 @@
 				22A92BB81D59EBD6005D76F7 /* Assets.xcassets in Resources */,
 				22EA578F1E1D28DD0008FFB2 /* newMessage.wav in Resources */,
 				224AFA9D1D867DE7004E7CCD /* Main.storyboard in Resources */,
-				22AE96381D89727D00B4ED38 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -396,10 +391,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = QuickChat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mexonis.QuickChat;
+				PRODUCT_BUNDLE_IDENTIFIER = com.YourIdentifier.QuickChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -411,10 +407,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = QuickChat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mexonis.QuickChat;
+				PRODUCT_BUNDLE_IDENTIFIER = com.YourIdentifier.QuickChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
