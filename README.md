@@ -4,7 +4,7 @@ Quick Chat for iOS is a real time chat app based on Firebase developed by [Haik 
 
 Quick Chat allows to send and receive text messages, photos & location.
 
-![Screenshots of Quick Chat for iOS](screenshot1.png "Screenshots of Quick Chat for iOS")
+![Screenshot of Quick Chat for iOS](screenshot.gif "Screenshot of Quick Chat for iOS")
 
 ## Getting Started
 
@@ -17,8 +17,6 @@ To get started and run the app, you need to follow these simple steps:
 5. Download "GoogleService-Info.plist" file and add to project. Make sure file name is "GoogleService-Info.plist".
 6. Go to [Firebase Console](https://console.firebase.google.com), select your project, choose "Authentication" from left menu, select "SIGN-IN METHOD" and enable "Email/Password" option.
 6. You're all set! Run Quick Chat on your iPhone or the iOS Simulator.
-
-![Screenshots of Quick Chat for iOS](screenshot2.png "Screenshots of Quick Chat for iOS")
 
 ## Compatibility
 
