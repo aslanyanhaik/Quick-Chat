@@ -11,9 +11,9 @@
       location = "group:LICENSE">
    </FileRef>
    <FileRef
-      location = "group:README.md">
+      location = "group:screenshot.gif">
    </FileRef>
    <FileRef
-      location = "group:screenshot.gif">
+      location = "group:README.md">
    </FileRef>
 </Workspace>
