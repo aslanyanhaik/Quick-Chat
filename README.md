@@ -4,7 +4,9 @@ Quick Chat for iOS is a real time chat app based on Firebase developed by [Haik 
 
 Quick Chat allows to send and receive text messages, photos & location.
 
-![Screenshot of Quick Chat for iOS](screenshot.gif "Screenshot of Quick Chat for iOS")
+<h3 align="center">
+<img src="screenshot.gif" alt="Screenshot of Quick Chat for iOS" />
+</h3>
 
 ## Getting Started
 
