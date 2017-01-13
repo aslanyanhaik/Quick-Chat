@@ -32,7 +32,7 @@ This project is written in Swift 3.0 and requires Xcode 8.2 to build and run.
 
 Quick Chat for iOS is compatible with iOS 9.1+.
 
-## Authors
+## Author
 
 * [Haik Aslanyan](https://twitter.com/aslanyanhaik)
 
