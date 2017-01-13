@@ -1,8 +1,9 @@
 # Quick Chat for iOS
 
-[![Twitter: @aslanyanhaik](https://img.shields.io/badge/contact-aslanyanhaik-blue.svg?style=flat)](https://twitter.com/aslanyanhaik)
-[![License](http://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/aslanyanhaik/Quick-Chat/blob/master/LICENSE)
-[![Swift 3](https://img.shields.io/badge/language-Swift%203-orange.svg?style=flat)](https://swift.org)
+[![License](http://img.shields.io/badge/license-MIT-green.svg)](https://github.com/aslanyanhaik/Quick-Chat/blob/master/LICENSE)
+[![Swift 3](https://img.shields.io/badge/Swift-3.0-orange.svg)](https://swift.org)
+[![Twitter: @aslanyanhaik](https://img.shields.io/badge/contact-Twitter-blue.svg)](https://twitter.com/aslanyanhaik)
+
 
 
 Quick Chat for iOS is a real time chat app based on Firebase developed by [Haik Aslanyan](https://twitter.com/aslanyanhaik) and written in Swift 3.
