@@ -1,8 +1,8 @@
 # Quick Chat for iOS
 
-[![License](http://img.shields.io/badge/license-MIT-green.svg)](https://github.com/aslanyanhaik/Quick-Chat/blob/master/LICENSE)
-[![Swift 3](https://img.shields.io/badge/Swift-3.0-orange.svg)](https://swift.org)
-[![Twitter: @aslanyanhaik](https://img.shields.io/badge/contact-Twitter-blue.svg)](https://twitter.com/aslanyanhaik)
+[![License](http://img.shields.io/badge/License-MIT-green.svg?style=flat)](https://github.com/aslanyanhaik/Quick-Chat/blob/master/LICENSE)
+[![Swift 3](https://img.shields.io/badge/Swift-3.0-orange.svg?style=flat)](https://swift.org)
+[![Twitter: @aslanyanhaik](https://img.shields.io/badge/Contact-Twitter-blue.svg?style=flat)](https://twitter.com/aslanyanhaik)
 
 
 
