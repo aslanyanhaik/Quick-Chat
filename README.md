@@ -19,12 +19,13 @@ Quick Chat allows to send and receive text messages, photos & location.
 To get started and run the app, you need to follow these simple steps:
 
 1. Open the QuickChat workspace in Xcode.
-2. Change Bundle Identifier to match your domain.
+2. Change the Bundle Identifier to match your domain.
 3. Go to [Firebase](https://firebase.google.com) and create new project.
-4. Select "Add Firebase to your iOS app" option, type bundle Identifier & click continue.
-5. Download "GoogleService-Info.plist" file and add to project. Make sure file name is "GoogleService-Info.plist".
+4. Select "Add Firebase to your iOS app" option, type the bundle Identifier & click continue.
+5. Download "GoogleService-Info.plist" file and add to the project. Make sure file name is "GoogleService-Info.plist".
 6. Go to [Firebase Console](https://console.firebase.google.com), select your project, choose "Authentication" from left menu, select "SIGN-IN METHOD" and enable "Email/Password" option.
-6. You're all set! Run Quick Chat on your iPhone or the iOS Simulator.
+7. Open the terminal, navigate to project folder and run "pod update". 
+8. You're all set! Run Quick Chat on your iPhone or the iOS Simulator.
 
 ## Compatibility
 
