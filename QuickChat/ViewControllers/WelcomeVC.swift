@@ -27,6 +27,8 @@ import Photos
 class WelcomeVC: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
     //MARK: Properties
+    @IBOutlet weak var darkView: UIView!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet var registerView: UIView!
     @IBOutlet var loginView: UIView!
     @IBOutlet weak var profilePicView: RoundedImageView!
@@ -38,6 +40,7 @@ class WelcomeVC: UIViewController, UITextFieldDelegate, UINavigationControllerDe
     @IBOutlet weak var loginPasswordField: UITextField!
     @IBOutlet weak var cloudsView: UIImageView!
     @IBOutlet weak var cloudsViewLeading: NSLayoutConstraint!
+    @IBOutlet var inputFields: [UITextField]!
     var loginViewTopConstraint: NSLayoutConstraint!
     var registerTopConstraint: NSLayoutConstraint!
     let imagePicker = UIImagePickerController()
@@ -50,6 +53,7 @@ class WelcomeVC: UIViewController, UITextFieldDelegate, UINavigationControllerDe
     
     //MARK: Methods
     func customization()  {
+        self.darkView.alpha = 0
         self.imagePicker.delegate = self
         self.profilePicView.layer.borderColor = GlobalVariables.blue.cgColor
         self.profilePicView.layer.borderWidth = 2
@@ -79,6 +83,23 @@ class WelcomeVC: UIViewController, UITextFieldDelegate, UINavigationControllerDe
         UIView.animate(withDuration: 15, delay: 0, options: [.repeat, .curveLinear], animations: {
             self.view.layoutIfNeeded()
         })
+    }
+    
+    func showLoading(state: Bool)  {
+        if state {
+            self.darkView.isHidden = false
+            self.spinner.startAnimating()
+            UIView.animate(withDuration: 0.3, animations: { 
+                self.darkView.alpha = 0.5
+            })
+        } else {
+            UIView.animate(withDuration: 0.3, animations: { 
+                self.darkView.alpha = 0
+            }, completion: { _ in
+                self.spinner.stopAnimating()
+                self.darkView.isHidden = true
+            })
+        }
     }
     
     func pushTomainView() {
@@ -126,10 +147,19 @@ class WelcomeVC: UIViewController, UITextFieldDelegate, UINavigationControllerDe
     }
     
     @IBAction func register(_ sender: Any) {
+        for item in self.inputFields {
+            item.resignFirstResponder()
+        }
+        self.showLoading(state: true)
         User.registerUser(withName: self.registerNameField.text!, email: self.registerEmailField.text!, password: self.registerPasswordField.text!, profilePic: self.profilePicView.image!) { [weak weakSelf = self] (status) in
             DispatchQueue.main.async {
+                weakSelf?.showLoading(state: false)
+                for item in self.inputFields {
+                    item.text = ""
+                }
                 if status == true {
                     weakSelf?.pushTomainView()
+                    weakSelf?.profilePicView.image = UIImage.init(named: "profile pic")
                 } else {
                     for item in (weakSelf?.waringLabels)! {
                         item.isHidden = false
@@ -140,8 +170,16 @@ class WelcomeVC: UIViewController, UITextFieldDelegate, UINavigationControllerDe
     }
     
     @IBAction func login(_ sender: Any) {
+        for item in self.inputFields {
+            item.resignFirstResponder()
+        }
+        self.showLoading(state: true)
         User.loginUser(withEmail: self.loginEmailField.text!, password: self.loginPasswordField.text!) { [weak weakSelf = self](status) in
             DispatchQueue.main.async {
+                weakSelf?.showLoading(state: false)
+                for item in self.inputFields {
+                    item.text = ""
+                }
                 if status == true {
                     weakSelf?.pushTomainView()
                 } else {

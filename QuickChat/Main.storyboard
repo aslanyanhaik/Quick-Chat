@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="YU4-6K-4QF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="YU4-6K-4QF">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -76,6 +76,23 @@
                                     <action selector="switchViews:" destination="rVC-Ig-Azx" eventType="touchUpInside" id="QAB-rd-4px"/>
                                 </connections>
                             </button>
+                            <view hidden="YES" alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mgg-MM-NR7">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="b3E-sR-X8y">
+                                        <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="S2t-Nb-k3P"/>
+                                            <constraint firstAttribute="width" constant="20" id="ghP-ck-Inx"/>
+                                        </constraints>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="b3E-sR-X8y" firstAttribute="centerX" secondItem="mgg-MM-NR7" secondAttribute="centerX" id="PX6-li-WQd"/>
+                                    <constraint firstItem="b3E-sR-X8y" firstAttribute="centerY" secondItem="mgg-MM-NR7" secondAttribute="centerY" id="jTI-6b-q2r"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -87,12 +104,17 @@
                             <constraint firstItem="pW2-zY-MgK" firstAttribute="top" secondItem="oxM-sB-nYg" secondAttribute="top" id="SNc-Zy-9fB"/>
                             <constraint firstItem="aSu-34-603" firstAttribute="centerX" secondItem="oxM-sB-nYg" secondAttribute="centerX" id="Yiw-ZS-PWv"/>
                             <constraint firstItem="Ong-Qv-GEy" firstAttribute="top" secondItem="ddG-br-Cig" secondAttribute="bottom" id="bfK-GS-nmR"/>
+                            <constraint firstItem="Ong-Qv-GEy" firstAttribute="top" secondItem="mgg-MM-NR7" secondAttribute="bottom" id="cKq-xJ-DNJ"/>
+                            <constraint firstAttribute="trailing" secondItem="mgg-MM-NR7" secondAttribute="trailing" id="ggq-YC-Iz3"/>
                             <constraint firstItem="Ong-Qv-GEy" firstAttribute="top" secondItem="pW2-zY-MgK" secondAttribute="bottom" id="kjx-JP-1cp"/>
+                            <constraint firstItem="mgg-MM-NR7" firstAttribute="top" secondItem="oxM-sB-nYg" secondAttribute="top" id="n9r-PA-mNB"/>
+                            <constraint firstItem="mgg-MM-NR7" firstAttribute="leading" secondItem="oxM-sB-nYg" secondAttribute="leading" id="qeo-ze-RN7"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="cloudsView" destination="ddG-br-Cig" id="LoI-Vx-dm0"/>
                         <outlet property="cloudsViewLeading" destination="FqB-ie-bd4" id="Gah-Uh-uIp"/>
+                        <outlet property="darkView" destination="mgg-MM-NR7" id="vKQ-2d-KyE"/>
                         <outlet property="loginEmailField" destination="Ecv-9h-ZWB" id="EYC-V1-0Fo"/>
                         <outlet property="loginPasswordField" destination="12N-yZ-eQF" id="Noo-Av-rda"/>
                         <outlet property="loginView" destination="Fdo-n4-x0m" id="z0i-g0-DGT"/>
@@ -101,8 +123,14 @@
                         <outlet property="registerNameField" destination="ysO-kC-tfW" id="v99-9x-pJM"/>
                         <outlet property="registerPasswordField" destination="MbO-OW-uK3" id="cuk-aV-R6W"/>
                         <outlet property="registerView" destination="nIB-x6-Ajd" id="SqE-hU-K8o"/>
+                        <outlet property="spinner" destination="b3E-sR-X8y" id="G2n-1r-jdg"/>
                         <outletCollection property="waringLabels" destination="aBA-he-i3z" collectionClass="NSMutableArray" id="1Dt-un-JpK"/>
                         <outletCollection property="waringLabels" destination="O5g-Mk-Irl" collectionClass="NSMutableArray" id="bVM-Mf-GdQ"/>
+                        <outletCollection property="inputFields" destination="ysO-kC-tfW" id="Eqq-cj-Od8"/>
+                        <outletCollection property="inputFields" destination="HqN-BY-obZ" id="sKF-h0-9ak"/>
+                        <outletCollection property="inputFields" destination="MbO-OW-uK3" id="Kdy-2c-E3Y"/>
+                        <outletCollection property="inputFields" destination="Ecv-9h-ZWB" id="0WE-ZX-Wyh"/>
+                        <outletCollection property="inputFields" destination="12N-yZ-eQF" id="8YP-mT-7qC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ub0-iA-SeX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -423,7 +451,7 @@
                     </constraints>
                 </view>
             </objects>
-            <point key="canvasLocation" x="86" y="429"/>
+            <point key="canvasLocation" x="85.599999999999994" y="428.63568215892059"/>
         </scene>
         <!-- -->
         <scene sceneID="sN9-4N-rjq">
@@ -716,7 +744,7 @@
                             <rect key="frame" x="38" y="69" width="301" height="50"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qBU-f2-8Pd">
-                                    <rect key="frame" x="1" y="13" width="32" height="25"/>
+                                    <rect key="frame" x="0.0" y="13" width="32" height="25"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="32" id="TVn-tN-gQt"/>
                                         <constraint firstAttribute="height" constant="25" id="jlM-k3-Pan"/>
@@ -738,7 +766,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bPy-aa-pXN">
-                                    <rect key="frame" x="180" y="13" width="32" height="25"/>
+                                    <rect key="frame" x="179" y="13" width="32" height="25"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="32" id="sbK-bR-TmC"/>
                                         <constraint firstAttribute="height" constant="25" id="yVq-0V-Mqj"/>
@@ -749,7 +777,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wkz-Xg-Poz">
-                                    <rect key="frame" x="270" y="13" width="32" height="25"/>
+                                    <rect key="frame" x="269" y="13" width="32" height="25"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="32" id="D4D-g2-P3B"/>
                                         <constraint firstAttribute="height" constant="25" id="xpY-Vx-Gwa"/>
