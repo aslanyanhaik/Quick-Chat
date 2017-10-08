@@ -110,7 +110,7 @@ class WelcomeVC: UIViewController, UITextFieldDelegate, UINavigationControllerDe
     func openPhotoPickerWith(source: PhotoSource) {
         switch source {
         case .camera:
-            let status = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
+            let status = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
             if (status == .authorized || status == .notDetermined) {
                 self.imagePicker.sourceType = .camera
                 self.imagePicker.allowsEditing = true

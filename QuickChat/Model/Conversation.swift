@@ -43,7 +43,7 @@ class Conversation {
                         let emptyMessage = Message.init(type: .text, content: "loading", owner: .sender, timestamp: 0, isRead: true)
                         let conversation = Conversation.init(user: user, lastMessage: emptyMessage)
                         conversations.append(conversation)
-                        conversation.lastMessage.downloadLastMessage(forLocation: location, completion: { (_) in
+                        conversation.lastMessage.downloadLastMessage(forLocation: location, completion: { 
                             completion(conversations)
                         })
                     })

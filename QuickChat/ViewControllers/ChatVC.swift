@@ -82,7 +82,7 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
     }
     
     //Hides current viewcontroller
-    func dismissSelf() {
+    @objc func dismissSelf() {
         if let navController = self.navigationController {
             navController.popViewController(animated: true)
         }
@@ -137,7 +137,7 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
     
     @IBAction func selectCamera(_ sender: Any) {
         self.animateExtraButtons(toHide: true)
-        let status = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
+        let status = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
         if (status == .authorized || status == .notDetermined) {
             self.imagePicker.sourceType = .camera
             self.imagePicker.allowsEditing = false
@@ -169,7 +169,7 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
     }
     
     //MARK: NotificationCenter handlers
-    func showKeyboard(notification: Notification) {
+    @objc func showKeyboard(notification: Notification) {
         if let frame = notification.userInfo![UIKeyboardFrameEndUserInfoKey] as? NSValue {
             let height = frame.cgRectValue.height
             self.tableView.contentInset.bottom = height
