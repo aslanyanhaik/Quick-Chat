@@ -87,7 +87,7 @@ static NSString *gLoggingProcessName = nil;
     // directory that a developer can find easily, the application home
     paths = @[ NSHomeDirectory() ];
 #elif TARGET_OS_IPHONE
-    // Neither ~/Desktop nor ~/Home is writable on an actual iPhone device.
+    // Neither ~/Desktop nor ~/Home is writable on an actual iOS, watchOS, or tvOS device.
     // Put it in ~/Documents.
     paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 #else
