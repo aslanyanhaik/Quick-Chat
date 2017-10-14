@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B976F4D1F8FCEF3007A9FE8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1B976F4C1F8FC59B007A9FE8 /* GoogleService-Info.plist */; };
 		220698841E066E4900F2284B /* Helper Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220698831E066E4900F2284B /* Helper Files.swift */; };
 		2217853D1DCD1DAC00A69F88 /* ConversationsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2217853C1DCD1DAC00A69F88 /* ConversationsVC.swift */; };
 		224834B11DB539A50019153C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224834B01DB539A50019153C /* User.swift */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1B976F4C1F8FC59B007A9FE8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		220698831E066E4900F2284B /* Helper Files.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Helper Files.swift"; path = "Helper files/Helper Files.swift"; sourceTree = "<group>"; };
 		2217853C1DCD1DAC00A69F88 /* ConversationsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConversationsVC.swift; path = QuickChat/ViewControllers/ConversationsVC.swift; sourceTree = "<group>"; };
 		224834B01DB539A50019153C /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = QuickChat/Model/User.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				224AFAAA1D86900B004E7CCD /* Helper Files */,
 				22A92BB71D59EBD6005D76F7 /* Assets.xcassets */,
 				22A92BBC1D59EBD6005D76F7 /* Info.plist */,
+				1B976F4C1F8FC59B007A9FE8 /* GoogleService-Info.plist */,
 				22EA578E1E1D28DD0008FFB2 /* newMessage.wav */,
 			);
 			path = QuickChat;
@@ -180,6 +183,7 @@
 				TargetAttributes = {
 					22A92BAC1D59EBD5005D76F7 = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = RKSE3ZH6AB;
 						DevelopmentTeamName = "Haik Aslanyan (Personal Team)";
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -217,6 +221,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22A92BB81D59EBD6005D76F7 /* Assets.xcassets in Resources */,
+				1B976F4D1F8FCEF3007A9FE8 /* GoogleService-Info.plist in Resources */,
 				22EA578F1E1D28DD0008FFB2 /* newMessage.wav in Resources */,
 				224AFA9D1D867DE7004E7CCD /* Main.storyboard in Resources */,
 			);
@@ -231,13 +236,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-QuickChat-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		59C78960725AB64FF0FC6829 /* [CP] Copy Pods Resources */ = {
@@ -261,9 +269,18 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-QuickChat/Pods-QuickChat-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -391,11 +408,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = RKSE3ZH6AB;
 				INFOPLIST_FILE = QuickChat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.YourIdentifier.QuickChat;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hsjh.zcql;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -407,11 +424,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = RKSE3ZH6AB;
 				INFOPLIST_FILE = QuickChat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.YourIdentifier.QuickChat;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hsjh.zcql;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

@@ -181,7 +181,7 @@ class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewD
     
     //Downloads users list for Contacts View
     func fetchUsers()  {
-        if let id = FIRAuth.auth()?.currentUser?.uid {
+        if let id = Auth.auth().currentUser?.uid {
             User.downloadAllUsers(exceptID: id, completion: {(user) in
                 DispatchQueue.main.async {
                     self.items.append(user)
@@ -193,7 +193,7 @@ class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewD
     
     //Downloads current user credentials
     func fetchUserInfo() {
-        if let id = FIRAuth.auth()?.currentUser?.uid {
+        if let id = Auth.auth().currentUser?.uid {
             User.info(forUserID: id, completion: {[weak weakSelf = self] (user) in
                 DispatchQueue.main.async {
                     weakSelf?.nameLabel.text = user.name

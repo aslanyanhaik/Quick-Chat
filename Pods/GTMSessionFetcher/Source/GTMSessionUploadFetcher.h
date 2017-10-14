@@ -39,6 +39,9 @@
 
 GTM_ASSUME_NONNULL_BEGIN
 
+// The value to use for file size parameters when the file size is not yet known.
+extern int64_t const kGTMSessionUploadFetcherUnknownFileSize;
+
 // Unless an application knows it needs a smaller chunk size, it should use the standard
 // chunk size, which sends the entire file as a single chunk to minimize upload overhead.
 extern int64_t const kGTMSessionUploadFetcherStandardChunkSize;
@@ -55,9 +58,17 @@ extern NSString *const kGTMSessionFetcherUploadLocationObtainedNotification;
 // Response data may be allocated with dataWithBytesNoCopy:length:freeWhenDone: for efficiency,
 // and released after the response block returns.
 //
+// If the length of the file being uploaded is unknown or already set, send
+// kGTMSessionUploadFetcherUnknownFileSize for |fullUploadLength|. Otherwise, set |fullUploadLength|
+// to its proper value.
+//
 // Pass nil as the data (and optionally an NSError) for a failure.
 typedef void (^GTMSessionUploadFetcherDataProviderResponse)(NSData * GTM_NULLABLE_TYPE data,
+                                                            int64_t fullUploadLength,
                                                             NSError * GTM_NULLABLE_TYPE error);
+// Do not call the repsonse with an NSData object with less data than the requested length unless
+// you are passing the fullUploadLength to the fetcher for the first time and it is the last chunk
+// of data in the file being uploaded.
 typedef void (^GTMSessionUploadFetcherDataProvider)(int64_t offset, int64_t length,
     GTMSessionUploadFetcherDataProviderResponse response);
 
@@ -81,6 +92,8 @@ typedef void (^GTMSessionUploadFetcherDataProvider)(int64_t offset, int64_t leng
                                 chunkSize:(int64_t)chunkSize
                            fetcherService:(GTM_NULLABLE GTMSessionFetcherService *)fetcherServiceOrNil;
 
+// Allows dataProviders for files of unknown length. Pass kGTMSessionUploadFetcherUnknownFileSize as
+// |fullLength| if the length is unknown.
 - (void)setUploadDataLength:(int64_t)fullLength
                    provider:(GTM_NULLABLE GTMSessionUploadFetcherDataProvider)block;
 
