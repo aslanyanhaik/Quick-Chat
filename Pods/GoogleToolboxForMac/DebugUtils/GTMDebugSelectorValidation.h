@@ -18,9 +18,9 @@
 //  Licensed under the Apache License, Version 2.0 (the "License"); you may not
 //  use this file except in compliance with the License.  You may obtain a copy
 //  of the License at
-// 
+//
 //  http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 //  Unless required by applicable law or agreed to in writing, software
 //  distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
 //  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the
@@ -39,52 +39,52 @@ static void GTMAssertSelectorNilOrImplementedWithReturnTypeAndArguments(id obj, 
   // number and type of arguments
   va_list argList;
   va_start(argList, retType);
-  
+
   if (obj && sel) {
     // check that the selector is implemented
     _GTMDevAssert([obj respondsToSelector:sel],
-                  @"\"%@\" selector \"%@\" is unimplemented or misnamed", 
-                  NSStringFromClass([obj class]), 
+                  @"\"%@\" selector \"%@\" is unimplemented or misnamed",
+                  NSStringFromClass([obj class]),
                   NSStringFromSelector(sel));
 
     const char *expectedArgType;
     NSUInteger argCount = 2; // skip self and _cmd
     NSMethodSignature *sig = [obj methodSignatureForSelector:sel];
-    
+
     // check that each expected argument is present and of the correct type
     while ((expectedArgType = va_arg(argList, const char*)) != 0) {
-        
+
       if ([sig numberOfArguments] > argCount) {
         const char *foundArgType = [sig getArgumentTypeAtIndex:argCount];
-          
+
         _GTMDevAssert(0 == strncmp(foundArgType, expectedArgType, strlen(expectedArgType)),
-                      @"\"%@\" selector \"%@\" argument %u should be type %s", 
-                      NSStringFromClass([obj class]), 
+                      @"\"%@\" selector \"%@\" argument %u should be type %s",
+                      NSStringFromClass([obj class]),
                       NSStringFromSelector(sel),
                       (uint32_t)(argCount - 2),
                       expectedArgType);
       }
       argCount++;
     }
-      
+
     // check that the proper number of arguments are present in the selector
     _GTMDevAssert(argCount == [sig numberOfArguments],
                   @"\"%@\" selector \"%@\" should have %u arguments",
-                  NSStringFromClass([obj class]), 
+                  NSStringFromClass([obj class]),
                   NSStringFromSelector(sel),
                   (uint32_t)(argCount - 2));
-    
+
     // if asked, validate the return type
     if (retType && (strcmp("gtm_skip_return_test", retType) != 0)) {
       const char *foundRetType = [sig methodReturnType];
       _GTMDevAssert(0 == strncmp(foundRetType, retType, strlen(retType)),
-                    @"\"%@\" selector \"%@\" return type should be type %s", 
-                    NSStringFromClass([obj class]), 
+                    @"\"%@\" selector \"%@\" return type should be type %s",
+                    NSStringFromClass([obj class]),
                     NSStringFromSelector(sel),
                     retType);
     }
   }
-  
+
   va_end(argList);
 }
 
