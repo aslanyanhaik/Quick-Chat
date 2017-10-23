@@ -134,7 +134,7 @@ class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewD
     }
     
     //Show extra view
-    func showExtraViews(notification: NSNotification)  {
+    @objc func showExtraViews(notification: NSNotification)  {
         let transform = CGAffineTransform.init(scaleX: 0.94, y: 0.94)
         self.topAnchorContraint.constant = 0
         self.darkView.isHidden = false
