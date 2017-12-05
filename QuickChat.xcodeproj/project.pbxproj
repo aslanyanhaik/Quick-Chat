@@ -7,42 +7,42 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		220698841E066E4900F2284B /* Helper Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220698831E066E4900F2284B /* Helper Files.swift */; };
-		2217853D1DCD1DAC00A69F88 /* ConversationsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2217853C1DCD1DAC00A69F88 /* ConversationsVC.swift */; };
-		224834B11DB539A50019153C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224834B01DB539A50019153C /* User.swift */; };
+		2227EA041FD707B7008F5CA9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2227EA031FD707B7008F5CA9 /* GoogleService-Info.plist */; };
 		224AFA9D1D867DE7004E7CCD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 224AFA9C1D867DE7004E7CCD /* Main.storyboard */; };
-		224AFAA91D86890A004E7CCD /* WelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224AFAA81D86890A004E7CCD /* WelcomeVC.swift */; };
 		226EFFA11E1BBBCA00B1D185 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 226EFFA01E1BBBCA00B1D185 /* MapKit.framework */; };
-		2274709E1DCCF9BF00645401 /* LandingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2274709D1DCCF9BF00645401 /* LandingVC.swift */; };
-		2284BC451DC3582F00E36E8A /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2284BC441DC3582F00E36E8A /* ChatVC.swift */; };
-		22873DAA1DC790550021690E /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22873DA91DC790550021690E /* Message.swift */; };
-		22A5FC5F1DEB185B00624E2B /* NavVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A5FC5E1DEB185B00624E2B /* NavVC.swift */; };
 		22A92BB11D59EBD6005D76F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A92BB01D59EBD6005D76F7 /* AppDelegate.swift */; };
 		22A92BB81D59EBD6005D76F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22A92BB71D59EBD6005D76F7 /* Assets.xcassets */; };
-		22B974C01DE9B5DF00E09490 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B974BF1DE9B5DF00E09490 /* Conversation.swift */; };
-		22EA578F1E1D28DD0008FFB2 /* newMessage.wav in Resources */ = {isa = PBXBuildFile; fileRef = 22EA578E1E1D28DD0008FFB2 /* newMessage.wav */; };
-		22EA57911E1D32520008FFB2 /* VCCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EA57901E1D32520008FFB2 /* VCCells.swift */; };
+		22E200B51FD70E28005470B4 /* NavVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E200AF1FD70E24005470B4 /* NavVC.swift */; };
+		22E200B61FD70E28005470B4 /* ConversationsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E200B01FD70E25005470B4 /* ConversationsVC.swift */; };
+		22E200B71FD70E28005470B4 /* LandingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E200B11FD70E26005470B4 /* LandingVC.swift */; };
+		22E200B81FD70E28005470B4 /* VCCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E200B21FD70E27005470B4 /* VCCells.swift */; };
+		22E200B91FD70E28005470B4 /* WelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E200B31FD70E27005470B4 /* WelcomeVC.swift */; };
+		22E200BA1FD70E28005470B4 /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E200B41FD70E28005470B4 /* ChatVC.swift */; };
+		22E200C01FD70E6B005470B4 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E200BD1FD70E69005470B4 /* Message.swift */; };
+		22E200C11FD70E6B005470B4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E200BE1FD70E6A005470B4 /* User.swift */; };
+		22E200C21FD70E6B005470B4 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E200BF1FD70E6A005470B4 /* Conversation.swift */; };
+		22E200C51FD70ECD005470B4 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E200C41FD70ECD005470B4 /* Extensions.swift */; };
 		62058F6006BD9ACBE0439C4B /* Pods_QuickChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8041C4B4A9DA4F0F53D2BDE /* Pods_QuickChat.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		220698831E066E4900F2284B /* Helper Files.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Helper Files.swift"; path = "Helper files/Helper Files.swift"; sourceTree = "<group>"; };
-		2217853C1DCD1DAC00A69F88 /* ConversationsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConversationsVC.swift; path = QuickChat/ViewControllers/ConversationsVC.swift; sourceTree = "<group>"; };
-		224834B01DB539A50019153C /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = QuickChat/Model/User.swift; sourceTree = "<group>"; };
+		2227EA031FD707B7008F5CA9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		224AFA9C1D867DE7004E7CCD /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		224AFAA81D86890A004E7CCD /* WelcomeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WelcomeVC.swift; path = QuickChat/ViewControllers/WelcomeVC.swift; sourceTree = "<group>"; };
 		226EFFA01E1BBBCA00B1D185 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		2274709D1DCCF9BF00645401 /* LandingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LandingVC.swift; path = QuickChat/ViewControllers/LandingVC.swift; sourceTree = "<group>"; };
-		2284BC441DC3582F00E36E8A /* ChatVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatVC.swift; path = QuickChat/ViewControllers/ChatVC.swift; sourceTree = "<group>"; };
-		22873DA91DC790550021690E /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Message.swift; path = QuickChat/Model/Message.swift; sourceTree = "<group>"; };
-		22A5FC5E1DEB185B00624E2B /* NavVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NavVC.swift; path = QuickChat/ViewControllers/NavVC.swift; sourceTree = "<group>"; };
 		22A92BAD1D59EBD6005D76F7 /* QuickChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22A92BB01D59EBD6005D76F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22A92BB71D59EBD6005D76F7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		22A92BBC1D59EBD6005D76F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		22B974BF1DE9B5DF00E09490 /* Conversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Conversation.swift; path = QuickChat/Model/Conversation.swift; sourceTree = "<group>"; };
-		22EA578E1E1D28DD0008FFB2 /* newMessage.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = newMessage.wav; sourceTree = "<group>"; };
-		22EA57901E1D32520008FFB2 /* VCCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VCCells.swift; path = QuickChat/ViewControllers/VCCells.swift; sourceTree = "<group>"; };
+		22E200AF1FD70E24005470B4 /* NavVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavVC.swift; sourceTree = "<group>"; };
+		22E200B01FD70E25005470B4 /* ConversationsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationsVC.swift; sourceTree = "<group>"; };
+		22E200B11FD70E26005470B4 /* LandingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandingVC.swift; sourceTree = "<group>"; };
+		22E200B21FD70E27005470B4 /* VCCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCCells.swift; sourceTree = "<group>"; };
+		22E200B31FD70E27005470B4 /* WelcomeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeVC.swift; sourceTree = "<group>"; };
+		22E200B41FD70E28005470B4 /* ChatVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
+		22E200BD1FD70E69005470B4 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		22E200BE1FD70E6A005470B4 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		22E200BF1FD70E6A005470B4 /* Conversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
+		22E200C41FD70ECD005470B4 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		614F8B4888358059B3DC166B /* Pods-QuickChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QuickChat/Pods-QuickChat.debug.xcconfig"; sourceTree = "<group>"; };
 		B8041C4B4A9DA4F0F53D2BDE /* Pods_QuickChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuickChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8FBFCFF82B6EB57B02FA375 /* Pods-QuickChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-QuickChat/Pods-QuickChat.release.xcconfig"; sourceTree = "<group>"; };
@@ -61,39 +61,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		224834AF1DB539690019153C /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				224834B01DB539A50019153C /* User.swift */,
-				22873DA91DC790550021690E /* Message.swift */,
-				22B974BF1DE9B5DF00E09490 /* Conversation.swift */,
-			);
-			name = Model;
-			path = ..;
-			sourceTree = "<group>";
-		};
-		224AFA9E1D868371004E7CCD /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				2274709D1DCCF9BF00645401 /* LandingVC.swift */,
-				224AFAA81D86890A004E7CCD /* WelcomeVC.swift */,
-				22A5FC5E1DEB185B00624E2B /* NavVC.swift */,
-				2217853C1DCD1DAC00A69F88 /* ConversationsVC.swift */,
-				2284BC441DC3582F00E36E8A /* ChatVC.swift */,
-				22EA57901E1D32520008FFB2 /* VCCells.swift */,
-			);
-			name = ViewControllers;
-			path = ..;
-			sourceTree = "<group>";
-		};
-		224AFAAA1D86900B004E7CCD /* Helper Files */ = {
-			isa = PBXGroup;
-			children = (
-				220698831E066E4900F2284B /* Helper Files.swift */,
-			);
-			name = "Helper Files";
-			sourceTree = "<group>";
-		};
 		22A92BA41D59EBD5005D76F7 = {
 			isa = PBXGroup;
 			children = (
@@ -117,14 +84,45 @@
 			children = (
 				22A92BB01D59EBD6005D76F7 /* AppDelegate.swift */,
 				224AFA9C1D867DE7004E7CCD /* Main.storyboard */,
-				224AFA9E1D868371004E7CCD /* ViewControllers */,
-				224834AF1DB539690019153C /* Model */,
-				224AFAAA1D86900B004E7CCD /* Helper Files */,
+				2227EA031FD707B7008F5CA9 /* GoogleService-Info.plist */,
+				22E200A21FD70DF6005470B4 /* ViewControllers */,
+				22E200BC1FD70E61005470B4 /* Model */,
+				22E200C31FD70EAF005470B4 /* Extensions */,
 				22A92BB71D59EBD6005D76F7 /* Assets.xcassets */,
 				22A92BBC1D59EBD6005D76F7 /* Info.plist */,
-				22EA578E1E1D28DD0008FFB2 /* newMessage.wav */,
 			);
 			path = QuickChat;
+			sourceTree = "<group>";
+		};
+		22E200A21FD70DF6005470B4 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				22E200B11FD70E26005470B4 /* LandingVC.swift */,
+				22E200B41FD70E28005470B4 /* ChatVC.swift */,
+				22E200B01FD70E25005470B4 /* ConversationsVC.swift */,
+				22E200AF1FD70E24005470B4 /* NavVC.swift */,
+				22E200B21FD70E27005470B4 /* VCCells.swift */,
+				22E200B31FD70E27005470B4 /* WelcomeVC.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		22E200BC1FD70E61005470B4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				22E200BF1FD70E6A005470B4 /* Conversation.swift */,
+				22E200BD1FD70E69005470B4 /* Message.swift */,
+				22E200BE1FD70E6A005470B4 /* User.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		22E200C31FD70EAF005470B4 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				22E200C41FD70ECD005470B4 /* Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		5923406597F4A9DB000B8FF9 /* Frameworks */ = {
@@ -180,6 +178,7 @@
 				TargetAttributes = {
 					22A92BAC1D59EBD5005D76F7 = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = P6GDVV24N5;
 						DevelopmentTeamName = "Haik Aslanyan (Personal Team)";
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
@@ -218,7 +217,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22A92BB81D59EBD6005D76F7 /* Assets.xcassets in Resources */,
-				22EA578F1E1D28DD0008FFB2 /* newMessage.wav in Resources */,
+				2227EA041FD707B7008F5CA9 /* GoogleService-Info.plist in Resources */,
 				224AFA9D1D867DE7004E7CCD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -232,13 +231,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-QuickChat-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		59C78960725AB64FF0FC6829 /* [CP] Copy Pods Resources */ = {
@@ -262,9 +264,32 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-QuickChat/Pods-QuickChat-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-ProtoRPC/ProtoRPC.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-RxLibrary/RxLibrary.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ProtoRPC.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxLibrary.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -278,17 +303,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2284BC451DC3582F00E36E8A /* ChatVC.swift in Sources */,
-				2274709E1DCCF9BF00645401 /* LandingVC.swift in Sources */,
-				22A5FC5F1DEB185B00624E2B /* NavVC.swift in Sources */,
-				22B974C01DE9B5DF00E09490 /* Conversation.swift in Sources */,
-				2217853D1DCD1DAC00A69F88 /* ConversationsVC.swift in Sources */,
+				22E200B71FD70E28005470B4 /* LandingVC.swift in Sources */,
+				22E200B91FD70E28005470B4 /* WelcomeVC.swift in Sources */,
+				22E200B51FD70E28005470B4 /* NavVC.swift in Sources */,
+				22E200C01FD70E6B005470B4 /* Message.swift in Sources */,
+				22E200B81FD70E28005470B4 /* VCCells.swift in Sources */,
+				22E200C21FD70E6B005470B4 /* Conversation.swift in Sources */,
 				22A92BB11D59EBD6005D76F7 /* AppDelegate.swift in Sources */,
-				224AFAA91D86890A004E7CCD /* WelcomeVC.swift in Sources */,
-				220698841E066E4900F2284B /* Helper Files.swift in Sources */,
-				22873DAA1DC790550021690E /* Message.swift in Sources */,
-				22EA57911E1D32520008FFB2 /* VCCells.swift in Sources */,
-				224834B11DB539A50019153C /* User.swift in Sources */,
+				22E200BA1FD70E28005470B4 /* ChatVC.swift in Sources */,
+				22E200C11FD70E6B005470B4 /* User.swift in Sources */,
+				22E200C51FD70ECD005470B4 /* Extensions.swift in Sources */,
+				22E200B61FD70E28005470B4 /* ConversationsVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -404,11 +429,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = P6GDVV24N5;
 				INFOPLIST_FILE = QuickChat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.YourIdentifier.QuickChat;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mexonis.quick-chat";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
@@ -421,11 +446,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = P6GDVV24N5;
 				INFOPLIST_FILE = QuickChat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.YourIdentifier.QuickChat;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mexonis.quick-chat";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;

@@ -29,7 +29,7 @@ class LandingVC: UIViewController {
     //MARK: Properties
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         get {
-            return UIInterfaceOrientationMask.portrait
+            return .portrait
         }
     }
 
@@ -64,9 +64,5 @@ class LandingVC: UIViewController {
         } else {
             self.pushTo(viewController: .welcome)
         }
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
     }
 }

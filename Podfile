@@ -1,4 +1,4 @@
-platform :ios, '9.1'
+platform :ios, '10.0'
 use_frameworks!
 
 target 'QuickChat' do
@@ -6,6 +6,8 @@ target 'QuickChat' do
 	pod 'Firebase/Database'
 	pod 'Firebase/Auth'
 	pod 'Firebase/Storage'
+	pod 'Kingfisher'
+	pod "Firebase/Firestore"
 
 end
 
