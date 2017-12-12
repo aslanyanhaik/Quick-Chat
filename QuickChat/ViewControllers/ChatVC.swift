@@ -161,7 +161,7 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
     
     @IBAction func sendMessage(_ sender: Any) {
         if let text = self.inputTextField.text {
-            if text.characters.count > 0 {
+            if text.count > 0 {
                 self.composeMessage(type: .text, content: self.inputTextField.text!)
                 self.inputTextField.text = ""
             }

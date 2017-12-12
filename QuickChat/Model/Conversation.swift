@@ -32,9 +32,9 @@ class Conversation {
     
     //MARK: Methods
     class func showConversations(completion: @escaping ([Conversation]) -> Swift.Void) {
-        if let currentUserID = FIRAuth.auth()?.currentUser?.uid {
+        if let currentUserID = Auth.auth().currentUser?.uid {
             var conversations = [Conversation]()
-            FIRDatabase.database().reference().child("users").child(currentUserID).child("conversations").observe(.childAdded, with: { (snapshot) in
+            Database.database().reference().child("users").child(currentUserID).child("conversations").observe(.childAdded, with: { (snapshot) in
                 if snapshot.exists() {
                     let fromID = snapshot.key
                     let values = snapshot.value as! [String: String]

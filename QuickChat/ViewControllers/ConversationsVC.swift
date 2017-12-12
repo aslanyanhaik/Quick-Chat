@@ -54,7 +54,7 @@ class ConversationsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         //left bar button image fetching
         self.navigationItem.leftBarButtonItem = self.leftButton
         self.tableView.tableFooterView = UIView.init(frame: CGRect.zero)
-        if let id = FIRAuth.auth()?.currentUser?.uid {
+        if let id = Auth.auth().currentUser?.uid {
             User.info(forUserID: id, completion: { [weak weakSelf = self] (user) in
                 let image = user.profilePic
                 let contentSize = CGSize.init(width: 30, height: 30)
