@@ -29,7 +29,10 @@
 //
 // Chunk fetchers are discarded as soon as they have completed.
 //
-
+// The protocol also allows for a cancellation notification request to be sent to the
+// server to allow discarding of the currently uploaded data and this will be sent
+// automatically upon calling stopFetching if the upload has already started.
+//
 // Note: Unlike the fetcher superclass, the methods of GTMSessionUploadFetcher should
 // only be used from the main thread until further work is done to make this subclass
 // thread-safe.
@@ -39,8 +42,13 @@
 
 GTM_ASSUME_NONNULL_BEGIN
 
+// The value to use for file size parameters when the file size is not yet known.
+extern int64_t const kGTMSessionUploadFetcherUnknownFileSize;
+
 // Unless an application knows it needs a smaller chunk size, it should use the standard
 // chunk size, which sends the entire file as a single chunk to minimize upload overhead.
+// Setting an explicit chunk size that comfortably fits in memory is advisable for large
+// uploads.
 extern int64_t const kGTMSessionUploadFetcherStandardChunkSize;
 
 // When uploading requires data buffer allocations (such as uploading from an NSData or
@@ -55,11 +63,29 @@ extern NSString *const kGTMSessionFetcherUploadLocationObtainedNotification;
 // Response data may be allocated with dataWithBytesNoCopy:length:freeWhenDone: for efficiency,
 // and released after the response block returns.
 //
+// If the length of the file being uploaded is unknown or already set, send
+// kGTMSessionUploadFetcherUnknownFileSize for |fullUploadLength|. Otherwise, set |fullUploadLength|
+// to its proper value.
+//
 // Pass nil as the data (and optionally an NSError) for a failure.
 typedef void (^GTMSessionUploadFetcherDataProviderResponse)(NSData * GTM_NULLABLE_TYPE data,
+                                                            int64_t fullUploadLength,
                                                             NSError * GTM_NULLABLE_TYPE error);
+// Do not call the repsonse with an NSData object with less data than the requested length unless
+// you are passing the fullUploadLength to the fetcher for the first time and it is the last chunk
+// of data in the file being uploaded.
 typedef void (^GTMSessionUploadFetcherDataProvider)(int64_t offset, int64_t length,
     GTMSessionUploadFetcherDataProviderResponse response);
+
+// Block to be notified about the final status of the cancellation request started in stopFetching.
+//
+// |fetcher| will be the cancel request that was sent to the server, or nil if stopFetching is not
+// going to send a cancel request. If |fetcher| is provided, the other parameters correspond to the
+// completion handler of the cancellation request fetcher.
+typedef void (^GTMSessionUploadFetcherCancellationHandler)(
+    GTMSessionFetcher * GTM_NULLABLE_TYPE fetcher,
+    NSData * GTM_NULLABLE_TYPE data,
+    NSError * GTM_NULLABLE_TYPE error);
 
 @interface GTMSessionUploadFetcher : GTMSessionFetcher
 
@@ -81,6 +107,8 @@ typedef void (^GTMSessionUploadFetcherDataProvider)(int64_t offset, int64_t leng
                                 chunkSize:(int64_t)chunkSize
                            fetcherService:(GTM_NULLABLE GTMSessionFetcherService *)fetcherServiceOrNil;
 
+// Allows dataProviders for files of unknown length. Pass kGTMSessionUploadFetcherUnknownFileSize as
+// |fullLength| if the length is unknown.
 - (void)setUploadDataLength:(int64_t)fullLength
                    provider:(GTM_NULLABLE GTMSessionUploadFetcherDataProvider)block;
 
@@ -112,6 +140,16 @@ typedef void (^GTMSessionUploadFetcherDataProvider)(int64_t offset, int64_t leng
 
 // The status code from the most recently-completed fetch.
 @property(atomic, assign) NSInteger statusCode;
+
+// Invoked as part of the stop fetching process. Invoked immediately if there is no upload in
+// progress, otherwise invoked with the results of the attempt to notify the server that the
+// upload will not continue.
+//
+// Unlike other callbacks, since this is related specifically to the stopFetching flow it is not
+// cleared by stopFetching. It will instead clear itself after it is invoked or if the completion
+// has occured before stopFetching is called.
+@property(atomic, copy, GTM_NULLABLE) GTMSessionUploadFetcherCancellationHandler
+    cancellationHandler;
 
 // Exposed for testing only.
 @property(atomic, readonly, GTM_NULLABLE) dispatch_queue_t delegateCallbackQueue;
