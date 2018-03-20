@@ -1,31 +1,18 @@
 /*
- * Firebase iOS Client Library
+ * Copyright 2017 Google
  *
- * Copyright © 2013 Firebase - All Rights Reserved
- * https://www.firebase.com
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
+ *      http://www.apache.org/licenses/LICENSE-2.0
  *
- * 1. Redistributions of source code must retain the above copyright notice, this
- * list of conditions and the following disclaimer.
- *
- * 2. Redistributions in binaryform must reproduce the above copyright notice,
- * this list of conditions and the following disclaimer in the documentation
- * and/or other materials provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY FIREBASE AS IS AND ANY EXPRESS OR
- * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
- * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
- * EVENT SHALL FIREBASE BE LIABLE FOR ANY DIRECT,
- * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
- * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
- * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
- * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
- * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
-
 
 #import <Foundation/Foundation.h>
 #import "FIRDatabaseQuery.h"
@@ -48,6 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
  * to read data (ie. observeEventType:withBlock:), write data (ie. setValue:), and to
  * create new FIRDatabaseReferences (ie. child:).
  */
+NS_SWIFT_NAME(DatabaseReference)
 @interface FIRDatabaseReference : FIRDatabaseQuery
 
 
@@ -85,8 +73,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** Write data to this Firebase Database location.
 
-This will overwrite any data at this location and all child locations. 
- 
+This will overwrite any data at this location and all child locations.
+
 Data types that can be set are:
 
 - NSString -- @"Hello World"
@@ -97,7 +85,7 @@ Data types that can be set are:
 The effect of the write will be visible immediately and the corresponding
 events will be triggered. Synchronization of the data to the Firebase Database
 servers will also be started.
- 
+
 Passing null for the new value is equivalent to calling remove:;
 all data at this location or any child location will be deleted.
 
@@ -142,7 +130,7 @@ is meant to be preserved, you should use setValue:andPriority: instead.
 
 /**
  * Remove the data at this Firebase Database location. Any data at child locations will also be deleted.
- * 
+ *
  * The effect of the delete will be visible immediately and the corresponding events
  * will be triggered. Synchronization of the delete to the Firebase Database servers will
  * also be started.
@@ -176,7 +164,7 @@ is meant to be preserved, you should use setValue:andPriority: instead.
  * Children with a string as their priority come last. They are sorted lexicographically by priority.
  * Whenever two children have the same priority (including no priority), they are sorted by key. Numeric
  * keys come first (sorted numerically), followed by the remaining keys (sorted lexicographically).
- * 
+ *
  * Note that priorities are parsed and ordered as IEEE 754 double-precision floating-point numbers.
  * Keys are always stored as strings and are treated as numbers only when they can be parsed as a
  * 32-bit integer
@@ -204,7 +192,7 @@ is meant to be preserved, you should use setValue:andPriority: instead.
 - (void) updateChildValues:(NSDictionary *)values;
 
 /**
- * The same as update: with a block that is called once the update has been committed to the 
+ * The same as update: with a block that is called once the update has been committed to the
  * Firebase Database servers
  *
  * @param values A dictionary of the keys to change and their new values
@@ -564,7 +552,7 @@ is meant to be preserved, you should use setValue:andPriority: instead.
 
 /**
  * Cancel any operations that are set to run on disconnect. If you previously called onDisconnectSetValue:,
- * onDisconnectRemoveValue:, or onDisconnectUpdateChildValues:, and no longer want the values updated when the 
+ * onDisconnectRemoveValue:, or onDisconnectUpdateChildValues:, and no longer want the values updated when the
  * connection is lost, call cancelDisconnectOperations:
  */
 - (void) cancelDisconnectOperations;
@@ -586,19 +574,19 @@ is meant to be preserved, you should use setValue:andPriority: instead.
  * Manually disconnect the Firebase Database client from the server and disable automatic reconnection.
  *
  * The Firebase Database client automatically maintains a persistent connection to the Firebase Database server,
- * which will remain active indefinitely and reconnect when disconnected. However, the goOffline( ) 
- * and goOnline( ) methods may be used to manually control the client connection in cases where 
+ * which will remain active indefinitely and reconnect when disconnected. However, the goOffline( )
+ * and goOnline( ) methods may be used to manually control the client connection in cases where
  * a persistent connection is undesirable.
- * 
+ *
  * While offline, the Firebase Database client will no longer receive data updates from the server. However,
  * all database operations performed locally will continue to immediately fire events, allowing
- * your application to continue behaving normally. Additionally, each operation performed locally 
+ * your application to continue behaving normally. Additionally, each operation performed locally
  * will automatically be queued and retried upon reconnection to the Firebase Database server.
- * 
+ *
  * To reconnect to the Firebase Database server and begin receiving remote events, see goOnline( ).
  * Once the connection is reestablished, the Firebase Database client will transmit the appropriate data
  * and fire the appropriate events so that your client "catches up" automatically.
- * 
+ *
  * Note: Invoking this method will impact all Firebase Database connections.
  */
 + (void) goOffline;
@@ -607,16 +595,16 @@ is meant to be preserved, you should use setValue:andPriority: instead.
  * Manually reestablish a connection to the Firebase Database server and enable automatic reconnection.
  *
  * The Firebase Database client automatically maintains a persistent connection to the Firebase Database server,
- * which will remain active indefinitely and reconnect when disconnected. However, the goOffline( ) 
- * and goOnline( ) methods may be used to manually control the client connection in cases where 
+ * which will remain active indefinitely and reconnect when disconnected. However, the goOffline( )
+ * and goOnline( ) methods may be used to manually control the client connection in cases where
  * a persistent connection is undesirable.
- * 
- * This method should be used after invoking goOffline( ) to disable the active connection. 
+ *
+ * This method should be used after invoking goOffline( ) to disable the active connection.
  * Once reconnected, the Firebase Database client will automatically transmit the proper data and fire
  * the appropriate events so that your client "catches up" automatically.
- * 
+ *
  * To disconnect from the Firebase Database server, see goOffline( ).
- * 
+ *
  * Note: Invoking this method will impact all Firebase Database connections.
  */
 + (void) goOnline;
@@ -705,7 +693,7 @@ is meant to be preserved, you should use setValue:andPriority: instead.
 
 
 /**
- * Gets the last token in a Firebase Database location (e.g. 'fred' in https://SampleChat.firebaseIO-demo.com/users/fred)
+ * Gets the last token in a Firebase Database location (e.g. 'fred' in https&#58;//SampleChat.firebaseIO-demo.com/users/fred)
  *
  * @return The key of the location this reference points to.
  */

@@ -40,12 +40,14 @@ static NSString *const kGTMSessionHeaderXGoogUploadURL              = @"X-Goog-U
 // Property of chunk fetchers identifying the parent upload fetcher.  Non-retained NSValue.
 static NSString *const kGTMSessionUploadFetcherChunkParentKey = @"_uploadFetcherChunkParent";
 
+int64_t const kGTMSessionUploadFetcherUnknownFileSize = -1;
+
 int64_t const kGTMSessionUploadFetcherStandardChunkSize = (int64_t)LLONG_MAX;
 
 #if TARGET_OS_IPHONE
-int64_t const kGTMSessionUploadFetcherMaximumDemandBufferSize = 10 * 1024 * 1024;  // 10 MB for iOS
+int64_t const kGTMSessionUploadFetcherMaximumDemandBufferSize = 10 * 1024 * 1024;  // 10 MB for iOS, watchOS, tvOS
 #else
-int64_t const kGTMSessionUploadFetcherMaximumDemandBufferSize = 100 * 1024 * 1024;  // 100 MB for OS X
+int64_t const kGTMSessionUploadFetcherMaximumDemandBufferSize = 100 * 1024 * 1024;  // 100 MB for macOS
 #endif
 
 typedef NS_ENUM(NSUInteger, GTMSessionUploadFetcherStatus) {
@@ -70,11 +72,14 @@ NSString *const kGTMSessionFetcherUploadLocationObtainedNotification =
              afterUserStopped:(BOOL)afterStopped
                         block:(void (^)(void))block;
 - (NSTimer *)retryTimer;
+- (void)beginFetchForRetry;
 
 @property(readwrite, strong) NSData *downloadedData;
 - (void)releaseCallbacks;
 
 - (NSInteger)statusCodeUnsynchronized;
+
+- (BOOL)userStoppedFetching;
 
 @end
 #endif  // !GTMSESSION_BUILD_COMBINED_SOURCES
@@ -135,6 +140,9 @@ NSString *const kGTMSessionFetcherUploadLocationObtainedNotification =
   // is in progress.
   GTMSessionFetcher *_fetcherInFlight;
   BOOL _isSubdataGenerating;
+  BOOL _isCancelInFlight;
+
+  GTMSessionUploadFetcherCancellationHandler _cancellationHandler;
 }
 
 + (void)load {
@@ -218,6 +226,7 @@ NSString *const kGTMSessionFetcherUploadLocationObtainedNotification =
   uploadFetcher.sessionUserInfo = metadata;
   uploadFetcher.useBackgroundSession = YES;
   uploadFetcher.currentOffset = currentOffset;
+  uploadFetcher.delegateCallbackQueue = uploadFetcher.callbackQueue;
   uploadFetcher.allowedInsecureSchemes = @[ @"http" ];  // Allowed on restored upload fetcher.
   return uploadFetcher;
 }
@@ -383,7 +392,10 @@ NSString *const kGTMSessionFetcherUploadLocationObtainedNotification =
   @synchronized(self) {
     GTMSessionMonitorSynchronized(self);
 
-    _uploadFileLength = fullLength;
+    if (_uploadFileLength == kGTMSessionUploadFetcherUnknownFileSize &&
+        fullLength != kGTMSessionUploadFetcherUnknownFileSize) {
+      _uploadFileLength = fullLength;
+    }
   }
 }
 
@@ -467,14 +479,13 @@ NSString *const kGTMSessionFetcherUploadLocationObtainedNotification =
                           @"Request and location are mutually exclusive");
   if (!mutableRequest) return;
 
-  NSNumber *lengthNum = @([self fullUploadLength]);
   [mutableRequest setValue:@"resumable"
         forHTTPHeaderField:kGTMSessionHeaderXGoogUploadProtocol];
   [mutableRequest setValue:@"start"
         forHTTPHeaderField:kGTMSessionHeaderXGoogUploadCommand];
   [mutableRequest setValue:_uploadMIMEType
         forHTTPHeaderField:kGTMSessionHeaderXGoogUploadContentType];
-  [mutableRequest setValue:lengthNum.stringValue
+  [mutableRequest setValue:@([self fullUploadLength]).stringValue
         forHTTPHeaderField:kGTMSessionHeaderXGoogUploadContentLength];
 
   NSString *method = mutableRequest.HTTPMethod;
@@ -513,7 +524,7 @@ NSString *const kGTMSessionFetcherUploadLocationObtainedNotification =
     _chunkSize = chunkSize;
 
     // Indicate that we've not yet determined the file handle's length
-    _uploadFileLength = -1;
+    _uploadFileLength = kGTMSessionUploadFetcherUnknownFileSize;
 
     // Indicate that we've not yet determined the upload fetcher status
     _recentChunkStatusCode = -1;
@@ -532,7 +543,7 @@ NSString *const kGTMSessionFetcherUploadLocationObtainedNotification =
     if (_uploadData) {
       result = (int64_t)_uploadData.length;
     } else {
-      if (_uploadFileLength == -1) {
+      if (_uploadFileLength == kGTMSessionUploadFetcherUnknownFileSize) {
         if (_uploadFileHandle) {
           // First time through, seek to end to determine file length
           _uploadFileLength = (int64_t)[_uploadFileHandle seekToEndOfFile];
@@ -583,13 +594,26 @@ NSString *const kGTMSessionFetcherUploadLocationObtainedNotification =
                                   @"Range invalid for upload data.  offset: %lld\tlength: %lld\tdataLength: %lld",
                                   offset, length, dataLength];
         GTMSESSION_ASSERT_DEBUG(NO, @"%@", errorMessage);
-        response(nil, [self uploadChunkUnavailableErrorWithDescription:errorMessage]);
+        response(nil,
+                 kGTMSessionUploadFetcherUnknownFileSize,
+                 [self uploadChunkUnavailableErrorWithDescription:errorMessage]);
         return;
       }
       NSRange range = NSMakeRange((NSUInteger)offset, (NSUInteger)length);
-      resultData = [uploadData subdataWithRange:range];
+
+      @try {
+        resultData = [uploadData subdataWithRange:range];
+      }
+      @catch (NSException *exception) {
+        NSString *errorMessage = exception.description;
+        GTMSESSION_ASSERT_DEBUG(NO, @"%@", errorMessage);
+        response(nil,
+                 kGTMSessionUploadFetcherUnknownFileSize,
+                 [self uploadChunkUnavailableErrorWithDescription:errorMessage]);
+        return;
+      }
     }
-    response(resultData, nil);
+    response(resultData, kGTMSessionUploadFetcherUnknownFileSize, nil);
     return;
   }
   NSURL *uploadFileURL = self.uploadFileURL;
@@ -627,7 +651,7 @@ NSString *const kGTMSessionFetcherUploadLocationObtainedNotification =
     error = [self uploadChunkUnavailableErrorWithDescription:exception.description];
   }
   // The response always re-dispatches to the main thread, so we skip doing that here.
-  response(resultData, error);
+  response(resultData, kGTMSessionUploadFetcherUnknownFileSize, error);
 }
 
 - (void)generateChunkSubdataFromFileURL:(NSURL *)fileURL
@@ -686,6 +710,16 @@ NSString *const kGTMSessionFetcherUploadLocationObtainedNotification =
     // Fall through with the error.
   } else {
     // Successfully created an NSData by memory-mapping the file.
+    if ((NSUInteger)(offset + length) > mappedData.length) {
+      NSString *errorMessage = [NSString stringWithFormat:
+                                @"Range invalid for upload data.  offset: %lld\tlength: %lld\tdataLength: %lld\texpected UploadLength: %lld",
+                                offset, length, (long long)mappedData.length, fullUploadLength];
+      GTMSESSION_ASSERT_DEBUG(NO, @"%@", errorMessage);
+      response(nil,
+               kGTMSessionUploadFetcherUnknownFileSize,
+               [self uploadChunkUnavailableErrorWithDescription:errorMessage]);
+      return;
+    }
     if (offset > 0 || length < fullUploadLength) {
       NSRange range = NSMakeRange((NSUInteger)offset, (NSUInteger)length);
       resultData = [mappedData subdataWithRange:range];
@@ -694,7 +728,7 @@ NSString *const kGTMSessionFetcherUploadLocationObtainedNotification =
     }
   }
   // The response always re-dispatches to the main thread, so we skip re-dispatching here.
-  response(resultData, error);
+  response(resultData, kGTMSessionUploadFetcherUnknownFileSize, error);
 }
 
 - (NSError *)uploadChunkUnavailableErrorWithDescription:(NSString *)description {
@@ -796,6 +830,36 @@ NSString *const kGTMSessionFetcherUploadLocationObtainedNotification =
   }
 }
 
+- (void)setCancellationHandler:(GTMSessionUploadFetcherCancellationHandler GTM_NULLABLE_TYPE)
+    cancellationHandler {
+  @synchronized(self) {
+    GTMSessionMonitorSynchronized(self);
+
+    _cancellationHandler = cancellationHandler;
+  }
+}
+
+- (GTMSessionUploadFetcherCancellationHandler GTM_NULLABLE_TYPE)cancellationHandler {
+  @synchronized(self) {
+    GTMSessionMonitorSynchronized(self);
+
+    return _cancellationHandler;
+  }
+}
+
+- (void)beginFetchForRetry {
+  GTMSessionCheckNotSynchronized(self);
+
+  // Override the superclass to reset the initial body length and fetcher-in-flight,
+  // then call the superclass implementation.
+  [self setInitialBodyLength:[self bodyLength]];
+
+  GTMSESSION_ASSERT_DEBUG(self.fetcherInFlight == nil, @"unexpected fetcher in flight: %@",
+                          self.fetcherInFlight);
+  self.fetcherInFlight = self;
+  [super beginFetchForRetry];
+}
+
 - (void)beginFetchWithCompletionHandler:(GTMSessionFetcherCompletionHandler)handler {
   GTMSessionCheckNotSynchronized(self);
 
@@ -853,7 +917,7 @@ NSString *const kGTMSessionFetcherUploadLocationObtainedNotification =
         // and then call back.
         [self generateChunkSubdataWithOffset:0
                                       length:[self fullUploadLength]
-                                    response:^(NSData *generateData, NSError *generateError) {
+                                    response:^(NSData *generateData, int64_t fullUploadLength, NSError *generateError) {
             [self invokeFinalCallbackWithData:data
                                         error:error
                      shouldInvalidateLocation:YES];
@@ -973,16 +1037,19 @@ NSString *const kGTMSessionFetcherUploadLocationObtainedNotification =
     }
   }  // @synchronized(self)
 
-  [self releaseUploadAndBaseCallbacks];
+  [self releaseUploadAndBaseCallbacks:!self.userStoppedFetching];
 }
 
-- (void)releaseUploadAndBaseCallbacks {
+- (void)releaseUploadAndBaseCallbacks:(BOOL)shouldReleaseCancellation {
   @synchronized(self) {
     GTMSessionMonitorSynchronized(self);
 
     _delegateCallbackQueue = nil;
     _delegateCompletionHandler = nil;
     _uploadDataProvider = nil;
+    if (shouldReleaseCancellation) {
+      _cancellationHandler = nil;
+    }
   }
 
   // Release the base class's callbacks, too, if needed.
@@ -1002,7 +1069,7 @@ NSString *const kGTMSessionFetcherUploadLocationObtainedNotification =
   [super stopFetchReleasingCallbacks:shouldReleaseCallbacks];
 
   if (shouldReleaseCallbacks) {
-    [self releaseUploadAndBaseCallbacks];
+    [self releaseUploadAndBaseCallbacks:NO];
   }
 }
 
@@ -1061,7 +1128,9 @@ NSString *const kGTMSessionFetcherUploadLocationObtainedNotification =
   if (error == nil) {
     int64_t offset = [sizeReceivedHeader longLongValue];
     int64_t fullUploadLength = [self fullUploadLength];
-    if (offset >= fullUploadLength || uploadStatus == kStatusFinal) {
+    if (uploadStatus == kStatusFinal ||
+        (offset >= fullUploadLength &&
+         fullUploadLength != kGTMSessionUploadFetcherUnknownFileSize)) {
       // Handle we're done
       [self chunkFetcher:queryFetcher finishedWithData:data error:nil];
     } else {
@@ -1075,6 +1144,9 @@ NSString *const kGTMSessionFetcherUploadLocationObtainedNotification =
 }
 
 - (void)sendCancelUploadWithFetcherProperties:(NSDictionary *)props {
+  @synchronized(self) {
+    _isCancelInFlight = YES;
+  }
   GTMSessionFetcher *cancelFetcher = [self uploadFetcherWithProperties:props
                                                           isQueryFetch:YES];
   cancelFetcher.bodyData = [NSData data];
@@ -1088,8 +1160,13 @@ NSString *const kGTMSessionFetcherUploadLocationObtainedNotification =
   self.fetcherInFlight = cancelFetcher;
   [cancelFetcher beginFetchWithCompletionHandler:^(NSData *data, NSError *error) {
       self.fetcherInFlight = nil;
-      if (error) {
-        GTMSESSION_LOG_DEBUG(@"cancelFetcher %@", error);
+      if (![self triggerCancellationHandlerForFetch:cancelFetcher data:data error:error]) {
+        if (error) {
+          GTMSESSION_LOG_DEBUG(@"cancelFetcher %@", error);
+        }
+      }
+      @synchronized(self) {
+        _isCancelInFlight = NO;
       }
   }];
 }
@@ -1110,74 +1187,15 @@ NSString *const kGTMSessionFetcherUploadLocationObtainedNotification =
   GTMSessionFetcher *chunkFetcher = [self uploadFetcherWithProperties:props
                                                          isQueryFetch:NO];
   [self attachSendProgressBlockToChunkFetcher:chunkFetcher];
-
+  int64_t chunkSize = [self updateChunkFetcher:chunkFetcher
+                              forChunkAtOffset:offset];
   BOOL isUploadingFileURL = (self.uploadFileURL != nil);
-
-  // Upload another chunk, meeting server-required granularity.
-  int64_t chunkSize = self.chunkSize;
-
   int64_t fullUploadLength = [self fullUploadLength];
 
-  BOOL isUploadingFullFile = (offset == 0 && chunkSize >= fullUploadLength);
-  if (!isUploadingFileURL || !isUploadingFullFile) {
-    // We're not uploading the entire file and given the file URL.  Since we'll be
-    // allocating a subdata block for a chunk, we need to bound it to something that
-    // won't blow the process's memory.
-    if (chunkSize > kGTMSessionUploadFetcherMaximumDemandBufferSize) {
-      chunkSize = kGTMSessionUploadFetcherMaximumDemandBufferSize;
-    }
-  }
-
-  int64_t granularity = self.uploadGranularity;
-  if (granularity > 0) {
-    if (chunkSize < granularity) {
-      chunkSize = granularity;
-    } else {
-      chunkSize = chunkSize - (chunkSize % granularity);
-    }
-  }
-
-  GTMSESSION_ASSERT_DEBUG(offset < fullUploadLength || fullUploadLength == 0,
-                          @"offset %lld exceeds data length %lld", offset, fullUploadLength);
-
-  if (granularity > 0) {
-    offset = offset - (offset % granularity);
-  }
-
-  // If the chunk size is bigger than the remaining data, or else
-  // it's close enough in size to the remaining data that we'd rather
-  // avoid having a whole extra http fetch for the leftover bit, then make
-  // this chunk size exactly match the remaining data size
-  NSString *command;
-  int64_t thisChunkSize = chunkSize;
-
-  BOOL isChunkTooBig = (thisChunkSize >= (fullUploadLength - offset));
-  BOOL isChunkAlmostBigEnough = (fullUploadLength - offset - 2500 < thisChunkSize);
-  BOOL isFinalChunk = isChunkTooBig || isChunkAlmostBigEnough;
-  if (isFinalChunk) {
-    thisChunkSize = fullUploadLength - offset;
-    if (thisChunkSize > 0) {
-      command = @"upload, finalize";
-    } else {
-      command = @"finalize";
-    }
-  } else {
-    command = @"upload";
-  }
-  NSString *lengthStr = @(thisChunkSize).stringValue;
-  NSString *offsetStr = @(offset).stringValue;
-
-  [chunkFetcher setRequestValue:command forHTTPHeaderField:kGTMSessionHeaderXGoogUploadCommand];
-  [chunkFetcher setRequestValue:lengthStr forHTTPHeaderField:@"Content-Length"];
-  [chunkFetcher setRequestValue:offsetStr forHTTPHeaderField:kGTMSessionHeaderXGoogUploadOffset];
-
-  // Append the range of bytes in this chunk to the fetcher comment.
-  NSString *baseComment = self.comment;
-  [chunkFetcher setCommentWithFormat:@"%@ (%lld-%lld)",
-   baseComment ? baseComment : @"upload", offset, MAX(0, offset + thisChunkSize - 1)];
-
   // The chunk size may have changed, so determine again if we're uploading the full file.
-  isUploadingFullFile = (offset == 0 && thisChunkSize >= fullUploadLength);
+  BOOL isUploadingFullFile = (offset == 0 &&
+                              fullUploadLength != kGTMSessionUploadFetcherUnknownFileSize &&
+                              chunkSize >= fullUploadLength);
   if (isUploadingFullFile && isUploadingFileURL) {
     // The data is the full upload file URL.
     chunkFetcher.bodyFileURL = self.uploadFileURL;
@@ -1187,11 +1205,32 @@ NSString *const kGTMSessionFetcherUploadLocationObtainedNotification =
     // Make an NSData for the subset for this upload chunk.
     self.subdataGenerating = YES;
     [self generateChunkSubdataWithOffset:offset
-                                  length:thisChunkSize
-                                response:^(NSData *chunkData, NSError *chunkError) {
+                                  length:chunkSize
+                                response:^(NSData *chunkData, int64_t uploadFileLength, NSError *chunkError) {
       // The subdata methods may leave us on a background thread.
       dispatch_async(dispatch_get_main_queue(), ^{
         self.subdataGenerating = NO;
+
+        // dont allow the updating of fileLength for uploads not using a data provider as they
+        // should know the file length before the upload starts.
+        if (_uploadDataProvider != nil && uploadFileLength > 0) {
+          [self setUploadFileLength:uploadFileLength];
+          // Update the command and content-length headers if this is the last chunk to be sent.
+          if (offset + chunkSize >= uploadFileLength) {
+            int64_t updatedChunkSize = [self updateChunkFetcher:chunkFetcher
+                                               forChunkAtOffset:offset];
+            if (updatedChunkSize == 0) {
+              // Calling beginChunkFetcher early when there is no more data to send allows us to
+              // properly handle nil chunkData below without having to account for the case where
+              // we are just finalizing the file.
+              chunkFetcher.bodyData = [[NSData alloc] init];
+              [self beginChunkFetcher:chunkFetcher
+                               offset:offset];
+              return;
+            }
+          }
+        }
+
         if (chunkData == nil) {
           NSError *responseError = chunkError;
           if (!responseError) {
@@ -1331,11 +1370,11 @@ NSString *const kGTMSessionFetcherUploadLocationObtainedNotification =
     // We interpose our own retry method both so we can change the request to ask the server to
     // tell us where to resume the chunk.
     chunkFetcher.retryBlock = ^(BOOL suggestedWillRetry, NSError *chunkError,
-                                GTMSessionFetcherRetryResponse response){
+                                GTMSessionFetcherRetryResponse response) {
       void (^finish)(BOOL) = ^(BOOL shouldRetry){
         // We'll retry by sending an offset query.
         if (shouldRetry) {
-          self.shouldInitiateOffsetQuery = YES;
+          self.shouldInitiateOffsetQuery = !isQueryFetch;
 
           // We don't know what our actual offset is anymore, but the server will tell us.
           self.currentOffset = 0;
@@ -1373,6 +1412,14 @@ NSString *const kGTMSessionFetcherUploadLocationObtainedNotification =
       responseHeaders, self);
   BOOL isUploadStatusStopped = (uploadStatus == kStatusFinal || uploadStatus == kStatusCancelled);
 
+  // Check if the fetcher was actually querying. If it failed, do not retry,
+  // as it would enter an infinite retry loop.
+  NSString *uploadCommand =
+      chunkFetcher.request.allHTTPHeaderFields[kGTMSessionHeaderXGoogUploadCommand];
+  BOOL isQueryFetch = [uploadCommand isEqual:@"query"];
+
+  // TODO
+  // Maybe here we can check to see if the request had x goog content length set. (the file length one).
   int64_t previousContentLength =
       [[chunkFetcher.request valueForHTTPHeaderField:@"Content-Length"] longLongValue];
   // The Content-Length header may not be present if the chunk fetcher was recreated from
@@ -1380,14 +1427,14 @@ NSString *const kGTMSessionFetcherUploadLocationObtainedNotification =
   BOOL hasKnownChunkSize = (previousContentLength > 0);
   BOOL needsQuery = (!hasKnownChunkSize && !isUploadStatusStopped);
 
-  if (error || needsQuery) {
+  if (error || (needsQuery && !isQueryFetch)) {
     NSInteger status = error.code;
 
     // Status 4xx indicates a bad offset in the Google upload protocol. However, do not retry status
     // 404 per spec, nor if the upload size appears to have been zero (since the server will just
     // keep asking us to retry.)
     if (self.shouldInitiateOffsetQuery ||
-        needsQuery ||
+        (needsQuery && !isQueryFetch) ||
         ([error.domain isEqual:kGTMSessionFetcherStatusDomain] &&
          status >= 400 && status <= 499 &&
          status != 404 &&
@@ -1414,7 +1461,7 @@ NSString *const kGTMSessionFetcherUploadLocationObtainedNotification =
     BOOL isFinalStatus = (uploadStatus == kStatusFinal);
     #pragma unused(hasUploadAllData,isFinalStatus)
     GTMSESSION_ASSERT_DEBUG(hasUploadAllData == isFinalStatus || !hasKnownChunkSize,
-                            @"uploadStatus:%@  newOffset:%zd (%lld + %zd)  fullUploadLength:%lld"
+                            @"uploadStatus:%@  newOffset:%lld (%lld + %lld)  fullUploadLength:%lld"
                             @" chunkFetcher:%@ requestHeaders:%@ responseHeaders:%@",
                             [responseHeaders objectForKey:kGTMSessionHeaderXGoogUploadStatus],
                             newOffset, self.currentOffset, previousContentLength,
@@ -1422,7 +1469,7 @@ NSString *const kGTMSessionFetcherUploadLocationObtainedNotification =
                             chunkFetcher, chunkFetcher.request.allHTTPHeaderFields,
                             responseHeaders);
 #endif
-    if (isUploadStatusStopped) {
+    if (isUploadStatusStopped || (_currentOffset > _uploadFileLength && _uploadFileLength > 0)) {
       // This was the last chunk.
       if (error == nil && uploadStatus == kStatusCancelled) {
         // Report cancelled status as an error.
@@ -1528,7 +1575,7 @@ NSString *const kGTMSessionFetcherUploadLocationObtainedNotification =
 
   // Standard granularity for Google uploads is 256K.
   NSString *chunkGranularityHeader =
-      [responseHeaders objectForKey:@"X-Goog-Upload-Chunk-Granularity"];
+      [responseHeaders objectForKey:kGTMSessionHeaderXGoogUploadChunkGranularity];
   self.uploadGranularity = chunkGranularityHeader.longLongValue;
 }
 
@@ -1581,12 +1628,114 @@ NSString *const kGTMSessionFetcherUploadLocationObtainedNotification =
   if (self.uploadLocationURL) {
     [self sendCancelUploadWithFetcherProperties:[self properties]];
     self.uploadLocationURL = nil;
+  } else {
+    [self invokeOnCallbackQueue:self.callbackQueue
+               afterUserStopped:YES
+                          block:^{
+      // Repeated calls to stopFetching may cause this path to be reached despite having sent a real
+      // cancel request, check here to ensure that the cancellation handler invocation which fires
+      // will definitely be for the real request sent previously.
+      @synchronized(self) {
+        if (_isCancelInFlight) {
+          return;
+        }
+      }
+      [self triggerCancellationHandlerForFetch:nil data:nil error:nil];
+    }];
   }
 
   [super stopFetching];
 }
 
+// Fires the cancellation handler, returning whether there was a handler to be fired.
+- (BOOL)triggerCancellationHandlerForFetch:(GTMSessionFetcher *)fetcher
+                                      data:(NSData *)data
+                                     error:(NSError *)error {
+  GTMSessionUploadFetcherCancellationHandler handler = self.cancellationHandler;
+  if (handler) {
+    handler(fetcher, data, error);
+    self.cancellationHandler = nil;
+    return YES;
+  }
+  return NO;
+}
+
 #pragma mark -
+
+- (int64_t)updateChunkFetcher:(GTMSessionFetcher *)chunkFetcher
+             forChunkAtOffset:(int64_t)offset {
+  BOOL isUploadingFileURL = (self.uploadFileURL != nil);
+
+  // Upload another chunk, meeting server-required granularity.
+  int64_t chunkSize = self.chunkSize;
+
+  int64_t fullUploadLength = [self fullUploadLength];
+  BOOL isFileLengthKnown = fullUploadLength >= 0;
+
+  BOOL isUploadingFullFile = (offset == 0 && isFileLengthKnown && chunkSize >= fullUploadLength);
+  if (!isUploadingFileURL || !isUploadingFullFile) {
+    // We're not uploading the entire file and given the file URL.  Since we'll be
+    // allocating a subdata block for a chunk, we need to bound it to something that
+    // won't blow the process's memory.
+    if (chunkSize > kGTMSessionUploadFetcherMaximumDemandBufferSize) {
+      chunkSize = kGTMSessionUploadFetcherMaximumDemandBufferSize;
+    }
+  }
+
+  int64_t granularity = self.uploadGranularity;
+  if (granularity > 0) {
+    if (chunkSize < granularity) {
+      chunkSize = granularity;
+    } else {
+      chunkSize = chunkSize - (chunkSize % granularity);
+    }
+  }
+
+  GTMSESSION_ASSERT_DEBUG(offset < fullUploadLength || fullUploadLength == 0,
+                          @"offset %lld exceeds data length %lld", offset, fullUploadLength);
+
+  if (granularity > 0) {
+    offset = offset - (offset % granularity);
+  }
+
+  // If the chunk size is bigger than the remaining data, or else
+  // it's close enough in size to the remaining data that we'd rather
+  // avoid having a whole extra http fetch for the leftover bit, then make
+  // this chunk size exactly match the remaining data size
+  NSString *command;
+  int64_t thisChunkSize = chunkSize;
+
+  BOOL isChunkTooBig = (thisChunkSize >= (fullUploadLength - offset));
+  BOOL isChunkAlmostBigEnough = (fullUploadLength - offset - 2500 < thisChunkSize);
+  BOOL isFinalChunk = (isChunkTooBig || isChunkAlmostBigEnough) && isFileLengthKnown;
+  if (isFinalChunk) {
+    thisChunkSize = fullUploadLength - offset;
+    if (thisChunkSize > 0) {
+      command = @"upload, finalize";
+    } else {
+      command = @"finalize";
+    }
+  } else {
+    command = @"upload";
+  }
+  NSString *lengthStr = @(thisChunkSize).stringValue;
+  NSString *offsetStr = @(offset).stringValue;
+
+  [chunkFetcher setRequestValue:command forHTTPHeaderField:kGTMSessionHeaderXGoogUploadCommand];
+  [chunkFetcher setRequestValue:lengthStr forHTTPHeaderField:@"Content-Length"];
+  [chunkFetcher setRequestValue:offsetStr forHTTPHeaderField:kGTMSessionHeaderXGoogUploadOffset];
+  if (_uploadFileLength != kGTMSessionUploadFetcherUnknownFileSize) {
+    [chunkFetcher setRequestValue:@([self fullUploadLength]).stringValue
+               forHTTPHeaderField:kGTMSessionHeaderXGoogUploadContentLength];
+  }
+
+  // Append the range of bytes in this chunk to the fetcher comment.
+  NSString *baseComment = self.comment;
+  [chunkFetcher setCommentWithFormat:@"%@ (%lld-%lld)",
+      baseComment ? baseComment : @"upload", offset, MAX(0, offset + thisChunkSize - 1)];
+
+  return thisChunkSize;
+}
 
 // Public properties.
 @synthesize currentOffset = _currentOffset,
@@ -1604,7 +1753,7 @@ NSString *const kGTMSessionFetcherUploadLocationObtainedNotification =
 @dynamic delegateCallbackQueue;
 
 + (void)removePointer:(void *)pointer fromPointerArray:(NSPointerArray *)pointerArray {
-  for (NSUInteger index = 0; index < pointerArray.count; ++index) {
+  for (NSUInteger index = 0, count = pointerArray.count; index < count; ++index) {
     void *pointerAtIndex = [pointerArray pointerAtIndex:index];
     if (pointerAtIndex == pointer) {
       [pointerArray removePointerAtIndex:index];
