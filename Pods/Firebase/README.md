@@ -32,45 +32,56 @@ the SDK-specific documentation at [https://firebase.google.com/docs/](https://fi
 
 CocoaPods is used to install and manage dependencies in existing Xcode projects.
 
-1. Create an Xcode project, and save it to your local machine.
-2. Create a file named `Podfile` in your project directory. This file defines
-   your project's dependencies, and is commonly referred to as a Podspec.
-3. Open `Podfile`, and add your dependencies. A simple Podspec is shown here:
+1.  Create an Xcode project, and save it to your local machine.
+2.  Create a file named `Podfile` in your project directory. This file defines
+    your project's dependencies, and is commonly referred to as a Podspec.
+3.  Open `Podfile`, and add your dependencies. A simple Podspec is shown here:
 
     ```
-    platform :ios, '7.0'
+    platform :ios, '8.0'
     pod 'Firebase'
     ```
 
-4. Save the file.
-5. Open a terminal and `cd` to the directory containing the Podfile.
+4.  Save the file.
+
+5.  Open a terminal and `cd` to the directory containing the Podfile.
 
     ```
     $ cd <path-to-project>/project/
     ```
 
-6. Run the `pod install` command. This will install the SDKs specified in the
-   Podspec, along with any dependencies they may have.
+6.  Run the `pod install` command. This will install the SDKs specified in the
+    Podspec, along with any dependencies they may have.
 
     ```
     $ pod install
     ```
 
-7. Open your app's `.xcworkspace` file to launch Xcode.
-   Use this file for all development on your app.
-8. You can also install other Firebase SDKs by adding the subspecs in the
-   Podfile.
+7.  Open your app's `.xcworkspace` file to launch Xcode. Use this file for all
+    development on your app.
 
-   ```
-   pod 'Firebase/AdMob'
-   pod 'Firebase/Analytics'
-   pod 'Firebase/Auth'
-   pod 'Firebase/Crash'
-   pod 'Firebase/Database'
-   pod 'Firebase/DynamicLinks'
-   pod 'Firebase/Invites'
-   pod 'Firebase/Messaging'
-   pod 'Firebase/Performance'
-   pod 'Firebase/RemoteConfig'
-   pod 'Firebase/Storage'
-   ```
+8.  You can also install other Firebase SDKs by adding the subspecs in the
+    Podfile.
+
+    ```
+    pod 'Firebase/AdMob'
+    pod 'Firebase/Analytics'
+    pod 'Firebase/Auth'
+    pod 'Firebase/Crash'
+    pod 'Firebase/Database'
+    pod 'Firebase/DynamicLinks'
+    pod 'Firebase/Firestore'
+    pod 'Firebase/Functions'
+    pod 'Firebase/Invites'
+    pod 'Firebase/Messaging'
+    pod 'Firebase/MLCommon'
+    pod 'Firebase/MLModelInterpreter'
+    pod 'Firebase/MLVision'
+    pod 'Firebase/MLVisionBarcodeModel'
+    pod 'Firebase/MLVisionFaceModel'
+    pod 'Firebase/MLVisionLabelModel'
+    pod 'Firebase/MLVisionTextModel'
+    pod 'Firebase/Performance'
+    pod 'Firebase/RemoteConfig'
+    pod 'Firebase/Storage'
+    ```
