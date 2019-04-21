@@ -15,6 +15,11 @@
 		22124CB9226C872D009800D4 /* StoryboardEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22124CB8226C872D009800D4 /* StoryboardEnum.swift */; };
 		22124CBB226C8772009800D4 /* UIStoryboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22124CBA226C8772009800D4 /* UIStoryboardExtension.swift */; };
 		22124CBD226C885D009800D4 /* Conversations.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22124CBC226C885D009800D4 /* Conversations.storyboard */; };
+		22124CBF226CB6BE009800D4 /* EncodableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22124CBE226CB6BE009800D4 /* EncodableExtension.swift */; };
+		22124CC1226CBB6F009800D4 /* DictionaryExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22124CC0226CBB6F009800D4 /* DictionaryExtension.swift */; };
+		22124CC3226CC017009800D4 /* ObjectUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22124CC2226CC017009800D4 /* ObjectUser.swift */; };
+		22124CC5226CC140009800D4 /* ObjectConversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22124CC4226CC140009800D4 /* ObjectConversation.swift */; };
+		22124CC7226CC1C7009800D4 /* ObjectMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22124CC6226CC1C7009800D4 /* ObjectMessage.swift */; };
 		2227EA041FD707B7008F5CA9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2227EA031FD707B7008F5CA9 /* GoogleService-Info.plist */; };
 		224AFA9D1D867DE7004E7CCD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 224AFA9C1D867DE7004E7CCD /* Main.storyboard */; };
 		226EFFA11E1BBBCA00B1D185 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 226EFFA01E1BBBCA00B1D185 /* MapKit.framework */; };
@@ -26,9 +31,6 @@
 		22E200B81FD70E28005470B4 /* VCCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E200B21FD70E27005470B4 /* VCCells.swift */; };
 		22E200B91FD70E28005470B4 /* WelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E200B31FD70E27005470B4 /* WelcomeVC.swift */; };
 		22E200BA1FD70E28005470B4 /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E200B41FD70E28005470B4 /* ChatVC.swift */; };
-		22E200C01FD70E6B005470B4 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E200BD1FD70E69005470B4 /* Message.swift */; };
-		22E200C11FD70E6B005470B4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E200BE1FD70E6A005470B4 /* User.swift */; };
-		22E200C21FD70E6B005470B4 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E200BF1FD70E6A005470B4 /* Conversation.swift */; };
 		22EDC215226C53FC008F1BBC /* ImagePickerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EDC214226C53FC008F1BBC /* ImagePickerService.swift */; };
 		22EDC217226C541D008F1BBC /* Typealiases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EDC216226C541D008F1BBC /* Typealiases.swift */; };
 		22EDC219226C54E0008F1BBC /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EDC218226C54E0008F1BBC /* UIImageExtension.swift */; };
@@ -57,6 +59,11 @@
 		22124CB8226C872D009800D4 /* StoryboardEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardEnum.swift; sourceTree = "<group>"; };
 		22124CBA226C8772009800D4 /* UIStoryboardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStoryboardExtension.swift; sourceTree = "<group>"; };
 		22124CBC226C885D009800D4 /* Conversations.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Conversations.storyboard; sourceTree = "<group>"; };
+		22124CBE226CB6BE009800D4 /* EncodableExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncodableExtension.swift; sourceTree = "<group>"; };
+		22124CC0226CBB6F009800D4 /* DictionaryExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryExtension.swift; sourceTree = "<group>"; };
+		22124CC2226CC017009800D4 /* ObjectUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectUser.swift; sourceTree = "<group>"; };
+		22124CC4226CC140009800D4 /* ObjectConversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectConversation.swift; sourceTree = "<group>"; };
+		22124CC6226CC1C7009800D4 /* ObjectMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectMessage.swift; sourceTree = "<group>"; };
 		2227EA031FD707B7008F5CA9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		224AFA9C1D867DE7004E7CCD /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		226EFFA01E1BBBCA00B1D185 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -70,9 +77,6 @@
 		22E200B21FD70E27005470B4 /* VCCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCCells.swift; sourceTree = "<group>"; };
 		22E200B31FD70E27005470B4 /* WelcomeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeVC.swift; sourceTree = "<group>"; };
 		22E200B41FD70E28005470B4 /* ChatVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
-		22E200BD1FD70E69005470B4 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
-		22E200BE1FD70E6A005470B4 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		22E200BF1FD70E6A005470B4 /* Conversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		22EDC214226C53FC008F1BBC /* ImagePickerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerService.swift; sourceTree = "<group>"; };
 		22EDC216226C541D008F1BBC /* Typealiases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typealiases.swift; sourceTree = "<group>"; };
 		22EDC218226C54E0008F1BBC /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
@@ -164,9 +168,9 @@
 		22E200BC1FD70E61005470B4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				22E200BF1FD70E6A005470B4 /* Conversation.swift */,
-				22E200BD1FD70E69005470B4 /* Message.swift */,
-				22E200BE1FD70E6A005470B4 /* User.swift */,
+				22124CC2226CC017009800D4 /* ObjectUser.swift */,
+				22124CC4226CC140009800D4 /* ObjectConversation.swift */,
+				22124CC6226CC1C7009800D4 /* ObjectMessage.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -182,6 +186,8 @@
 				22EDC220226C570D008F1BBC /* UIImageViewExtension.swift */,
 				22EDC222226C5816008F1BBC /* UIViewControllerExtension.swift */,
 				22124CBA226C8772009800D4 /* UIStoryboardExtension.swift */,
+				22124CBE226CB6BE009800D4 /* EncodableExtension.swift */,
+				22124CC0226CBB6F009800D4 /* DictionaryExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -478,6 +484,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22EDC219226C54E0008F1BBC /* UIImageExtension.swift in Sources */,
+				22124CC3226CC017009800D4 /* ObjectUser.swift in Sources */,
 				22EDC233226C5B24008F1BBC /* FirestorageService.swift in Sources */,
 				22EDC21F226C56ED008F1BBC /* NSObjectExtension.swift in Sources */,
 				22EDC235226C5B3D008F1BBC /* FirestoreService.swift in Sources */,
@@ -487,11 +494,10 @@
 				22124CB9226C872D009800D4 /* StoryboardEnum.swift in Sources */,
 				22E200B91FD70E28005470B4 /* WelcomeVC.swift in Sources */,
 				22E200B51FD70E28005470B4 /* NavVC.swift in Sources */,
-				22E200C01FD70E6B005470B4 /* Message.swift in Sources */,
 				22124CBB226C8772009800D4 /* UIStoryboardExtension.swift in Sources */,
 				22E200B81FD70E28005470B4 /* VCCells.swift in Sources */,
+				22124CBF226CB6BE009800D4 /* EncodableExtension.swift in Sources */,
 				22EDC229226C58F9008F1BBC /* OptionalExtension.swift in Sources */,
-				22E200C21FD70E6B005470B4 /* Conversation.swift in Sources */,
 				22EDC21B226C552C008F1BBC /* LocationService.swift in Sources */,
 				22A92BB11D59EBD6005D76F7 /* AppDelegate.swift in Sources */,
 				22E200BA1FD70E28005470B4 /* ChatVC.swift in Sources */,
@@ -500,9 +506,11 @@
 				22EDC225226C5867008F1BBC /* StringExtension.swift in Sources */,
 				22EDC230226C5AEA008F1BBC /* FirebaseEnums.swift in Sources */,
 				22124CB1226C8544009800D4 /* UserManager.swift in Sources */,
-				22E200C11FD70E6B005470B4 /* User.swift in Sources */,
 				22EDC21D226C56BD008F1BBC /* FireCodable.swift in Sources */,
 				22EDC22D226C59B3008F1BBC /* ThemeService.swift in Sources */,
+				22124CC7226CC1C7009800D4 /* ObjectMessage.swift in Sources */,
+				22124CC5226CC140009800D4 /* ObjectConversation.swift in Sources */,
+				22124CC1226CBB6F009800D4 /* DictionaryExtension.swift in Sources */,
 				22EDC221226C570D008F1BBC /* UIImageViewExtension.swift in Sources */,
 				22EDC215226C53FC008F1BBC /* ImagePickerService.swift in Sources */,
 				22EDC223226C5816008F1BBC /* UIViewControllerExtension.swift in Sources */,

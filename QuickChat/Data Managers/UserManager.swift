@@ -28,5 +28,19 @@ class UserManager {
     return Auth.auth().currentUser?.uid
   }
   
+  func currentUserData(_ completion: @escaping (ObjectUser?) -> Void) {
+    guard let id = Auth.auth().currentUser?.uid else { completion(nil); return }
+    FirestoreService().objects(ObjectUser.self, reference: .users, parameter: ("id", id)) { (results) in
+      completion(results.first)
+    }
+  }
   
+  @discardableResult func logout() -> Bool {
+    do {
+      try Auth.auth().signOut()
+      return true
+    } catch {
+      return false
+    }
+  }
 }
