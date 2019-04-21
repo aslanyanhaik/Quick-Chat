@@ -20,20 +20,13 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
+import FirebaseAuth
 
-import UIKit
-
-@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class UserManager {
   
-  var window: UIWindow?
-  
-  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    FirestoreService().configure()
-    return true
+  func currentUserID() -> String? {
+    return Auth.auth().currentUser?.uid
   }
+  
+  
 }
-
-
-
-

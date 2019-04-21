@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="YU4-6K-4QF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -9,32 +9,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--LandingVC-->
-        <scene sceneID="0jb-GF-tm4">
-            <objects>
-                <viewController id="YU4-6K-4QF" customClass="LandingVC" customModule="QuickChat" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="hBL-Vi-Mf5">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch" translatesAutoresizingMaskIntoConstraints="NO" id="3bj-bK-kkR">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="3bj-bK-kkR" firstAttribute="top" secondItem="hBL-Vi-Mf5" secondAttribute="top" id="Y3s-pK-2Ka"/>
-                            <constraint firstItem="0qa-Mh-rki" firstAttribute="bottom" secondItem="3bj-bK-kkR" secondAttribute="bottom" id="pUw-0R-nGK"/>
-                            <constraint firstItem="3bj-bK-kkR" firstAttribute="leading" secondItem="0qa-Mh-rki" secondAttribute="leading" id="w9n-A6-vTA"/>
-                            <constraint firstItem="0qa-Mh-rki" firstAttribute="trailing" secondItem="3bj-bK-kkR" secondAttribute="trailing" id="xDa-VD-Ul1"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="0qa-Mh-rki"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ds1-sN-QMJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-608.79999999999995" y="428.63568215892059"/>
-        </scene>
         <!--WelcomeVC-->
         <scene sceneID="Gs1-m1-RGK">
             <objects>
@@ -1155,7 +1129,6 @@
         <image name="clouds" width="750" height="110"/>
         <image name="email" width="24" height="24"/>
         <image name="empty" width="375" height="602"/>
-        <image name="launch" width="375" height="667"/>
         <image name="more" width="32" height="25"/>
         <image name="name" width="24" height="24"/>
         <image name="password" width="24" height="24"/>

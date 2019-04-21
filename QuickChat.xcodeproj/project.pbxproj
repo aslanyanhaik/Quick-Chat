@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		22124CAF226C84B4009800D4 /* Initial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22124CAE226C84B4009800D4 /* Initial.storyboard */; };
+		22124CB1226C8544009800D4 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22124CB0226C8544009800D4 /* UserManager.swift */; };
+		22124CB3226C85B2009800D4 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22124CB2226C85B2009800D4 /* InitialViewController.swift */; };
+		22124CB5226C86CA009800D4 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22124CB4226C86CA009800D4 /* Auth.storyboard */; };
+		22124CB7226C8702009800D4 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22124CB6226C8702009800D4 /* AuthViewController.swift */; };
+		22124CB9226C872D009800D4 /* StoryboardEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22124CB8226C872D009800D4 /* StoryboardEnum.swift */; };
+		22124CBB226C8772009800D4 /* UIStoryboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22124CBA226C8772009800D4 /* UIStoryboardExtension.swift */; };
+		22124CBD226C885D009800D4 /* Conversations.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22124CBC226C885D009800D4 /* Conversations.storyboard */; };
 		2227EA041FD707B7008F5CA9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2227EA031FD707B7008F5CA9 /* GoogleService-Info.plist */; };
 		224AFA9D1D867DE7004E7CCD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 224AFA9C1D867DE7004E7CCD /* Main.storyboard */; };
 		226EFFA11E1BBBCA00B1D185 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 226EFFA01E1BBBCA00B1D185 /* MapKit.framework */; };
@@ -41,6 +49,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		22124CAE226C84B4009800D4 /* Initial.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Initial.storyboard; sourceTree = "<group>"; };
+		22124CB0226C8544009800D4 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		22124CB2226C85B2009800D4 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
+		22124CB4226C86CA009800D4 /* Auth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
+		22124CB6226C8702009800D4 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
+		22124CB8226C872D009800D4 /* StoryboardEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardEnum.swift; sourceTree = "<group>"; };
+		22124CBA226C8772009800D4 /* UIStoryboardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStoryboardExtension.swift; sourceTree = "<group>"; };
+		22124CBC226C885D009800D4 /* Conversations.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Conversations.storyboard; sourceTree = "<group>"; };
 		2227EA031FD707B7008F5CA9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		224AFA9C1D867DE7004E7CCD /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		226EFFA01E1BBBCA00B1D185 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -91,6 +107,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		22124CAD226C8419009800D4 /* Initial */ = {
+			isa = PBXGroup;
+			children = (
+				22124CAE226C84B4009800D4 /* Initial.storyboard */,
+				22124CB2226C85B2009800D4 /* InitialViewController.swift */,
+			);
+			path = Initial;
+			sourceTree = "<group>";
+		};
 		22A92BA41D59EBD5005D76F7 = {
 			isa = PBXGroup;
 			children = (
@@ -156,6 +181,7 @@
 				22EDC21E226C56ED008F1BBC /* NSObjectExtension.swift */,
 				22EDC220226C570D008F1BBC /* UIImageViewExtension.swift */,
 				22EDC222226C5816008F1BBC /* UIViewControllerExtension.swift */,
+				22124CBA226C8772009800D4 /* UIStoryboardExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -175,6 +201,7 @@
 		22EDC20A226C5229008F1BBC /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				22124CAD226C8419009800D4 /* Initial */,
 				22EDC20B226C5232008F1BBC /* Auth */,
 				22EDC20C226C5237008F1BBC /* Conversations */,
 				22EDC20D226C523D008F1BBC /* Messages */,
@@ -186,6 +213,8 @@
 		22EDC20B226C5232008F1BBC /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				22124CB4226C86CA009800D4 /* Auth.storyboard */,
+				22124CB6226C8702009800D4 /* AuthViewController.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -193,6 +222,7 @@
 		22EDC20C226C5237008F1BBC /* Conversations */ = {
 			isa = PBXGroup;
 			children = (
+				22124CBC226C885D009800D4 /* Conversations.storyboard */,
 			);
 			path = Conversations;
 			sourceTree = "<group>";
@@ -228,6 +258,7 @@
 		22EDC210226C529D008F1BBC /* Data Managers */ = {
 			isa = PBXGroup;
 			children = (
+				22124CB0226C8544009800D4 /* UserManager.swift */,
 			);
 			path = "Data Managers";
 			sourceTree = "<group>";
@@ -262,6 +293,7 @@
 			isa = PBXGroup;
 			children = (
 				22EDC22F226C5AEA008F1BBC /* FirebaseEnums.swift */,
+				22124CB8226C872D009800D4 /* StoryboardEnum.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -366,7 +398,10 @@
 			files = (
 				22A92BB81D59EBD6005D76F7 /* Assets.xcassets in Resources */,
 				2227EA041FD707B7008F5CA9 /* GoogleService-Info.plist in Resources */,
+				22124CB5226C86CA009800D4 /* Auth.storyboard in Resources */,
 				224AFA9D1D867DE7004E7CCD /* Main.storyboard in Resources */,
+				22124CAF226C84B4009800D4 /* Initial.storyboard in Resources */,
+				22124CBD226C885D009800D4 /* Conversations.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,18 +483,23 @@
 				22EDC235226C5B3D008F1BBC /* FirestoreService.swift in Sources */,
 				22E200B71FD70E28005470B4 /* LandingVC.swift in Sources */,
 				22EDC22B226C591C008F1BBC /* KeyboardHandler.swift in Sources */,
+				22124CB7226C8702009800D4 /* AuthViewController.swift in Sources */,
+				22124CB9226C872D009800D4 /* StoryboardEnum.swift in Sources */,
 				22E200B91FD70E28005470B4 /* WelcomeVC.swift in Sources */,
 				22E200B51FD70E28005470B4 /* NavVC.swift in Sources */,
 				22E200C01FD70E6B005470B4 /* Message.swift in Sources */,
+				22124CBB226C8772009800D4 /* UIStoryboardExtension.swift in Sources */,
 				22E200B81FD70E28005470B4 /* VCCells.swift in Sources */,
 				22EDC229226C58F9008F1BBC /* OptionalExtension.swift in Sources */,
 				22E200C21FD70E6B005470B4 /* Conversation.swift in Sources */,
 				22EDC21B226C552C008F1BBC /* LocationService.swift in Sources */,
 				22A92BB11D59EBD6005D76F7 /* AppDelegate.swift in Sources */,
 				22E200BA1FD70E28005470B4 /* ChatVC.swift in Sources */,
+				22124CB3226C85B2009800D4 /* InitialViewController.swift in Sources */,
 				22EDC217226C541D008F1BBC /* Typealiases.swift in Sources */,
 				22EDC225226C5867008F1BBC /* StringExtension.swift in Sources */,
 				22EDC230226C5AEA008F1BBC /* FirebaseEnums.swift in Sources */,
+				22124CB1226C8544009800D4 /* UserManager.swift in Sources */,
 				22E200C11FD70E6B005470B4 /* User.swift in Sources */,
 				22EDC21D226C56BD008F1BBC /* FireCodable.swift in Sources */,
 				22EDC22D226C59B3008F1BBC /* ThemeService.swift in Sources */,
@@ -592,7 +632,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = P6GDVV24N5;
-				INFOPLIST_FILE = QuickChat/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/QuickChat/Application/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mexonis.quick-chat";
@@ -609,7 +649,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = P6GDVV24N5;
-				INFOPLIST_FILE = QuickChat/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/QuickChat/Application/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mexonis.quick-chat";

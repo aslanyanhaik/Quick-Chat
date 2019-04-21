@@ -21,10 +21,15 @@
 //  SOFTWARE.
 
 import FirebaseFirestore
+import Firebase
 
 class FirestoreService {
   
   private var listener: ListenerRegistration?
+  
+  func configure() {
+    FirebaseApp.configure()
+  }
   
   func objects<T>(_ object: T.Type, reference: FirestoreCollectionReference, parameter: (String, Any)? = nil, completion: @escaping CompletionArray<T>) where T: FireCodable {
     let ref = Firestore.firestore().collection(reference.rawValue)
