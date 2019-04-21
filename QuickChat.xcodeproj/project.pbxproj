@@ -22,7 +22,7 @@
 		22E200C11FD70E6B005470B4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E200BE1FD70E6A005470B4 /* User.swift */; };
 		22E200C21FD70E6B005470B4 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E200BF1FD70E6A005470B4 /* Conversation.swift */; };
 		22E200C51FD70ECD005470B4 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E200C41FD70ECD005470B4 /* Extensions.swift */; };
-		62058F6006BD9ACBE0439C4B /* Pods_QuickChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8041C4B4A9DA4F0F53D2BDE /* Pods_QuickChat.framework */; };
+		5B9ECF6E03F5E624C52B3509 /* Pods_QuickChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1078AA3D2FF8C5707E873E0 /* Pods_QuickChat.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,9 +43,9 @@
 		22E200BE1FD70E6A005470B4 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		22E200BF1FD70E6A005470B4 /* Conversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		22E200C41FD70ECD005470B4 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		614F8B4888358059B3DC166B /* Pods-QuickChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QuickChat/Pods-QuickChat.debug.xcconfig"; sourceTree = "<group>"; };
-		B8041C4B4A9DA4F0F53D2BDE /* Pods_QuickChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuickChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B8FBFCFF82B6EB57B02FA375 /* Pods-QuickChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-QuickChat/Pods-QuickChat.release.xcconfig"; sourceTree = "<group>"; };
+		64442DBDEF6A70CFEE9331D6 /* Pods-QuickChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickChat.debug.xcconfig"; path = "Target Support Files/Pods-QuickChat/Pods-QuickChat.debug.xcconfig"; sourceTree = "<group>"; };
+		9226BB5F97214501430FF2E8 /* Pods-QuickChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickChat.release.xcconfig"; path = "Target Support Files/Pods-QuickChat/Pods-QuickChat.release.xcconfig"; sourceTree = "<group>"; };
+		C1078AA3D2FF8C5707E873E0 /* Pods_QuickChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuickChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,7 +54,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				226EFFA11E1BBBCA00B1D185 /* MapKit.framework in Frameworks */,
-				62058F6006BD9ACBE0439C4B /* Pods_QuickChat.framework in Frameworks */,
+				5B9ECF6E03F5E624C52B3509 /* Pods_QuickChat.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,8 +66,8 @@
 			children = (
 				22A92BAF1D59EBD6005D76F7 /* QuickChat */,
 				22A92BAE1D59EBD6005D76F7 /* Products */,
-				ADD6E8E924E29AFE4DBB9FB3 /* Pods */,
 				5923406597F4A9DB000B8FF9 /* Frameworks */,
+				F817C9587743A2335E357791 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -129,18 +129,18 @@
 			isa = PBXGroup;
 			children = (
 				226EFFA01E1BBBCA00B1D185 /* MapKit.framework */,
-				B8041C4B4A9DA4F0F53D2BDE /* Pods_QuickChat.framework */,
+				C1078AA3D2FF8C5707E873E0 /* Pods_QuickChat.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		ADD6E8E924E29AFE4DBB9FB3 /* Pods */ = {
+		F817C9587743A2335E357791 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				614F8B4888358059B3DC166B /* Pods-QuickChat.debug.xcconfig */,
-				B8FBFCFF82B6EB57B02FA375 /* Pods-QuickChat.release.xcconfig */,
+				64442DBDEF6A70CFEE9331D6 /* Pods-QuickChat.debug.xcconfig */,
+				9226BB5F97214501430FF2E8 /* Pods-QuickChat.release.xcconfig */,
 			);
-			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -150,11 +150,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 22A92BBF1D59EBD6005D76F7 /* Build configuration list for PBXNativeTarget "QuickChat" */;
 			buildPhases = (
-				0E741B6EDD8AFBD5853F3B88 /* [CP] Check Pods Manifest.lock */,
+				D6779CB879904103CBDA3C74 /* [CP] Check Pods Manifest.lock */,
 				22A92BA91D59EBD5005D76F7 /* Sources */,
 				22A92BAA1D59EBD5005D76F7 /* Frameworks */,
 				22A92BAB1D59EBD5005D76F7 /* Resources */,
-				62D3364F6C35C0B3DF08236F /* [CP] Embed Pods Frameworks */,
+				F143906814ACD7E5D56F39E1 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -172,7 +172,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = Mexonis;
 				TargetAttributes = {
 					22A92BAC1D59EBD5005D76F7 = {
@@ -194,10 +194,9 @@
 			};
 			buildConfigurationList = 22A92BA81D59EBD5005D76F7 /* Build configuration list for PBXProject "QuickChat" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 			);
@@ -225,16 +224,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0E741B6EDD8AFBD5853F3B88 /* [CP] Check Pods Manifest.lock */ = {
+		D6779CB879904103CBDA3C74 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			inputFileListPaths = (
 			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-QuickChat-checkManifestLockResult.txt",
 			);
@@ -243,10 +246,12 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		62D3364F6C35C0B3DF08236F /* [CP] Embed Pods Frameworks */ = {
+		F143906814ACD7E5D56F39E1 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			inputFileListPaths = (
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-QuickChat/Pods-QuickChat-frameworks.sh",
@@ -261,6 +266,8 @@
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
@@ -305,6 +312,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -314,6 +322,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -321,6 +330,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -353,6 +363,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -360,6 +371,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -369,6 +381,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -376,6 +389,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -400,13 +414,14 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
 		22A92BC01D59EBD6005D76F7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 614F8B4888358059B3DC166B /* Pods-QuickChat.debug.xcconfig */;
+			baseConfigurationReference = 64442DBDEF6A70CFEE9331D6 /* Pods-QuickChat.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -417,13 +432,13 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mexonis.quick-chat";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
 		22A92BC11D59EBD6005D76F7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B8FBFCFF82B6EB57B02FA375 /* Pods-QuickChat.release.xcconfig */;
+			baseConfigurationReference = 9226BB5F97214501430FF2E8 /* Pods-QuickChat.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -434,7 +449,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mexonis.quick-chat";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
