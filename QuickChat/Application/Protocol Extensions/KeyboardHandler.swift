@@ -20,24 +20,26 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-
 import UIKit
-import Firebase
 
-@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-    
-    var window: UIWindow?
-    
-    
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        FIRApp.configure()
-        UINavigationBar.appearance().setBackgroundImage(UIImage(named: "navigation")!.resizableImage(withCapInsets: UIEdgeInsetsMake(0, 0, 0, 0), resizingMode: .stretch), for: .default)
-        UINavigationBar.appearance().isTranslucent = false
-        return true
-    }
+protocol KeyboardHandler {
+  var scrollView: UIScrollView! { get }
 }
 
-
-
-
+extension KeyboardHandler where Self: UIViewController {
+  func addKeyboardObservers() {
+    NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: nil) {[weak self] (notification) in
+      self?.handleKeyboard(notification: notification)
+    }
+    NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: nil) {[weak self] (notification) in
+      self?.handleKeyboard(notification: notification)
+    }
+  }
+  
+  private func handleKeyboard(notification: Notification) {
+    guard let userInfo = notification.userInfo else { return }
+    guard let keyboardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+    scrollView.setContentOffset(notification.name == UIResponder.keyboardWillHideNotification ? .zero : CGPoint(x: 0, y: keyboardFrame.height), animated: true)
+    scrollView.scrollIndicatorInsets.bottom = notification.name == UIResponder.keyboardWillHideNotification ? 0 : keyboardFrame.height
+  }
+}

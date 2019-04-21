@@ -20,24 +20,48 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
+import CoreLocation
 
-import UIKit
-import Firebase
-
-@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-    
-    var window: UIWindow?
-    
-    
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        FIRApp.configure()
-        UINavigationBar.appearance().setBackgroundImage(UIImage(named: "navigation")!.resizableImage(withCapInsets: UIEdgeInsetsMake(0, 0, 0, 0), resizingMode: .stretch), for: .default)
-        UINavigationBar.appearance().isTranslucent = false
-        return true
+class LocationService: NSObject, CLLocationManagerDelegate {
+  
+  private lazy var manager: CLLocationManager = {
+    let manager = CLLocationManager()
+    manager.desiredAccuracy = kCLLocationAccuracyBest
+    manager.delegate = self
+    return manager
+  }()
+  var completion: CompletionObject<Response>?
+  
+  func getLocation(_ closure: CompletionObject<Response>? ) {
+    completion = closure
+    if CLLocationManager.authorizationStatus() == .notDetermined {
+      manager.requestWhenInUseAuthorization()
     }
+    manager.startUpdatingLocation()
+  }
+  
+  func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    if let location = locations.last?.coordinate {
+      completion?(.location(location))
+      manager.stopUpdatingLocation()
+    }
+  }
+  
+  func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+    if status == .denied {
+      completion?(.denied)
+    }
+  }
+  
+  deinit {
+    manager.stopUpdatingLocation()
+  }
 }
 
-
-
-
+extension LocationService {
+  
+  enum Response {
+    case denied
+    case location(CLLocationCoordinate2D)
+  }
+}

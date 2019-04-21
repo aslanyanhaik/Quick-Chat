@@ -20,24 +20,23 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-
 import UIKit
-import Firebase
 
-@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-    
-    var window: UIWindow?
-    
-    
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        FIRApp.configure()
-        UINavigationBar.appearance().setBackgroundImage(UIImage(named: "navigation")!.resizableImage(withCapInsets: UIEdgeInsetsMake(0, 0, 0, 0), resizingMode: .stretch), for: .default)
-        UINavigationBar.appearance().isTranslucent = false
-        return true
-    }
+protocol BaseCodable: class {
+  
+  var id: String { get set }
+  
 }
 
+protocol FireCodable: BaseCodable, Codable {
+  
+  var id: String { get set }
+  
+}
 
-
-
+protocol FireStorageCodable: FireCodable {
+  
+  var profilePic: UIImage? { get set }
+  var profilePicLink: String? { get set }
+  
+}

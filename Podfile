@@ -8,6 +8,7 @@ target 'QuickChat' do
 	pod 'Firebase/Auth'
 	pod 'Firebase/Storage'
 	pod 'Kingfisher'
-	pod "Firebase/Firestore"
+	pod 'Firebase/Firestore'
+	pod 'ALLoadingView'
 
 end

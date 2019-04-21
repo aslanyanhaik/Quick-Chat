@@ -20,24 +20,10 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
+import Foundation
 
-import UIKit
-import Firebase
-
-@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-    
-    var window: UIWindow?
-    
-    
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        FIRApp.configure()
-        UINavigationBar.appearance().setBackgroundImage(UIImage(named: "navigation")!.resizableImage(withCapInsets: UIEdgeInsetsMake(0, 0, 0, 0), resizingMode: .stretch), for: .default)
-        UINavigationBar.appearance().isTranslucent = false
-        return true
-    }
-}
-
-
-
+public typealias EmptyCompletion = () -> Void
+public typealias CompletionObject<T> = (_ response: T) -> Void
+public typealias CompletionOptionalObject<T> = (_ response: T?) -> Void
+public typealias CompletionResponse = (_ response: Result<Void, Error>) -> Void
 

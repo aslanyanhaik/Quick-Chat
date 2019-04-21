@@ -20,24 +20,26 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
+import Foundation
 
-import UIKit
-import Firebase
-
-@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-    
-    var window: UIWindow?
-    
-    
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        FIRApp.configure()
-        UINavigationBar.appearance().setBackgroundImage(UIImage(named: "navigation")!.resizableImage(withCapInsets: UIEdgeInsetsMake(0, 0, 0, 0), resizingMode: .stretch), for: .default)
-        UINavigationBar.appearance().isTranslucent = false
-        return true
-    }
+public enum FirestoreCollectionReference: String {
+  case users = "Users"
+  case couriers = "Conversations"
+  case operators = "Messages"
 }
 
+public enum FirestoreResponse {
+  case success
+  case failure
+}
 
+public enum UploadResponse {
+  case success(String)
+  case failure
+}
 
-
+public enum UserResults {
+  case auth(_: String)
+  case failure
+  case success
+}

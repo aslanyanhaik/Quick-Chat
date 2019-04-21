@@ -20,24 +20,19 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-
 import UIKit
-import Firebase
+import Kingfisher
 
-@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-    
-    var window: UIWindow?
-    
-    
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        FIRApp.configure()
-        UINavigationBar.appearance().setBackgroundImage(UIImage(named: "navigation")!.resizableImage(withCapInsets: UIEdgeInsetsMake(0, 0, 0, 0), resizingMode: .stretch), for: .default)
-        UINavigationBar.appearance().isTranslucent = false
-        return true
+extension UIImageView {
+  
+  func set(_ urlString: String?, placeholder: UIImage? = nil, completion: CompletionObject<UIImage?>? = nil) {
+    guard let urlString = urlString else { completion?(nil); return }
+    kf.setImage(with: URL(string: urlString), placeholder: placeholder) { (result, image) in
+      
     }
+  }
+  
+  func cancelDownload() {
+    kf.cancelDownloadTask()
+  }
 }
-
-
-
-

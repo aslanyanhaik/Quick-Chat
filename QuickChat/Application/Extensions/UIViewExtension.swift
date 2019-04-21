@@ -20,24 +20,61 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-
 import UIKit
-import Firebase
 
-@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-    
-    var window: UIWindow?
-    
-    
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        FIRApp.configure()
-        UINavigationBar.appearance().setBackgroundImage(UIImage(named: "navigation")!.resizableImage(withCapInsets: UIEdgeInsetsMake(0, 0, 0, 0), resizingMode: .stretch), for: .default)
-        UINavigationBar.appearance().isTranslucent = false
-        return true
+extension UIView {
+  
+  @IBInspectable var cornerRadius: CGFloat {
+    get {
+      return layer.cornerRadius
     }
+    set {
+      layer.cornerRadius = newValue
+      layer.masksToBounds = newValue > 0
+    }
+  }
+  
+  @IBInspectable var borderWidth: CGFloat {
+    get {
+      return layer.borderWidth
+    }
+    set {
+      layer.borderWidth = newValue
+    }
+  }
+  
+  @IBInspectable var borderColor: UIColor? {
+    get {
+      if let color = layer.borderColor {
+        return UIColor(cgColor: color)
+      }
+      return nil
+    }
+    set {
+      layer.borderColor = newValue?.cgColor
+    }
+  }
+  
+  @IBInspectable var shadowColor: UIColor? {
+    get {
+      if let color = layer.shadowColor {
+        return UIColor(cgColor: color)
+      }
+      return nil
+    }
+    set {
+      layer.shadowColor = newValue?.cgColor
+    }
+  }
+  
+  @IBInspectable var shadowRadius: CGFloat {
+    get {
+      return layer.shadowRadius
+    }
+    set {
+      layer.shadowOffset = CGSize.zero
+      layer.shadowRadius = newValue
+      layer.shadowOpacity = 0.2
+    }
+  }
 }
-
-
-
-
