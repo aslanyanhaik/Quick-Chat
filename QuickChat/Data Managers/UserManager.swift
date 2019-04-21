@@ -28,10 +28,44 @@ class UserManager {
     return Auth.auth().currentUser?.uid
   }
   
-  func currentUserData(_ completion: @escaping (ObjectUser?) -> Void) {
+  func currentUserData(_ completion: @escaping CompletionObject<ObjectUser?>) {
     guard let id = Auth.auth().currentUser?.uid else { completion(nil); return }
-    FirestoreService().objects(ObjectUser.self, reference: .users, parameter: ("id", id)) { (results) in
+    let query = FirestoreService.DataQuery(key: "id", value: id, mode: .equal)
+    FirestoreService().objects(ObjectUser.self, reference: .init(location: .users), parameter: query){ (results) in
       completion(results.first)
+    }
+  }
+  
+  func login(user: ObjectUser, completion: @escaping CompletionObject<FirestoreResponse>) {
+    guard let email = user.email, let password = user.password else { completion(.failure); return }
+    Auth.auth().signIn(withEmail: email, password: password) { (_, error) in
+      if error.isNone {
+        completion(.success)
+        return
+      }
+      completion(.failure)
+    }
+  }
+  
+  func register(user: ObjectUser, completion: @escaping CompletionObject<FirestoreResponse>) {
+    guard let email = user.email, let password = user.password else { completion(.failure); return }
+    Auth.auth().createUser(withEmail: email, password: password) {[weak self] (_, error) in
+      guard error.isNone else { completion(.failure); return }
+      self?.update(user: user, completion: { result in
+        completion(result)
+      })
+    }
+  }
+  
+  func update(user: ObjectUser, completion: @escaping CompletionObject<FirestoreResponse>) {
+    FirestorageService().update(user, reference: .users) { response in
+      switch response {
+      case .failure: completion(.failure)
+      case .success:
+        FirestoreService().update(user, reference: .init(location: .users), completion: { result in
+          completion(result)
+        })
+      }
     }
   }
   

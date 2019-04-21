@@ -20,16 +20,18 @@
 		22124CC3226CC017009800D4 /* ObjectUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22124CC2226CC017009800D4 /* ObjectUser.swift */; };
 		22124CC5226CC140009800D4 /* ObjectConversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22124CC4226CC140009800D4 /* ObjectConversation.swift */; };
 		22124CC7226CC1C7009800D4 /* ObjectMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22124CC6226CC1C7009800D4 /* ObjectMessage.swift */; };
+		22124CC9226CC4BF009800D4 /* ConversationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22124CC8226CC4BF009800D4 /* ConversationManager.swift */; };
+		22124CCB226CC513009800D4 /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22124CCA226CC513009800D4 /* MessageManager.swift */; };
+		22124CCD226CC66B009800D4 /* Messages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22124CCC226CC66B009800D4 /* Messages.storyboard */; };
+		22124CCF226CC69F009800D4 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22124CCE226CC69F009800D4 /* Profile.storyboard */; };
+		22124CD1226CC6DE009800D4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22124CD0226CC6DE009800D4 /* LaunchScreen.storyboard */; };
 		2227EA041FD707B7008F5CA9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2227EA031FD707B7008F5CA9 /* GoogleService-Info.plist */; };
-		224AFA9D1D867DE7004E7CCD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 224AFA9C1D867DE7004E7CCD /* Main.storyboard */; };
 		226EFFA11E1BBBCA00B1D185 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 226EFFA01E1BBBCA00B1D185 /* MapKit.framework */; };
 		22A92BB11D59EBD6005D76F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A92BB01D59EBD6005D76F7 /* AppDelegate.swift */; };
 		22A92BB81D59EBD6005D76F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22A92BB71D59EBD6005D76F7 /* Assets.xcassets */; };
 		22E200B51FD70E28005470B4 /* NavVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E200AF1FD70E24005470B4 /* NavVC.swift */; };
 		22E200B61FD70E28005470B4 /* ConversationsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E200B01FD70E25005470B4 /* ConversationsVC.swift */; };
-		22E200B71FD70E28005470B4 /* LandingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E200B11FD70E26005470B4 /* LandingVC.swift */; };
 		22E200B81FD70E28005470B4 /* VCCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E200B21FD70E27005470B4 /* VCCells.swift */; };
-		22E200B91FD70E28005470B4 /* WelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E200B31FD70E27005470B4 /* WelcomeVC.swift */; };
 		22E200BA1FD70E28005470B4 /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E200B41FD70E28005470B4 /* ChatVC.swift */; };
 		22EDC215226C53FC008F1BBC /* ImagePickerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EDC214226C53FC008F1BBC /* ImagePickerService.swift */; };
 		22EDC217226C541D008F1BBC /* Typealiases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EDC216226C541D008F1BBC /* Typealiases.swift */; };
@@ -64,8 +66,12 @@
 		22124CC2226CC017009800D4 /* ObjectUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectUser.swift; sourceTree = "<group>"; };
 		22124CC4226CC140009800D4 /* ObjectConversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectConversation.swift; sourceTree = "<group>"; };
 		22124CC6226CC1C7009800D4 /* ObjectMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectMessage.swift; sourceTree = "<group>"; };
+		22124CC8226CC4BF009800D4 /* ConversationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationManager.swift; sourceTree = "<group>"; };
+		22124CCA226CC513009800D4 /* MessageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageManager.swift; sourceTree = "<group>"; };
+		22124CCC226CC66B009800D4 /* Messages.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Messages.storyboard; sourceTree = "<group>"; };
+		22124CCE226CC69F009800D4 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
+		22124CD0226CC6DE009800D4 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2227EA031FD707B7008F5CA9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		224AFA9C1D867DE7004E7CCD /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		226EFFA01E1BBBCA00B1D185 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		22A92BAD1D59EBD6005D76F7 /* QuickChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22A92BB01D59EBD6005D76F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -73,9 +79,7 @@
 		22A92BBC1D59EBD6005D76F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22E200AF1FD70E24005470B4 /* NavVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavVC.swift; sourceTree = "<group>"; };
 		22E200B01FD70E25005470B4 /* ConversationsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationsVC.swift; sourceTree = "<group>"; };
-		22E200B11FD70E26005470B4 /* LandingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandingVC.swift; sourceTree = "<group>"; };
 		22E200B21FD70E27005470B4 /* VCCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCCells.swift; sourceTree = "<group>"; };
-		22E200B31FD70E27005470B4 /* WelcomeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeVC.swift; sourceTree = "<group>"; };
 		22E200B41FD70E28005470B4 /* ChatVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
 		22EDC214226C53FC008F1BBC /* ImagePickerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerService.swift; sourceTree = "<group>"; };
 		22EDC216226C541D008F1BBC /* Typealiases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typealiases.swift; sourceTree = "<group>"; };
@@ -141,7 +145,6 @@
 		22A92BAF1D59EBD6005D76F7 /* QuickChat */ = {
 			isa = PBXGroup;
 			children = (
-				224AFA9C1D867DE7004E7CCD /* Main.storyboard */,
 				22E200A21FD70DF6005470B4 /* ViewControllers */,
 				22EDC20A226C5229008F1BBC /* Presenter */,
 				22EDC210226C529D008F1BBC /* Data Managers */,
@@ -155,12 +158,10 @@
 		22E200A21FD70DF6005470B4 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				22E200B11FD70E26005470B4 /* LandingVC.swift */,
 				22E200B41FD70E28005470B4 /* ChatVC.swift */,
 				22E200B01FD70E25005470B4 /* ConversationsVC.swift */,
 				22E200AF1FD70E24005470B4 /* NavVC.swift */,
 				22E200B21FD70E27005470B4 /* VCCells.swift */,
-				22E200B31FD70E27005470B4 /* WelcomeVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -236,6 +237,7 @@
 		22EDC20D226C523D008F1BBC /* Messages */ = {
 			isa = PBXGroup;
 			children = (
+				22124CCC226CC66B009800D4 /* Messages.storyboard */,
 			);
 			path = Messages;
 			sourceTree = "<group>";
@@ -243,6 +245,7 @@
 		22EDC20E226C524E008F1BBC /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				22124CCE226CC69F009800D4 /* Profile.storyboard */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -265,6 +268,8 @@
 			isa = PBXGroup;
 			children = (
 				22124CB0226C8544009800D4 /* UserManager.swift */,
+				22124CC8226CC4BF009800D4 /* ConversationManager.swift */,
+				22124CCA226CC513009800D4 /* MessageManager.swift */,
 			);
 			path = "Data Managers";
 			sourceTree = "<group>";
@@ -272,6 +277,7 @@
 		22EDC211226C52CA008F1BBC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				22124CD0226CC6DE009800D4 /* LaunchScreen.storyboard */,
 				22A92BB71D59EBD6005D76F7 /* Assets.xcassets */,
 				2227EA031FD707B7008F5CA9 /* GoogleService-Info.plist */,
 				22A92BBC1D59EBD6005D76F7 /* Info.plist */,
@@ -403,9 +409,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				22A92BB81D59EBD6005D76F7 /* Assets.xcassets in Resources */,
+				22124CD1226CC6DE009800D4 /* LaunchScreen.storyboard in Resources */,
 				2227EA041FD707B7008F5CA9 /* GoogleService-Info.plist in Resources */,
+				22124CCF226CC69F009800D4 /* Profile.storyboard in Resources */,
 				22124CB5226C86CA009800D4 /* Auth.storyboard in Resources */,
-				224AFA9D1D867DE7004E7CCD /* Main.storyboard in Resources */,
+				22124CCD226CC66B009800D4 /* Messages.storyboard in Resources */,
 				22124CAF226C84B4009800D4 /* Initial.storyboard in Resources */,
 				22124CBD226C885D009800D4 /* Conversations.storyboard in Resources */,
 			);
@@ -485,14 +493,13 @@
 			files = (
 				22EDC219226C54E0008F1BBC /* UIImageExtension.swift in Sources */,
 				22124CC3226CC017009800D4 /* ObjectUser.swift in Sources */,
+				22124CC9226CC4BF009800D4 /* ConversationManager.swift in Sources */,
 				22EDC233226C5B24008F1BBC /* FirestorageService.swift in Sources */,
 				22EDC21F226C56ED008F1BBC /* NSObjectExtension.swift in Sources */,
 				22EDC235226C5B3D008F1BBC /* FirestoreService.swift in Sources */,
-				22E200B71FD70E28005470B4 /* LandingVC.swift in Sources */,
 				22EDC22B226C591C008F1BBC /* KeyboardHandler.swift in Sources */,
 				22124CB7226C8702009800D4 /* AuthViewController.swift in Sources */,
 				22124CB9226C872D009800D4 /* StoryboardEnum.swift in Sources */,
-				22E200B91FD70E28005470B4 /* WelcomeVC.swift in Sources */,
 				22E200B51FD70E28005470B4 /* NavVC.swift in Sources */,
 				22124CBB226C8772009800D4 /* UIStoryboardExtension.swift in Sources */,
 				22E200B81FD70E28005470B4 /* VCCells.swift in Sources */,
@@ -514,6 +521,7 @@
 				22EDC221226C570D008F1BBC /* UIImageViewExtension.swift in Sources */,
 				22EDC215226C53FC008F1BBC /* ImagePickerService.swift in Sources */,
 				22EDC223226C5816008F1BBC /* UIViewControllerExtension.swift in Sources */,
+				22124CCB226CC513009800D4 /* MessageManager.swift in Sources */,
 				22EDC227226C58E4008F1BBC /* UIViewExtension.swift in Sources */,
 				22E200B61FD70E28005470B4 /* ConversationsVC.swift in Sources */,
 			);
@@ -638,7 +646,6 @@
 			baseConfigurationReference = 64442DBDEF6A70CFEE9331D6 /* Pods-QuickChat.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = P6GDVV24N5;
 				INFOPLIST_FILE = "$(SRCROOT)/QuickChat/Application/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -655,7 +662,6 @@
 			baseConfigurationReference = 9226BB5F97214501430FF2E8 /* Pods-QuickChat.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = P6GDVV24N5;
 				INFOPLIST_FILE = "$(SRCROOT)/QuickChat/Application/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;

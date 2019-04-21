@@ -30,6 +30,8 @@
 	<string>Location will be used for to share with friends</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Photos will be used for setting profile picture or sending to friends</string>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Initial</string>
 	<key>UIRequiredDeviceCapabilities</key>

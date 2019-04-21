@@ -25,10 +25,20 @@ import Kingfisher
 
 extension UIImageView {
   
-  func set(_ urlString: String?, placeholder: UIImage? = nil, completion: CompletionObject<UIImage?>? = nil) {
-    guard let urlString = urlString else { completion?(nil); return }
-    kf.setImage(with: URL(string: urlString), placeholder: placeholder) { (result, image) in
-      
+  func setImage(url: URL?, showIndicator: Bool = false, placeholder: UIImage? = nil, completion: CompletionObject<UIImage?>? = nil) {
+    if showIndicator {
+      var kf = self.kf
+      kf.indicatorType = .activity
+    }
+    kf.setImage(with: url, placeholder: placeholder) { result in
+      switch result {
+      case .success(let value):
+        completion?(value.image)
+      case .failure(_):
+        var kf = self.kf
+        kf.indicatorType = .none
+        completion?(nil)
+      }
     }
   }
   

@@ -25,6 +25,8 @@ import Foundation
 import UIKit
 
 
+/*
+
 class SenderCell: UITableViewCell {
     
     @IBOutlet weak var profilePic: RoundedImageView!
@@ -99,6 +101,7 @@ class ContactsCVCell: UICollectionViewCell {
     }
 }
 
+ */
 
 
 

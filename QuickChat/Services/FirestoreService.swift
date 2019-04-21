@@ -31,37 +31,35 @@ class FirestoreService {
     FirebaseApp.configure()
   }
   
-  func objects<T>(_ object: T.Type, reference: FirestoreCollectionReference, parameter: DataQuery? = nil, completion: @escaping CompletionObject<[T]>) where T: FireCodable {
-    fetchDocuments(Firestore.firestore().collection(reference.rawValue), parameter: parameter) { result in
+  func objects<T>(_ object: T.Type, reference: Reference, parameter: DataQuery? = nil, completion: @escaping CompletionObject<[T]>) where T: FireCodable {
+    fetchDocuments(reference.reference(), parameter: parameter) { result in
       completion(result)
     }
   }
   
-  func update<T>(_ object: T, reference: FirestoreCollectionReference, completion: @escaping CompletionObject<FirestoreResponse>) where T: FireCodable {
+  func update<T>(_ object: T, reference: Reference, completion: @escaping CompletionObject<FirestoreResponse>) where T: FireCodable {
     guard let data = object.values else { completion(.failure); return }
-    let ref = Firestore.firestore().collection(reference.rawValue)
-    ref.document(object.id).setData(data, merge: true) { (error) in
+    reference.reference().document(object.id).setData(data, merge: true) { (error) in
       guard let _ = error else { completion(.success); return }
       completion(.failure)
     }
   }
   
-  func delete<T>(_ objects: T.Type, reference: FirestoreCollectionReference, parameter: DataQuery, completion: @escaping CompletionObject<FirestoreResponse>) where T: FireCodable {
-    let ref = Firestore.firestore().collection(reference.rawValue)
+  func delete<T>(_ objects: T.Type, reference: Reference, parameter: DataQuery, completion: @escaping CompletionObject<FirestoreResponse>) where T: FireCodable {
     let queryReference: Query
     switch parameter.mode {
     case .equal:
-      queryReference = ref.whereField(parameter.key, isEqualTo: parameter.value)
+      queryReference = reference.reference().whereField(parameter.key, isEqualTo: parameter.value)
     case .lessThan:
-      queryReference = ref.whereField(parameter.key, isLessThan: parameter.value)
+      queryReference = reference.reference().whereField(parameter.key, isLessThan: parameter.value)
     case .moreThan:
-      queryReference = ref.whereField(parameter.key, isGreaterThan: parameter.value)
+      queryReference = reference.reference().whereField(parameter.key, isGreaterThan: parameter.value)
     case .contains:
-      queryReference = ref.whereField(parameter.key, arrayContains: parameter.value)
+      queryReference = reference.reference().whereField(parameter.key, arrayContains: parameter.value)
     }
     queryReference.getDocuments { (snap, error) in
       guard error.isNone else { completion(.failure); return }
-      let batch = ref.firestore.batch()
+      let batch = reference.reference().firestore.batch()
       snap?.documents.forEach({ (document) in
         batch.deleteDocument(document.reference)
       })
@@ -72,18 +70,29 @@ class FirestoreService {
     }
   }
   
-  func objectWithListener<T>(_ object: T.Type, parameter: DataQuery, reference: FirestoreCollectionReference, completion: @escaping CompletionObject<[T]>) where T: FireCodable {
-    let ref = Firestore.firestore().collection(reference.rawValue)
+  func objectWithListener<T>(_ object: T.Type, parameter: DataQuery? = nil, reference: Reference, completion: @escaping CompletionObject<[T]>) where T: FireCodable {
+    guard let parameter = parameter else {
+      listener = reference.reference().addSnapshotListener({ (snapshot, _) in
+        var objects = [T]()
+        snapshot?.documents.forEach({ (document) in
+          if let objectData = document.data().data, let object = try? JSONDecoder().decode(T.self, from: objectData) {
+            objects.append(object)
+          }
+        })
+        completion(objects)
+      })
+      return
+    }
     let queryReference: Query
     switch parameter.mode {
     case .equal:
-      queryReference = ref.whereField(parameter.key, isEqualTo: parameter.value)
+      queryReference = reference.reference().whereField(parameter.key, isEqualTo: parameter.value)
     case .lessThan:
-      queryReference = ref.whereField(parameter.key, isLessThan: parameter.value)
+      queryReference = reference.reference().whereField(parameter.key, isLessThan: parameter.value)
     case .moreThan:
-      queryReference = ref.whereField(parameter.key, isGreaterThan: parameter.value)
+      queryReference = reference.reference().whereField(parameter.key, isGreaterThan: parameter.value)
     case .contains:
-      queryReference = ref.whereField(parameter.key, arrayContains: parameter.value)
+      queryReference = reference.reference().whereField(parameter.key, arrayContains: parameter.value)
     }
     listener = queryReference.addSnapshotListener({ (snapshot, _) in
       var objects = [T]()
@@ -133,4 +142,31 @@ extension FirestoreService {
       case contains
     }
   }
+  
+  struct Reference {
+    
+    var firstLocation: FirestoreCollectionReference
+    var secondLocation: FirestoreCollectionReference
+    var documentID: String?
+    
+    init(location: FirestoreCollectionReference) {
+      self.firstLocation = location
+      self.secondLocation = location
+    }
+    
+    init(first: FirestoreCollectionReference, second: FirestoreCollectionReference, id: String) {
+      self.documentID = id
+      self.firstLocation = first
+      self.secondLocation = first
+    }
+    
+    func reference() -> CollectionReference {
+      let ref = Firestore.firestore()
+      guard let id = documentID else {
+        return ref.collection(firstLocation.rawValue)
+      }
+      return ref.collection(firstLocation.rawValue).document(id).collection(secondLocation.rawValue)
+    }
+  }
 }
+

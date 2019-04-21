@@ -25,6 +25,8 @@ import UIKit
 import Firebase
 import AudioToolbox
 
+/*
+
 class ConversationsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     //MARK: Properties
@@ -225,6 +227,6 @@ class ConversationsVC: UIViewController, UITableViewDelegate, UITableViewDataSou
 }
 
 
-
+*/
 
 

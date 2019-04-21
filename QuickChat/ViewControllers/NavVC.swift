@@ -25,6 +25,8 @@ import UIKit
 import Firebase
 import MapKit
 
+/*
+
 class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate {
 
     //MARK: Properties
@@ -297,4 +299,5 @@ class NavVC: UINavigationController, UICollectionViewDelegate, UICollectionViewD
     }    
 }
 
+ */
 

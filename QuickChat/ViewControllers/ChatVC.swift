@@ -26,6 +26,8 @@ import Photos
 import Firebase
 import CoreLocation
 
+/*
+
 class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate,  UINavigationControllerDelegate, UIImagePickerControllerDelegate, CLLocationManagerDelegate {
     
     //MARK: Properties
@@ -317,6 +319,6 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
         self.fetchData()
     }
 }
-
+*/
 
 

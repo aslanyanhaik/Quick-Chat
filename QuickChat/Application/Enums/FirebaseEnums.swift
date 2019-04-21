@@ -24,8 +24,8 @@ import Foundation
 
 public enum FirestoreCollectionReference: String {
   case users = "Users"
-  case couriers = "Conversations"
-  case operators = "Messages"
+  case conversations = "Conversations"
+  case messages = "Messages"
 }
 
 public enum FirestoreResponse {
