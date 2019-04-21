@@ -82,14 +82,13 @@
 		22A92BAF1D59EBD6005D76F7 /* QuickChat */ = {
 			isa = PBXGroup;
 			children = (
-				22A92BB01D59EBD6005D76F7 /* AppDelegate.swift */,
 				224AFA9C1D867DE7004E7CCD /* Main.storyboard */,
-				2227EA031FD707B7008F5CA9 /* GoogleService-Info.plist */,
 				22E200A21FD70DF6005470B4 /* ViewControllers */,
-				22E200BC1FD70E61005470B4 /* Model */,
-				22E200C31FD70EAF005470B4 /* Extensions */,
-				22A92BB71D59EBD6005D76F7 /* Assets.xcassets */,
-				22A92BBC1D59EBD6005D76F7 /* Info.plist */,
+				22EDC20A226C5229008F1BBC /* Presenter */,
+				22EDC210226C529D008F1BBC /* Data Managers */,
+				22EDC209226C5219008F1BBC /* Services */,
+				22E200BC1FD70E61005470B4 /* Models */,
+				22EDC20F226C5265008F1BBC /* Application */,
 			);
 			path = QuickChat;
 			sourceTree = "<group>";
@@ -107,14 +106,14 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		22E200BC1FD70E61005470B4 /* Model */ = {
+		22E200BC1FD70E61005470B4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				22E200BF1FD70E6A005470B4 /* Conversation.swift */,
 				22E200BD1FD70E69005470B4 /* Message.swift */,
 				22E200BE1FD70E6A005470B4 /* User.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		22E200C31FD70EAF005470B4 /* Extensions */ = {
@@ -123,6 +122,95 @@
 				22E200C41FD70ECD005470B4 /* Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		22EDC209226C5219008F1BBC /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		22EDC20A226C5229008F1BBC /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				22EDC20B226C5232008F1BBC /* Auth */,
+				22EDC20C226C5237008F1BBC /* Conversations */,
+				22EDC20D226C523D008F1BBC /* Messages */,
+				22EDC20E226C524E008F1BBC /* Profile */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		22EDC20B226C5232008F1BBC /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		22EDC20C226C5237008F1BBC /* Conversations */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Conversations;
+			sourceTree = "<group>";
+		};
+		22EDC20D226C523D008F1BBC /* Messages */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Messages;
+			sourceTree = "<group>";
+		};
+		22EDC20E226C524E008F1BBC /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		22EDC20F226C5265008F1BBC /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				22A92BB01D59EBD6005D76F7 /* AppDelegate.swift */,
+				22EDC212226C5315008F1BBC /* Protocols */,
+				22EDC213226C531E008F1BBC /* Protocol Extensions */,
+				22E200C31FD70EAF005470B4 /* Extensions */,
+				22EDC211226C52CA008F1BBC /* Resources */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		22EDC210226C529D008F1BBC /* Data Managers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Data Managers";
+			sourceTree = "<group>";
+		};
+		22EDC211226C52CA008F1BBC /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				22A92BB71D59EBD6005D76F7 /* Assets.xcassets */,
+				2227EA031FD707B7008F5CA9 /* GoogleService-Info.plist */,
+				22A92BBC1D59EBD6005D76F7 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		22EDC212226C5315008F1BBC /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		22EDC213226C531E008F1BBC /* Protocol Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Protocol Extensions";
 			sourceTree = "<group>";
 		};
 		5923406597F4A9DB000B8FF9 /* Frameworks */ = {
