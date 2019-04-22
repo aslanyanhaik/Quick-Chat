@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--WelcomeVC-->
+        <!--Auth View Controller-->
         <scene sceneID="cay-VV-EvY">
             <objects>
-                <viewController storyboardIdentifier="Welcome" useStoryboardIdentifierAsRestorationIdentifier="YES" id="I5r-es-mup" customClass="WelcomeVC" customModule="QuickChat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="I5r-es-mup" customClass="AuthViewController" customModule="QuickChat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ePs-iS-IWg">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clouds" translatesAutoresizingMaskIntoConstraints="NO" id="oTj-za-KgH">
-                                <rect key="frame" x="0.0" y="727.5" width="750" height="134.5"/>
+                                <rect key="frame" x="0.0" y="727.5" width="16" height="134.5"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
                                 </accessibility>
@@ -37,49 +37,27 @@
                                     <color key="titleColor" red="0.63137254899999995" green="0.44705882349999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="switchViews:" destination="I5r-es-mup" eventType="touchUpInside" id="AHn-6Q-d67"/>
+                                    <action selector="switchViews:" destination="I5r-es-mup" eventType="touchUpInside" id="yd4-3P-t4L"/>
                                 </connections>
                             </button>
-                            <view hidden="YES" alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tD5-Ow-dzR">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
-                                <subviews>
-                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="P9C-p8-ioU">
-                                        <rect key="frame" x="197" y="421" width="20" height="20"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="20" id="PP1-Ti-fhg"/>
-                                            <constraint firstAttribute="width" constant="20" id="mhd-H5-oTB"/>
-                                        </constraints>
-                                    </activityIndicatorView>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="P9C-p8-ioU" firstAttribute="centerY" secondItem="tD5-Ow-dzR" secondAttribute="centerY" id="2cR-ew-t0w"/>
-                                    <constraint firstItem="P9C-p8-ioU" firstAttribute="centerX" secondItem="tD5-Ow-dzR" secondAttribute="centerX" id="vED-g5-fvo"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="7KS-X3-elB" firstAttribute="trailing" secondItem="h7x-zh-9OI" secondAttribute="trailing" id="5Yo-41-gp0"/>
-                            <constraint firstItem="7KS-X3-elB" firstAttribute="bottom" secondItem="tD5-Ow-dzR" secondAttribute="bottom" id="8jB-10-izo"/>
                             <constraint firstItem="h7x-zh-9OI" firstAttribute="leading" secondItem="7KS-X3-elB" secondAttribute="leading" id="9Yv-By-nuA"/>
                             <constraint firstItem="7KS-X3-elB" firstAttribute="bottom" secondItem="Vme-oJ-yDK" secondAttribute="bottom" constant="10" id="9ih-cp-YkV"/>
                             <constraint firstItem="h7x-zh-9OI" firstAttribute="top" secondItem="ePs-iS-IWg" secondAttribute="top" id="JRt-co-D5u"/>
-                            <constraint firstItem="7KS-X3-elB" firstAttribute="trailing" secondItem="tD5-Ow-dzR" secondAttribute="trailing" id="LTt-bD-Nse"/>
                             <constraint firstItem="oTj-za-KgH" firstAttribute="leading" secondItem="7KS-X3-elB" secondAttribute="leading" id="P0V-Ug-G3u"/>
-                            <constraint firstItem="tD5-Ow-dzR" firstAttribute="leading" secondItem="7KS-X3-elB" secondAttribute="leading" id="Wcm-UK-gWT"/>
                             <constraint firstItem="oTj-za-KgH" firstAttribute="height" secondItem="ePs-iS-IWg" secondAttribute="height" multiplier="0.15" id="gi8-gW-aFc"/>
-                            <constraint firstItem="7KS-X3-elB" firstAttribute="bottom" secondItem="h7x-zh-9OI" secondAttribute="bottom" id="m8H-gW-xqg"/>
+                            <constraint firstAttribute="bottom" secondItem="h7x-zh-9OI" secondAttribute="bottom" constant="34" id="m8H-gW-xqg"/>
                             <constraint firstItem="7KS-X3-elB" firstAttribute="bottom" secondItem="oTj-za-KgH" secondAttribute="bottom" id="rQp-1y-Dit"/>
                             <constraint firstItem="Vme-oJ-yDK" firstAttribute="centerX" secondItem="7KS-X3-elB" secondAttribute="centerX" id="rhT-io-aQX"/>
-                            <constraint firstItem="tD5-Ow-dzR" firstAttribute="top" secondItem="ePs-iS-IWg" secondAttribute="top" id="yts-dk-VJP"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7KS-X3-elB"/>
                     </view>
                     <connections>
-                        <outlet property="cloudsView" destination="oTj-za-KgH" id="uVd-l9-DGM"/>
-                        <outlet property="cloudsViewLeading" destination="P0V-Ug-G3u" id="6SK-dZ-39W"/>
-                        <outlet property="darkView" destination="tD5-Ow-dzR" id="5He-vK-PnJ"/>
+                        <outlet property="cloudsImageView" destination="oTj-za-KgH" id="mHk-3A-SOw"/>
+                        <outlet property="cloudsImageViewLeadingConstraint" destination="P0V-Ug-G3u" id="p8G-3b-4aR"/>
                         <outlet property="loginEmailField" destination="wiQ-7x-r4f" id="viY-n3-UUL"/>
                         <outlet property="loginPasswordField" destination="svU-u3-aPv" id="Mz1-II-OUo"/>
                         <outlet property="loginView" destination="fRa-Er-UA3" id="Omz-hN-sYO"/>
@@ -88,7 +66,6 @@
                         <outlet property="registerNameField" destination="2RK-hT-TJT" id="xNk-ks-gql"/>
                         <outlet property="registerPasswordField" destination="MlA-lS-KS2" id="2L7-sI-xdr"/>
                         <outlet property="registerView" destination="9fL-Ub-Hjh" id="OWJ-Px-weH"/>
-                        <outlet property="spinner" destination="P9C-p8-ioU" id="hAB-iu-jON"/>
                         <outletCollection property="waringLabels" destination="wPg-yR-Hee" collectionClass="NSMutableArray" id="cfY-Vu-y6a"/>
                         <outletCollection property="waringLabels" destination="kyq-U6-Gpz" collectionClass="NSMutableArray" id="dxf-MZ-HJb"/>
                         <outletCollection property="inputFields" destination="2RK-hT-TJT" collectionClass="NSMutableArray" id="MQH-AO-UAi"/>
