@@ -26,9 +26,12 @@
 		22124CCF226CC69F009800D4 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22124CCE226CC69F009800D4 /* Profile.storyboard */; };
 		22124CD1226CC6DE009800D4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22124CD0226CC6DE009800D4 /* LaunchScreen.storyboard */; };
 		2227EA041FD707B7008F5CA9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2227EA031FD707B7008F5CA9 /* GoogleService-Info.plist */; };
-		226EFFA11E1BBBCA00B1D185 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 226EFFA01E1BBBCA00B1D185 /* MapKit.framework */; };
 		22A92BB11D59EBD6005D76F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A92BB01D59EBD6005D76F7 /* AppDelegate.swift */; };
 		22A92BB81D59EBD6005D76F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22A92BB71D59EBD6005D76F7 /* Assets.xcassets */; };
+		22D46863226CDFDD004B5B64 /* Previews.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22D46862226CDFDD004B5B64 /* Previews.storyboard */; };
+		22D46865226CE01B004B5B64 /* MapPreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D46864226CE01B004B5B64 /* MapPreviewController.swift */; };
+		22D46867226CE028004B5B64 /* ImagePreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D46866226CE028004B5B64 /* ImagePreviewController.swift */; };
+		22D46869226CE8E3004B5B64 /* ContactsPreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D46868226CE8E3004B5B64 /* ContactsPreviewController.swift */; };
 		22E200B51FD70E28005470B4 /* NavVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E200AF1FD70E24005470B4 /* NavVC.swift */; };
 		22E200B61FD70E28005470B4 /* ConversationsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E200B01FD70E25005470B4 /* ConversationsVC.swift */; };
 		22E200B81FD70E28005470B4 /* VCCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E200B21FD70E27005470B4 /* VCCells.swift */; };
@@ -77,6 +80,10 @@
 		22A92BB01D59EBD6005D76F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22A92BB71D59EBD6005D76F7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		22A92BBC1D59EBD6005D76F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		22D46862226CDFDD004B5B64 /* Previews.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Previews.storyboard; sourceTree = "<group>"; };
+		22D46864226CE01B004B5B64 /* MapPreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPreviewController.swift; sourceTree = "<group>"; };
+		22D46866226CE028004B5B64 /* ImagePreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreviewController.swift; sourceTree = "<group>"; };
+		22D46868226CE8E3004B5B64 /* ContactsPreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsPreviewController.swift; sourceTree = "<group>"; };
 		22E200AF1FD70E24005470B4 /* NavVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavVC.swift; sourceTree = "<group>"; };
 		22E200B01FD70E25005470B4 /* ConversationsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationsVC.swift; sourceTree = "<group>"; };
 		22E200B21FD70E27005470B4 /* VCCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCCells.swift; sourceTree = "<group>"; };
@@ -107,7 +114,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				226EFFA11E1BBBCA00B1D185 /* MapKit.framework in Frameworks */,
 				5B9ECF6E03F5E624C52B3509 /* Pods_QuickChat.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -153,6 +159,17 @@
 				22EDC20F226C5265008F1BBC /* Application */,
 			);
 			path = QuickChat;
+			sourceTree = "<group>";
+		};
+		22D46861226CDFC8004B5B64 /* Previews */ = {
+			isa = PBXGroup;
+			children = (
+				22D46862226CDFDD004B5B64 /* Previews.storyboard */,
+				22D46864226CE01B004B5B64 /* MapPreviewController.swift */,
+				22D46866226CE028004B5B64 /* ImagePreviewController.swift */,
+				22D46868226CE8E3004B5B64 /* ContactsPreviewController.swift */,
+			);
+			path = Previews;
 			sourceTree = "<group>";
 		};
 		22E200A21FD70DF6005470B4 /* ViewControllers */ = {
@@ -213,6 +230,7 @@
 				22EDC20C226C5237008F1BBC /* Conversations */,
 				22EDC20D226C523D008F1BBC /* Messages */,
 				22EDC20E226C524E008F1BBC /* Profile */,
+				22D46861226CDFC8004B5B64 /* Previews */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -409,6 +427,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22A92BB81D59EBD6005D76F7 /* Assets.xcassets in Resources */,
+				22D46863226CDFDD004B5B64 /* Previews.storyboard in Resources */,
 				22124CD1226CC6DE009800D4 /* LaunchScreen.storyboard in Resources */,
 				2227EA041FD707B7008F5CA9 /* GoogleService-Info.plist in Resources */,
 				22124CCF226CC69F009800D4 /* Profile.storyboard in Resources */,
@@ -506,15 +525,18 @@
 				22124CBF226CB6BE009800D4 /* EncodableExtension.swift in Sources */,
 				22EDC229226C58F9008F1BBC /* OptionalExtension.swift in Sources */,
 				22EDC21B226C552C008F1BBC /* LocationService.swift in Sources */,
+				22D46869226CE8E3004B5B64 /* ContactsPreviewController.swift in Sources */,
 				22A92BB11D59EBD6005D76F7 /* AppDelegate.swift in Sources */,
 				22E200BA1FD70E28005470B4 /* ChatVC.swift in Sources */,
 				22124CB3226C85B2009800D4 /* InitialViewController.swift in Sources */,
 				22EDC217226C541D008F1BBC /* Typealiases.swift in Sources */,
 				22EDC225226C5867008F1BBC /* StringExtension.swift in Sources */,
 				22EDC230226C5AEA008F1BBC /* FirebaseEnums.swift in Sources */,
+				22D46865226CE01B004B5B64 /* MapPreviewController.swift in Sources */,
 				22124CB1226C8544009800D4 /* UserManager.swift in Sources */,
 				22EDC21D226C56BD008F1BBC /* FireCodable.swift in Sources */,
 				22EDC22D226C59B3008F1BBC /* ThemeService.swift in Sources */,
+				22D46867226CE028004B5B64 /* ImagePreviewController.swift in Sources */,
 				22124CC7226CC1C7009800D4 /* ObjectMessage.swift in Sources */,
 				22124CC5226CC140009800D4 /* ObjectConversation.swift in Sources */,
 				22124CC1226CBB6F009800D4 /* DictionaryExtension.swift in Sources */,

@@ -69,6 +69,12 @@ class UserManager {
     }
   }
   
+  func contacts(_ completion: @escaping CompletionObject<[ObjectUser]>) {
+    FirestoreService().objects(ObjectUser.self, reference: .init(location: .users)) { results in
+      completion(results)
+    }
+  }
+  
   @discardableResult func logout() -> Bool {
     do {
       try Auth.auth().signOut()

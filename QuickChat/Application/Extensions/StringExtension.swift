@@ -21,6 +21,7 @@
 //  SOFTWARE.
 
 import Foundation
+import CoreLocation
 
 extension String {
   
@@ -30,4 +31,9 @@ extension String {
     return emailTest.evaluate(with: self)
   }
   
+  var location: CLLocationCoordinate2D? {
+    let coordinates = self.components(separatedBy: ",")
+    guard coordinates.count == 2 else { return nil }
+    return CLLocationCoordinate2D(latitude: Double(coordinates.first!)!, longitude: Double(coordinates.last!)!)
+  }
 }

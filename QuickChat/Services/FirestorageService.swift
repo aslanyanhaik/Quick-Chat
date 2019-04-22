@@ -37,9 +37,9 @@ class FirestorageService {
           object.profilePic = nil
           object.profilePicLink = downloadURL
           completion(.success)
-        } else {
-          completion(.failure)
+          return
         }
+        completion(.failure)
       })
     }
   }

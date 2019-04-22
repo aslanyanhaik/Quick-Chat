@@ -68,3 +68,10 @@ fastlane/test_output
 # Others
 .DS_Store
 .idea/
+
+
+### Firebase ###
+.idea
+**/node_modules/*
+**/.firebaserc
+
