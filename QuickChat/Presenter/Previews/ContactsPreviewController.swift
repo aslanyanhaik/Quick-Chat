@@ -32,12 +32,22 @@ class ContactsPreviewController: UIViewController {
   private var users = [ObjectUser]()
   weak var delegate: ContactsPreviewControllerDelegate?
   
+  @IBAction func closePressed(_ sender: Any) {
+    dismiss(animated: true, completion: nil)
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     UserManager().contacts {[weak self] results in
       self?.users = results
       self?.collectionView.reloadData()
     }
+  }
+  
+  required init?(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)
+    modalTransitionStyle = .crossDissolve
+    modalPresentationStyle = .overFullScreen
   }
 }
 
@@ -48,7 +58,12 @@ extension ContactsPreviewController: UICollectionViewDelegateFlowLayout, UIColle
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    
+    guard !users.isEmpty else {
+      return collectionView.dequeueReusableCell(withReuseIdentifier: "EmptyCell", for: indexPath)
+    }
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ContactsCell.className, for: indexPath) as! ContactsCell
+    cell.set(users[indexPath.row])
+    return cell
   }
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -57,6 +72,27 @@ extension ContactsPreviewController: UICollectionViewDelegateFlowLayout, UIColle
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    
+    guard !users.isEmpty else {
+      return collectionView.bounds.size
+    }
+    let width = collectionView.bounds.width / 3 - 20
+    return CGSize(width: width, height: width + 20)
+  }
+}
+
+
+class ContactsCell: UICollectionViewCell {
+  
+  @IBOutlet weak var profilePic: UIImageView!
+  @IBOutlet weak var nameLabel: UILabel!
+  
+  func set(_ user: ObjectUser) {
+   nameLabel.text = user.name
+    profilePic.setImage(url: URL(string: user.profilePicLink ?? ""), placeholder: UIImage(named: "profile pic"))
+  }
+  
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    profilePic.layer.cornerRadius = profilePic.bounds.width / 2
   }
 }
