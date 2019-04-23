@@ -31,6 +31,7 @@ class AuthViewController: UIViewController {
   @IBOutlet weak var registerPasswordTextField: UITextField!
   @IBOutlet weak var loginEmailTextField: UITextField!
   @IBOutlet weak var loginPasswordTextField: UITextField!
+  @IBOutlet var separatorViews: [UIView]!
   @IBOutlet weak var cloudsImageView: UIImageView!
   @IBOutlet weak var cloudsImageViewLeadingConstraint: NSLayoutConstraint!
   @IBOutlet weak var loginViewTopConstraint: NSLayoutConstraint!
@@ -42,8 +43,8 @@ class AuthViewController: UIViewController {
   private let imageService = ImagePickerService()
   
   //MARK: Lifecycle
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
     animateClouds()
   }
 }
@@ -56,15 +57,15 @@ extension AuthViewController {
       return
     }
     guard !name.isEmpty else {
-      registerNameTextField.borderColor = .red
+      separatorViews.filter({$0.tag == 2}).first?.backgroundColor = .red
       return
     }
     guard email.isValidEmail() else {
-      registerEmailTextField.borderColor = .red
+      separatorViews.filter({$0.tag == 3}).first?.backgroundColor = .red
       return
     }
     guard password.count > 5 else {
-      registerPasswordTextField.borderColor = .red
+      separatorViews.filter({$0.tag == 4}).first?.backgroundColor = .red
       return
     }
     view.endEditing(true)
@@ -88,11 +89,11 @@ extension AuthViewController {
       return
     }
     guard email.isValidEmail() else {
-      loginEmailTextField.borderColor = .red
+      separatorViews.filter({$0.tag == 0}).first?.backgroundColor = .red
       return
     }
     guard password.count > 5 else {
-      loginPasswordTextField.borderColor = .red
+      separatorViews.filter({$0.tag == 1}).first?.backgroundColor = .red
       return
     }
     view.endEditing(true)
@@ -110,7 +111,11 @@ extension AuthViewController {
   }
   
   @IBAction func switchViews(_ sender: UIButton) {
-    UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
+    let shouldShowLogin = loginViewTopConstraint.constant != 30
+    sender.setTitle(!shouldShowLogin ? "Login": "Create New Account", for: .normal)
+    loginViewTopConstraint.constant = shouldShowLogin ? 30 : -800
+    registerViewTopConstraint.constant = shouldShowLogin ? -800 : 30
+    UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
       self.view.layoutIfNeeded()
     })
   }
@@ -127,6 +132,9 @@ extension AuthViewController {
 extension AuthViewController {
   
   private func animateClouds() {
+    cloudsImageViewLeadingConstraint.constant = 0
+    cloudsImageView.layer.removeAllAnimations()
+    view.layoutIfNeeded()
     let distance = view.bounds.width - cloudsImageView.bounds.width
     self.cloudsImageViewLeadingConstraint.constant = distance
     UIView.animate(withDuration: 15, delay: 0, options: [.repeat, .curveLinear], animations: {
@@ -142,6 +150,6 @@ extension AuthViewController: UITextFieldDelegate {
   }
   
   func textFieldDidBeginEditing(_ textField: UITextField) {
-    textField.borderColor = ThemeService.purpleColor
+    separatorViews.forEach({$0.backgroundColor = .darkGray})
   }
 }

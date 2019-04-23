@@ -4,7 +4,8 @@ inhibit_all_warnings!
 ENV['COCOAPODS_DISABLE_STATS'] = "true"
 
 target 'QuickChat' do
-
+	
+	pod 'Firebase/Core'
 	pod 'Firebase/Auth'
 	pod 'Firebase/Storage'
 	pod 'Kingfisher'

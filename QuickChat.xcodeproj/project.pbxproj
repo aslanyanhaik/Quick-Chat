@@ -672,7 +672,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/QuickChat/Application/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.mexonis.quick-chat";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.quick-chat";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
@@ -688,7 +688,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/QuickChat/Application/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.mexonis.quick-chat";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.quick-chat";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
