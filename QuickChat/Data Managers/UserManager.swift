@@ -24,6 +24,8 @@ import FirebaseAuth
 
 class UserManager {
   
+  private let service = FirestoreService()
+  
   func currentUserID() -> String? {
     return Auth.auth().currentUser?.uid
   }
@@ -31,9 +33,9 @@ class UserManager {
   func currentUserData(_ completion: @escaping CompletionObject<ObjectUser?>) {
     guard let id = Auth.auth().currentUser?.uid else { completion(nil); return }
     let query = FirestoreService.DataQuery(key: "id", value: id, mode: .equal)
-    FirestoreService().objects(ObjectUser.self, reference: .init(location: .users), parameter: query){ (results) in
-      completion(results.first)
-    }
+    service.objectWithListener(ObjectUser.self, parameter: query, reference: .init(location: .users), completion: { users in
+      completion(users.first)
+    })
   }
   
   func login(user: ObjectUser, completion: @escaping CompletionObject<FirestoreResponse>) {
