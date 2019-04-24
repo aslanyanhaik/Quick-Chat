@@ -26,6 +26,8 @@ class ObjectMessage: FireStorageCodable {
   
   var id = UUID().uuidString
   var message: String?
+  var content: String?
+  var contentType = ContentType.none
   var timestamp = Int(Date().timeIntervalSince1970)
   var location: String?
   var ownerID: String?
@@ -40,6 +42,8 @@ class ObjectMessage: FireStorageCodable {
     try container.encodeIfPresent(location, forKey: .location)
     try container.encodeIfPresent(ownerID, forKey: .ownerID)
     try container.encodeIfPresent(profilePicLink, forKey: .profilePicLink)
+    try container.encodeIfPresent(contentType.rawValue, forKey: .contentType)
+    try container.encodeIfPresent(content, forKey: .content)
   }
   
   init() {}
@@ -53,8 +57,11 @@ class ObjectMessage: FireStorageCodable {
     location = try container.decodeIfPresent(String.self, forKey: .location)
     ownerID = try container.decodeIfPresent(String.self, forKey: .ownerID)
     profilePicLink = try container.decodeIfPresent(String.self, forKey: .profilePicLink)
+    content = try container.decodeIfPresent(String.self, forKey: .content)
+    if let contentTypeValue = try container.decodeIfPresent(Int.self, forKey: .contentType) {
+      contentType = ContentType(rawValue: contentTypeValue) ?? ContentType.unknown
+    }
   }
-  
 }
 
 extension ObjectMessage {
@@ -65,5 +72,14 @@ extension ObjectMessage {
     case location
     case ownerID
     case profilePicLink
+    case contentType
+    case content
+  }
+  
+  enum ContentType: Int {
+    case none
+    case photo
+    case location
+    case unknown
   }
 }

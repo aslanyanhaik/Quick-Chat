@@ -21,29 +21,67 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="VU7-1V-gaK" userLabel="HeaderView">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="45"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Conversations" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="17" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hPj-c7-r9b" customClass="UILabelGradient" customModule="QuickChat" customModuleProvider="target">
-                                            <rect key="frame" x="20" y="5" width="374" height="35"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="35" id="FmU-tl-OtY"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chats" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="17" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hPj-c7-r9b" customClass="UILabelGradient" customModule="QuickChat" customModuleProvider="target">
+                                            <rect key="frame" x="20" y="5" width="97" height="40"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="35"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WHE-oR-WHK">
+                                            <rect key="frame" x="332" y="5" width="30" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="30" id="ZNP-8c-z8a"/>
+                                            </constraints>
+                                            <state key="normal" image="compose"/>
+                                            <connections>
+                                                <action selector="composePressed:" destination="ri6-fX-8IQ" eventType="touchUpInside" id="Rcf-1Y-fk1"/>
+                                            </connections>
+                                        </button>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile pic" translatesAutoresizingMaskIntoConstraints="NO" id="UUO-sI-ZJg">
+                                            <rect key="frame" x="372" y="10" width="30" height="30"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="15"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                    <real key="value" value="1.5"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                    <color key="value" red="0.50588235290000005" green="0.56470588239999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </imageView>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="80H-7U-xif">
+                                            <rect key="frame" x="372" y="10" width="30" height="30"/>
+                                            <connections>
+                                                <action selector="profilePressed:" destination="ri6-fX-8IQ" eventType="touchUpInside" id="5Ij-xq-pI1"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="hPj-c7-r9b" secondAttribute="bottom" constant="5" id="0Fp-wj-rcz"/>
                                         <constraint firstItem="hPj-c7-r9b" firstAttribute="top" secondItem="VU7-1V-gaK" secondAttribute="top" constant="5" id="7aR-uW-JJF"/>
+                                        <constraint firstItem="UUO-sI-ZJg" firstAttribute="width" secondItem="UUO-sI-ZJg" secondAttribute="height" multiplier="1:1" id="CIn-ME-zlg"/>
+                                        <constraint firstItem="80H-7U-xif" firstAttribute="centerX" secondItem="UUO-sI-ZJg" secondAttribute="centerX" id="D3Z-5i-gcr"/>
+                                        <constraint firstItem="WHE-oR-WHK" firstAttribute="centerY" secondItem="VU7-1V-gaK" secondAttribute="centerY" id="KHP-ya-VeN"/>
+                                        <constraint firstItem="80H-7U-xif" firstAttribute="height" secondItem="UUO-sI-ZJg" secondAttribute="height" id="KzW-y7-VRH"/>
+                                        <constraint firstItem="WHE-oR-WHK" firstAttribute="top" secondItem="VU7-1V-gaK" secondAttribute="top" constant="5" id="Xey-f1-oz8"/>
+                                        <constraint firstAttribute="bottom" secondItem="WHE-oR-WHK" secondAttribute="bottom" constant="5" id="XlP-XV-YUK"/>
+                                        <constraint firstItem="UUO-sI-ZJg" firstAttribute="top" secondItem="VU7-1V-gaK" secondAttribute="top" constant="10" id="btD-Jw-gF3"/>
                                         <constraint firstItem="hPj-c7-r9b" firstAttribute="leading" secondItem="VU7-1V-gaK" secondAttribute="leading" constant="20" id="eRb-Em-UUv"/>
-                                        <constraint firstAttribute="trailing" secondItem="hPj-c7-r9b" secondAttribute="trailing" constant="20" id="swc-gh-fRI"/>
+                                        <constraint firstAttribute="trailing" secondItem="UUO-sI-ZJg" secondAttribute="trailing" constant="12" id="fkE-lj-4pw"/>
+                                        <constraint firstItem="UUO-sI-ZJg" firstAttribute="centerY" secondItem="VU7-1V-gaK" secondAttribute="centerY" id="hkz-eI-xOz"/>
+                                        <constraint firstItem="80H-7U-xif" firstAttribute="width" secondItem="UUO-sI-ZJg" secondAttribute="width" id="nLb-XM-ZR6"/>
+                                        <constraint firstItem="80H-7U-xif" firstAttribute="centerY" secondItem="UUO-sI-ZJg" secondAttribute="centerY" id="oOR-Gk-7OZ"/>
+                                        <constraint firstItem="WHE-oR-WHK" firstAttribute="trailing" secondItem="UUO-sI-ZJg" secondAttribute="leading" constant="-10" id="vmw-jR-2Xc"/>
                                     </constraints>
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ConversationCell" id="hmC-Bu-c6E" customClass="ConversationCell" customModule="QuickChat" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="125" width="414" height="80"/>
+                                        <rect key="frame" x="0.0" y="130" width="414" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hmC-Bu-c6E" id="Acp-2h-erh">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
@@ -107,7 +145,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="EmptyCell" rowHeight="531" id="dh3-yI-J7z">
-                                        <rect key="frame" x="0.0" y="205" width="414" height="531"/>
+                                        <rect key="frame" x="0.0" y="210" width="414" height="531"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dh3-yI-J7z" id="klZ-GO-2Rd">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="531"/>
@@ -151,6 +189,7 @@
                     </navigationItem>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="profileImageView" destination="UUO-sI-ZJg" id="JQE-5i-1Ub"/>
                         <outlet property="tableView" destination="rep-KH-3nN" id="OyQ-XB-Lkb"/>
                     </connections>
                 </viewController>

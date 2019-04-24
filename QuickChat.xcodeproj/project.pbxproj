@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2209BB262270971900E6328A /* UILabelGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2209BB252270971900E6328A /* UILabelGradient.swift */; };
+		2209BB282270A51600E6328A /* AudioService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2209BB272270A51600E6328A /* AudioService.swift */; };
+		2209BB2A2270A66D00E6328A /* newMessage.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2209BB292270A66D00E6328A /* newMessage.wav */; };
 		22124CAF226C84B4009800D4 /* Initial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22124CAE226C84B4009800D4 /* Initial.storyboard */; };
 		22124CB1226C8544009800D4 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22124CB0226C8544009800D4 /* UserManager.swift */; };
 		22124CB3226C85B2009800D4 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22124CB2226C85B2009800D4 /* InitialViewController.swift */; };
@@ -62,6 +64,8 @@
 
 /* Begin PBXFileReference section */
 		2209BB252270971900E6328A /* UILabelGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelGradient.swift; sourceTree = "<group>"; };
+		2209BB272270A51600E6328A /* AudioService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioService.swift; sourceTree = "<group>"; };
+		2209BB292270A66D00E6328A /* newMessage.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = newMessage.wav; sourceTree = "<group>"; };
 		22124CAE226C84B4009800D4 /* Initial.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Initial.storyboard; sourceTree = "<group>"; };
 		22124CB0226C8544009800D4 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		22124CB2226C85B2009800D4 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
@@ -231,6 +235,7 @@
 		22EDC209226C5219008F1BBC /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				2209BB272270A51600E6328A /* AudioService.swift */,
 				22EDC214226C53FC008F1BBC /* ImagePickerService.swift */,
 				22EDC21A226C552C008F1BBC /* LocationService.swift */,
 				22EDC22C226C59B3008F1BBC /* ThemeService.swift */,
@@ -320,6 +325,7 @@
 			children = (
 				22124CD0226CC6DE009800D4 /* LaunchScreen.storyboard */,
 				22A92BB71D59EBD6005D76F7 /* Assets.xcassets */,
+				2209BB292270A66D00E6328A /* newMessage.wav */,
 				2227EA031FD707B7008F5CA9 /* GoogleService-Info.plist */,
 				22A92BBC1D59EBD6005D76F7 /* Info.plist */,
 			);
@@ -452,6 +458,7 @@
 				22A92BB81D59EBD6005D76F7 /* Assets.xcassets in Resources */,
 				22D46863226CDFDD004B5B64 /* Previews.storyboard in Resources */,
 				22124CD1226CC6DE009800D4 /* LaunchScreen.storyboard in Resources */,
+				2209BB2A2270A66D00E6328A /* newMessage.wav in Resources */,
 				2227EA041FD707B7008F5CA9 /* GoogleService-Info.plist in Resources */,
 				22124CCF226CC69F009800D4 /* Profile.storyboard in Resources */,
 				22124CB5226C86CA009800D4 /* Auth.storyboard in Resources */,
@@ -559,6 +566,7 @@
 				22D70574226F661200953354 /* UIFontExtension.swift in Sources */,
 				22124CB3226C85B2009800D4 /* InitialViewController.swift in Sources */,
 				22EDC217226C541D008F1BBC /* Typealiases.swift in Sources */,
+				2209BB282270A51600E6328A /* AudioService.swift in Sources */,
 				22EDC225226C5867008F1BBC /* StringExtension.swift in Sources */,
 				22EDC230226C5AEA008F1BBC /* FirebaseEnums.swift in Sources */,
 				22D46865226CE01B004B5B64 /* MapPreviewController.swift in Sources */,

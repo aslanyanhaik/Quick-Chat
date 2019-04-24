@@ -42,6 +42,7 @@ class ConversationCell: UITableViewCell {
       if !isRead {
         nameLabel.font = nameLabel.font.bold
         messageLabel.font = messageLabel.font.bold
+        messageLabel.textColor = ThemeService.purpleColor
         timeLabel.font = timeLabel.font.bold
       }
       ProfileManager.shared.userData(id: id) {[weak self] profile in

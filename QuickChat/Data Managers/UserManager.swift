@@ -51,8 +51,9 @@ class UserManager {
   
   func register(user: ObjectUser, completion: @escaping CompletionObject<FirestoreResponse>) {
     guard let email = user.email, let password = user.password else { completion(.failure); return }
-    Auth.auth().createUser(withEmail: email, password: password) {[weak self] (_, error) in
+    Auth.auth().createUser(withEmail: email, password: password) {[weak self] (reponse, error) in
       guard error.isNone else { completion(.failure); return }
+      user.id = reponse?.user.uid ?? UUID().uuidString
       self?.update(user: user, completion: { result in
         completion(result)
       })
