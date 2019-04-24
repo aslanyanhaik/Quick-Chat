@@ -27,6 +27,9 @@ class ConversationsViewController: UIViewController {
   //MARK: IBOutlets
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var profileImageView: UIImageView!
+  override var preferredStatusBarStyle: UIStatusBarStyle {
+    return .default
+  }
   
   //MARK: Private properties
   private var conversations = [ObjectConversation]()
@@ -57,7 +60,10 @@ class ConversationsViewController: UIViewController {
 extension ConversationsViewController {
   
   @IBAction func profilePressed(_ sender: Any) {
-    
+    let vc: ProfileViewController = UIStoryboard.initial(storyboard: .profile)
+    vc.delegate = self
+    vc.user = currentUser
+    present(vc, animated: false)
   }
   
   @IBAction func composePressed(_ sender: Any) {
@@ -114,7 +120,7 @@ extension ConversationsViewController: UITableViewDelegate, UITableViewDataSourc
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     if conversations.isEmpty {
-      //show profile
+      //show contacts
     }
     
   }
@@ -127,3 +133,10 @@ extension ConversationsViewController: UITableViewDelegate, UITableViewDataSourc
   }
 }
 
+//MARK: ProfileViewController Delegate
+extension ConversationsViewController: ProfileViewControllerDelegate {
+  func profileViewControllerDidLogOut() {
+    userManager.logout()
+    navigationController?.dismiss(animated: true)
+  }
+}

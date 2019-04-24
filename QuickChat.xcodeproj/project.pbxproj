@@ -10,6 +10,7 @@
 		2209BB262270971900E6328A /* UILabelGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2209BB252270971900E6328A /* UILabelGradient.swift */; };
 		2209BB282270A51600E6328A /* AudioService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2209BB272270A51600E6328A /* AudioService.swift */; };
 		2209BB2A2270A66D00E6328A /* newMessage.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2209BB292270A66D00E6328A /* newMessage.wav */; };
+		2209BB2C2270AF3300E6328A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2209BB2B2270AF3300E6328A /* ProfileViewController.swift */; };
 		22124CAF226C84B4009800D4 /* Initial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22124CAE226C84B4009800D4 /* Initial.storyboard */; };
 		22124CB1226C8544009800D4 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22124CB0226C8544009800D4 /* UserManager.swift */; };
 		22124CB3226C85B2009800D4 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22124CB2226C85B2009800D4 /* InitialViewController.swift */; };
@@ -66,6 +67,7 @@
 		2209BB252270971900E6328A /* UILabelGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelGradient.swift; sourceTree = "<group>"; };
 		2209BB272270A51600E6328A /* AudioService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioService.swift; sourceTree = "<group>"; };
 		2209BB292270A66D00E6328A /* newMessage.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = newMessage.wav; sourceTree = "<group>"; };
+		2209BB2B2270AF3300E6328A /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		22124CAE226C84B4009800D4 /* Initial.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Initial.storyboard; sourceTree = "<group>"; };
 		22124CB0226C8544009800D4 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		22124CB2226C85B2009800D4 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
@@ -291,6 +293,7 @@
 			isa = PBXGroup;
 			children = (
 				22124CCE226CC69F009800D4 /* Profile.storyboard */,
+				2209BB2B2270AF3300E6328A /* ProfileViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -580,6 +583,7 @@
 				22EDC221226C570D008F1BBC /* UIImageViewExtension.swift in Sources */,
 				22EDC215226C53FC008F1BBC /* ImagePickerService.swift in Sources */,
 				22EDC223226C5816008F1BBC /* UIViewControllerExtension.swift in Sources */,
+				2209BB2C2270AF3300E6328A /* ProfileViewController.swift in Sources */,
 				22124CCB226CC513009800D4 /* MessageManager.swift in Sources */,
 				22EDC227226C58E4008F1BBC /* UIViewExtension.swift in Sources */,
 			);

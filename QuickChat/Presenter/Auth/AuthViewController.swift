@@ -36,6 +36,9 @@ class AuthViewController: UIViewController {
   @IBOutlet weak var cloudsImageViewLeadingConstraint: NSLayoutConstraint!
   @IBOutlet weak var loginViewTopConstraint: NSLayoutConstraint!
   @IBOutlet weak var registerViewTopConstraint: NSLayoutConstraint!
+  override var preferredStatusBarStyle: UIStatusBarStyle {
+    return .lightContent
+  }
 
   //MARK: Private properties
   private var selectedImage: UIImage?
