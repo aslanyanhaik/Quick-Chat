@@ -67,7 +67,9 @@ extension ConversationsViewController {
   }
   
   @IBAction func composePressed(_ sender: Any) {
-    
+    let vc: ContactsPreviewController = UIStoryboard.controller(storyboard: .previews)
+    vc.delegate = self
+    present(vc, animated: true, completion: nil)
   }
 }
 
@@ -120,7 +122,7 @@ extension ConversationsViewController: UITableViewDelegate, UITableViewDataSourc
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     if conversations.isEmpty {
-      //show contacts
+      composePressed(self)
     }
     
   }
@@ -138,5 +140,15 @@ extension ConversationsViewController: ProfileViewControllerDelegate {
   func profileViewControllerDidLogOut() {
     userManager.logout()
     navigationController?.dismiss(animated: true)
+  }
+}
+
+//MARK: ContactsPreviewController Delegate
+extension ConversationsViewController: ContactsPreviewControllerDelegate {
+  func contactsPreviewController(didSelect user: ObjectUser) {
+    if let conversation = conversations.filter({$0.userIDs.contains(user.id)}).first {
+      
+    }
+    
   }
 }

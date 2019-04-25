@@ -29,17 +29,20 @@ protocol ContactsPreviewControllerDelegate: class {
 class ContactsPreviewController: UIViewController {
   
   @IBOutlet weak var collectionView: UICollectionView!
-  private var users = [ObjectUser]()
   weak var delegate: ContactsPreviewControllerDelegate?
+  
+  private var users = [ObjectUser]()
+  private let manager = UserManager()
   
   @IBAction func closePressed(_ sender: Any) {
     dismiss(animated: true, completion: nil)
   }
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    UserManager().contacts {[weak self] results in
-      self?.users = results
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    guard let id = manager.currentUserID() else { return }
+    manager.contacts {[weak self] results in
+      self?.users = results.filter({$0.id != id})
       self?.collectionView.reloadData()
     }
   }
@@ -67,6 +70,7 @@ extension ContactsPreviewController: UICollectionViewDelegateFlowLayout, UIColle
   }
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    guard !users.isEmpty else { return }
     delegate?.contactsPreviewController(didSelect: users[indexPath.row])
     dismiss(animated: true, completion: nil)
   }
@@ -75,8 +79,8 @@ extension ContactsPreviewController: UICollectionViewDelegateFlowLayout, UIColle
     guard !users.isEmpty else {
       return collectionView.bounds.size
     }
-    let width = collectionView.bounds.width / 3 - 20
-    return CGSize(width: width, height: width + 20)
+    let width = (collectionView.bounds.width - 30) / 3 //spacing
+    return CGSize(width: width, height: width + 30)
   }
 }
 
@@ -86,13 +90,21 @@ class ContactsCell: UICollectionViewCell {
   @IBOutlet weak var profilePic: UIImageView!
   @IBOutlet weak var nameLabel: UILabel!
   
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    profilePic.cancelDownload()
+    profilePic.image = UIImage(named: "profile pic")
+  }
+  
   func set(_ user: ObjectUser) {
-   nameLabel.text = user.name
-    profilePic.setImage(url: URL(string: user.profilePicLink ?? ""), placeholder: UIImage(named: "profile pic"))
+    nameLabel.text = user.name
+    if let urlString = user.profilePicLink {
+      profilePic.setImage(url: URL(string: urlString))
+    }
   }
   
   override func layoutSubviews() {
     super.layoutSubviews()
-    profilePic.layer.cornerRadius = profilePic.bounds.width / 2
+    profilePic.layer.cornerRadius = (bounds.width - 10) / 2
   }
 }
