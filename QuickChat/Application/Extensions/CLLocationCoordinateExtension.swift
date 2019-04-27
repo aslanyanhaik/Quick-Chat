@@ -20,11 +20,11 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-import Foundation
+import CoreLocation
 
-enum StoryboardEnum: String {
-  case auth = "Auth"
-  case conversations = "Conversations"
-  case profile = "Profile"
-  case previews = "Previews"
+extension  CLLocationCoordinate2D {
+  
+  var string: String {
+    return "\(latitude):\(longitude)"
+  }
 }

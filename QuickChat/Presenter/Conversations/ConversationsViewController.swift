@@ -42,7 +42,6 @@ class ConversationsViewController: UIViewController {
     super.viewDidLoad()
     fetchProfile()
     fetchConversations()
-    navigationController?.navigationBar.shadowImage = UIImage()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -123,8 +122,12 @@ extension ConversationsViewController: UITableViewDelegate, UITableViewDataSourc
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     if conversations.isEmpty {
       composePressed(self)
+      return
     }
-    
+    let vc: MessagesViewController = UIStoryboard.initial(storyboard: .messages)
+    vc.conversation = conversations[indexPath.row]
+    manager.markAsRead(conversations[indexPath.row])
+    show(vc, sender: self)
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -146,9 +149,17 @@ extension ConversationsViewController: ProfileViewControllerDelegate {
 //MARK: ContactsPreviewController Delegate
 extension ConversationsViewController: ContactsPreviewControllerDelegate {
   func contactsPreviewController(didSelect user: ObjectUser) {
+    guard let currentID = userManager.currentUserID() else { return }
+    let vc: MessagesViewController = UIStoryboard.initial(storyboard: .messages)
     if let conversation = conversations.filter({$0.userIDs.contains(user.id)}).first {
-      
+      vc.conversation = conversation
+      show(vc, sender: self)
+      return
     }
-    
+    let conversation = ObjectConversation()
+    conversation.userIDs.append(contentsOf: [currentID, user.id])
+    conversation.isRead = [currentID: true, user.id: true]
+    vc.conversation = conversation
+    show(vc, sender: self)
   }
 }

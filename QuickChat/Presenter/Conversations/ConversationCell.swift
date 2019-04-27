@@ -37,7 +37,7 @@ class ConversationCell: UITableViewCell {
   func set(_ conversation: ObjectConversation) {
     timeLabel.text = DateService.shared.format(Date(timeIntervalSince1970: TimeInterval(conversation.timestamp)))
     messageLabel.text = conversation.lastMessage
-    if let id = conversation.userIDs.filter({$0 != userID}).first {
+    if let id = conversation.userIDs.filter({$0 == userID}).first {
       let isRead = conversation.isRead[id] ?? true
       if !isRead {
         nameLabel.font = nameLabel.font.bold

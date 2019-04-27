@@ -32,14 +32,3 @@ public enum FirestoreResponse {
   case success
   case failure
 }
-
-public enum UploadResponse {
-  case success(String)
-  case failure
-}
-
-public enum UserResults {
-  case auth(_: String)
-  case failure
-  case success
-}

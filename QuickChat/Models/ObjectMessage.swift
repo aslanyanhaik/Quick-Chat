@@ -29,7 +29,6 @@ class ObjectMessage: FireStorageCodable {
   var content: String?
   var contentType = ContentType.none
   var timestamp = Int(Date().timeIntervalSince1970)
-  var location: String?
   var ownerID: String?
   var profilePicLink: String?
   var profilePic: UIImage?
@@ -39,7 +38,6 @@ class ObjectMessage: FireStorageCodable {
     try container.encode(id, forKey: .id)
     try container.encodeIfPresent(message, forKey: .message)
     try container.encodeIfPresent(timestamp, forKey: .timestamp)
-    try container.encodeIfPresent(location, forKey: .location)
     try container.encodeIfPresent(ownerID, forKey: .ownerID)
     try container.encodeIfPresent(profilePicLink, forKey: .profilePicLink)
     try container.encodeIfPresent(contentType.rawValue, forKey: .contentType)
@@ -54,7 +52,6 @@ class ObjectMessage: FireStorageCodable {
     id = try container.decode(String.self, forKey: .id)
     message = try container.decodeIfPresent(String.self, forKey: .message)
     timestamp = try container.decodeIfPresent(Int.self, forKey: .timestamp) ?? Int(Date().timeIntervalSince1970)
-    location = try container.decodeIfPresent(String.self, forKey: .location)
     ownerID = try container.decodeIfPresent(String.self, forKey: .ownerID)
     profilePicLink = try container.decodeIfPresent(String.self, forKey: .profilePicLink)
     content = try container.decodeIfPresent(String.self, forKey: .content)
@@ -69,7 +66,6 @@ extension ObjectMessage {
     case id
     case message
     case timestamp
-    case location
     case ownerID
     case profilePicLink
     case contentType

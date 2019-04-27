@@ -35,8 +35,13 @@ class ConversationManager {
   }
   
   func create(_ conversation: ObjectConversation, _ completion: CompletionObject<FirestoreResponse>? = nil) {
-    FirestoreService().update(conversation, reference: .init(location: .conversations)) { response in
-      completion?(response)
-    }
+    FirestoreService().update(conversation, reference: .init(location: .conversations)) { completion?($0) }
+  }
+  
+  func markAsRead(_ conversation: ObjectConversation, _ completion: CompletionObject<FirestoreResponse>? = nil) {
+    guard let userID = UserManager().currentUserID() else { return }
+    guard conversation.isRead[userID] == false else { return }
+    conversation.isRead[userID] = true
+    FirestoreService().update(conversation, reference: .init(location: .conversations)) { completion?($0) }
   }
 }

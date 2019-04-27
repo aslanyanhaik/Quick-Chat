@@ -48,7 +48,7 @@ class ObjectConversation: FireCodable {
     userIDs = try container.decode([String].self, forKey: .userIDs)
     timestamp = try container.decode(Int.self, forKey: .timestamp)
     lastMessage = try container.decodeIfPresent(String.self, forKey: .lastMessage)
-    isRead = try container.decode([String: Bool].self, forKey: .timestamp)
+    isRead = try container.decode([String: Bool].self, forKey: .isRead)
   }
 }
 

@@ -33,25 +33,30 @@ class ImagePickerService: NSObject, UIImagePickerControllerDelegate, UINavigatio
   }()
   var completionBlock: CompletionObject<UIImage>?
   
-  func pickImage(from vc: UIViewController, completion: CompletionObject<UIImage>?) {
+  func pickImage(from vc: UIViewController, source: UIImagePickerController.SourceType? = nil, completion: CompletionObject<UIImage>?) {
     completionBlock = completion
-    let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-    sheet.view.tintColor = ThemeService.purpleColor
-    let cameraAction = UIAlertAction(title: "Camera", style: .default) {[weak self] _ in
-      guard let weakSelf = self else { return }
-      weakSelf.picker.sourceType = .camera
-      vc.present(weakSelf.picker, animated: true, completion: nil)
+    guard let source = source else {
+      let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+      sheet.view.tintColor = ThemeService.purpleColor
+      let cameraAction = UIAlertAction(title: "Camera", style: .default) {[weak self] _ in
+        guard let weakSelf = self else { return }
+        weakSelf.picker.sourceType = .camera
+        vc.present(weakSelf.picker, animated: true, completion: nil)
+      }
+      let photoAction = UIAlertAction(title: "Gallery", style: .default) {[weak self] _ in
+        guard let weakSelf = self else { return }
+        weakSelf.picker.sourceType = .photoLibrary
+        vc.present(weakSelf.picker, animated: true, completion: nil)
+      }
+      let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+      sheet.addAction(cameraAction)
+      sheet.addAction(photoAction)
+      sheet.addAction(cancelAction)
+      vc.present(sheet, animated: true, completion: nil)
+      return
     }
-    let photoAction = UIAlertAction(title: "Gallery", style: .default) {[weak self] _ in
-      guard let weakSelf = self else { return }
-      weakSelf.picker.sourceType = .photoLibrary
-      vc.present(weakSelf.picker, animated: true, completion: nil)
-    }
-    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-    sheet.addAction(cameraAction)
-    sheet.addAction(photoAction)
-    sheet.addAction(cancelAction)
-    vc.present(sheet, animated: true, completion: nil)
+   picker.sourceType = source
+    vc.present(picker, animated: true, completion: nil)
   }
   
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {

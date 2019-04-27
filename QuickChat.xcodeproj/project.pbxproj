@@ -16,7 +16,6 @@
 		22124CB3226C85B2009800D4 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22124CB2226C85B2009800D4 /* InitialViewController.swift */; };
 		22124CB5226C86CA009800D4 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22124CB4226C86CA009800D4 /* Auth.storyboard */; };
 		22124CB7226C8702009800D4 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22124CB6226C8702009800D4 /* AuthViewController.swift */; };
-		22124CB9226C872D009800D4 /* StoryboardEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22124CB8226C872D009800D4 /* StoryboardEnum.swift */; };
 		22124CBB226C8772009800D4 /* UIStoryboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22124CBA226C8772009800D4 /* UIStoryboardExtension.swift */; };
 		22124CBD226C885D009800D4 /* Conversations.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22124CBC226C885D009800D4 /* Conversations.storyboard */; };
 		22124CBF226CB6BE009800D4 /* EncodableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22124CBE226CB6BE009800D4 /* EncodableExtension.swift */; };
@@ -30,9 +29,10 @@
 		22124CCF226CC69F009800D4 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22124CCE226CC69F009800D4 /* Profile.storyboard */; };
 		22124CD1226CC6DE009800D4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22124CD0226CC6DE009800D4 /* LaunchScreen.storyboard */; };
 		2227EA041FD707B7008F5CA9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2227EA031FD707B7008F5CA9 /* GoogleService-Info.plist */; };
-		224EFA9D2270BC5900E22BAF /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224EFA9C2270BC5900E22BAF /* ChatViewController.swift */; };
+		224EFA9D2270BC5900E22BAF /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224EFA9C2270BC5900E22BAF /* MessagesViewController.swift */; };
 		224EFA9F2270BC7A00E22BAF /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224EFA9E2270BC7A00E22BAF /* MessageTableViewCell.swift */; };
 		22648AC2226ECC5500246443 /* ConversationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22648AC1226ECC5500246443 /* ConversationsViewController.swift */; };
+		2281D14F2272009B0023F5B2 /* CLLocationCoordinateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2281D14E2272009B0023F5B2 /* CLLocationCoordinateExtension.swift */; };
 		22A92BB11D59EBD6005D76F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A92BB01D59EBD6005D76F7 /* AppDelegate.swift */; };
 		22A92BB81D59EBD6005D76F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22A92BB71D59EBD6005D76F7 /* Assets.xcassets */; };
 		22D46863226CDFDD004B5B64 /* Previews.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22D46862226CDFDD004B5B64 /* Previews.storyboard */; };
@@ -72,7 +72,6 @@
 		22124CB2226C85B2009800D4 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		22124CB4226C86CA009800D4 /* Auth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
 		22124CB6226C8702009800D4 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
-		22124CB8226C872D009800D4 /* StoryboardEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardEnum.swift; sourceTree = "<group>"; };
 		22124CBA226C8772009800D4 /* UIStoryboardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStoryboardExtension.swift; sourceTree = "<group>"; };
 		22124CBC226C885D009800D4 /* Conversations.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Conversations.storyboard; sourceTree = "<group>"; };
 		22124CBE226CB6BE009800D4 /* EncodableExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncodableExtension.swift; sourceTree = "<group>"; };
@@ -86,10 +85,11 @@
 		22124CCE226CC69F009800D4 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		22124CD0226CC6DE009800D4 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2227EA031FD707B7008F5CA9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		224EFA9C2270BC5900E22BAF /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		224EFA9C2270BC5900E22BAF /* MessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
 		224EFA9E2270BC7A00E22BAF /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		22648AC1226ECC5500246443 /* ConversationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsViewController.swift; sourceTree = "<group>"; };
 		226EFFA01E1BBBCA00B1D185 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		2281D14E2272009B0023F5B2 /* CLLocationCoordinateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLLocationCoordinateExtension.swift; sourceTree = "<group>"; };
 		22A92BAD1D59EBD6005D76F7 /* QuickChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22A92BB01D59EBD6005D76F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22A92BB71D59EBD6005D76F7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -217,6 +217,7 @@
 				22124CBA226C8772009800D4 /* UIStoryboardExtension.swift */,
 				22124CBE226CB6BE009800D4 /* EncodableExtension.swift */,
 				22124CC0226CBB6F009800D4 /* DictionaryExtension.swift */,
+				2281D14E2272009B0023F5B2 /* CLLocationCoordinateExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -272,7 +273,7 @@
 			isa = PBXGroup;
 			children = (
 				22124CCC226CC66B009800D4 /* Messages.storyboard */,
-				224EFA9C2270BC5900E22BAF /* ChatViewController.swift */,
+				224EFA9C2270BC5900E22BAF /* MessagesViewController.swift */,
 				224EFA9E2270BC7A00E22BAF /* MessageTableViewCell.swift */,
 			);
 			path = Messages;
@@ -344,7 +345,6 @@
 			isa = PBXGroup;
 			children = (
 				22EDC22F226C5AEA008F1BBC /* FirebaseEnums.swift */,
-				22124CB8226C872D009800D4 /* StoryboardEnum.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -534,7 +534,7 @@
 			files = (
 				22D7057622703E3A00953354 /* DateService.swift in Sources */,
 				22EDC219226C54E0008F1BBC /* UIImageExtension.swift in Sources */,
-				224EFA9D2270BC5900E22BAF /* ChatViewController.swift in Sources */,
+				224EFA9D2270BC5900E22BAF /* MessagesViewController.swift in Sources */,
 				22124CC3226CC017009800D4 /* ObjectUser.swift in Sources */,
 				22124CC9226CC4BF009800D4 /* ConversationManager.swift in Sources */,
 				22EDC233226C5B24008F1BBC /* FirestorageService.swift in Sources */,
@@ -543,7 +543,6 @@
 				22D70570226F5F9300953354 /* ConversationCell.swift in Sources */,
 				22EDC22B226C591C008F1BBC /* KeyboardHandler.swift in Sources */,
 				22124CB7226C8702009800D4 /* AuthViewController.swift in Sources */,
-				22124CB9226C872D009800D4 /* StoryboardEnum.swift in Sources */,
 				22D70578227088A300953354 /* ProfileManager.swift in Sources */,
 				2209BB262270971900E6328A /* UILabelGradient.swift in Sources */,
 				22648AC2226ECC5500246443 /* ConversationsViewController.swift in Sources */,
@@ -573,6 +572,7 @@
 				22EDC223226C5816008F1BBC /* UIViewControllerExtension.swift in Sources */,
 				2209BB2C2270AF3300E6328A /* ProfileViewController.swift in Sources */,
 				22124CCB226CC513009800D4 /* MessageManager.swift in Sources */,
+				2281D14F2272009B0023F5B2 /* CLLocationCoordinateExtension.swift in Sources */,
 				22EDC227226C58E4008F1BBC /* UIViewExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

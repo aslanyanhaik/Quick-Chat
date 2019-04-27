@@ -23,7 +23,9 @@
 import UIKit
 
 protocol KeyboardHandler {
-  var scrollView: UIScrollView! { get }
+  var tableView: UITableView! { get }
+  var barBottomConstraint: NSLayoutConstraint! { get }
+  var bottomInset: CGFloat { get }
 }
 
 extension KeyboardHandler where Self: UIViewController {
@@ -39,7 +41,11 @@ extension KeyboardHandler where Self: UIViewController {
   private func handleKeyboard(notification: Notification) {
     guard let userInfo = notification.userInfo else { return }
     guard let keyboardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
-    scrollView.setContentOffset(notification.name == UIResponder.keyboardWillHideNotification ? .zero : CGPoint(x: 0, y: keyboardFrame.height), animated: true)
-    scrollView.scrollIndicatorInsets.bottom = notification.name == UIResponder.keyboardWillHideNotification ? 0 : keyboardFrame.height
+    tableView.setContentOffset(notification.name == UIResponder.keyboardWillHideNotification ? .zero : CGPoint(x: 0, y: keyboardFrame.height + bottomInset), animated: true)
+    tableView.scrollIndicatorInsets.bottom = notification.name == UIResponder.keyboardWillHideNotification ? 0 : keyboardFrame.height + bottomInset
+    barBottomConstraint.constant = notification.name == UIResponder.keyboardWillHideNotification ? 0 : keyboardFrame.height - view.safeAreaInsets.bottom
+    UIView.animate(withDuration: 0.3) {
+      self.view.layoutIfNeeded()
+    }
   }
 }

@@ -145,27 +145,25 @@ extension FirestoreService {
   
   struct Reference {
     
-    var firstLocation: FirestoreCollectionReference
-    var secondLocation: FirestoreCollectionReference
-    var documentID: String?
+    private let locations: [FirestoreCollectionReference]
+    private let documentID: String
     
     init(location: FirestoreCollectionReference) {
-      self.firstLocation = location
-      self.secondLocation = location
+      self.locations = [location]
+      self.documentID = ""
     }
     
     init(first: FirestoreCollectionReference, second: FirestoreCollectionReference, id: String) {
+      self.locations = [first, second]
       self.documentID = id
-      self.firstLocation = first
-      self.secondLocation = first
     }
     
     func reference() -> CollectionReference {
       let ref = Firestore.firestore()
-      guard let id = documentID else {
-        return ref.collection(firstLocation.rawValue)
+      guard locations.count == 2 else {
+        return ref.collection(locations.first!.rawValue)
       }
-      return ref.collection(firstLocation.rawValue).document(id).collection(secondLocation.rawValue)
+      return ref.collection(locations.first!.rawValue).document(documentID).collection(locations.last!.rawValue)
     }
   }
 }

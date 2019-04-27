@@ -78,6 +78,13 @@ class UserManager {
     }
   }
   
+  func userData(for id: String, _ completion: @escaping CompletionObject<ObjectUser?>) {
+    let query = FirestoreService.DataQuery(key: "id", value: id, mode: .equal)
+    FirestoreService().objects(ObjectUser.self, reference: .init(location: .users), parameter: query) { users in
+      completion(users.first)
+    }
+  }
+  
   @discardableResult func logout() -> Bool {
     do {
       try Auth.auth().signOut()

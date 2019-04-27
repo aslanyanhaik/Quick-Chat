@@ -71,8 +71,9 @@ extension ContactsPreviewController: UICollectionViewDelegateFlowLayout, UIColle
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     guard !users.isEmpty else { return }
-    delegate?.contactsPreviewController(didSelect: users[indexPath.row])
-    dismiss(animated: true, completion: nil)
+    dismiss(animated: true) {
+      self.delegate?.contactsPreviewController(didSelect: self.users[indexPath.row])
+    }
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
