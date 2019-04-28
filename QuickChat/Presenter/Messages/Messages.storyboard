@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="88" width="375" height="690"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Sender" id="qTM-KY-Yin" customClass="SenderCell" customModule="QuickChat" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Sender" id="qTM-KY-Yin" customClass="SenderCell" customModule="QuickChat" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qTM-KY-Yin" id="7og-Pa-YwM">
@@ -72,7 +72,7 @@
                                             <outlet property="profilePic" destination="jKx-Sh-UgN" id="PZZ-6j-s8L"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MessageTableViewCell" rowHeight="90" id="75b-FZ-kCW" customClass="MessageTableViewCell" customModule="QuickChat" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MessageTableViewCell" rowHeight="90" id="75b-FZ-kCW" customClass="MessageTableViewCell" customModule="QuickChat" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="72" width="375" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="75b-FZ-kCW" id="3k0-vp-xYi">
@@ -216,6 +216,9 @@
                                                         </connections>
                                                     </button>
                                                 </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="32" id="ufN-j0-uAx"/>
+                                                </constraints>
                                             </stackView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -276,6 +279,7 @@
                         <outlet property="barBottomConstraint" destination="USX-fV-RHa" id="izl-sj-oQR"/>
                         <outlet property="expandButton" destination="Wiw-ke-ss8" id="68o-lJ-1dX"/>
                         <outlet property="inputTextField" destination="QSa-zB-UHJ" id="kY9-9V-eoH"/>
+                        <outlet property="stackViewWidthConstraint" destination="ufN-j0-uAx" id="sDa-cX-hti"/>
                         <outlet property="tableView" destination="bBq-0a-Ntf" id="3bs-rp-U9P"/>
                         <outletCollection property="actionButtons" destination="v2o-z8-jrT" collectionClass="NSMutableArray" id="M8E-ve-vyR"/>
                         <outletCollection property="actionButtons" destination="aAN-TH-BmZ" collectionClass="NSMutableArray" id="iyj-eR-dxn"/>

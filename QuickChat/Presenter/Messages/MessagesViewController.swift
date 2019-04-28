@@ -30,6 +30,8 @@ class MessagesViewController: UIViewController, KeyboardHandler {
   @IBOutlet weak var inputTextField: UITextField!
   @IBOutlet weak var expandButton: UIButton!
   @IBOutlet weak var barBottomConstraint: NSLayoutConstraint!
+  
+  @IBOutlet weak var stackViewWidthConstraint: NSLayoutConstraint!
   @IBOutlet var actionButtons: [UIButton]!
 
   //MARK: Private properties
@@ -131,10 +133,12 @@ extension MessagesViewController {
   }
   
   @IBAction func expandItemsPressed(_ sender: UIButton) {
+    stackViewWidthConstraint.constant = 112
     UIView.animate(withDuration: 0.3) {
       self.expandButton.isHidden = true
       self.expandButton.alpha = 0
       self.actionButtons.forEach({$0.isHidden = false})
+      self.view.layoutIfNeeded()
     }
   }
 }
@@ -176,10 +180,12 @@ extension MessagesViewController: UITextFieldDelegate {
   }
   
   func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    stackViewWidthConstraint.constant = 32
     UIView.animate(withDuration: 0.3) {
       self.expandButton.isHidden = false
       self.expandButton.alpha = 1
       self.actionButtons.forEach({$0.isHidden = true})
+      self.view.layoutIfNeeded()
     }
     return true
   }
