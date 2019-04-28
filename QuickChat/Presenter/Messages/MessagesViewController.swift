@@ -94,6 +94,27 @@ extension MessagesViewController {
       self?.navigationItem.title = name
     }
   }
+  
+  private func showActionButtons(_ status: Bool) {
+    guard !status else {
+      stackViewWidthConstraint.constant = 112
+      UIView.animate(withDuration: 0.3) {
+        self.expandButton.isHidden = true
+        self.expandButton.alpha = 0
+        self.actionButtons.forEach({$0.isHidden = false})
+        self.view.layoutIfNeeded()
+      }
+      return
+    }
+    guard stackViewWidthConstraint.constant != 32 else { return }
+    stackViewWidthConstraint.constant = 32
+    UIView.animate(withDuration: 0.3) {
+      self.expandButton.isHidden = false
+      self.expandButton.alpha = 1
+      self.actionButtons.forEach({$0.isHidden = true})
+      self.view.layoutIfNeeded()
+    }
+  }
 }
 
 //MARK: IBActions
@@ -105,6 +126,7 @@ extension MessagesViewController {
     message.message = text
     message.ownerID = UserManager().currentUserID()
     inputTextField.text = nil
+    showActionButtons(false)
     send(message)
   }
   
@@ -114,6 +136,8 @@ extension MessagesViewController {
       message.profilePic = image
       message.ownerID = UserManager().currentUserID()
       self?.send(message)
+      self?.inputTextField.text = nil
+      self?.showActionButtons(false)
     }
   }
   
@@ -128,18 +152,14 @@ extension MessagesViewController {
         message.content = location.string
         message.contentType = .location
         self?.send(message)
+        self?.inputTextField.text = nil
+        self?.showActionButtons(false)
       }
     }
   }
   
   @IBAction func expandItemsPressed(_ sender: UIButton) {
-    stackViewWidthConstraint.constant = 112
-    UIView.animate(withDuration: 0.3) {
-      self.expandButton.isHidden = true
-      self.expandButton.alpha = 0
-      self.actionButtons.forEach({$0.isHidden = false})
-      self.view.layoutIfNeeded()
-    }
+    showActionButtons(true)
   }
 }
 
@@ -180,13 +200,7 @@ extension MessagesViewController: UITextFieldDelegate {
   }
   
   func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-    stackViewWidthConstraint.constant = 32
-    UIView.animate(withDuration: 0.3) {
-      self.expandButton.isHidden = false
-      self.expandButton.alpha = 1
-      self.actionButtons.forEach({$0.isHidden = true})
-      self.view.layoutIfNeeded()
-    }
+    showActionButtons(false)
     return true
   }
 }
