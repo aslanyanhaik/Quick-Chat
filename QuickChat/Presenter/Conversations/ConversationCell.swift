@@ -47,7 +47,10 @@ class ConversationCell: UITableViewCell {
       }
       ProfileManager.shared.userData(id: id) {[weak self] profile in
         self?.nameLabel.text = profile?.name
-        guard let urlString = profile?.profilePicLink else { return }
+        guard let urlString = profile?.profilePicLink else {
+          self?.profilePic.image = UIImage(named: "profile pic")
+          return
+        }
         self?.profilePic.setImage(url: URL(string: urlString))
       }
     }
@@ -57,7 +60,6 @@ class ConversationCell: UITableViewCell {
   override func prepareForReuse() {
     super.prepareForReuse()
     profilePic.cancelDownload()
-    profilePic.image = UIImage(named: "profile pic")
     nameLabel.font = nameLabel.font.regular
     messageLabel.font = messageLabel.font.regular
     timeLabel.font = timeLabel.font.regular

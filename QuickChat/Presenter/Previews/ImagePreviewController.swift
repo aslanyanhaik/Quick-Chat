@@ -26,7 +26,7 @@ class ImagePreviewController: UIViewController, UIScrollViewDelegate {
   
   @IBOutlet weak var imageView: UIImageView!
   @IBOutlet weak var scrollView: UIScrollView!
-  var image: UIImage?
+  var imageURLString: String?
   
   @IBAction func closePressed(_ sender: Any) {
     dismiss(animated: true, completion: nil)
@@ -50,9 +50,13 @@ class ImagePreviewController: UIViewController, UIScrollViewDelegate {
     return zoomRect
   }
   
+  func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+    return imageView
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
-    imageView.image = image
+    imageView.setImage(url: URL(string: imageURLString ?? ""))
   }
   
   required init?(coder aDecoder: NSCoder) {

@@ -23,22 +23,27 @@
 
 import UIKit
 
+protocol MessageTableViewCellDelegate: class {
+  func messageTableViewCell(didSelect message: ObjectMessage)
+}
+
 class MessageTableViewCell: UITableViewCell {
   
-  @IBOutlet weak var messageLabel: UILabel!
+  @IBOutlet weak var messageTextView: UITextView!
   @IBOutlet weak var attachmentImageView: UIImageView!
   @IBOutlet weak var attachmentImageViewHeightConstraint: NSLayoutConstraint!
-
+  weak var delegate: MessageTableViewCellDelegate?
+  
   override func prepareForReuse() {
     super.prepareForReuse()
-    messageLabel.text = nil
-    attachmentImageView.cancelDownload()
-    attachmentImageView.image = nil
-    attachmentImageViewHeightConstraint.constant = 0
+    messageTextView.text = nil
+//    attachmentImageView.cancelDownload()
+//    attachmentImageView.image = nil
+//    attachmentImageViewHeightConstraint.constant = 0
   }
   
   func set(_ message: ObjectMessage) {
-    
+    messageTextView.text = message.message
   }
   
   

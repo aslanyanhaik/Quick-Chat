@@ -133,6 +133,7 @@ extension MessagesViewController {
   @IBAction func expandItemsPressed(_ sender: UIButton) {
     UIView.animate(withDuration: 0.3) {
       self.expandButton.isHidden = true
+      self.expandButton.alpha = 0
       self.actionButtons.forEach({$0.isHidden = false})
     }
   }
@@ -142,17 +143,19 @@ extension MessagesViewController {
 extension MessagesViewController: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 0
+    return messages.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let message = messages[indexPath.row]
     if message.ownerID == UserManager().currentUserID() {
       let cell = tableView.dequeueReusableCell(withIdentifier: MessageTableViewCell.className) as! MessageTableViewCell
+      cell.delegate = self
       cell.set(message)
       return cell
     }
     let cell = tableView.dequeueReusableCell(withIdentifier: UserMessageTableViewCell.className) as! UserMessageTableViewCell
+    cell.delegate = self
     cell.set(message)
     return cell
   }
@@ -175,8 +178,28 @@ extension MessagesViewController: UITextFieldDelegate {
   func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
     UIView.animate(withDuration: 0.3) {
       self.expandButton.isHidden = false
+      self.expandButton.alpha = 1
       self.actionButtons.forEach({$0.isHidden = true})
     }
     return true
   }
 }
+
+//MARK: MessageTableViewCellDelegate Delegate
+extension MessagesViewController: MessageTableViewCellDelegate {
+  
+  func messageTableViewCell(didSelect message: ObjectMessage) {
+    switch message.contentType {
+    case .location:
+      let vc: MapPreviewController = UIStoryboard.controller(storyboard: .previews)
+      vc.locationString = message.content
+      navigationController?.present(vc, animated: true)
+    case .photo:
+      let vc: ImagePreviewController = UIStoryboard.controller(storyboard: .previews)
+      vc.imageURLString = message.profilePicLink
+      navigationController?.present(vc, animated: true)
+    default: break
+    }
+  }
+}
+
