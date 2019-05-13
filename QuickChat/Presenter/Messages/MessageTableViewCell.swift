@@ -29,7 +29,22 @@ protocol MessageTableViewCellDelegate: class {
 
 class MessageTableViewCell: UITableViewCell {
   
+  @IBOutlet weak var profilePic: UIImageView?
   @IBOutlet weak var messageTextView: UITextView!
+  
+  func set(_ message: ObjectMessage) {
+    messageTextView.text = message.message
+    guard let imageView = profilePic else { return }
+    guard let userID = message.ownerID else { return }
+    ProfileManager.shared.userData(id: userID) { user in
+      guard let urlString = user?.profilePicLink else { return }
+      imageView.setImage(url: URL(string: urlString))
+    }
+  }
+}
+
+class MessageAttachmentTableViewCell: MessageTableViewCell {
+  
   @IBOutlet weak var attachmentImageView: UIImageView!
   @IBOutlet weak var attachmentImageViewHeightConstraint: NSLayoutConstraint!
   weak var delegate: MessageTableViewCellDelegate?
@@ -37,70 +52,16 @@ class MessageTableViewCell: UITableViewCell {
   override func prepareForReuse() {
     super.prepareForReuse()
     messageTextView.text = nil
-//    attachmentImageView.cancelDownload()
-//    attachmentImageView.image = nil
-//    attachmentImageViewHeightConstraint.constant = 0
+    attachmentImageView.cancelDownload()
+    attachmentImageView.image = nil
+    attachmentImageViewHeightConstraint.constant = 200
   }
   
-  func set(_ message: ObjectMessage) {
-    messageTextView.text = message.message
-  }
-  
-  
-}
-
-class UserMessageTableViewCell: MessageTableViewCell {
-  
-  @IBOutlet weak var profilePic: UIImageView!
-
   override func set(_ message: ObjectMessage) {
     super.set(message)
-//    profilePic.
+    guard let urlString = message.profilePicLink else { return }
+    attachmentImageView.setImage(url: URL(string: urlString)) { image in
+      
+    }
   }
 }
-
-
-
-/*
- 
- class SenderCell: UITableViewCell {
- 
- @IBOutlet weak var profilePic: RoundedImageView!
- @IBOutlet weak var message: UITextView!
- @IBOutlet weak var messageBackground: UIImageView!
- 
- func clearCellData()  {
- self.message.text = nil
- self.message.isHidden = false
- self.messageBackground.image = nil
- }
- 
- override func awakeFromNib() {
- super.awakeFromNib()
- self.selectionStyle = .none
- self.message.textContainerInset = UIEdgeInsetsMake(5, 5, 5, 5)
- self.messageBackground.layer.cornerRadius = 15
- self.messageBackground.clipsToBounds = true
- }
- }
- 
- class ReceiverCell: UITableViewCell {
- 
- @IBOutlet weak var message: UITextView!
- @IBOutlet weak var messageBackground: UIImageView!
- 
- func clearCellData()  {
- self.message.text = nil
- self.message.isHidden = false
- self.messageBackground.image = nil
- }
- 
- override func awakeFromNib() {
- super.awakeFromNib()
- self.selectionStyle = .none
- self.message.textContainerInset = UIEdgeInsetsMake(5, 5, 5, 5)
- self.messageBackground.layer.cornerRadius = 15
- self.messageBackground.clipsToBounds = true
- }
- }
-*/

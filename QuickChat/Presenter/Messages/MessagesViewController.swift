@@ -30,7 +30,6 @@ class MessagesViewController: UIViewController, KeyboardHandler {
   @IBOutlet weak var inputTextField: UITextField!
   @IBOutlet weak var expandButton: UIButton!
   @IBOutlet weak var barBottomConstraint: NSLayoutConstraint!
-  
   @IBOutlet weak var stackViewWidthConstraint: NSLayoutConstraint!
   @IBOutlet var actionButtons: [UIButton]!
 
@@ -49,7 +48,10 @@ class MessagesViewController: UIViewController, KeyboardHandler {
   //MARK: Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
-    addKeyboardObservers()
+    addKeyboardObservers() {[weak self] state in
+      guard state else { return }
+      self?.tableView.scroll(to: .bottom, animated: true)
+    }
     fetchMessages()
     fetchUserName()
   }
@@ -62,6 +64,7 @@ extension MessagesViewController {
     manager.messages(for: conversation) {[weak self] messages in
       self?.messages = messages.sorted(by: {$0.timestamp < $1.timestamp})
       self?.tableView.reloadData()
+      self?.tableView.scroll(to: .bottom, animated: true)
     }
   }
   
@@ -172,13 +175,12 @@ extension MessagesViewController: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let message = messages[indexPath.row]
-    if message.ownerID == UserManager().currentUserID() {
-      let cell = tableView.dequeueReusableCell(withIdentifier: MessageTableViewCell.className) as! MessageTableViewCell
-      cell.delegate = self
+    if message.contentType == .none {
+      let cell = tableView.dequeueReusableCell(withIdentifier: message.ownerID == UserManager().currentUserID() ? "MessageTableViewCell" : "UserMessageTableViewCell") as! MessageTableViewCell
       cell.set(message)
       return cell
     }
-    let cell = tableView.dequeueReusableCell(withIdentifier: UserMessageTableViewCell.className) as! UserMessageTableViewCell
+    let cell = tableView.dequeueReusableCell(withIdentifier: message.ownerID == UserManager().currentUserID() ? "MessageAttachmentTableViewCell" : "UserMessageAttachmentTableViewCell") as! MessageAttachmentTableViewCell
     cell.delegate = self
     cell.set(message)
     return cell

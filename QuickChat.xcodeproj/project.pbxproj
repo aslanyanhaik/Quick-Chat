@@ -29,6 +29,7 @@
 		22124CCF226CC69F009800D4 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22124CCE226CC69F009800D4 /* Profile.storyboard */; };
 		22124CD1226CC6DE009800D4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22124CD0226CC6DE009800D4 /* LaunchScreen.storyboard */; };
 		2227EA041FD707B7008F5CA9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2227EA031FD707B7008F5CA9 /* GoogleService-Info.plist */; };
+		2235D75722899173005BAE3E /* UITableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2235D75622899173005BAE3E /* UITableViewExtension.swift */; };
 		224EFA9D2270BC5900E22BAF /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224EFA9C2270BC5900E22BAF /* MessagesViewController.swift */; };
 		224EFA9F2270BC7A00E22BAF /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224EFA9E2270BC7A00E22BAF /* MessageTableViewCell.swift */; };
 		22648AC2226ECC5500246443 /* ConversationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22648AC1226ECC5500246443 /* ConversationsViewController.swift */; };
@@ -85,6 +86,7 @@
 		22124CCE226CC69F009800D4 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		22124CD0226CC6DE009800D4 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2227EA031FD707B7008F5CA9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2235D75622899173005BAE3E /* UITableViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewExtension.swift; sourceTree = "<group>"; };
 		224EFA9C2270BC5900E22BAF /* MessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
 		224EFA9E2270BC7A00E22BAF /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		22648AC1226ECC5500246443 /* ConversationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsViewController.swift; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 				22124CBE226CB6BE009800D4 /* EncodableExtension.swift */,
 				22124CC0226CBB6F009800D4 /* DictionaryExtension.swift */,
 				2281D14E2272009B0023F5B2 /* CLLocationCoordinateExtension.swift */,
+				2235D75622899173005BAE3E /* UITableViewExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -568,6 +571,7 @@
 				22124CC1226CBB6F009800D4 /* DictionaryExtension.swift in Sources */,
 				224EFA9F2270BC7A00E22BAF /* MessageTableViewCell.swift in Sources */,
 				22EDC221226C570D008F1BBC /* UIImageViewExtension.swift in Sources */,
+				2235D75722899173005BAE3E /* UITableViewExtension.swift in Sources */,
 				22EDC215226C53FC008F1BBC /* ImagePickerService.swift in Sources */,
 				22EDC223226C5816008F1BBC /* UIViewControllerExtension.swift in Sources */,
 				2209BB2C2270AF3300E6328A /* ProfileViewController.swift in Sources */,
