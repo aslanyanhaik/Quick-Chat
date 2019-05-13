@@ -134,8 +134,9 @@ extension MessagesViewController {
   }
   
   @IBAction func sendImagePressed(_ sender: UIButton) {
-    imageService.pickImage(from: self, source: sender.tag == 0 ? .photoLibrary : .camera) {[weak self] image in
+    imageService.pickImage(from: self, allowEditing: false, source: sender.tag == 0 ? .photoLibrary : .camera) {[weak self] image in
       let message = ObjectMessage()
+      message.contentType = .photo
       message.profilePic = image
       message.ownerID = UserManager().currentUserID()
       self?.send(message)
@@ -193,6 +194,21 @@ extension MessagesViewController: UITableViewDelegate, UITableViewDataSource {
       cell.transform = CGAffineTransform.identity
     })
   }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    let message = messages[indexPath.row]
+    switch message.contentType {
+    case .location:
+      let vc: MapPreviewController = UIStoryboard.controller(storyboard: .previews)
+      vc.locationString = message.content
+      navigationController?.present(vc, animated: true)
+    case .photo:
+      let vc: ImagePreviewController = UIStoryboard.controller(storyboard: .previews)
+      vc.imageURLString = message.profilePicLink
+      navigationController?.present(vc, animated: true)
+    default: break
+    }
+  }
 }
 
 //MARK: UItextField Delegate
@@ -210,18 +226,9 @@ extension MessagesViewController: UITextFieldDelegate {
 //MARK: MessageTableViewCellDelegate Delegate
 extension MessagesViewController: MessageTableViewCellDelegate {
   
-  func messageTableViewCell(didSelect message: ObjectMessage) {
-    switch message.contentType {
-    case .location:
-      let vc: MapPreviewController = UIStoryboard.controller(storyboard: .previews)
-      vc.locationString = message.content
-      navigationController?.present(vc, animated: true)
-    case .photo:
-      let vc: ImagePreviewController = UIStoryboard.controller(storyboard: .previews)
-      vc.imageURLString = message.profilePicLink
-      navigationController?.present(vc, animated: true)
-    default: break
-    }
+  func messageTableViewCellUpdate() {
+    tableView.beginUpdates()
+    tableView.endUpdates()
   }
 }
 

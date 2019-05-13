@@ -30,10 +30,12 @@ class LocationService: NSObject, CLLocationManagerDelegate {
     manager.delegate = self
     return manager
   }()
+  private var hasSentLocation = false
   var completion: CompletionObject<Response>?
   
   func getLocation(_ closure: CompletionObject<Response>? ) {
     completion = closure
+    hasSentLocation = false
     if CLLocationManager.authorizationStatus() == .notDetermined {
       manager.requestWhenInUseAuthorization()
     }
@@ -41,8 +43,13 @@ class LocationService: NSObject, CLLocationManagerDelegate {
   }
   
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    guard !hasSentLocation else {
+      manager.stopUpdatingLocation()
+      return
+    }
     if let location = locations.last?.coordinate {
       completion?(.location(location))
+      hasSentLocation = true
       manager.stopUpdatingLocation()
     }
   }

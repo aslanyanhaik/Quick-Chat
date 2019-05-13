@@ -28,13 +28,13 @@ class ImagePickerService: NSObject, UIImagePickerControllerDelegate, UINavigatio
   private lazy var picker: UIImagePickerController = {
     let picker = UIImagePickerController()
     picker.delegate = self
-    picker.allowsEditing = true
     return picker
   }()
   var completionBlock: CompletionObject<UIImage>?
   
-  func pickImage(from vc: UIViewController, source: UIImagePickerController.SourceType? = nil, completion: CompletionObject<UIImage>?) {
+  func pickImage(from vc: UIViewController, allowEditing: Bool = true, source: UIImagePickerController.SourceType? = nil, completion: CompletionObject<UIImage>?) {
     completionBlock = completion
+    picker.allowsEditing = allowEditing
     guard let source = source else {
       let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
       sheet.view.tintColor = ThemeService.purpleColor
@@ -60,9 +60,14 @@ class ImagePickerService: NSObject, UIImagePickerControllerDelegate, UINavigatio
   }
   
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-    if let image = info[.editedImage] as? UIImage {
-      completionBlock?(image.fixOrientation())
+    picker.dismiss(animated: true) {
+      if let image = info[.editedImage] as? UIImage {
+        self.completionBlock?(image.fixOrientation())
+        return
+      }
+      if let image = info[.originalImage] as? UIImage {
+        self.completionBlock?(image.fixOrientation())
+      }
     }
-    picker.dismiss(animated: true, completion: nil)
   }
 }
