@@ -32,8 +32,37 @@ class FirestoreService {
   }
   
   func objects<T>(_ object: T.Type, reference: Reference, parameter: DataQuery? = nil, completion: @escaping CompletionObject<[T]>) where T: FireCodable {
-    fetchDocuments(reference.reference(), parameter: parameter) { result in
-      completion(result)
+    guard let parameter = parameter else {
+      reference.reference().getDocuments { (snapshot, error) in
+        var results = [T]()
+        snapshot?.documents.forEach({ (document) in
+          if let objectData = document.data().data, let object = try? JSONDecoder().decode(T.self, from: objectData) {
+            results.append(object)
+          }
+        })
+        completion(results)
+      }
+      return
+    }
+    let queryReference: Query
+    switch parameter.mode {
+    case .equal:
+      queryReference = reference.reference().whereField(parameter.key, isEqualTo: parameter.value)
+    case .lessThan:
+      queryReference = reference.reference().whereField(parameter.key, isLessThan: parameter.value)
+    case .moreThan:
+      queryReference = reference.reference().whereField(parameter.key, isGreaterThan: parameter.value)
+    case .contains:
+      queryReference = reference.reference().whereField(parameter.key, arrayContains: parameter.value)
+    }
+    queryReference.getDocuments { (snapshot, error) in
+      var results = [T]()
+      snapshot?.documents.forEach({ (document) in
+        if let objectData = document.data().data, let object = try? JSONDecoder().decode(T.self, from: objectData) {
+          results.append(object)
+        }
+      })
+      completion(results)
     }
   }
   
@@ -103,18 +132,6 @@ class FirestoreService {
       })
       completion(objects)
     })
-  }
-  
-  private func fetchDocuments<T>(_ ref: CollectionReference, parameter: DataQuery?, completion: @escaping CompletionObject<[T]>) where T: FireCodable {
-    ref.getDocuments { (snapshot, error) in
-      var results = [T]()
-      snapshot?.documents.forEach({ (document) in
-        if let objectData = document.data().data, let object = try? JSONDecoder().decode(T.self, from: objectData) {
-          results.append(object)
-        }
-      })
-      completion(results)
-    }
   }
   
   func stopObservers() {

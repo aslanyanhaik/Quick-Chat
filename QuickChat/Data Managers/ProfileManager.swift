@@ -34,12 +34,12 @@ class ProfileManager {
     }
     let query = FirestoreService.DataQuery(key: "id", value: id, mode: .equal)
     FirestoreService().objects(ObjectUser.self, reference: .init(location: .users), parameter: query) {[weak self] results in
-      if let user = results.first {
-        self?.users.append(user)
-        completion(user)
+      guard let user = results.first else {
+        completion(nil)
         return
       }
-      completion(nil)
+      self?.users.append(user)
+      completion(user)
     }
   }
   
