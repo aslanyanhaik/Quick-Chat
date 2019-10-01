@@ -41,9 +41,9 @@
 		22D46867226CE028004B5B64 /* ImagePreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D46866226CE028004B5B64 /* ImagePreviewController.swift */; };
 		22D46869226CE8E3004B5B64 /* ContactsPreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D46868226CE8E3004B5B64 /* ContactsPreviewController.swift */; };
 		22D70570226F5F9300953354 /* ConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D7056F226F5F9300953354 /* ConversationCell.swift */; };
-		22D70574226F661200953354 /* UIFontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D70573226F661200953354 /* UIFontExtension.swift */; };
 		22D7057622703E3A00953354 /* DateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D7057522703E3A00953354 /* DateService.swift */; };
 		22D70578227088A300953354 /* ProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D70577227088A300953354 /* ProfileManager.swift */; };
+		22DE3D14234353E90062B9F7 /* UIFontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DE3D13234353E90062B9F7 /* UIFontExtension.swift */; };
 		22EDC215226C53FC008F1BBC /* ImagePickerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EDC214226C53FC008F1BBC /* ImagePickerService.swift */; };
 		22EDC217226C541D008F1BBC /* Typealiases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EDC216226C541D008F1BBC /* Typealiases.swift */; };
 		22EDC219226C54E0008F1BBC /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EDC218226C54E0008F1BBC /* UIImageExtension.swift */; };
@@ -101,9 +101,9 @@
 		22D46866226CE028004B5B64 /* ImagePreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreviewController.swift; sourceTree = "<group>"; };
 		22D46868226CE8E3004B5B64 /* ContactsPreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsPreviewController.swift; sourceTree = "<group>"; };
 		22D7056F226F5F9300953354 /* ConversationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCell.swift; sourceTree = "<group>"; };
-		22D70573226F661200953354 /* UIFontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIFontExtension.swift; path = "/Users/haik/Desktop/Quick-Chat/QuickChat/Application/Extensions/UIFontExtension.swift"; sourceTree = "<absolute>"; };
 		22D7057522703E3A00953354 /* DateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateService.swift; sourceTree = "<group>"; };
 		22D70577227088A300953354 /* ProfileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileManager.swift; sourceTree = "<group>"; };
+		22DE3D13234353E90062B9F7 /* UIFontExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFontExtension.swift; sourceTree = "<group>"; };
 		22EDC214226C53FC008F1BBC /* ImagePickerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerService.swift; sourceTree = "<group>"; };
 		22EDC216226C541D008F1BBC /* Typealiases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typealiases.swift; sourceTree = "<group>"; };
 		22EDC218226C54E0008F1BBC /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
@@ -209,7 +209,7 @@
 		22E200C31FD70EAF005470B4 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				22D70573226F661200953354 /* UIFontExtension.swift */,
+				22DE3D13234353E90062B9F7 /* UIFontExtension.swift */,
 				22EDC218226C54E0008F1BBC /* UIImageExtension.swift */,
 				22EDC224226C5867008F1BBC /* StringExtension.swift */,
 				22EDC228226C58F9008F1BBC /* OptionalExtension.swift */,
@@ -490,8 +490,6 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-QuickChat/Pods-QuickChat-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ALLoadingView/ALLoadingView.framework",
@@ -506,8 +504,6 @@
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ALLoadingView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
@@ -552,7 +548,6 @@
 				22EDC21B226C552C008F1BBC /* LocationService.swift in Sources */,
 				22D46869226CE8E3004B5B64 /* ContactsPreviewController.swift in Sources */,
 				22A92BB11D59EBD6005D76F7 /* AppDelegate.swift in Sources */,
-				22D70574226F661200953354 /* UIFontExtension.swift in Sources */,
 				22124CB3226C85B2009800D4 /* InitialViewController.swift in Sources */,
 				22EDC217226C541D008F1BBC /* Typealiases.swift in Sources */,
 				2209BB282270A51600E6328A /* AudioService.swift in Sources */,
@@ -574,6 +569,7 @@
 				2209BB2C2270AF3300E6328A /* ProfileViewController.swift in Sources */,
 				22124CCB226CC513009800D4 /* MessageManager.swift in Sources */,
 				2281D14F2272009B0023F5B2 /* CLLocationCoordinateExtension.swift in Sources */,
+				22DE3D14234353E90062B9F7 /* UIFontExtension.swift in Sources */,
 				22EDC227226C58E4008F1BBC /* UIViewExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
