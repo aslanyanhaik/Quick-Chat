@@ -22,13 +22,13 @@
 
 import UIKit
 
-protocol KeyboardHandler {
+protocol KeyboardHandler: UIViewController {
   var barBottomConstraint: NSLayoutConstraint! { get }
   var bottomInset: CGFloat { get }
 }
 
-extension KeyboardHandler where Self: UIViewController {
-  func addKeyboardObservers(_ completion: CompletionObject<Bool>?  = nil) {
+extension KeyboardHandler {
+  func addKeyboardObservers(_ completion: CompletionObject<Bool>? = nil) {
     NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: nil) {[weak self] (notification) in
       self?.handleKeyboard(notification: notification)
       completion?(true)
