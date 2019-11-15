@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="I5r-es-mup">
-    <device id="retina5_9" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="I5r-es-mup">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -94,7 +93,6 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="35" id="h43-wq-aGj"/>
                                                         </constraints>
-                                                        <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardAppearance="alert" textContentType="name"/>
                                                         <connections>
@@ -136,7 +134,6 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="35" id="WfA-3F-oZL"/>
                                                         </constraints>
-                                                        <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress" keyboardAppearance="alert" textContentType="email"/>
                                                         <connections>
@@ -177,7 +174,6 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="35" id="bzz-jr-buz"/>
                                                         </constraints>
-                                                        <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" keyboardAppearance="alert" secureTextEntry="YES" textContentType="new-password"/>
                                                         <connections>
@@ -206,7 +202,7 @@
                                         </subviews>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" name="AuthBackground"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="8c2-Hk-cyk" secondAttribute="bottom" constant="30" id="2N7-n1-LVZ"/>
                                     <constraint firstItem="KEx-fR-15R" firstAttribute="top" secondItem="Z0T-uu-sxh" secondAttribute="bottom" constant="15" id="7Lw-TY-mRD"/>
@@ -249,7 +245,6 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="35" id="9nT-Ht-KDN"/>
                                                         </constraints>
-                                                        <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress" keyboardAppearance="alert" textContentType="email"/>
                                                         <connections>
@@ -291,7 +286,6 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="35" id="0sS-EF-UDb"/>
                                                         </constraints>
-                                                        <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" keyboardAppearance="alert" secureTextEntry="YES" textContentType="password"/>
                                                         <connections>
@@ -339,7 +333,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" name="AuthBackground"/>
                                 <constraints>
                                     <constraint firstItem="4bN-55-vA0" firstAttribute="centerX" secondItem="fRa-Er-UA3" secondAttribute="centerX" id="6RS-KF-4Js"/>
                                     <constraint firstItem="VVR-sg-zpw" firstAttribute="top" secondItem="fRa-Er-UA3" secondAttribute="top" constant="30" id="CRE-5w-53P"/>
@@ -370,7 +364,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" name="AuthBackground"/>
                         <constraints>
                             <constraint firstItem="7KS-X3-elB" firstAttribute="trailing" secondItem="h7x-zh-9OI" secondAttribute="trailing" id="5Yo-41-gp0"/>
                             <constraint firstItem="9fL-Ub-Hjh" firstAttribute="leading" secondItem="7KS-X3-elB" secondAttribute="leading" constant="30" id="6sv-xi-eZl"/>
@@ -420,5 +414,8 @@
         <image name="name" width="24" height="24"/>
         <image name="password" width="24" height="24"/>
         <image name="profile pic" width="100" height="100"/>
+        <namedColor name="AuthBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>
