@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="gTs-Hf-oyN">
-    <device id="retina5_9" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="gTs-Hf-oyN">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,7 +18,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bBq-0a-Ntf">
                                 <rect key="frame" x="0.0" y="88" width="375" height="640"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MessageTableViewCell" rowHeight="90" id="75b-FZ-kCW" customClass="MessageTableViewCell" customModule="QuickChat" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="90"/>
@@ -45,6 +44,7 @@
                                                     <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES"/>
                                                 </textView>
                                             </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="mzO-gQ-Kf9" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="3k0-vp-xYi" secondAttribute="leading" constant="60" id="Eyo-Dh-wb5"/>
                                                 <constraint firstAttribute="bottom" secondItem="mzO-gQ-Kf9" secondAttribute="bottom" constant="5" id="Fhu-P6-rRy"/>
@@ -56,6 +56,7 @@
                                                 <constraint firstItem="ZnP-PL-A6i" firstAttribute="top" secondItem="mzO-gQ-Kf9" secondAttribute="top" id="yMb-Tb-6Ah"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="messageTextView" destination="ZnP-PL-A6i" id="fZp-8n-Nn5"/>
                                         </connections>
@@ -96,6 +97,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
                                             </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="Vzm-oI-d4p" secondAttribute="bottom" constant="5" id="1to-V4-8wA"/>
                                                 <constraint firstItem="Vrd-F8-pd4" firstAttribute="bottom" secondItem="Vzm-oI-d4p" secondAttribute="bottom" id="2ac-te-FxX"/>
@@ -109,6 +111,7 @@
                                                 <constraint firstItem="Vrd-F8-pd4" firstAttribute="leading" secondItem="Vzm-oI-d4p" secondAttribute="leading" constant="5" id="w1o-5y-Kuw"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="messageTextView" destination="Vrd-F8-pd4" id="aP5-AI-GTy"/>
                                             <outlet property="profilePic" destination="oqU-VQ-Qe0" id="PzK-oV-86K"/>
@@ -146,12 +149,14 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="WiF-DQ-rdG" secondAttribute="trailing" constant="15" id="LzF-Bx-p0j"/>
                                                 <constraint firstItem="WiF-DQ-rdG" firstAttribute="top" secondItem="jno-1U-KvW" secondAttribute="top" constant="5" id="fL7-cf-hj9"/>
                                                 <constraint firstAttribute="bottom" secondItem="WiF-DQ-rdG" secondAttribute="bottom" constant="5" id="hyx-po-kUo"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="attachmentImageView" destination="m4o-h6-cUr" id="PyN-xJ-Rjv"/>
                                             <outlet property="attachmentImageViewHeightConstraint" destination="eIO-jO-81R" id="ApA-uy-yVe"/>
@@ -202,6 +207,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
                                             </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="4XG-W8-DP5" firstAttribute="top" secondItem="T8U-qO-YSe" secondAttribute="top" constant="5" id="LdG-YO-ZFW"/>
                                                 <constraint firstItem="4XG-W8-DP5" firstAttribute="leading" secondItem="CFc-FR-62v" secondAttribute="trailing" constant="10" id="P2C-T6-owU"/>
@@ -210,6 +216,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="CFc-FR-62v" secondAttribute="bottom" constant="6" id="x4O-Mg-OON"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="attachmentImageView" destination="QRj-pJ-nDC" id="Ojf-x9-foO"/>
                                             <outlet property="attachmentImageViewHeightConstraint" destination="R8S-zr-WSx" id="hx5-Jc-AiP"/>
@@ -223,14 +230,6 @@
                                     <outlet property="delegate" destination="gTs-Hf-oyN" id="U2T-lP-nWa"/>
                                 </connections>
                             </tableView>
-                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IWW-Q4-eJ9">
-                                <rect key="frame" x="0.0" y="728" width="375" height="84"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="wQs-7i-unm">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="84"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                </view>
-                                <blurEffect style="light"/>
-                            </visualEffectView>
                             <view clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vn0-qa-7SK">
                                 <rect key="frame" x="0.0" y="728" width="375" height="50"/>
                                 <subviews>
@@ -239,7 +238,7 @@
                                         <subviews>
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lxa-V7-sAi">
                                                 <rect key="frame" x="44" y="5" width="275" height="40"/>
-                                                <color key="backgroundColor" white="0.94999999999999996" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="backgroundColor" name="AuthBackground"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                         <real key="value" value="20"/>
@@ -328,9 +327,8 @@
                                                 </constraints>
                                             </stackView>
                                         </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="3YQ-MW-ldd"/>
                                             <constraint firstItem="eTe-ES-iF1" firstAttribute="leading" secondItem="YAR-7v-vPl" secondAttribute="leading" constant="6" id="6Pv-6r-PuW"/>
                                             <constraint firstItem="lxa-V7-sAi" firstAttribute="bottom" secondItem="QSa-zB-UHJ" secondAttribute="bottom" id="B8h-8A-R2j"/>
                                             <constraint firstAttribute="trailing" secondItem="aBf-gd-SKK" secondAttribute="trailing" constant="12" id="BRR-Pd-JgJ"/>
@@ -344,7 +342,7 @@
                                             <constraint firstItem="QSa-zB-UHJ" firstAttribute="leading" secondItem="lxa-V7-sAi" secondAttribute="leading" constant="5" id="v5o-ls-8IA"/>
                                         </constraints>
                                     </view>
-                                    <view alpha="0.60000002384185791" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i5t-5V-5MW">
+                                    <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i5t-5V-5MW">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
                                         <color key="backgroundColor" red="0.50588235290000005" green="0.56470588239999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -355,6 +353,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="i5t-5V-5MW" firstAttribute="leading" secondItem="Vn0-qa-7SK" secondAttribute="leading" id="8Ki-sj-mfe"/>
+                                    <constraint firstAttribute="height" constant="50" id="LK3-bV-8Wl"/>
                                     <constraint firstAttribute="trailing" secondItem="i5t-5V-5MW" secondAttribute="trailing" id="T1e-Le-Xwt"/>
                                     <constraint firstItem="YAR-7v-vPl" firstAttribute="centerX" secondItem="Vn0-qa-7SK" secondAttribute="centerX" id="Vcc-qn-CSX"/>
                                     <constraint firstItem="i5t-5V-5MW" firstAttribute="top" secondItem="Vn0-qa-7SK" secondAttribute="top" id="Zn4-Ay-l22"/>
@@ -364,19 +363,15 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="IWW-Q4-eJ9" firstAttribute="top" secondItem="bBq-0a-Ntf" secondAttribute="bottom" id="C73-M9-QhZ"/>
-                            <constraint firstItem="bek-LY-nS1" firstAttribute="trailing" secondItem="IWW-Q4-eJ9" secondAttribute="trailing" id="LnK-6C-p8Q"/>
-                            <constraint firstAttribute="bottom" secondItem="IWW-Q4-eJ9" secondAttribute="bottom" id="M43-MZ-HPP"/>
                             <constraint firstItem="bBq-0a-Ntf" firstAttribute="leading" secondItem="bek-LY-nS1" secondAttribute="leading" id="RAZ-sd-QEH"/>
                             <constraint firstItem="bek-LY-nS1" firstAttribute="trailing" secondItem="bBq-0a-Ntf" secondAttribute="trailing" id="SqY-6K-2BJ"/>
                             <constraint firstItem="bek-LY-nS1" firstAttribute="leading" secondItem="Vn0-qa-7SK" secondAttribute="leading" id="TVk-R8-tJW"/>
                             <constraint firstItem="bek-LY-nS1" firstAttribute="bottom" secondItem="Vn0-qa-7SK" secondAttribute="bottom" id="USX-fV-RHa"/>
                             <constraint firstItem="bBq-0a-Ntf" firstAttribute="top" secondItem="bek-LY-nS1" secondAttribute="top" id="XQw-op-KEn"/>
-                            <constraint firstItem="IWW-Q4-eJ9" firstAttribute="leading" secondItem="bek-LY-nS1" secondAttribute="leading" id="gV0-w7-X8X"/>
+                            <constraint firstItem="Vn0-qa-7SK" firstAttribute="top" secondItem="bBq-0a-Ntf" secondAttribute="bottom" id="f7S-WW-6pE"/>
                             <constraint firstItem="bek-LY-nS1" firstAttribute="trailing" secondItem="Vn0-qa-7SK" secondAttribute="trailing" id="kPT-FD-JUo"/>
-                            <constraint firstItem="IWW-Q4-eJ9" firstAttribute="top" secondItem="Vn0-qa-7SK" secondAttribute="top" id="phR-gl-wkr"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="bek-LY-nS1"/>
                     </view>
@@ -404,6 +399,9 @@
         <image name="selectLocation" width="32" height="25"/>
         <image name="selectPhoto" width="32" height="25"/>
         <image name="send" width="32" height="25"/>
+        <namedColor name="AuthBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
     <color key="tintColor" red="0.50588235290000005" green="0.56470588239999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

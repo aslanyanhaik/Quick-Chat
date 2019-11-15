@@ -29,9 +29,9 @@ To get started and run the app, you need to follow these simple steps:
 
 ## Compatibility
 
-This project is written in Swift 5.0 and requires Xcode 10.0 to build and run.
+This project is written in Swift 5.0 and requires Xcode 11.0 to build and run.
 
-Quick Chat for iOS is compatible with iOS 12.0+.
+Quick Chat for iOS is compatible with iOS 13.0+.
 
 ## Author
 

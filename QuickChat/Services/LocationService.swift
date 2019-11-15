@@ -59,10 +59,6 @@ class LocationService: NSObject, CLLocationManagerDelegate {
       completion?(.denied)
     }
   }
-  
-  deinit {
-    manager.stopUpdatingLocation()
-  }
 }
 
 extension LocationService {

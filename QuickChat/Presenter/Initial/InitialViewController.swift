@@ -30,6 +30,8 @@ class InitialViewController: UIViewController {
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    present(UIStoryboard.initial(storyboard: UserManager().currentUserID().isNone ? .auth : .conversations), animated: true, completion: nil)
+    let vc = UIStoryboard.initial(storyboard: UserManager().currentUserID().isNone ? .auth : .conversations)
+    vc.modalPresentationStyle = .fullScreen
+    present(vc, animated: true)
   }
 }
